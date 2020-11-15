@@ -1,0 +1,37 @@
+version: '3.3'
+
+services:
+  #api is the container name
+  api:
+  #look for a dockerfile
+    build: "."
+
+    ports:
+      - "5000"
+
+    restart: "always"
+
+    networks:
+      - "api.network"
+
+    deploy:
+      replicas: 5
+  #nginx container
+  nginx:
+    #specifies the latest image
+    image: nginx:latest
+
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+
+    depends_on:
+      - api
+
+    ports:
+      - "80:80"
+
+    networks:
+      - "api.network"
+
+networks:
+  api.network:
