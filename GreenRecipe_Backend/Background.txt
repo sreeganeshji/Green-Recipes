@@ -33,3 +33,12 @@ RUN- central executing directive for Dockerfiles.
 USER- sets tthe UID or username whcih is to run the container
 VOLUME- is used to enable access from the container to the location on the host machine.
 WORKDIR- sets the path where the command defined in the CMD is to be executed.
+
+docker-compose references.
+context: path to a directory containing Dockerfile or url to a git repo.
+dockerfile: alternate docker file.
+args: adds build arguements which are only accessible during the build process.
+
+
+
+
