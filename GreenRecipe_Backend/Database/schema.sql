@@ -1,27 +1,59 @@
 
 /* create tables */
 
-create table person(
-username varchar(30) not null,
-first_name varchar(30) not null,
-last_name varchar(30) not null,
-enabled boolean default true
+CREATE TABLE recipe(
+id SERIAL NOT NULL,
+name VARCHAR(50) NOT NULL,
+ingredients TEXT[] NOT NULL,
+process TEXT[] NOT NULL,
+contributor VARCHAR(50),
+origin VARCHAR(50),
+servings REAL,
+equipment TEXT[],
+images TEXT[],
+added_date DATE,
+added_by VARCHAR(50),
+nutrition TEXT[],
+category VARCHAR(50),
+PRIMARY KEY(ID)
 );
 
-create table recipe(
-id serial not null,
-author varchar(50),
-description varchar(300),
-primary key(id)
+CREATE TABLE review(
+review_id SERIAL,
+recipe_id INT,
+PRIMARY KEY(review_id),
+FOREIGN KEY(recipe_id) REFERENCES recipe(id) ON DELETE CASCADE,
+stars INT NOT NULL,
+likes INT NOT NULL,
+dislikes INT NOT NULL,
+images TEXT[]
 );
 
-create table step(
-recipe_id int not null,
-step_no int not null unique,
-description varchar(200),
-primary key (recipe_id, step_no) ,
-foreign key (recipe_id) references recipe(id) on delete cascade
+/*
+replies for each review (one to many)
+ */
+CREATE TABLE reply(
+reply_id SERIAL,
+body TEXT NOT NULL,
+likes INT NOT NULL,
+dislikes INT NOT NULL,
+images TEXT[],
+PRIMARY KEY(reply_id),
+review_id INT NOT NULL,
+FOREIGN KEY(review_id) REFERENCES review(review_id) ON DELETE CASCADE
 );
+
+CREATE TABLE user(
+user_id SERIAL,
+first_name VARCHAR(50) NOT NULL,
+last_name VARCHAR(50) NOT NULL,
+username VARCHAR(50) NOT NULL UNIQUE,
+email VARCHAR(50),
+PRIMARY KEY(user_id)
+);
+
+
+
 
 
 

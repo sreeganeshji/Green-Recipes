@@ -23,7 +23,7 @@ services:
 
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-
+      - ./nginx/:/etc/ssl/nginxssl:ro
     depends_on:
       - api
 

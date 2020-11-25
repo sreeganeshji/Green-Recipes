@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F821330256D653200D29FEE /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F82132F256D653200D29FEE /* Backend.swift */; };
 		1F8438B5254D2D19004A27A9 /* Green_RecipesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8438B4254D2D19004A27A9 /* Green_RecipesApp.swift */; };
 		1F8438B7254D2D19004A27A9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8438B6254D2D19004A27A9 /* ContentView.swift */; };
 		1F8438B9254D2D1A004A27A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F8438B8254D2D1A004A27A9 /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1F82132F256D653200D29FEE /* Backend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backend.swift; sourceTree = "<group>"; };
 		1F8438B1254D2D19004A27A9 /* Green Recipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Green Recipes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F8438B4254D2D19004A27A9 /* Green_RecipesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Green_RecipesApp.swift; sourceTree = "<group>"; };
 		1F8438B6254D2D19004A27A9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -84,6 +86,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F82132E256D5FC700D29FEE /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				1F82132F256D653200D29FEE /* Backend.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		1F8438A8254D2D19004A27A9 = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +117,7 @@
 		1F8438B3254D2D19004A27A9 /* Green Recipes */ = {
 			isa = PBXGroup;
 			children = (
+				1F82132E256D5FC700D29FEE /* Network */,
 				1F8438EB254D2E78004A27A9 /* Data */,
 				1F8438E2254D2D9A004A27A9 /* Views */,
 				1F8438B4254D2D19004A27A9 /* Green_RecipesApp.swift */,
@@ -303,6 +314,7 @@
 			files = (
 				1F843939254D3E8B004A27A9 /* Settings.swift in Sources */,
 				1F843934254D3E57004A27A9 /* AddRecipe.swift in Sources */,
+				1F821330256D653200D29FEE /* Backend.swift in Sources */,
 				1F84393F254DF6BB004A27A9 /* RecipesHome.swift in Sources */,
 				1F8438B7254D2D19004A27A9 /* ContentView.swift in Sources */,
 				1F8438E4254D2DBB004A27A9 /* HomePage.swift in Sources */,

@@ -23,6 +23,8 @@ class DataModels:ObservableObject{
         var uuid:Int
         var ratings:Ratings
         var comments:[Comment]
+        var origin:String
+        var category:String
         init() {
             self.name = ""
             self.process = []
@@ -33,6 +35,8 @@ class DataModels:ObservableObject{
             self.comments = []
             self.ingredients = []
             self.description = ""
+            self.origin = ""
+            self.category = ""
         }
         init(name:String, description:String){
             self.init()

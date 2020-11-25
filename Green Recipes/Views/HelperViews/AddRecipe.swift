@@ -99,11 +99,13 @@ struct AddRecipe: View {
 
         }
         .navigationTitle(Text("Add Recipe"))
-        .navigationBarItems(leading: EditButton())
+        .navigationBarItems(trailing: Button(action:{}){
+            Text("Done")
+        })
       
         }
         .onDisappear(){
-            self.data.recipies.append(recipeNew)
+      
         }
     }
     

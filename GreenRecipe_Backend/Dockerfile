@@ -5,6 +5,10 @@ FROM golang:1.14-alpine AS build
 RUN apk update && apk upgrade && \
 apk add --no-cache git
 
+
+RUN go get -u github.com/gorilla/mux
+RUN go get github.com/lib/pq
+
 #switches to directory like cd
 WORKDIR /tmp/app
 

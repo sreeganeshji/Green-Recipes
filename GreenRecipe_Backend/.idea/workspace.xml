@@ -1,7 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="0b39fbb6-cc4e-4b59-be15-8e3c7ca69ebc" name="Default Changelist" comment="" />
+    <list default="true" id="0b39fbb6-cc4e-4b59-be15-8e3c7ca69ebc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../Green Recipes/Network/Backend.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Database/database.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Models/models.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Service/service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Green Recipes.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Green Recipes/Data/Data.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Data/Data.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/AddRecipe.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/AddRecipe.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nginx/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/nginx.conf" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,6 +46,12 @@
     </option>
   </component>
   <component name="GOROOT" path="/usr/local/Cellar/go/1.15/libexec" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="false" />
+  </component>
   <component name="ProjectId" id="1joIET3In8ZIc4Ry5QqikeFZdSh" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -25,7 +62,9 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
+    <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -37,14 +76,45 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VgoProject">
+    <integration-enabled>true</integration-enabled>
+  </component>
   <component name="WindowStateProjectService">
+    <state x="520" y="287" key="#Go_Modules" timestamp="1606259677982">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="520" y="287" key="#Go_Modules/0.0.1440.900@0.0.1440.900" timestamp="1606259677982" />
     <state x="113" y="285" key="#SQL_Dialects" timestamp="1605288429917">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="113" y="285" key="#SQL_Dialects/0.0.1440.900@0.0.1440.900" timestamp="1605288429917" />
-    <state x="320" y="114" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605290282101">
+    <state x="320" y="114" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606270243392">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="320" y="114" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1605290282101" />
+    <state x="320" y="114" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1606270243392" />
+    <state x="621" y="315" key="EnvironmentVariablesDialog" timestamp="1606259675276">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="621" y="315" key="EnvironmentVariablesDialog/0.0.1440.900@0.0.1440.900" timestamp="1606259675276" />
+    <state x="444" y="147" key="SettingsEditor" timestamp="1606259658542">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="444" y="147" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1606259658542" />
+    <state x="789" y="176" key="SettingsEditor/0.0.2560.1080@0.0.2560.1080" timestamp="1605933569430" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1606333844568">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1606333844568" />
   </component>
 </project>
