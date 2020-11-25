@@ -20,18 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0b39fbb6-cc4e-4b59-be15-8e3c7ca69ebc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Green Recipes/Network/Backend.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Database/database.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Models/models.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Service/service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Green Recipes.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Green Recipes/Data/Data.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Data/Data.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/AddRecipe.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/AddRecipe.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/schema.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nginx/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/nginx.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rest/rest.go" beforeDir="false" afterPath="$PROJECT_DIR$/Rest/rest.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
