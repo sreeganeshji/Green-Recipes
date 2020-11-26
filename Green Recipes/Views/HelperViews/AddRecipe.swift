@@ -102,6 +102,7 @@ struct AddRecipe: View {
         .navigationBarItems(trailing: Button(action:{}){
             Text("Done")
         })
+        .navigationBarItems(leading: EditButton())
       
         }
         .onDisappear(){
@@ -117,7 +118,7 @@ struct AddRecipe: View {
     }
     func addProcess(){
         if self.newProcess != ""{
-        self.recipeNew.process.append(self.newProcess)
+            self.recipeNew.process.append(self.newProcess)
         }
         self.newProcess = ""
     }

@@ -3,11 +3,12 @@ package models
 type Recipe struct {
 	ID          int       `json:"id"`
 	Name        string    `json:"name"`
+	Description string `json:"description"`
 	Ingredients []string  `json:"ingredients"`
 	Process     []string  `json:"process"`
 	Contributor string    `json:"contributor"`
 	Origin      string    `json:"origin"`
-	Servings    float32   `json:"servings"`
+	Servings    int   `json:"servings"`
 	Equipment   []string  `json:"equipment"`
 	Images      [] string `json:"images"`
 	AddedDate   string    `json:"added_date"`
