@@ -1,7 +1,10 @@
 package main
 
 import (
+	"fmt"
 	database "greenrecipe/Database"
+	"greenrecipe/Rest"
+	"greenrecipe/Service"
 	"log"
 	"net/http"
 )
@@ -38,13 +41,21 @@ func main() {
 	//fmt.Println(err)
 	//http.HandleFunc("/hello", handleHello)
 
-	postgres,err := database.Connect("database-1.cbhzbc7blcip.us-west-1.rds.amazonaws.com","postgres","postgres","postgres",3)
+	postgres,err := database.Connect("database-1.cbhzbc7blcip.us-west-1.rds.amazonaws.com","postgres","postgres","903237837",3)
 if err != nil{
 	panic(err)
 }
-	
+	defer postgres.Close()
 
-if err := http.ListenAndServe(":5000", nil); err != nil {
+	service := service.Service{Postgres: postgres}
+
+	r := rest.Initalizer(service)
+	//print(rest)
+	//r := mux.NewRouter()
+	//r.HandleFunc("/hello",handleHello)
+
+fmt.Println("Starting the golang server")
+if err := http.ListenAndServe(":5000", r); err != nil {
 	log.Fatalln(err)
 	}
 }

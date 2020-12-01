@@ -59,6 +59,7 @@
 		1F843938254D3E8B004A27A9 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		1F84393E254DF6BB004A27A9 /* RecipesHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesHome.swift; sourceTree = "<group>"; };
 		1F843949254DF70A004A27A9 /* recipeThumb1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = recipeThumb1.swift; sourceTree = "<group>"; };
+		1F9294292574C49800B86AF5 /* Green Recipes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Green Recipes.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +118,7 @@
 		1F8438B3254D2D19004A27A9 /* Green Recipes */ = {
 			isa = PBXGroup;
 			children = (
+				1F9294292574C49800B86AF5 /* Green Recipes.entitlements */,
 				1F82132E256D5FC700D29FEE /* Network */,
 				1F8438EB254D2E78004A27A9 /* Data */,
 				1F8438E2254D2D9A004A27A9 /* Views */,
@@ -477,6 +479,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Green Recipes/Green Recipes.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Green Recipes/Preview Content\"";
 				DEVELOPMENT_TEAM = C5978J5948;
@@ -499,6 +502,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Green Recipes/Green Recipes.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Green Recipes/Preview Content\"";
 				DEVELOPMENT_TEAM = C5978J5948;

@@ -6,6 +6,7 @@ import(
 	models "greenrecipe/Models"
 	"greenrecipe/Service"
 	"github.com/gorilla/mux"
+	"log"
 	"net/http"
 )
 
@@ -22,6 +23,7 @@ func Initalizer(service service.Service) (*mux.Router){
 }
 
 func (h *handler)AddRecipeHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println(w,"add recipe")
 	decoder := json.NewDecoder(r.Body)
 	var recipe models.Recipe
 	err := decoder.Decode(&recipe)
@@ -30,7 +32,17 @@ func (h *handler)AddRecipeHandler(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(fmt.Sprint("Error unmarshalling JSON",err)))
 		return
 	}
+	encoder := json.NewEncoder(w)
 
+	err = encoder.Encode(recipe)
+	if (err!=nil){
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("error encoding",err)))
+	}
+	fmt.Println("decoded new recipe", recipe)
+	fmt.Println("absent parameter nutrients, category",recipe.Nutrition, recipe.Category)
+
+	log.Println("decoded recipe",recipe)
 	insertedRecipe, err := h.Service.AddRecipe(recipe)
 	if err!=nil {
 		w.WriteHeader(http.StatusInternalServerError)

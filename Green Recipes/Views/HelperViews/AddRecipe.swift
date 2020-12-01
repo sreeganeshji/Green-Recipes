@@ -9,11 +9,13 @@ import SwiftUI
 
 struct AddRecipe: View {
     @EnvironmentObject var data:DataModels
-    @State var recipeNew = DataModels.Recipe()
+    @State var recipeNew = Recipe()
     @State var newIngredient:String = ""
     @State var newProcess:String = ""
     var body: some View {
         NavigationView{
+
+
         Form{
             Section{
             HStack{
@@ -39,9 +41,14 @@ struct AddRecipe: View {
                 if(recipeNew.ingredients.count>0)
                 {
                     List{
-                ForEach(recipeNew.ingredients,id:\.self){
-                    ingredient in
-                    Text(ingredient)
+                        ForEach(Array(zip(recipeNew.ingredients,(1...recipeNew.ingredients.count))),id:\.1){
+                    item in
+                    HStack{
+                        Text("\(item.1).").bold()
+                        Spacer()
+                        Text(item.0)
+                        Spacer()
+                    }.padding()
                 }
                 .onDelete(perform: { ind in
                     self.recipeNew.ingredients.remove(atOffsets: ind)
@@ -68,9 +75,14 @@ struct AddRecipe: View {
                 if(recipeNew.process.count>0)
                 {
                     List{
-                ForEach(recipeNew.process,id:\.self){
-                    process in
-                    Text(process)
+                        ForEach(Array(zip((1...recipeNew.process.count),recipeNew.process)),id:\.0){
+                    item in
+                            HStack{
+                                Text("\(item.0).").bold()
+                                Spacer()
+                                Text(item.1)
+                                Spacer()
+                            }.padding()
                 }
                 .onDelete(perform: { ind in
                     self.recipeNew.process.remove(atOffsets: ind)
@@ -97,6 +109,16 @@ struct AddRecipe: View {
                 }
             }
 
+            Section{
+                Button(action:submitRecipe)
+                {
+                    HStack{
+                        Spacer()
+                    Text("Submit")
+                        Spacer()
+                    }
+                }
+            }
         }
         .navigationTitle(Text("Add Recipe"))
         .navigationBarItems(trailing: Button(action:{}){
@@ -121,6 +143,10 @@ struct AddRecipe: View {
             self.recipeNew.process.append(self.newProcess)
         }
         self.newProcess = ""
+    }
+    func submitRecipe(){
+        //validate the fields
+        self.data.networkHandler.addRecipe(recipe: self.recipeNew)
     }
 }
 

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct recipieThumb1: View {
-    @Binding var recipe:DataModels.Recipe
+    @Binding var recipe:Recipe
     var body: some View {
         VStack{
         if(recipe.pictures.count>0){
@@ -19,7 +19,7 @@ struct recipieThumb1: View {
             
         }
     }
-    func getDescription(recipe:DataModels.Recipe)->Text{
+    func getDescription(recipe:Recipe)->Text{
         let str = recipe.description
         let strlen = str.count
         var descriptionThumb:String

@@ -13,7 +13,8 @@ struct Green_RecipesApp: App {
     var body: some Scene {
         WindowGroup {
 //            RecipesHome(recipies: .constant(.init(repeating: .init(name:"name",description:"Des"), count: 20)))
-            AddRecipe().environmentObject(data)
+            
+            HomePage().environmentObject(data)
         }
     }
 }

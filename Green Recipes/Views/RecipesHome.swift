@@ -10,7 +10,7 @@ import SwiftUI
 
 struct RecipesHome: View {
     var rows:[GridItem] = .init(repeating: .init(.fixed(30)), count: 2)
-   @Binding var recipies:[DataModels.Recipe]
+   @Binding var recipies:[Recipe]
     var body: some View {
         ScrollView(.horizontal){
         LazyHGrid(rows: rows) /*@START_MENU_TOKEN@*/{
@@ -25,6 +25,6 @@ struct RecipesHome: View {
 
 struct RecipesHome_Previews: PreviewProvider {
     static var previews: some View {
-        RecipesHome(recipies: .constant([ DataModels.Recipe(name: "Vada Puri", description: "Masala recipe for making the best donout"),]))
+        RecipesHome(recipies: .constant([ Recipe(name: "Vada Puri", description: "Masala recipe for making the best donout"),]))
     }
 }
