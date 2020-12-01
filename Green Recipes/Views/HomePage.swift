@@ -19,20 +19,32 @@ enum tabViews {
 }
 
 struct HomePage: View {
-    @State var signedIn:Bool = false
+    @State var signedIn:Bool = true
     @EnvironmentObject var data:DataModels
     @State var tabSelect:tabViews = tabViews.explore
     var body: some View {
         if(self.signedIn){
         TabView(selection: $tabSelect) {
-            Text("Explore").tabItem { Text("Explore") }.tag(tabViews.explore)
-            Text("Search").tabItem { Text("Search") }.tag(tabViews.search)
-            Text("Favorites").tabItem { Text("Favorites") }.tag(tabViews.favorites)
+            Text("Explore").tabItem { HStack{
+                Image(systemName: "sparkles")
+                Text("Explore")
+            } }.tag(tabViews.explore)
+            Text("Search").tabItem { HStack{
+                Image(systemName: "magnifyingglass")
+                Text("Search")} }.tag(tabViews.search)
+            Text("Favorites").tabItem { HStack{
+                Image(systemName: "star.fill")
+                Text("Favorites")} }.tag(tabViews.favorites)
             
                 AddRecipe().environmentObject(data)
-                    .tabItem { Text("My recipes") }.tag(tabViews.addRecipe)
+                    .tabItem {
+                        HStack{
+                            Image(systemName: "tray.fill")
+                            Text("My Recipes")} }.tag(tabViews.addRecipe)
 
-            Text("Settings").tabItem { Text("Settings") }.tag(tabViews.settings)
+            Text("Settings").tabItem { HStack{
+                Image(systemName: "gear")
+                Text("Settings")} }.tag(tabViews.settings)
         }
         }
         else{

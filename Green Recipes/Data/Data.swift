@@ -74,7 +74,7 @@ struct User:Hashable, Equatable, Codable{
 
     var name:String
     var profilePic:String
-    var uuid:Int
+    var uuid:String
 }
 
 struct Ratings:Hashable, Codable{
