@@ -72,9 +72,13 @@ struct Comment:Hashable, Codable{
 
 struct User:Hashable, Equatable, Codable{
 
-    var name:String
-    var profilePic:String
-    var uuid:String
+    var username:String?
+    var firstName:String?
+    var lastName:String?
+    var profilePic:String?
+    var email:String?
+    var userId:Int?
+    var appleId:String?
 }
 
 struct Ratings:Hashable, Codable{
@@ -98,4 +102,6 @@ class DataModels:ObservableObject{
     var recipies = [Recipe]()
     
     var networkHandler = NetworkAdapter("http://localhost:5000")
+    
+    var user = User()
 }

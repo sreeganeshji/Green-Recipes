@@ -54,4 +54,35 @@ class NetworkAdapter{
         task.resume()
         
     }
+    
+    // adds a new user or authenticates an old one
+    func fetchUser(user: User)->User{
+        var fetchUserURL = baseURL
+        fetchUserURL.appendPathComponent("fetchuser")
+        var fetchUserRequest = URLRequest(url: fetchUserURL)
+        
+        //set header parameters
+        fetchUserRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        fetchUserRequest.httpMethod = "POST"
+        let encoder = JSONEncoder()
+        let data = try!encoder.encode(user)
+        print(String(data:data,encoding:.utf8))
+        
+        //add to request body
+        fetchUserRequest.httpBody = data
+        
+        var receivedUser = User()
+        
+        let task = URLSession.shared.dataTask(with: fetchUserRequest) { (data:Data?, response:URLResponse?, error:Error?) in
+            if error != nil{
+                print("Couldn't decode user")
+                return
+            }
+            let decoder = JSONDecoder()
+            
+            receivedUser = try! decoder.decode(User.self, from: data!)
+            
+        }
+        return receivedUser
+    }
 }

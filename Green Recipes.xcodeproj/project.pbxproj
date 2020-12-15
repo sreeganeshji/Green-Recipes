@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F46F55C2575E17A005414DE /* myRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F46F55B2575E17A005414DE /* myRecipe.swift */; };
 		1F821330256D653200D29FEE /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F82132F256D653200D29FEE /* Backend.swift */; };
 		1F8438B5254D2D19004A27A9 /* Green_RecipesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8438B4254D2D19004A27A9 /* Green_RecipesApp.swift */; };
 		1F8438B7254D2D19004A27A9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8438B6254D2D19004A27A9 /* ContentView.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1F46F55B2575E17A005414DE /* myRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myRecipe.swift; sourceTree = "<group>"; };
 		1F82132F256D653200D29FEE /* Backend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backend.swift; sourceTree = "<group>"; };
 		1F8438B1254D2D19004A27A9 /* Green Recipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Green Recipes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F8438B4254D2D19004A27A9 /* Green_RecipesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Green_RecipesApp.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				1F8438E3254D2DBB004A27A9 /* HomePage.swift */,
 				1F843938254D3E8B004A27A9 /* Settings.swift */,
 				1F84393E254DF6BB004A27A9 /* RecipesHome.swift */,
+				1F46F55B2575E17A005414DE /* myRecipe.swift */,
 				1F84393D254DF6A4004A27A9 /* HelperViews */,
 			);
 			path = Views;
@@ -319,6 +322,7 @@
 				1F821330256D653200D29FEE /* Backend.swift in Sources */,
 				1F84393F254DF6BB004A27A9 /* RecipesHome.swift in Sources */,
 				1F8438B7254D2D19004A27A9 /* ContentView.swift in Sources */,
+				1F46F55C2575E17A005414DE /* myRecipe.swift in Sources */,
 				1F8438E4254D2DBB004A27A9 /* HomePage.swift in Sources */,
 				1F8438B5254D2D19004A27A9 /* Green_RecipesApp.swift in Sources */,
 				1F84394A254DF70A004A27A9 /* recipeThumb1.swift in Sources */,

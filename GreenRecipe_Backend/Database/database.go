@@ -88,3 +88,30 @@ if (err != nil) {
 }
 return insertedrecipe, err
 }
+
+func (p *Postgres) FindUser(appleString string)(string, error){
+	// take the unique user id from apple signin and return the database user id.
+}
+/*
+CREATE TABLE person (
+person_id SERIAL,
+apple_id VARCHAR (100) NOT NULL,
+first_name VARCHAR(50) NOT NULL,
+last_name VARCHAR(50) NOT NULL,
+username VARCHAR(50) NOT NULL UNIQUE,
+email VARCHAR(50),
+PRIMARY KEY(person_id)
+);
+ */
+func (p *Postgres) AddUser(user models.Person)(string, error){
+	// create a user based on the appleString and return its database id.
+	context, cancel := context.WithTimeout(context.Background(),time.Second*3)
+	defer cancel()
+
+	sqlstatement := `INSERT INTO people (apple_id, first_name, last_name, username, email) VALUES($1, $2,  
+}
+
+func (p *Postgres) GetUserFavs(uuid string)([]models.Recipe,error){
+	
+}
+

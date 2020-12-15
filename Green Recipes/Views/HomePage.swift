@@ -66,6 +66,15 @@ struct HomePage: View {
                                         let givenName = details.fullName?.givenName
                                         let familyName = details.fullName?.familyName
                                         let state = details.state
+                                        /*
+                                         Find the user in the database, if not found create a new user and add to the database.
+                                         if found, retrive their information.
+                                         */
+                                        // send a user object to the backend server
+                                        var sessionUser = User(firstName: givenName, lastName: familyName, email: email, appleId: userid)
+                                        
+                                        data.user = data.networkHandler.fetchUser(user: sessionUser)
+                                        
                                         
                                         print("userid",userid,"email",email,"identityToken",identityToken,"authcode",authcode?.base64EncodedString(),"name",details.fullName?.description,"givenName",givenName,"familyName",familyName,"state",state)
                                         

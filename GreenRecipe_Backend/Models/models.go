@@ -1,7 +1,7 @@
 package models
 
 type Recipe struct {
-	ID          int       `json:"id"`
+	ID          *int       `json:"id"`
 	Name        *string    `json:"name"`
 	Description *string `json:"description"`
 	Ingredients []*string  `json:"ingredients"`
@@ -34,7 +34,10 @@ type Reply struct{
 	Recipefk int `json:"recipefk"`
 }
 
-type User struct {
+type Person struct {
+
+	UserID *int `json:"userid"`
+	Appleid *string `json:"appleid"`
 	Firstname *string `json:"firstname"`
 	Lastname *string `json:"lastname"`
 	Username *string `json:"username"`
