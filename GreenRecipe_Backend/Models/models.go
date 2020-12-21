@@ -1,5 +1,7 @@
 package models
 
+import "time"
+
 type Recipe struct {
 	ID          *int       `json:"id"`
 	Name        *string    `json:"name"`
@@ -11,7 +13,7 @@ type Recipe struct {
 	Servings    int   `json:"servings"`
 	Equipment   []*string  `json:"equipment"`
 	Images      [] *string `json:"images"`
-	AddedDate   *string    `json:"added_date"`
+	AddedDate   time.Time    `json:"added_date"`
 	Addedby     *string    `json:"addedby"`
 	Nutrition []*string `json:"nutrition"`
 	Category *string `json:"category"`

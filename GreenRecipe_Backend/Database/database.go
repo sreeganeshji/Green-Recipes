@@ -146,16 +146,16 @@ func (p *Postgres) FindRecipeWithID(id int) (models.Recipe, error) {
 	context, cancel := context.WithTimeout(context.Background(), 5 * time.Second)
 	defer cancel()
 
-	sql := `select name from recipe where id = $1`
+	sql := `select id, name, description, ingredients, process, contributor, origin, servings, equipment, images,
+added_date, added_by, nutrition, category from recipe where id=$1`
 
-	var recipe_rec models.Recipe
-	row, err := p.db.Query(context, sql, id)
+	var recipe models.Recipe
+	err := p.db.QueryRow(context, sql, id).Scan(&recipe.ID, &recipe.Name, &recipe.Description, &recipe.Ingredients, &recipe.Process, &recipe.Contributor, &recipe.Origin, &recipe.Servings, &recipe.Equipment, &recipe.Images, &recipe.AddedDate, &recipe.Addedby, &recipe.Nutrition, &recipe.Category)
 
 	if err!=nil{
-		return recipe_rec, err
+		return recipe, err
 	}
 
-	row.Scan(&recipe_rec.Name)
 
-	return recipe_rec, nil
+	return recipe, nil
 }

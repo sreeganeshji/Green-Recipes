@@ -101,9 +101,8 @@ func (h *handler) FindRecipeWithID(w http.ResponseWriter, r * http.Request){
 		return
 	}
 
-	fmt.Println("Recipe object: ",recipe)
 	response,err := json.Marshal(recipe)
-	fmt.Println("recieved ",recipe)
+
 	if err!=nil{
 		w.Write([]byte(fmt.Sprint("cannot marshal recipe: ",err)))
 		w.WriteHeader(http.StatusInternalServerError)
@@ -113,5 +112,4 @@ func (h *handler) FindRecipeWithID(w http.ResponseWriter, r * http.Request){
 	w.WriteHeader(http.StatusOK)
 	w.Write(response)
 	w.Header().Set("Content-Type", "application/json")
-
 }
