@@ -85,4 +85,38 @@ class NetworkAdapter{
         }
         return receivedUser
     }
+    
+    func searchRecipeLike(text:String, completion: @escaping ([RecipeTemplate1])->Void){
+        /*
+         Returns recipe with properties
+         ID, name, and category.
+         */
+        var fetchURL = baseURL
+        
+        fetchURL.appendPathComponent("findrecipeslike/\(text)")
+        
+        var recipeList : [RecipeTemplate1] = []
+        
+        let task = URLSession.shared.dataTask(with: fetchURL) { (data:Data?, response:URLResponse?, error:Error?) in
+            if error != nil{
+                print("Couldn't recieve data. Error: \(String(describing: error))")
+            }
+            let decoder = JSONDecoder()
+            do{
+                print("Data is: ",String(data:data!,encoding: .utf8))
+            recipeList = try decoder.decode([RecipeTemplate1].self, from: data!)
+                print("Recipe is ",recipeList)
+                completion(recipeList)
+            }
+                catch{
+                    
+                    print("Couldn't decode error: \(error)")
+                }
+            
+            }
+        
+        task.resume()
+        
+        
+    }
 }

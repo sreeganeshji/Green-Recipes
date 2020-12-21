@@ -3,20 +3,20 @@ package models
 import "time"
 
 type Recipe struct {
-	ID          *int       `json:"id"`
-	Name        *string    `json:"name"`
-	Description *string `json:"description"`
-	Ingredients []*string  `json:"ingredients"`
-	Process     []*string  `json:"process"`
-	Contributor *string    `json:"contributor"`
-	Origin      *string    `json:"origin"`
-	Servings    int   `json:"servings"`
-	Equipment   []*string  `json:"equipment"`
-	Images      [] *string `json:"images"`
-	AddedDate   time.Time    `json:"added_date"`
-	Addedby     *string    `json:"addedby"`
-	Nutrition []*string `json:"nutrition"`
-	Category *string `json:"category"`
+	ID          *int       `json:"id,omitempty"`
+	Name        *string    `json:"name,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Ingredients []*string  `json:"ingredients,omitempty"`
+	Process     []*string  `json:"process,omitempty"`
+	Contributor *string    `json:"contributor,omitempty"`
+	Origin      *string    `json:"origin,omitempty"`
+	Servings    int   `json:"servings,omitempty"`
+	Equipment   []*string  `json:"equipment,omitempty"`
+	Images      [] *string `json:"images,omitempty"`
+	AddedDate   time.Time    `json:"added_date,omitempty"`
+	Addedby     *string    `json:"addedby,omitempty"`
+	Nutrition []*string `json:"nutrition,omitempty"`
+	Category *string `json:"category,omitempty"`
 }
 
 type Review struct{

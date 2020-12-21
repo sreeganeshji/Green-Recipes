@@ -135,11 +135,12 @@ func (p *Postgres) FindRecipesLike(recipe string, count int)([]models.Recipe, er
 		recipe_rec[i] = recipeRow
 		i += 1
 	}
+	//fmt.Println("Retrived ",i," rows of recipes")
 
 	if (err != nil){
 		return recipe_rec, err
 	}
-	return recipe_rec, nil
+	return recipe_rec[:i], nil
 }
 
 func (p *Postgres) FindRecipeWithID(id int) (models.Recipe, error) {

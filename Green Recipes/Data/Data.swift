@@ -64,6 +64,12 @@ struct Recipe: Hashable, Equatable, Codable{
     }
 }
 
+struct RecipeTemplate1:Codable, Hashable{
+    var id:Int
+    var name:String
+    var category:String?
+}
+
 struct Comment:Hashable, Codable{
     var creator:User
     var body:String
