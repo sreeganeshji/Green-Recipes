@@ -19,34 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0b39fbb6-cc4e-4b59-be15-8e3c7ca69ebc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Green Recipes/Views/myRecipe.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Database/Desserts.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Database/Desserts.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Database/DharmaDiet Recipes.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Database/Lunch.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Database/Lunch.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Database/Lunch_Dinner.pages" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Database/ParseDoc/data.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Database/ParseDoc/output.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Database/Salads.pages" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Database/Salads.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Database/Snacks.pages" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Database/Snacks.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Database/Snacks.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Database/data.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Database/gotests/testJsonDecoding.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/greenrecipe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Green Recipes.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Green Recipes/Data/Data.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Data/Data.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Green Recipes/Network/Backend.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Network/Backend.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Green Recipes/Views/HomePage.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Views/HomePage.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/ParseDoc/parseDoc.py" beforeDir="false" afterPath="$PROJECT_DIR$/Database/ParseDoc/parseDoc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/database.go" beforeDir="false" afterPath="$PROJECT_DIR$/Database/database.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/schema.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/models.go" beforeDir="false" afterPath="$PROJECT_DIR$/Models/models.go" afterDir="false" />
-    </list>
+    <list default="true" id="0b39fbb6-cc4e-4b59-be15-8e3c7ca69ebc" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -59,7 +32,7 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" path="/usr/local/Cellar/go/1.15/libexec" />
+  <component name="GOROOT" url="file:///usr/local/Cellar/go/1.15.6/libexec" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
@@ -78,11 +51,12 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultGoTemplateProperty" value="Go Application" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -111,32 +85,5 @@
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="520" y="287" key="#Go_Modules" timestamp="1606259677982">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state x="520" y="287" key="#Go_Modules/0.0.1440.900@0.0.1440.900" timestamp="1606259677982" />
-    <state x="113" y="285" key="#SQL_Dialects" timestamp="1605288429917">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state x="113" y="285" key="#SQL_Dialects/0.0.1440.900@0.0.1440.900" timestamp="1605288429917" />
-    <state x="320" y="114" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606270243392">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state x="320" y="114" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1606270243392" />
-    <state x="621" y="315" key="EnvironmentVariablesDialog" timestamp="1606259675276">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state x="621" y="315" key="EnvironmentVariablesDialog/0.0.1440.900@0.0.1440.900" timestamp="1606259675276" />
-    <state x="444" y="147" key="SettingsEditor" timestamp="1606259658542">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state x="444" y="147" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1606259658542" />
-    <state x="789" y="176" key="SettingsEditor/0.0.2560.1080@0.0.2560.1080" timestamp="1605933569430" />
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1606333844568">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1606333844568" />
   </component>
 </project>

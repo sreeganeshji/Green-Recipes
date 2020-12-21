@@ -8,6 +8,7 @@ import(
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
+	"strconv"
 )
 
 type handler struct{
@@ -18,6 +19,8 @@ func Initalizer(service service.Service) (*mux.Router){
 	handler := handler{&service}
 	r := mux.NewRouter()
 	r.HandleFunc("/addrecipe",handler.AddRecipeHandler).Methods(http.MethodPost)
+	r.HandleFunc("/findrecipeslike/{text}", handler.FindRecipesLikeHandler).Methods(http.MethodGet)
+	r.HandleFunc("/findrecipewithid/{id}", handler.FindRecipeWithID).Methods(http.MethodGet)
 
 	return r
 }
@@ -52,4 +55,63 @@ func (h *handler)AddRecipeHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type","application/json")
 	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode(insertedRecipe)
+}
+
+func (h *handler) FindRecipesLikeHandler(w http.ResponseWriter, r *http.Request){
+	vars := mux.Vars(r)
+	w.WriteHeader(http.StatusOK)
+	text := vars["text"]
+	fmt.Println("Text is",text)
+
+	//call the service.
+	recipes,err := h.Service.FindRecipesLike(text,10)
+
+	if err!=nil{
+		//server error
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Error querying the database: ", err.Error())))
+		return
+	}
+
+	data,err := json.Marshal(recipes)
+
+	w.Write(data)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+}
+
+func (h *handler) FindRecipeWithID(w http.ResponseWriter, r * http.Request){
+	vars := mux.Vars(r)
+	id, err := strconv.Atoi(vars["id"])
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("error getting the id: ",err)))
+		return
+	}
+	if id<0{
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte(fmt.Sprint("cannot have negative id ",id)))
+		return
+	}
+
+	recipe, err := h.Service.FindRecipeWithID(id)
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("database error: ",err)))
+		return
+	}
+
+	fmt.Println("Recipe object: ",recipe)
+	response,err := json.Marshal(recipe)
+	fmt.Println("recieved ",recipe)
+	if err!=nil{
+		w.Write([]byte(fmt.Sprint("cannot marshal recipe: ",err)))
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Write(response)
+	w.Header().Set("Content-Type", "application/json")
+
 }
