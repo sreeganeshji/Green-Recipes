@@ -8,7 +8,11 @@
 import Foundation
 
 
-struct Recipe: Hashable, Equatable, Codable{
+class Recipe: Hashable, Equatable, Codable, ObservableObject{
+    static func == (lhs: Recipe, rhs: Recipe) -> Bool {
+        lhs.id == rhs.id
+    }
+    
 
     /*
      ID          int       `json:"id"`
@@ -25,7 +29,7 @@ struct Recipe: Hashable, Equatable, Codable{
      Nutrition []string `json:"nutrition"`
      Category string `json:"category"`
      */
-    var id:Int?
+    var id:Int
     var name:String
     var description:String?
     var ingredients:[String]
@@ -40,8 +44,10 @@ struct Recipe: Hashable, Equatable, Codable{
     var nutrition:[String]?
     var category:String?
     var pictures:[String]?
+    var hashValue: Int{return self.id}
 
     init() {
+        self.id = 0
         self.name = ""
         self.process = []
         self.servings = 1
@@ -53,10 +59,39 @@ struct Recipe: Hashable, Equatable, Codable{
         self.addedby = ""
         self.nutrition = []
     }
-    init(name:String, description:String){
+    convenience init(name:String, description:String){
         self.init()
         self.name = name
         self.description = description
+    }
+    convenience init(_ recipe:Recipe) {
+        self.init()
+        id = recipe.id
+        name = recipe.name
+        ingredients = recipe.ingredients
+        process = recipe.process
+        equipment = recipe.equipment
+        category = recipe.category
+        servings = recipe.servings
+        description = recipe.description
+        addedby = recipe.addedby
+        addeddate = recipe.addeddate
+        nutrition = recipe.nutrition
+        images = recipe.images
+    }
+    func copy(from recipe2:Recipe){
+        id = recipe2.id
+        name = recipe2.name
+        ingredients = recipe2.ingredients
+        process = recipe2.process
+        equipment = recipe2.equipment
+        category = recipe2.category
+        servings = recipe2.servings
+        description = recipe2.description
+        addedby = recipe2.addedby
+        addeddate = recipe2.addeddate
+        nutrition = recipe2.nutrition
+        images = recipe2.images
     }
 }
 

@@ -7,24 +7,17 @@
 
 import SwiftUI
 
-class ObservedRecipe:ObservableObject{
-    @Published var recipe:Recipe
-    init(recipe:Recipe){
-        self.recipe = recipe
-    }
-}
-
 
 struct RecipeDetail: View {
     var id :Int
-    @StateObject var recipe = ObservedRecipe(recipe: Recipe())
+    @StateObject var recipe = Recipe()
     @EnvironmentObject var data:DataModels
     var body: some View {
         NavigationView{
         Form
         {
             //description
-            if(self.recipe.recipe.description != nil){
+            if(self.recipe.description != nil){
             Section{
                 HStack{
                     Spacer()
@@ -32,7 +25,7 @@ struct RecipeDetail: View {
                 Spacer()
             }
 
-                Text(self.recipe.recipe.description!)
+                Text(self.recipe.description!)
                 }
             }
             
@@ -46,10 +39,10 @@ struct RecipeDetail: View {
             }
                 
                 
-                if(self.recipe.recipe.ingredients.count>0)
+                if(self.recipe.ingredients.count>0)
                 {
                     List{
-                        ForEach(Array(zip(self.recipe.recipe.ingredients,(1...self.recipe.recipe.ingredients.count))),id:\.1){
+                        ForEach(Array(zip(self.recipe.ingredients,(1...self.recipe.ingredients.count))),id:\.1){
                     item in
                     HStack{
                         Text("\(item.1).").bold()
@@ -71,10 +64,10 @@ struct RecipeDetail: View {
                 Text("Process").bold()
                 Spacer()
             }
-                if(self.recipe.recipe.process.count>0)
+                if(self.recipe.process.count>0)
                 {
                     List{
-                        ForEach(Array(zip((1...self.recipe.recipe.process.count),self.recipe.recipe.process)),id:\.0){
+                        ForEach(Array(zip((1...self.recipe.process.count),self.recipe.process)),id:\.0){
                     item in
                             HStack{
                                 Text("\(item.0).").bold()
@@ -92,7 +85,7 @@ struct RecipeDetail: View {
             HStack{
                 Text("Servings:").bold()
                 Spacer()
-                Text("\(self.recipe.recipe.servings)")
+                Text("\(self.recipe.servings)")
                 Spacer()
             }.padding()
             
@@ -103,10 +96,10 @@ struct RecipeDetail: View {
                 Text("Equipment").bold()
                 Spacer()
             }
-                if(self.recipe.recipe.equipment != nil && self.recipe.recipe.equipment!.count > 0 )
+                if(self.recipe.equipment != nil && self.recipe.equipment!.count > 0 )
                 {
                     List{
-                        ForEach(Array(zip((1...self.recipe.recipe.equipment!.count),self.recipe.recipe.equipment!)),id:\.0){
+                        ForEach(Array(zip((1...self.recipe.equipment!.count),self.recipe.equipment!)),id:\.0){
                     item in
                             HStack{
                                 Text("\(item.0).").bold()
@@ -127,7 +120,7 @@ struct RecipeDetail: View {
                 GetRecipeByID()
             }
 
-        .navigationBarTitle(Text(self.recipe.recipe.name), displayMode: .inline)
+        .navigationBarTitle(Text(self.recipe.name), displayMode: .inline)
         }
     }
 
@@ -137,8 +130,7 @@ func GetRecipeByID(){
 }
 
 func UpdateRecipe(recipe:Recipe){
-    
-    self.recipe.recipe = recipe
+    self.recipe.copy(from: recipe)
 }
 }
 
