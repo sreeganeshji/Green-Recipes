@@ -11,7 +11,7 @@ struct recipieThumb1: View {
     @Binding var recipe:Recipe
     var body: some View {
         VStack{
-        if(recipe.pictures.count>0){
+        if((recipe.pictures?.count ?? 0)>0){
             //display image
         }
             Text(recipe.name).bold()
@@ -21,19 +21,19 @@ struct recipieThumb1: View {
     }
     func getDescription(recipe:Recipe)->Text{
         let str = recipe.description
-        let strlen = str.count
+        let strlen = str?.count ?? 0
         var descriptionThumb:String
         
         if(strlen>0){
-            let start = str.startIndex
-            let end = str.index(str.startIndex, offsetBy: .init(20))
+            let start = str!.startIndex
+            let end = str!.index(str!.startIndex, offsetBy: .init(20))
             
-            let strDistance = str.distance(from: start, to: end)
+            let strDistance = str!.distance(from: start, to: end)
             if strDistance.magnitude < strlen{
-                descriptionThumb = str[start...end] + "..."
+                descriptionThumb = str![start...end] + "..."
             }
             else{
-                descriptionThumb = str
+                descriptionThumb = str!
             }
             return Text(descriptionThumb)
             

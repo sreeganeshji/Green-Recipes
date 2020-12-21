@@ -27,7 +27,7 @@ struct Recipe: Hashable, Equatable, Codable{
      */
     var id:Int?
     var name:String
-    var description:String
+    var description:String?
     var ingredients:[String]
     var process:[String]
     var contributor:String?
@@ -35,11 +35,11 @@ struct Recipe: Hashable, Equatable, Codable{
     var servings:Int
     var equipment:[String]?
     var images:[String]?
-    var addeddate:String
-    var addedby:String
-    var nutrition:[String]
-    var category:String
-    var pictures:[String]
+    var addeddate:String?
+    var addedby:String?
+    var nutrition:[String]?
+    var category:String?
+    var pictures:[String]?
 
     init() {
         self.name = ""
@@ -47,10 +47,6 @@ struct Recipe: Hashable, Equatable, Codable{
         self.servings = 1
         self.pictures = []
         self.ingredients = []
-        self.description = ""
-        self.origin = ""
-        self.category = ""
-        self.contributor = ""
         self.equipment = []
         self.images = []
         self.addeddate = ""

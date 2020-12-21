@@ -11,29 +11,48 @@ struct SearchView: View {
     @State var text : String = ""
     @State var recipes : [RecipeTemplate1] = []
     @EnvironmentObject var data:DataModels
+    
+    //modal sheet
+    @State var sheetPresented = false
+    @State var sheetRecipeID = 0
     var body: some View {
         VStack{
+          
             HStack{
                 Button(action: searchQuery){
                 Image(systemName: "magnifyingglass")
                 }
-                
+
                 TextField("Search recipes", text: $text)
-                
+
                 Button(action:clearSearchField){
                 Image(systemName: "xmark.circle.fill")
                 }
-                
+
             }.padding()
+            
+            
             List{
+
                 ForEach(self.recipes, id:\.self){
                     recipe in
-                    HStack{
+                    
+                    Button(action:{
+                        self.sheetPresented = true
+                        self.sheetRecipeID = recipe.id
+                        
+                    })
+                    {
                         Text(recipe.name)
                     }
+//                    .listRowInsets(EdgeInsets())
                 }
             }
         }
+        .sheet(isPresented: self.$sheetPresented, content: {
+            RecipeDetail(id: self.sheetRecipeID)
+        })
+   
     }
     func clearSearchField(){
         self.text = ""

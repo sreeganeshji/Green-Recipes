@@ -29,7 +29,9 @@ struct HomePage: View {
                 Image(systemName: "sparkles")
                 Text("Explore")
             } }.tag(tabViews.explore)
-            SearchView().tabItem { HStack{
+            
+            SearchView()
+                .tabItem { HStack{
                 Image(systemName: "magnifyingglass")
                 Text("Search")} }.tag(tabViews.search)
             Text("Favorites").tabItem { HStack{

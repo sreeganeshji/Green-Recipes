@@ -100,6 +100,7 @@ class NetworkAdapter{
         let task = URLSession.shared.dataTask(with: fetchURL) { (data:Data?, response:URLResponse?, error:Error?) in
             if error != nil{
                 print("Couldn't recieve data. Error: \(String(describing: error))")
+                return
             }
             let decoder = JSONDecoder()
             do{
@@ -117,6 +118,37 @@ class NetworkAdapter{
         
         task.resume()
         
-        
     }
+    
+    func searchRecipeWithID(id:Int, completion: @escaping (Recipe)->()){
+    //create a request
+        var requestURL = baseURL
+        requestURL.appendPathComponent("findrecipewithid")
+        requestURL.appendPathComponent("\(id)")
+        
+        var recipe:Recipe = .init()
+        
+        let task = URLSession.shared.dataTask(with: requestURL) { (data:Data?, response:URLResponse?, error:Error?) in
+            if error != nil{
+                print("couldn't fetch recipe, error: \(String(describing: error))")
+                return
+            }
+            
+            //decode data
+            let decoder = JSONDecoder()
+            
+            do{
+                try recipe = decoder.decode(Recipe.self, from: data!)
+            }
+            catch{
+                print("couldn't decode. Error: \(error)")
+                return
+            }
+            completion(recipe)
+        }
+        
+        task.resume()
+    }
+    
+    
 }

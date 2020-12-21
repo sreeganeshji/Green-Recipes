@@ -12,6 +12,7 @@ struct AddRecipe: View {
     @State var recipeNew = Recipe()
     @State var newIngredient:String = ""
     @State var newProcess:String = ""
+    @State var description:String = ""
     var body: some View {
         NavigationView{
 
@@ -30,7 +31,7 @@ struct AddRecipe: View {
                 Spacer()
             }
 
-                TextEditor(text: $recipeNew.description)
+                TextEditor(text: self.$description)
             }
             Section{
             HStack {
