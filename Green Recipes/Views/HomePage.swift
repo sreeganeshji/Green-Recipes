@@ -19,7 +19,7 @@ enum tabViews {
 }
 
 struct HomePage: View {
-    @State var signedIn:Bool = true
+    @State var signedIn:Bool = false
     @EnvironmentObject var data:DataModels
     @State var tabSelect:tabViews = tabViews.explore
     var body: some View {

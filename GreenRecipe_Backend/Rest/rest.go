@@ -21,7 +21,8 @@ func Initalizer(service service.Service) (*mux.Router){
 	r.HandleFunc("/addrecipe",handler.AddRecipeHandler).Methods(http.MethodPost)
 	r.HandleFunc("/findrecipeslike/{text}", handler.FindRecipesLikeHandler).Methods(http.MethodGet)
 	r.HandleFunc("/findrecipewithid/{id}", handler.FindRecipeWithID).Methods(http.MethodGet)
-
+	r.HandleFunc("/adduser",handler.AddUser).Methods(http.MethodPost)
+	r.HandleFunc("/getuserwithappleid/{apple_id}", handler.GetUserWithAppleID).Methods(http.MethodGet)
 	return r
 }
 
@@ -41,6 +42,7 @@ func (h *handler)AddRecipeHandler(w http.ResponseWriter, r *http.Request) {
 	if (err!=nil){
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(fmt.Sprint("error encoding",err)))
+		return
 	}
 	fmt.Println("decoded new recipe", recipe)
 	fmt.Println("absent parameter nutrients, category",recipe.Nutrition, recipe.Category)
@@ -112,4 +114,56 @@ func (h *handler) FindRecipeWithID(w http.ResponseWriter, r * http.Request){
 	w.WriteHeader(http.StatusOK)
 	w.Write(response)
 	w.Header().Set("Content-Type", "application/json")
+}
+
+func (h *handler) AddUser(w http.ResponseWriter, r *http.Request){
+
+	decoder := json.NewDecoder(r.Body)
+	var user models.Person
+	err := decoder.Decode(&user)
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Error decoding request: ",err)))
+		return
+	}
+
+	user_rec,err := h.Service.AddUser(user)
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Database error: ", err)))
+		return
+	}
+
+	response,err := json.Marshal(user_rec)
+	if err!=nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Error marshalling data: ",err)))
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Write(response)
+	w.Header().Set("Content-Type","application/json")
+}
+
+func (h *handler) GetUserWithAppleID(w http.ResponseWriter, r *http.Request){
+	vars := mux.Vars(r)
+	apple_id := vars["apple_id"]
+
+	user, err := h.Service.GetUserWithAppleID(apple_id)
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("database error: ",err)))
+		return
+	}
+
+	response,err := json.Marshal(user)
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Error marshalling json: ",err)))
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Write(response)
 }

@@ -20,3 +20,11 @@ func (s *Service) FindRecipesLike(text string, count int) ([]models.Recipe, erro
 func (s *Service) FindRecipeWithID(id int) (models.Recipe, error){
 	return s.Postgres.FindRecipeWithID(id)
 }
+
+func (s *Service) AddUser(user models.Person) (models.Person, error){
+	return s.Postgres.AddUser(user)
+}
+
+func (s *Service) GetUserWithAppleID(apple_id string) (models.Person, error){
+	return s.Postgres.GetUserWithAppleID(apple_id)
+}
