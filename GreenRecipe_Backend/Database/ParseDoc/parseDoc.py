@@ -39,7 +39,7 @@ keywords = {"Origin:", "Ingredients:", "Servings (number or # of people):", "Pro
 
 pointKey = "*"
 
-import re
+# import re
 def emptyLine(line):
     N = len(line)
     i = 0
@@ -107,9 +107,9 @@ recipe = recipe()
 def getSQL(recipe):
     sql = ''
     if recipe.contributor:
-        sql = "INSERT INTO recipe(name, origin,servings, ingredients, process, equipment, contributor, category) VALUES('%s', '%s', %d, ARRAY %s, ARRAY %s, ARRAY %s, '%s');"%(recipe.name,recipe.origin, recipe.servings,recipe.ingredients, recipe.process, recipe.equipment,recipe.contributor, recipe.category)
+        sql = "INSERT INTO recipe(name, origin,servings, ingredients, process, equipment, contributor, category) VALUES('%s', '%s', %d, ARRAY %s, ARRAY %s, ARRAY %s, '%s', '%s');"%(recipe.name,recipe.origin, recipe.servings,recipe.ingredients, recipe.process, recipe.equipment,recipe.contributor, recipe.category)
     else:
-        sql = "INSERT INTO recipe(name, origin,servings, ingredients, process, equipment, category) VALUES('%s', '%s', %d,  ARRAY %s, ARRAY %s, ARRAY %s);"%(recipe.name,recipe.origin, recipe.servings,recipe.ingredients, recipe.process, recipe.equipment, recipe.category)
+        sql = "INSERT INTO recipe(name, origin,servings, ingredients, process, equipment, category) VALUES('%s', '%s', %d,  ARRAY %s, ARRAY %s, ARRAY %s, '%s');"%(recipe.name,recipe.origin, recipe.servings,recipe.ingredients, recipe.process, recipe.equipment, recipe.category)
 
     print(sql)
     print("")

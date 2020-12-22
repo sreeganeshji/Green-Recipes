@@ -9,10 +9,12 @@ import Foundation
 
 class NetworkAdapter{
     
-    var baseURL = URL(string: "https://ganeshappbackend.com")!
+    var baseURL = URL(string: "")!
     
-    init(_ base:String){
-        self.baseURL = URL(string:base)!
+    init(_ base:String?){
+        if base != nil{
+        self.baseURL = URL(string:base!)!
+        }
     }
     
     func getRequest<T:Decodable>(path:String, handler:@escaping (([T]?)->Void)){
@@ -150,5 +152,43 @@ class NetworkAdapter{
         task.resume()
     }
     
+    func getUserWithAppleID(appleID:String,completion:@escaping (User)->()){
+        
+        var appleID_clean = String(appleID)
+        appleID_clean.removeAll { (c:Character) -> Bool in
+            if (c == "."){
+                return true
+            }
+            return false
+        }
+        
+        print("appleIDClean ", appleID_clean)
+        
+        var reqURL = baseURL
+        reqURL.appendPathComponent("getuserwithappleid/\(appleID_clean)")
+        
+        print("Requesting URL: ",reqURL.absoluteString)
+        let task = URLSession.shared.dataTask(with: reqURL) { (data:Data?, response:URLResponse?, error:Error?) in
+            if error != nil{
+                print("server error: \(error)")
+                return
+            }
+            
+            print("Recieved data: ",String(data: data!, encoding: .utf8))
+            
+            let decoder = JSONDecoder()
+            var user_rec = User()
+            do{
+                try user_rec = decoder.decode(User.self, from: data!)
+            }
+            catch{
+                print("Couldn't decode with error: \(error)")
+                return
+            }
+            completion(user_rec)
+        }
+        
+        task.resume()
+    }
     
 }

@@ -9,7 +9,7 @@ lastname VARCHAR(50) NOT NULL,
 username VARCHAR(50) NOT NULL UNIQUE,
 profilepic VARCHAR(100),
 email VARCHAR(50),
-PRIMARY KEY(person_id)
+PRIMARY KEY(user_id)
 );
 
 CREATE TABLE recipe(

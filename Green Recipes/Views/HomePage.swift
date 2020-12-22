@@ -50,49 +50,56 @@ struct HomePage: View {
         }
         }
         else{
-            SignInWithAppleButton(
-                            onRequest: { request in
-                                request.requestedScopes = [.fullName,.email]
-                            },
-                            onCompletion: { result in
-                                switch(result){
-                                
-                                case .success(let authResults):
-                                    if let details = authResults.credential as? ASAuthorizationAppleIDCredential{
-                                        let userid = details.user
-                                        //001289.c9ba712996a74ce8aa424e158d6b10d5.0653
-                                        //001289.c9ba712996a74ce8aa424e158d6b10d5.0653
-                                        let email = details.email
-                                        let identityToken = details.identityToken
-                                        let authcode = details.authorizationCode
-                                        let givenName = details.fullName?.givenName
-                                        let familyName = details.fullName?.familyName
-                                        let state = details.state
-                                        /*
-                                         Find the user in the database, if not found create a new user and add to the database.
-                                         if found, retrive their information.
-                                         */
-                                        // send a user object to the backend server
-                                        var sessionUser = User(firstName: givenName, lastName: familyName, email: email, appleId: userid)
-                                        
-                                        data.user = data.networkHandler.fetchUser(user: sessionUser)
-                                        
-                                        
-                                        print("userid",userid,"email",email,"identityToken",identityToken,"authcode",authcode?.base64EncodedString(),"name",details.fullName?.description,"givenName",givenName,"familyName",familyName,"state",state)
-                                        
-                                        self.signedIn = true
-                                    }
-                                case .failure(let error):
-                                    print("Failed",error)
-                                    self.signedIn = false
-                                }
-                            }
-                        ).padding()
-                        .frame(height:100)
+SignInWithAppleButton(
+        onRequest: { request in
+            request.requestedScopes = [.fullName,.email]
+        },
+        onCompletion: { result in
+            switch(result){
+            
+            case .success(let authResults):
+                if let details = authResults.credential as? ASAuthorizationAppleIDCredential{
+                    let userid = details.user
+              
+                    let email = details.email
+                    let identityToken = details.identityToken
+                    let authcode = details.authorizationCode
+                    let givenName = details.fullName?.givenName
+                    let familyName = details.fullName?.familyName
+                    let state = details.state
+                    /*
+                     Find the user in the database, if not found create a new user and add to the database.
+                     if found, retrive their information.
+                     */
+                    // send a user object to the backend server
+                    var sessionUser = User(firstName: givenName, lastName: familyName, email: email, appleId: userid)
+                    
+                    data.user = data.networkHandler.fetchUser(user: sessionUser)
+                    
+                    
+                    print("userid",userid,"email",email,"identityToken",identityToken,"authcode",authcode?.base64EncodedString(),"name",details.fullName?.description,"givenName",givenName,"familyName",familyName,"state",state)
+                    
+                    //Find if the user exists
+                    print("Userid",userid.description)
+                    self.data.networkHandler.getUserWithAppleID(appleID: userid.description, completion: updateUser)
+                    
+                }
+            case .failure(let error):
+                print("Failed",error)
+                self.signedIn = false
+            }
+        }
+    ).padding()
+                    .frame(height:100)
 //            .signInWithAppleButtonStyle(.)
 
-        }
+    }
 
+    }
+    
+    func updateUser(user:User){
+        self.data.user = user
+        self.signedIn = true
     }
 }
 

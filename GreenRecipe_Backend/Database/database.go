@@ -104,7 +104,7 @@ func (p *Postgres) AddUser(user models.Person) (models.Person, error){
 	// create a user based on the appleString and return its database id.
 	c, cancel := context.WithTimeout(context.Background(),time.Second*3)
 	defer cancel()
-	sql := `INSERT INTO person (apple_id, first_name, last_name, username, email) VALUES($1, $2, $3, $4, $5) RETURNING person_id, apple_id, first_name, last_name, username, email  `
+	sql := `INSERT INTO person (apple_id, firstname, lastname, username, email) VALUES($1, $2, $3, $4, $5) RETURNING user_id, apple_id, firstname, lastname, username, email  `
 
 	var user_rec models.Person
 
@@ -121,7 +121,7 @@ func (p *Postgres) GetUserWithAppleID(apple_id string)(models.Person, error){
 	c, cancel := context.WithTimeout(context.Background(), 5 * time.Second)
 	defer cancel()
 
-	sql := `select person_id, apple_id, first_name, last_name, username, email from person where apple_id=$1`
+	sql := `select user_id, apple_id, firstname, lastname, username, email from person where apple_id=$1`
 
 	var user models.Person
 	err := p.db.QueryRow(c, sql, apple_id).Scan(&user.UserID, &user.Appleid, &user.Firstname, &user.Lastname, &user.Username, &user.Email)
