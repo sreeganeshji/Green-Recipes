@@ -74,13 +74,21 @@ struct Comment:Hashable, Codable{
 
 struct User:Hashable, Equatable, Codable{
 
-    var username:String?
-    var firstName:String?
-    var lastName:String?
+    var username:String
+    var firstName:String
+    var lastName:String
     var profilePic:String?
     var email:String?
-    var userId:Int?
-    var appleId:String?
+    var userId:Int
+    var appleId:String
+    
+    init(){
+        self.username = ""
+        self.firstName = ""
+        self.lastName = ""
+        self.userId = 0
+        self.appleId = ""
+    }
 }
 
 struct Ratings:Hashable, Codable{

@@ -41,7 +41,6 @@ func main() {
 	//fmt.Println(err)
 	//http.HandleFunc("/hello", handleHello)
 
-	postgres,err := database.Connect("abc","postgres","postgres","pass",3)
 if err != nil{
 	panic(err)
 }

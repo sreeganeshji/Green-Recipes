@@ -22,6 +22,9 @@ struct HomePage: View {
     @State var signedIn:Bool = false
     @EnvironmentObject var data:DataModels
     @State var tabSelect:tabViews = tabViews.explore
+    
+    @State var signUp:Bool = false
+    
     var body: some View {
         if(self.signedIn){
         TabView(selection: $tabSelect) {
@@ -49,6 +52,9 @@ struct HomePage: View {
                 Text("Settings")} }.tag(tabViews.settings)
         }
         }
+        else if(self.signUp){
+            SignUp(user: self.data.user).environmentObject(data)
+        }
         else{
 SignInWithAppleButton(
         onRequest: { request in
@@ -72,7 +78,13 @@ SignInWithAppleButton(
                      if found, retrive their information.
                      */
                     // send a user object to the backend server
-                    var sessionUser = User(firstName: givenName, lastName: familyName, email: email, appleId: userid)
+                    var sessionUser = User()
+                    
+                    sessionUser.appleId = userid
+                    sessionUser.email = email
+                    sessionUser.firstName = givenName ?? ""
+                    sessionUser.lastName = familyName ?? ""
+                    
                     
                     data.user = data.networkHandler.fetchUser(user: sessionUser)
                     
@@ -99,6 +111,10 @@ SignInWithAppleButton(
     
     func updateUser(user:User){
         self.data.user = user
+        if self.data.user.username == ""{
+            self.signUp = true
+            return
+        }
         self.signedIn = true
     }
 }
