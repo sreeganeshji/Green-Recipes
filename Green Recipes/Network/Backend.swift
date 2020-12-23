@@ -9,7 +9,6 @@ import Foundation
 
 class NetworkAdapter{
     
-    var baseURL = URL(string: "")!
     
     init(_ base:String?){
         if base != nil{
@@ -154,18 +153,10 @@ class NetworkAdapter{
     
     func getUserWithAppleID(appleID:String,completion:@escaping (User)->()){
         
-        var appleID_clean = String(appleID)
-        appleID_clean.removeAll { (c:Character) -> Bool in
-            if (c == "."){
-                return true
-            }
-            return false
-        }
-        
-        print("appleIDClean ", appleID_clean)
+
         
         var reqURL = baseURL
-        reqURL.appendPathComponent("getuserwithappleid/\(appleID_clean)")
+        reqURL.appendPathComponent("getuserwithappleid/\(appleID)")
         
         print("Requesting URL: ",reqURL.absoluteString)
         let task = URLSession.shared.dataTask(with: reqURL) { (data:Data?, response:URLResponse?, error:Error?) in
@@ -183,12 +174,57 @@ class NetworkAdapter{
             }
             catch{
                 print("Couldn't decode with error: \(error)")
-                return
             }
             completion(user_rec)
         }
         
         task.resume()
+    }
+    
+    
+    func createUser(user:User, completion: @escaping (User?, Error?)->()){
+        
+        var userRec:User?
+        
+        //encode json
+        let encoder = JSONEncoder()
+        do{
+        let data = try encoder.encode(user)
+        var requestURL = baseURL
+        requestURL.appendPathComponent("adduser")
+        
+        var requestObj = URLRequest(url: requestURL)
+        
+        requestObj.httpMethod = "POST"
+        requestObj.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        requestObj.httpBody = data
+            
+        //create task
+            let task = URLSession.shared.dataTask(with: requestObj) { (data:Data?, response:URLResponse?, error:Error?) in
+                if error != nil{
+                    print("Session error: \(error)")
+                    completion(userRec, error)
+                    return
+                }
+                
+                do{
+                    let decoder = JSONDecoder()
+                    try userRec = decoder.decode(User.self, from: data!)
+                }
+                catch{
+                    print("Couldn't decode recieved user")
+                    completion(userRec, error)
+                    return
+                }
+                completion(userRec, nil)
+            }
+            task.resume()
+        }
+        catch{
+            print("Couldn't encode user: \(error)")
+            completion(userRec, error)
+            return
+        }
     }
     
 }

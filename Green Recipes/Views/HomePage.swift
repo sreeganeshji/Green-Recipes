@@ -22,10 +22,12 @@ struct HomePage: View {
     @State var signedIn:Bool = false
     @EnvironmentObject var data:DataModels
     @State var tabSelect:tabViews = tabViews.explore
+    @State var userDB = User()
+    @State var verifyCredentials = false
     
-    @State var signUp:Bool = false
     
     var body: some View {
+        ZStack{
         if(self.signedIn){
         TabView(selection: $tabSelect) {
             Text("Explore").tabItem { HStack{
@@ -51,14 +53,15 @@ struct HomePage: View {
                 Image(systemName: "gear")
                 Text("Settings")} }.tag(tabViews.settings)
         }
+   
         }
-        else if(self.signUp){
-            SignUp(user: self.data.user).environmentObject(data)
-        }
+
         else{
-SignInWithAppleButton(
-        onRequest: { request in
-            request.requestedScopes = [.fullName,.email]
+SignInWithAppleButton(.signIn, onRequest: { request in
+    request.requestedScopes = [.fullName,.email]
+//    request.nonce = "noncestr"
+//    request.state = "statestr"
+        
         },
         onCompletion: { result in
             switch(result){
@@ -78,22 +81,34 @@ SignInWithAppleButton(
                      if found, retrive their information.
                      */
                     // send a user object to the backend server
-                    var sessionUser = User()
+                    var appleID_clean = String(userid)
+                    appleID_clean.removeAll { (c:Character) -> Bool in
+                        if (c == "."){
+                            return true
+                        }
+                        return false
+                    }
                     
-                    sessionUser.appleId = userid
-                    sessionUser.email = email
-                    sessionUser.firstName = givenName ?? ""
-                    sessionUser.lastName = familyName ?? ""
+                    self.data.user.appleId = appleID_clean
+                    self.data.user.email = email ?? ""
+                    self.data.user.firstName = givenName ?? ""
+                    self.data.user.lastName = familyName ?? ""
+                    //default username
+                    self.data.user.username = (givenName ?? "" )+" "+(familyName ?? "")
+                        
+                    self.userDB.appleId = appleID_clean
                     
                     
-                    data.user = data.networkHandler.fetchUser(user: sessionUser)
+                    //check if user already existed.
                     
+                    
+                
                     
                     print("userid",userid,"email",email,"identityToken",identityToken,"authcode",authcode?.base64EncodedString(),"name",details.fullName?.description,"givenName",givenName,"familyName",familyName,"state",state)
                     
                     //Find if the user exists
                     print("Userid",userid.description)
-                    self.data.networkHandler.getUserWithAppleID(appleID: userid.description, completion: updateUser)
+                    self.data.networkHandler.getUserWithAppleID(appleID: appleID_clean, completion: updateUser)
                     
                 }
             case .failure(let error):
@@ -103,19 +118,40 @@ SignInWithAppleButton(
         }
     ).padding()
                     .frame(height:100)
-//            .signInWithAppleButtonStyle(.)
+.signInWithAppleButtonStyle(.whiteOutline)
 
     }
-
+        }
+//        .sheet(isPresented: self.$verifyCredentials, content: {
+//            VerifyCredentials(showSheet: self.$verifyCredentials, editUsername: true, user: self.$userDB).environmentObject(self.data)
+//        })
+     
     }
     
     func updateUser(user:User){
-        self.data.user = user
-        if self.data.user.username == ""{
-            self.signUp = true
+        self.userDB = user
+        if self.userDB.firstName == ""{
+            //new user. Create database entry from the apple credentials.
+            
+            //verify credentials
+//            self.verifyCredentials = true
+            
+            //submit to database
+            self.data.networkHandler.createUser(user: self.data.user, completion: createUser)
+           
+        }
+        self.data.user = self.userDB
+        self.signedIn = true
+    }
+    
+    func createUser(user:User?, err:Error?){
+        if err != nil{
+            print("Error creating user: \(err)")
             return
         }
-        self.signedIn = true
+        if user != nil{
+            self.userDB.copyFrom(user: user!)
+        }
     }
 }
 

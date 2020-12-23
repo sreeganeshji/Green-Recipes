@@ -73,12 +73,12 @@ struct Comment:Hashable, Codable{
 }
 
 struct User:Hashable, Equatable, Codable{
-
+    
     var username:String
     var firstName:String
     var lastName:String
     var profilePic:String?
-    var email:String?
+    var email:String
     var userId:Int
     var appleId:String
     
@@ -88,6 +88,27 @@ struct User:Hashable, Equatable, Codable{
         self.lastName = ""
         self.userId = 0
         self.appleId = ""
+        self.email = ""
+    }
+    
+    mutating func copyFrom(user:User){
+        username = user.username
+        firstName = user.firstName
+        lastName = user.lastName
+        userId = user.userId
+        appleId = user.appleId
+        email = user.email
+        profilePic = user.profilePic
+    }
+    
+    enum CodingKeys:String, CodingKey{
+        case firstName = "firstname"
+        case lastName = "lastname"
+        case userId = "userid"
+        case appleId = "appleid"
+        case username = "username"
+        case email = "email"
+        case profilePic = "profilepic"
     }
 }
 
@@ -106,6 +127,18 @@ struct Ratings:Hashable, Codable{
     }
 }
 
+struct cache{
+    //store common values.
+    var timeUpdated:Date
+    
+    //list of all recipes
+    var allRecipes:[RecipeTemplate1]
+    
+    //explore page
+    
+    
+}
+
 class DataModels:ObservableObject{
 
     
@@ -115,4 +148,6 @@ class DataModels:ObservableObject{
     var networkHandler = NetworkAdapter(nil)
     
     var user = User()
+    
+    
 }
