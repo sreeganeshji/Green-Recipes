@@ -43,7 +43,19 @@ struct SearchView: View {
                         
                     })
                     {
+                        HStack{
                         Text(recipe.name)
+                            if(checkFavorite(recipe: recipe)){
+                            Button(action:{}){
+                                Image(systemName: "star.fill")
+                            }
+                            }
+                            else{
+                                Button(action:{}){
+                                    Image(systemName: "star")
+                                }
+                            }
+                        }
                     }
 //                    .listRowInsets(EdgeInsets())
                 }
@@ -66,6 +78,12 @@ struct SearchView: View {
     func updateRecipes(recipes:[RecipeTemplate1]){
         self.recipes = recipes
     }
+    
+    func checkFavorite(recipe:RecipeTemplate1)->Bool{
+        return self.data.cache.favRecipes.contains(recipe)
+    }
+    
+    
 }
 
 struct SearchView_Previews: PreviewProvider {

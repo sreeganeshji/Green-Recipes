@@ -127,7 +127,7 @@ struct Ratings:Hashable, Codable{
     }
 }
 
-struct cache{
+struct Cache{
     //store common values.
     var timeUpdated:Date
     
@@ -137,6 +137,14 @@ struct cache{
     //explore page
     
     
+    //favorites
+    var favRecipes:Set<RecipeTemplate1>
+    
+    init(){
+        timeUpdated = .init()
+        allRecipes = []
+        favRecipes = .init()
+    }
 }
 
 class DataModels:ObservableObject{
@@ -149,5 +157,17 @@ class DataModels:ObservableObject{
     
     var user = User()
     
+    var cache = Cache()
     
+    func fetchFavorites(){
+        
+    }
+    
+    func createFavorites(userId:Int, recipeId:Int){
+        self.cache.favRecipes.insert(.init(id: 2, name: "sbd"))
+    }
+    
+    func removeFavorites(userId:Int, recipeId:Int){
+        
+    }
 }

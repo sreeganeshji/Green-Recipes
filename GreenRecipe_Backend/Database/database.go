@@ -154,7 +154,10 @@ func (p *Postgres) FindRecipesLike(recipe string, count int)([]models.Recipe, er
 	i := 0
 	for rows.Next(){
 		var recipeRow models.Recipe
-		rows.Scan(&recipeRow.ID, &recipeRow.Name, &recipeRow.Category)
+		err := rows.Scan(&recipeRow.ID, &recipeRow.Name, &recipeRow.Category)
+		if err!=nil{
+			return []models.Recipe{}, err
+		}
 		recipe_rec[i] = recipeRow
 		i += 1
 	}
@@ -182,4 +185,55 @@ added_date, added_by, nutrition, category from recipe where id=$1`
 
 
 	return recipe, nil
+}
+
+func (p *Postgres) AddFavorites(userid int, recipeid int)(error){
+	c, cancel := context.WithTimeout(context.Background(), 5 * time.Second)
+	defer cancel()
+
+	sql := `insert into favorites (person_id, recipe_id) values($1, $2)`
+
+	err := p.db.QueryRow(c, sql, userid, recipeid).Scan()
+	if err!= nil{
+		return err
+	}
+	return nil
+}
+
+func (p *Postgres) RemoveFavorites(userid int, recipeid int)(error){
+	c, cancel := context.WithTimeout(context.Background(), 5 * time.Second)
+	defer cancel()
+
+	sql := `delete from favorites where person_id=$1 and recipe_id=$2`
+
+	err := p.db.QueryRow(c, sql).Scan()
+	if err!=nil{
+		return err
+	}
+
+	return err
+}
+
+func (p *Postgres) GetUserFavorites(userid int)([]models.Recipe, error){
+	c, cancel := context.WithTimeout(context.Background(), 5 * time.Second)
+	defer cancel()
+
+	sql := `select id, name, category from recipes inner join favorites on id=recipe_id where person_id=$1`
+
+	var recipes []models.Recipe
+	row, err := p.db.Query(c, sql, userid)
+	if err!=nil{
+		return []models.Recipe{}, err
+	}
+
+	for row.Next(){
+		var recipe models.Recipe
+		err := row.Scan(&recipe.ID, &recipe.Name, &recipe.Category)
+		if err!=nil{
+			return []models.Recipe{}, err
+		}
+
+		recipes = append(recipes, recipe)
+	}
+	return recipes, nil
 }

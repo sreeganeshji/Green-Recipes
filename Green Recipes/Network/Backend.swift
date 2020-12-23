@@ -227,4 +227,9 @@ class NetworkAdapter{
         }
     }
     
+    func addFavorites(userId:Int, recipeId:Int){
+        var requestURL = baseURL
+//        requestURL.appendPathComponent(<#T##pathComponent: String##String#>)
+    }
+    
 }
