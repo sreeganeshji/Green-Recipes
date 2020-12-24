@@ -161,13 +161,29 @@ class DataModels:ObservableObject{
     
     func fetchFavorites(){
         
-    }
-    
-    func createFavorites(userId:Int, recipeId:Int){
-        self.cache.favRecipes.insert(.init(id: 2, name: "sbd"))
-    }
-    
-    func removeFavorites(userId:Int, recipeId:Int){
+        func updateFavoritesCache(recipes:[RecipeTemplate1]?, error:Error?){
+            if error != nil{
+                //handle error
+                return
+            }
+            self.cache.favRecipes = Set(recipes!)
+        }
         
+        self.networkHandler.getUserFavorites(userId: self.user.userId, completion: updateFavoritesCache)
+    }
+    
+    func createFavorites(userId:Int, recipe:RecipeTemplate1){
+        self.networkHandler.addFavorite(userId: userId, recipeId: recipe.id)
+        self.cache.favRecipes.insert(recipe)
+    }
+    
+    func removeFavorites(userId:Int, recipe:RecipeTemplate1){
+        self.networkHandler.removeFavorite(userId: userId, recipeId: recipe.id)
+        self.cache.favRecipes.remove(recipe)
+    }
+    
+    func updateCache(){
+        fetchFavorites()
+        cache.timeUpdated = .init()
     }
 }

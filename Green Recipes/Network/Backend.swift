@@ -261,7 +261,7 @@ class NetworkAdapter{
         task.resume()
     }
     
-    func getUserFavorites(userId:Int, completion:@escaping ([RecipeTemplate1])->()){
+    func getUserFavorites(userId:Int, completion:@escaping ([RecipeTemplate1]?, Error?)->()){
         var requestURL = baseURL
         requestURL.appendPathComponent("getuserfavorites/\(userId)")
         
@@ -270,6 +270,7 @@ class NetworkAdapter{
                 
             if error != nil{
                 print("Couldn't fetch favorites: \(error)")
+                completion(nil, error)
                 return
             }
             var recipes:[RecipeTemplate1] = []
@@ -277,9 +278,10 @@ class NetworkAdapter{
             
             do {
                 recipes = try decoder.decode([RecipeTemplate1].self, from: data!)
-                completion(recipes)
+                completion(recipes, nil)
             }
             catch{
+                completion(nil, error)
                 print("Couldn't decode due to error: \(error)")
             }
         }

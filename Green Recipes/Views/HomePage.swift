@@ -142,6 +142,9 @@ SignInWithAppleButton(.signIn, onRequest: { request in
         }
         self.data.user = self.userDB
         self.signedIn = true
+        
+        //fetch favorites
+        self.data.updateCache()
     }
     
     func createUser(user:User?, err:Error?){

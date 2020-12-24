@@ -46,12 +46,12 @@ struct SearchView: View {
                         HStack{
                         Text(recipe.name)
                             if(checkFavorite(recipe: recipe)){
-                            Button(action:{}){
+                                Button(action: {self.data.removeFavorites(userId: self.data.user.userId, recipe: recipe)}){
                                 Image(systemName: "star.fill")
                             }
                             }
                             else{
-                                Button(action:{}){
+                                Button(action:{self.data.createFavorites(userId: self.data.user.userId, recipe: recipe)}){
                                     Image(systemName: "star")
                                 }
                             }
