@@ -23,6 +23,9 @@ func Initalizer(service service.Service) (*mux.Router){
 	r.HandleFunc("/findrecipewithid/{id}", handler.FindRecipeWithID).Methods(http.MethodGet)
 	r.HandleFunc("/adduser",handler.AddUser).Methods(http.MethodPost)
 	r.HandleFunc("/getuserwithappleid/{apple_id}", handler.GetUserWithAppleID).Methods(http.MethodGet)
+	r.HandleFunc("/getuserfavorites/{person_id}", handler.GetUserFavorites).Methods(http.MethodGet)
+	r.HandleFunc("/addfavorite/{person_id}/{recipe_id}", handler.AddFavorite).Methods(http.MethodPost)
+	r.HandleFunc("/removefavorite/{person_id}/{recipe_id}", handler.RemoveFavorite).Methods(http.MethodDelete)
 	return r
 }
 
@@ -166,5 +169,76 @@ func (h *handler) GetUserWithAppleID(w http.ResponseWriter, r *http.Request){
 
 	w.WriteHeader(http.StatusOK)
 	w.Write(response)
+}
+
+func (h *handler) AddFavorite(w http.ResponseWriter, r *http.Request){
+	vars := mux.Vars(r)
+	person_id, err := strconv.Atoi(vars["person_id"])
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Error getting person_id: ",err)))
+		return
+	}
+	recipe_id, err := strconv.Atoi(vars["recipe_id"])
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Error getting recipe_id: ",err)))
+		return
+	}
+
+	err = h.Service.AddFavorite(person_id, recipe_id)
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Error getting recipe_id: ",err)))
+		return
+	}
+
+}
+
+func (h *handler) RemoveFavorite(w http.ResponseWriter, r *http.Request){
+	vars := mux.Vars(r)
+	person_id, err := strconv.Atoi(vars["person_id"])
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Error getting person_id: ",err)))
+		return
+	}
+	recipe_id, err := strconv.Atoi(vars["recipe_id"])
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Error getting recipe_id: ",err)))
+		return
+	}
+
+	err = h.Service.RemoveFavorite(person_id, recipe_id)
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Error getting recipe_id: ",err)))
+		return
+	}
+}
+
+func (h *handler) GetUserFavorites(w http.ResponseWriter, r *http.Request){
+	fmt.Println("Getting user favorites")
+	vars := mux.Vars(r)
+	person_id, err := strconv.Atoi(vars["person_id"])
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("unable to get the person_id: ", err)))
+		return
+	}
+	var favorites []models.Recipe
+
+	favorites, err = h.Service.GetUserFavorites(person_id)
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Error getting favorites: ",err)))
+		return
+	}
+	data,err := json.Marshal(favorites)
+
+	w.Write(data)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
 }
 

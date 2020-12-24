@@ -227,9 +227,62 @@ class NetworkAdapter{
         }
     }
     
-    func addFavorites(userId:Int, recipeId:Int){
+    func addFavorite(userId:Int, recipeId:Int){
         var requestURL = baseURL
-//        requestURL.appendPathComponent(<#T##pathComponent: String##String#>)
+        requestURL.appendPathComponent("addfavorite/\(userId)/\(recipeId)")
+        
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request){
+            data, response, error in
+            if error != nil{
+                print("Couldn't add favorites: \(error)")
+            }
+        }
+        task.resume()
+    }
+    
+    func removeFavorite(userId:Int, recipeId:Int){
+        var requestURL = baseURL
+        requestURL.appendPathComponent("removefavorite/\(userId)/\(recipeId)")
+        
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = "DELETE"
+        
+        let task = URLSession.shared.dataTask(with: requestURL)
+        {
+            _, _, error in
+            if error != nil{
+                print("couldn't remove favorite: \(error)")
+            }
+        }
+        
+        task.resume()
+    }
+    
+    func getUserFavorites(userId:Int, completion:@escaping ([RecipeTemplate1])->()){
+        var requestURL = baseURL
+        requestURL.appendPathComponent("getuserfavorites/\(userId)")
+        
+        let task = URLSession.shared.dataTask(with: requestURL){
+            data, response, error in
+                
+            if error != nil{
+                print("Couldn't fetch favorites: \(error)")
+                return
+            }
+            var recipes:[RecipeTemplate1] = []
+            let decoder = JSONDecoder()
+            
+            do {
+                recipes = try decoder.decode([RecipeTemplate1].self, from: data!)
+                completion(recipes)
+            }
+            catch{
+                print("Couldn't decode due to error: \(error)")
+            }
+        }
     }
     
 }

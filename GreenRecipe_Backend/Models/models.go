@@ -46,6 +46,9 @@ type Person struct {
 	Email *string `json:"email"`
 }
 
-
+type Favorite struct {
+	UserID *int `json:"userid"`
+	RecipeID *int `json:"recipeid"`
+}
 
 
