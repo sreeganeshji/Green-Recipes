@@ -236,3 +236,28 @@ func (p *Postgres) GetUserFavorites(userid int)([]models.Recipe, error){
 	}
 	return recipes, nil
 }
+
+func (p *Postgres) GetUserRecipes(userid int)([]models.Recipe, error){
+	c, cancel := context.WithTimeout(context.Background(), 5 * time.Second)
+	defer cancel()
+
+	sql := `select id, name, category from recipe where added_by=$1`
+
+	var recipes []models.Recipe
+
+	row, err := p.db.Query(c, sql, userid)
+	if err!=nil{
+		return recipes, err
+	}
+	for row.Next(){
+		var recipe models.Recipe
+		err := row.Scan(&recipe.ID, &recipe.Name, &recipe.Category)
+		if err!=nil{
+			return recipes, err
+		}
+		recipes = append(recipes, recipe)
+
+	}
+	return recipes,nil
+}
+

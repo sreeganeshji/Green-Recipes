@@ -16,6 +16,7 @@ struct SearchView: View {
     @State var sheetPresented = false
     @State var sheetRecipeID = 0
     var body: some View {
+        
         VStack{
           
             HStack{
@@ -32,38 +33,49 @@ struct SearchView: View {
             }.padding()
             
             
+        
             List{
-
                 ForEach(self.recipes, id:\.self){
                     recipe in
                     
-                    Button(action:{
-                        self.sheetPresented = true
-                        self.sheetRecipeID = recipe.id
-                        
-                    })
+//                    Button(action:{
+//                        print("Sending id \(recipe.id)")
+//                        self.sheetRecipeID = recipe.id
+//                        self.sheetPresented = true
+//                    })
+                    NavigationLink(destination:RecipeDetail(id: recipe.id).environmentObject(self.data))
                     {
                         HStack{
                         Text(recipe.name)
+                            Spacer()
+                            
                             if(checkFavorite(recipe: recipe)){
                                 Button(action: {self.data.removeFavorites(userId: self.data.user.userId, recipe: recipe)}){
                                 Image(systemName: "star.fill")
-                            }
+                                    .foregroundColor(.blue)
+                                }
+                                .buttonStyle(PlainButtonStyle())
                             }
                             else{
                                 Button(action:{self.data.createFavorites(userId: self.data.user.userId, recipe: recipe)}){
                                     Image(systemName: "star")
+                                        .foregroundColor(.blue)
                                 }
+                                .buttonStyle(PlainButtonStyle())
+                          
                             }
                         }
                     }
 //                    .listRowInsets(EdgeInsets())
                 }
             }
+            
         }
-        .sheet(isPresented: self.$sheetPresented, content: {
-            RecipeDetail(id: self.sheetRecipeID)
-        })
+        .navigationBarHidden(true)
+        
+//        .sheet(isPresented: self.$sheetPresented, content: {
+//            RecipeDetail(id: self.sheetRecipeID)
+//        })
    
     }
     func clearSearchField(){

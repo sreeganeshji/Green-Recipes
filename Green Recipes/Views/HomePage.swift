@@ -24,11 +24,13 @@ struct HomePage: View {
     @State var tabSelect:tabViews = tabViews.explore
     @State var userDB = User()
     @State var verifyCredentials = false
+    @State var navigationTitle:String = "Green Recipe"
     
     
     var body: some View {
-        ZStack{
+
         if(self.signedIn){
+            NavigationView{
         TabView(selection: $tabSelect) {
             Text("Explore").tabItem { HStack{
                 Image(systemName: "sparkles")
@@ -39,21 +41,24 @@ struct HomePage: View {
                 .tabItem { HStack{
                 Image(systemName: "magnifyingglass")
                 Text("Search")} }.tag(tabViews.search)
-            Text("Favorites").tabItem { HStack{
+            
+            FavoritesView(navigationTitle: self.$navigationTitle).environmentObject(self.data)
+                .tabItem { HStack{
                 Image(systemName: "star.fill")
                 Text("Favorites")} }.tag(tabViews.favorites)
             
-                AddRecipe().environmentObject(data)
-                    .tabItem {
-                        HStack{
-                            Image(systemName: "tray.fill")
-                            Text("My Recipes")} }.tag(tabViews.addRecipe)
+            MyRecipes(navigationTitle: self.$navigationTitle).environmentObject(data)
+                .tabItem {
+                HStack{
+                Image(systemName: "tray.fill")
+                Text("My Recipes")} }.tag(tabViews.addRecipe)
 
             Text("Settings").tabItem { HStack{
                 Image(systemName: "gear")
                 Text("Settings")} }.tag(tabViews.settings)
-        }
-   
+                }
+        .navigationTitle(self.navigationTitle)
+            }
         }
 
         else{
@@ -121,7 +126,6 @@ SignInWithAppleButton(.signIn, onRequest: { request in
 .signInWithAppleButtonStyle(.whiteOutline)
 
     }
-        }
 //        .sheet(isPresented: self.$verifyCredentials, content: {
 //            VerifyCredentials(showSheet: self.$verifyCredentials, editUsername: true, user: self.$userDB).environmentObject(self.data)
 //        })

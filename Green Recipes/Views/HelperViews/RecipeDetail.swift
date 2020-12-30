@@ -17,22 +17,34 @@ class ObservedRecipe:ObservableObject{
 
 struct RecipeDetail: View {
     var id :Int
-    @StateObject var recipe = ObservedRecipe(recipe: Recipe())
+//    @StateObject var recipe = ObservedRecipe(recipe: Recipe())
+    @State var recipe = Recipe()
     @EnvironmentObject var data:DataModels
     var body: some View {
-        NavigationView{
-        Form
+        if self.recipe.name == ""{
+            Text("Loading...")
+                .foregroundColor(.blue)
+                .font(.title)
+                .fontWeight(.light)
+                .onAppear(){
+                    GetRecipeByID()
+                }
+        }
+        else{
+
+        VStack
         {
+            Form{
             //description
-            if(self.recipe.recipe.description != nil){
+            if(self.recipe.description != nil){
             Section{
                 HStack{
                     Spacer()
-                    Text("Description").bold()
+                    Text("Description").bold().italic()
                 Spacer()
             }
 
-                Text(self.recipe.recipe.description!)
+                Text(self.recipe.description!)
                 }
             }
             
@@ -41,18 +53,23 @@ struct RecipeDetail: View {
             Section{
             HStack {
                 Spacer()
-                Text("Ingredients").bold()
+                Text("Ingredients").foregroundColor(.blue)
+                    .fontWeight(.light)
+                    .font(.title)
+                
                 Spacer()
             }
                 
                 
-                if(self.recipe.recipe.ingredients.count>0)
+                if(self.recipe.ingredients.count>0)
                 {
                     List{
-                        ForEach(Array(zip(self.recipe.recipe.ingredients,(1...self.recipe.recipe.ingredients.count))),id:\.1){
+                        ForEach(Array(zip(self.recipe.ingredients,(1...self.recipe.ingredients.count))),id:\.1){
                     item in
                     HStack{
-                        Text("\(item.1).").bold()
+                        Text("\(item.1).").font(.title)
+                            .fontWeight(.light)
+                            .foregroundColor(.blue)
                         Spacer()
                         Text(item.0)
                         Spacer()
@@ -68,16 +85,22 @@ struct RecipeDetail: View {
             Section{
             HStack {
                 Spacer()
-                Text("Process").bold()
+                Text("Process")
+                    .font(.title)
+                    .fontWeight(.light)
+                    .foregroundColor(.blue)
                 Spacer()
             }
-                if(self.recipe.recipe.process.count>0)
+                if(self.recipe.process.count>0)
                 {
                     List{
-                        ForEach(Array(zip((1...self.recipe.recipe.process.count),self.recipe.recipe.process)),id:\.0){
+                        ForEach(Array(zip((1...self.recipe.process.count),self.recipe.process)),id:\.0){
                     item in
                             HStack{
-                                Text("\(item.0).").bold()
+                                Text("\(item.0).")
+                                    .font(.title)
+                                    .fontWeight(.light)
+                                    .foregroundColor(.blue)
                                 Spacer()
                                 Text(item.1)
                                 Spacer()
@@ -90,9 +113,11 @@ struct RecipeDetail: View {
             }
            
             HStack{
-                Text("Servings:").bold()
+                Text("Servings:").font(.title)
+                    .fontWeight(.light)
+                    .foregroundColor(.blue)
                 Spacer()
-                Text("\(self.recipe.recipe.servings)")
+                Text("\(self.recipe.servings)")
                 Spacer()
             }.padding()
             
@@ -100,16 +125,22 @@ struct RecipeDetail: View {
             Section{
             HStack {
                 Spacer()
-                Text("Equipment").bold()
+                Text("Equipment")
+                    .font(.title)
+                    .fontWeight(.light)
+                    .foregroundColor(.blue)
                 Spacer()
             }
-                if(self.recipe.recipe.equipment != nil && self.recipe.recipe.equipment!.count > 0 )
+                if(self.recipe.equipment != nil && self.recipe.equipment!.count > 0 )
                 {
                     List{
-                        ForEach(Array(zip((1...self.recipe.recipe.equipment!.count),self.recipe.recipe.equipment!)),id:\.0){
+                        ForEach(Array(zip((1...self.recipe.equipment!.count),self.recipe.equipment!)),id:\.0){
                     item in
                             HStack{
-                                Text("\(item.0).").bold()
+                                Text("\(item.0).")
+                                    .font(.title)
+                                    .fontWeight(.light)
+                                    .foregroundColor(.blue)
                                 Spacer()
                                 Text(item.1)
                                 Spacer()
@@ -123,22 +154,24 @@ struct RecipeDetail: View {
 
 
         }
-            .onAppear(){
-                GetRecipeByID()
-            }
+        }
 
-        .navigationBarTitle(Text(self.recipe.recipe.name), displayMode: .inline)
+
+//        .navigationBarTitle(Text(self.recipe.name), displayMode: .inline)
+        .navigationTitle(self.recipe.name)
+            
         }
     }
 
 
 func GetRecipeByID(){
+    print("ID is \(id)")
     data.networkHandler.searchRecipeWithID(id: id, completion: UpdateRecipe)
 }
 
 func UpdateRecipe(recipe:Recipe){
     
-    self.recipe.recipe = recipe
+    self.recipe = recipe
 }
 }
 

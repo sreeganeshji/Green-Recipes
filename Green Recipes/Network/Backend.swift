@@ -9,6 +9,7 @@ import Foundation
 
 class NetworkAdapter{
     
+    var baseURL = URL(string: "https://ganeshappbackend.com")!
     
     init(_ base:String?){
         if base != nil{
@@ -142,7 +143,7 @@ class NetworkAdapter{
                 try recipe = decoder.decode(Recipe.self, from: data!)
             }
             catch{
-                print("couldn't decode. Error: \(error)")
+                print("couldn't decode, id:\(id) data:\(String(data:data!, encoding: .utf8)). Error: \(error)")
                 return
             }
             completion(recipe)
@@ -250,9 +251,10 @@ class NetworkAdapter{
         var request = URLRequest(url: requestURL)
         request.httpMethod = "DELETE"
         
-        let task = URLSession.shared.dataTask(with: requestURL)
+        let task = URLSession.shared.dataTask(with: request)
         {
-            _, _, error in
+            _, response, error in
+            print("Response is: \(response)")
             if error != nil{
                 print("couldn't remove favorite: \(error)")
             }
@@ -285,6 +287,7 @@ class NetworkAdapter{
                 print("Couldn't decode due to error: \(error)")
             }
         }
+        task.resume()
     }
     
 }

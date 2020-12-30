@@ -14,7 +14,7 @@ type Recipe struct {
 	Equipment   []*string  `json:"equipment,omitempty"`
 	Images      [] *string `json:"images,omitempty"`
 	AddedDate   time.Time    `json:"added_date,omitempty"`
-	Addedby     *string    `json:"addedby,omitempty"`
+	Addedby     *int    `json:"addedby,omitempty"`
 	Nutrition []*string `json:"nutrition,omitempty"`
 	Category *string `json:"category,omitempty"`
 }

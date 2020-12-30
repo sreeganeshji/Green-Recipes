@@ -16,7 +16,7 @@ CREATE TABLE recipe(
 id SERIAL NOT NULL,
 name VARCHAR(50) NOT NULL,
 ingredients TEXT[] NOT NULL,
-document VARCHAR(1000),
+description VARCHAR(1000),
 process TEXT[] NOT NULL,
 contributor VARCHAR(50),
 origin VARCHAR(50),

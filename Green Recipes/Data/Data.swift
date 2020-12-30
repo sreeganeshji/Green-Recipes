@@ -36,7 +36,7 @@ struct Recipe: Hashable, Equatable, Codable{
     var equipment:[String]?
     var images:[String]?
     var addeddate:String?
-    var addedby:String?
+    var addedby:Int?
     var nutrition:[String]?
     var category:String?
     var pictures:[String]?
@@ -50,8 +50,8 @@ struct Recipe: Hashable, Equatable, Codable{
         self.equipment = []
         self.images = []
         self.addeddate = ""
-        self.addedby = ""
         self.nutrition = []
+        self.origin = ""
     }
     init(name:String, description:String){
         self.init()
@@ -140,10 +140,14 @@ struct Cache{
     //favorites
     var favRecipes:Set<RecipeTemplate1>
     
+    //my recipes
+    var myRecipes:[RecipeTemplate1]
+    
     init(){
         timeUpdated = .init()
         allRecipes = []
         favRecipes = .init()
+        myRecipes = .init()
     }
 }
 
@@ -157,7 +161,7 @@ class DataModels:ObservableObject{
     
     var user = User()
     
-    var cache = Cache()
+    @Published var cache = Cache()
     
     func fetchFavorites(){
         
