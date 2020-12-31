@@ -21,7 +21,7 @@ struct ImageCarousel: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(maxHeight:300)
-                        .clipShape(RoundedRectangle(cornerRadius: 25.0))
+                        .clipShape(RoundedRectangle(cornerRadius: 10.0))
                 }
 
                 if self.images.count>0{

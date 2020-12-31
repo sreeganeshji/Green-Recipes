@@ -158,6 +158,7 @@ func (p *Postgres) FindRecipesLike(recipe string, count int)([]models.Recipe, er
 		if err!=nil{
 			return []models.Recipe{}, err
 		}
+		fmt.Println(recipeRow.Name)
 		recipe_rec[i] = recipeRow
 		i += 1
 	}

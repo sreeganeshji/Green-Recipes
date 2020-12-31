@@ -19,6 +19,7 @@ struct RecipeDetail: View {
     var id :Int
 //    @StateObject var recipe = ObservedRecipe(recipe: Recipe())
     @State var recipe = Recipe()
+    @State var images:[UIImage] = []
     @EnvironmentObject var data:DataModels
     var body: some View {
         if self.recipe.name == ""{
@@ -122,6 +123,8 @@ struct RecipeDetail: View {
             }.padding()
             
             //Equipments
+                if(self.recipe.equipment != nil && self.recipe.equipment!.count > 0 )
+            {
             Section{
             HStack {
                 Spacer()
@@ -131,8 +134,7 @@ struct RecipeDetail: View {
                     .foregroundColor(.blue)
                 Spacer()
             }
-                if(self.recipe.equipment != nil && self.recipe.equipment!.count > 0 )
-                {
+
                     List{
                         ForEach(Array(zip((1...self.recipe.equipment!.count),self.recipe.equipment!)),id:\.0){
                     item in
@@ -148,10 +150,31 @@ struct RecipeDetail: View {
                         }
         
                     }
-            }
+            
         
             }
 
+                if (self.recipe.images != nil && self.recipe.images!.count > 0){
+                    Section{
+                        //images
+//                        HStack{
+//                            Spacer()
+//                        Text("Images")
+//                            .font(.title)
+//                            .fontWeight(.light)
+//                            .foregroundColor(.blue)
+//                            Spacer()
+//
+//                        }
+                        
+                        ImageCarouselPreview(images:self.$images)
+                            .frame(maxHeight:300)
+                            .padding(.top)
+                            .padding(.bottom)
+                        
+                        
+                    }
+                }
 
         }
         }
@@ -168,10 +191,26 @@ func GetRecipeByID(){
     print("ID is \(id)")
     data.networkHandler.searchRecipeWithID(id: id, completion: UpdateRecipe)
 }
+    
+func GetImages(){
+    if (self.recipe.images != nil && self.recipe.images!.count > 0){
+        if self.images.count < self.recipe.images!.count{
+            let i = self.images.count
+        //download images
+        self.data.photoStore.downloadData(key: self.recipe.images![i], completion: UpdateImages)
+        }
+    }
+}
+    
+    func UpdateImages(image:Data){
+        self.images.append(UIImage(data: image)!)
+        GetImages()
+    }
 
 func UpdateRecipe(recipe:Recipe){
     
     self.recipe = recipe
+    GetImages()
 }
 }
 

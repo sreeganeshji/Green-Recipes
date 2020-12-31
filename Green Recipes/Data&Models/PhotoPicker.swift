@@ -45,9 +45,14 @@ struct PhotoPicker:UIViewControllerRepresentable{
                             if(self.parent.images.count < 5){
                             let image = newImage as! UIImage
 //                          print(image.configuration.)
-                            let compressedImage = image.jpegData(compressionQuality: 0.0000001)
+                            let compressedImage = image.jpegData(compressionQuality: 0)
+                                let options = [kCGImageSourceCreateThumbnailWithTransform: true, kCGImageSourceCreateThumbnailFromImageAlways: true, kCGImageSourceThumbnailMaxPixelSize: 300] as CFDictionary
+                                let CGimageSource = CGImageSourceCreateWithData(compressedImage as! CFData, nil)
+                                let imageFromCG = CGImageSourceCreateThumbnailAtIndex(CGimageSource!, 0, options)!
+                                let thumbnail = UIImage(cgImage: imageFromCG)
+                                
                             
-                            self.parent.images.append(UIImage(data: compressedImage!)!)
+                            self.parent.images.append(thumbnail)
                             }
                         }
                     }
