@@ -125,7 +125,7 @@ struct RecipeDetail: View {
             Section{
             HStack {
                 Spacer()
-                Text("Equipment")
+                Text("Equipments")
                     .font(.title)
                     .fontWeight(.light)
                     .foregroundColor(.blue)

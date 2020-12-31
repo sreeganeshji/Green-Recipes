@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F1E4BC18F8C40608BA1912E /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = F5AD1BD0DD04456A9BAA3A84 /* awsconfiguration.json */; };
 		1F46F55C2575E17A005414DE /* MyRecipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F46F55B2575E17A005414DE /* MyRecipes.swift */; };
 		1F821330256D653200D29FEE /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F82132F256D653200D29FEE /* Backend.swift */; };
 		1F8438B5254D2D19004A27A9 /* Green_RecipesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8438B4254D2D19004A27A9 /* Green_RecipesApp.swift */; };
@@ -21,12 +22,19 @@
 		1F843939254D3E8B004A27A9 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F843938254D3E8B004A27A9 /* Settings.swift */; };
 		1F84393F254DF6BB004A27A9 /* RecipesHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F84393E254DF6BB004A27A9 /* RecipesHome.swift */; };
 		1F84394A254DF70A004A27A9 /* recipeThumb1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F843949254DF70A004A27A9 /* recipeThumb1.swift */; };
+		5C7284225351E8AB33B732DB /* Pods_Green_Recipes_Green_RecipesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70B825A8ABBFE20964DD063E /* Pods_Green_Recipes_Green_RecipesUITests.framework */; };
+		62708647B49747709C53CDBC /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = C34E391B81DD44CD8219A77A /* amplifyconfiguration.json */; };
+		B1199B640C7070095A0927BC /* Pods_Green_RecipesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E49E08B8110C81874B3EE94E /* Pods_Green_RecipesTests.framework */; };
+		B163D999259D741100225124 /* ImageCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B163D998259D741100225124 /* ImageCarousel.swift */; };
 		B16A1247259112080027FC4F /* Reviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16A1246259112080027FC4F /* Reviews.swift */; };
 		B16A124F2591C69A0027FC4F /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16A124E2591C69A0027FC4F /* SignUp.swift */; };
 		B16A1254259271DB0027FC4F /* VerifyCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16A1253259271DB0027FC4F /* VerifyCredentials.swift */; };
 		B16A125925951A5D0027FC4F /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16A125825951A5C0027FC4F /* FavoritesView.swift */; };
+		B1A440C6259D2734002A0252 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A440C5259D2734002A0252 /* PhotoPicker.swift */; };
+		B1A440CB259D36F9002A0252 /* AmplifyStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A440CA259D36F9002A0252 /* AmplifyStorageManager.swift */; };
 		B1F0D60125904DC600BD36EF /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F0D60025904DC600BD36EF /* SearchView.swift */; };
 		B1F0D60625906B6600BD36EF /* RecipeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F0D60525906B6600BD36EF /* RecipeDetail.swift */; };
+		E704DDE212D1AF68DF224D64 /* Pods_Green_Recipes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F03D5F7797242AD915CC7362 /* Pods_Green_Recipes.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0D38D65090BBD2FF4D41EB4C /* Pods-Green RecipesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Green RecipesTests.release.xcconfig"; path = "Target Support Files/Pods-Green RecipesTests/Pods-Green RecipesTests.release.xcconfig"; sourceTree = "<group>"; };
 		1F46F55B2575E17A005414DE /* MyRecipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipes.swift; sourceTree = "<group>"; };
 		1F82132F256D653200D29FEE /* Backend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backend.swift; sourceTree = "<group>"; };
 		1F8438B1254D2D19004A27A9 /* Green Recipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Green Recipes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,12 +77,26 @@
 		1F84393E254DF6BB004A27A9 /* RecipesHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesHome.swift; sourceTree = "<group>"; };
 		1F843949254DF70A004A27A9 /* recipeThumb1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = recipeThumb1.swift; sourceTree = "<group>"; };
 		1F9294292574C49800B86AF5 /* Green Recipes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Green Recipes.entitlements"; sourceTree = "<group>"; };
+		2D7239C58CF735327D4F00C9 /* Pods-Green Recipes-Green RecipesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Green Recipes-Green RecipesUITests.debug.xcconfig"; path = "Target Support Files/Pods-Green Recipes-Green RecipesUITests/Pods-Green Recipes-Green RecipesUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		31E3FA2FA05F6F1700ED5B1D /* Pods-Green Recipes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Green Recipes.release.xcconfig"; path = "Target Support Files/Pods-Green Recipes/Pods-Green Recipes.release.xcconfig"; sourceTree = "<group>"; };
+		66E897F288650F369DCC7F74 /* Pods-Green Recipes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Green Recipes.debug.xcconfig"; path = "Target Support Files/Pods-Green Recipes/Pods-Green Recipes.debug.xcconfig"; sourceTree = "<group>"; };
+		70B825A8ABBFE20964DD063E /* Pods_Green_Recipes_Green_RecipesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Green_Recipes_Green_RecipesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		84C3F2A202E696D06EA11584 /* Pods-Green Recipes-Green RecipesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Green Recipes-Green RecipesUITests.release.xcconfig"; path = "Target Support Files/Pods-Green Recipes-Green RecipesUITests/Pods-Green Recipes-Green RecipesUITests.release.xcconfig"; sourceTree = "<group>"; };
+		9A3B94E880CA402E8BE8FFC7 /* amplifytools.xcconfig */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.xcconfig; path = amplifytools.xcconfig; sourceTree = "<group>"; };
+		9C064A5FAC1E39E9D7297844 /* Pods-Green RecipesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Green RecipesTests.debug.xcconfig"; path = "Target Support Files/Pods-Green RecipesTests/Pods-Green RecipesTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B163D998259D741100225124 /* ImageCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCarousel.swift; sourceTree = "<group>"; };
 		B16A1246259112080027FC4F /* Reviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reviews.swift; sourceTree = "<group>"; };
 		B16A124E2591C69A0027FC4F /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		B16A1253259271DB0027FC4F /* VerifyCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyCredentials.swift; sourceTree = "<group>"; };
 		B16A125825951A5C0027FC4F /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
+		B1A440C5259D2734002A0252 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
+		B1A440CA259D36F9002A0252 /* AmplifyStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmplifyStorageManager.swift; sourceTree = "<group>"; };
 		B1F0D60025904DC600BD36EF /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		B1F0D60525906B6600BD36EF /* RecipeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetail.swift; sourceTree = "<group>"; };
+		C34E391B81DD44CD8219A77A /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = amplifyconfiguration.json; sourceTree = "<group>"; };
+		E49E08B8110C81874B3EE94E /* Pods_Green_RecipesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Green_RecipesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F03D5F7797242AD915CC7362 /* Pods_Green_Recipes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Green_Recipes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5AD1BD0DD04456A9BAA3A84 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = awsconfiguration.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E704DDE212D1AF68DF224D64 /* Pods_Green_Recipes.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1199B640C7070095A0927BC /* Pods_Green_RecipesTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C7284225351E8AB33B732DB /* Pods_Green_Recipes_Green_RecipesUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				1F82132F256D653200D29FEE /* Backend.swift */,
+				B1A440CA259D36F9002A0252 /* AmplifyStorageManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -112,10 +139,13 @@
 		1F8438A8254D2D19004A27A9 = {
 			isa = PBXGroup;
 			children = (
+				4A356BB3D23F4DCBB2235AFD /* AmplifyConfig */,
 				1F8438B3254D2D19004A27A9 /* Green Recipes */,
 				1F8438C5254D2D1A004A27A9 /* Green RecipesTests */,
 				1F8438D0254D2D1A004A27A9 /* Green RecipesUITests */,
 				1F8438B2254D2D19004A27A9 /* Products */,
+				775CD289F418CBA35D7EA72C /* Pods */,
+				7CA3551C5EA5BB65DD34FCDE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -134,7 +164,7 @@
 			children = (
 				1F9294292574C49800B86AF5 /* Green Recipes.entitlements */,
 				1F82132E256D5FC700D29FEE /* Network */,
-				1F8438EB254D2E78004A27A9 /* Data */,
+				1F8438EB254D2E78004A27A9 /* Data&Models */,
 				1F8438E2254D2D9A004A27A9 /* Views */,
 				1F8438B4254D2D19004A27A9 /* Green_RecipesApp.swift */,
 				1F8438B6254D2D19004A27A9 /* ContentView.swift */,
@@ -185,12 +215,13 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		1F8438EB254D2E78004A27A9 /* Data */ = {
+		1F8438EB254D2E78004A27A9 /* Data&Models */ = {
 			isa = PBXGroup;
 			children = (
 				1F8438EC254D2E8A004A27A9 /* Data.swift */,
+				B1A440C5259D2734002A0252 /* PhotoPicker.swift */,
 			);
-			path = Data;
+			path = "Data&Models";
 			sourceTree = "<group>";
 		};
 		1F84393D254DF6A4004A27A9 /* HelperViews */ = {
@@ -202,8 +233,43 @@
 				B16A1246259112080027FC4F /* Reviews.swift */,
 				B16A124E2591C69A0027FC4F /* SignUp.swift */,
 				B16A1253259271DB0027FC4F /* VerifyCredentials.swift */,
+				B163D998259D741100225124 /* ImageCarousel.swift */,
 			);
 			path = HelperViews;
+			sourceTree = "<group>";
+		};
+		4A356BB3D23F4DCBB2235AFD /* AmplifyConfig */ = {
+			isa = PBXGroup;
+			children = (
+				9A3B94E880CA402E8BE8FFC7 /* amplifytools.xcconfig */,
+				C34E391B81DD44CD8219A77A /* amplifyconfiguration.json */,
+				F5AD1BD0DD04456A9BAA3A84 /* awsconfiguration.json */,
+			);
+			name = AmplifyConfig;
+			path = .;
+			sourceTree = "<group>";
+		};
+		775CD289F418CBA35D7EA72C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				66E897F288650F369DCC7F74 /* Pods-Green Recipes.debug.xcconfig */,
+				31E3FA2FA05F6F1700ED5B1D /* Pods-Green Recipes.release.xcconfig */,
+				2D7239C58CF735327D4F00C9 /* Pods-Green Recipes-Green RecipesUITests.debug.xcconfig */,
+				84C3F2A202E696D06EA11584 /* Pods-Green Recipes-Green RecipesUITests.release.xcconfig */,
+				9C064A5FAC1E39E9D7297844 /* Pods-Green RecipesTests.debug.xcconfig */,
+				0D38D65090BBD2FF4D41EB4C /* Pods-Green RecipesTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		7CA3551C5EA5BB65DD34FCDE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F03D5F7797242AD915CC7362 /* Pods_Green_Recipes.framework */,
+				70B825A8ABBFE20964DD063E /* Pods_Green_Recipes_Green_RecipesUITests.framework */,
+				E49E08B8110C81874B3EE94E /* Pods_Green_RecipesTests.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,9 +279,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1F8438D6254D2D1A004A27A9 /* Build configuration list for PBXNativeTarget "Green Recipes" */;
 			buildPhases = (
+				67A1C2C0547B0502A9EA79D7 /* [CP] Check Pods Manifest.lock */,
 				1F8438AD254D2D19004A27A9 /* Sources */,
 				1F8438AE254D2D19004A27A9 /* Frameworks */,
 				1F8438AF254D2D19004A27A9 /* Resources */,
+				A829CA0080DC2DF2941479CC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -230,6 +298,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1F8438D9254D2D1A004A27A9 /* Build configuration list for PBXNativeTarget "Green RecipesTests" */;
 			buildPhases = (
+				850363017D1BED3A5B09C48E /* [CP] Check Pods Manifest.lock */,
 				1F8438BE254D2D1A004A27A9 /* Sources */,
 				1F8438BF254D2D1A004A27A9 /* Frameworks */,
 				1F8438C0254D2D1A004A27A9 /* Resources */,
@@ -248,9 +317,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1F8438DC254D2D1A004A27A9 /* Build configuration list for PBXNativeTarget "Green RecipesUITests" */;
 			buildPhases = (
+				548E380EDAE1D15D1C71403C /* [CP] Check Pods Manifest.lock */,
 				1F8438C9254D2D1A004A27A9 /* Sources */,
 				1F8438CA254D2D1A004A27A9 /* Frameworks */,
 				1F8438CB254D2D1A004A27A9 /* Resources */,
+				37C411F68374DA188C3128B4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -311,6 +382,8 @@
 			files = (
 				1F8438BC254D2D1A004A27A9 /* Preview Assets.xcassets in Resources */,
 				1F8438B9254D2D1A004A27A9 /* Assets.xcassets in Resources */,
+				62708647B49747709C53CDBC /* amplifyconfiguration.json in Resources */,
+				0F1E4BC18F8C40608BA1912E /* awsconfiguration.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +403,109 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		37C411F68374DA188C3128B4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Green Recipes-Green RecipesUITests/Pods-Green Recipes-Green RecipesUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Green Recipes-Green RecipesUITests/Pods-Green Recipes-Green RecipesUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Green Recipes-Green RecipesUITests/Pods-Green Recipes-Green RecipesUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		548E380EDAE1D15D1C71403C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Green Recipes-Green RecipesUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		67A1C2C0547B0502A9EA79D7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Green Recipes-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		850363017D1BED3A5B09C48E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Green RecipesTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A829CA0080DC2DF2941479CC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Green Recipes/Pods-Green Recipes-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Green Recipes/Pods-Green Recipes-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Green Recipes/Pods-Green Recipes-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1F8438AD254D2D19004A27A9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -346,10 +522,13 @@
 				1F46F55C2575E17A005414DE /* MyRecipes.swift in Sources */,
 				B16A1254259271DB0027FC4F /* VerifyCredentials.swift in Sources */,
 				1F8438E4254D2DBB004A27A9 /* HomePage.swift in Sources */,
+				B1A440C6259D2734002A0252 /* PhotoPicker.swift in Sources */,
 				1F8438B5254D2D19004A27A9 /* Green_RecipesApp.swift in Sources */,
 				B16A125925951A5D0027FC4F /* FavoritesView.swift in Sources */,
+				B163D999259D741100225124 /* ImageCarousel.swift in Sources */,
 				1F84394A254DF70A004A27A9 /* recipeThumb1.swift in Sources */,
 				1F8438ED254D2E8A004A27A9 /* Data.swift in Sources */,
+				B1A440CB259D36F9002A0252 /* AmplifyStorageManager.swift in Sources */,
 				B1F0D60125904DC600BD36EF /* SearchView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -504,6 +683,7 @@
 		};
 		1F8438D7254D2D1A004A27A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 66E897F288650F369DCC7F74 /* Pods-Green Recipes.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -527,6 +707,7 @@
 		};
 		1F8438D8254D2D1A004A27A9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 31E3FA2FA05F6F1700ED5B1D /* Pods-Green Recipes.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -550,6 +731,7 @@
 		};
 		1F8438DA254D2D1A004A27A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9C064A5FAC1E39E9D7297844 /* Pods-Green RecipesTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -572,6 +754,7 @@
 		};
 		1F8438DB254D2D1A004A27A9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0D38D65090BBD2FF4D41EB4C /* Pods-Green RecipesTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -594,6 +777,7 @@
 		};
 		1F8438DD254D2D1A004A27A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2D7239C58CF735327D4F00C9 /* Pods-Green Recipes-Green RecipesUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -614,6 +798,7 @@
 		};
 		1F8438DE254D2D1A004A27A9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 84C3F2A202E696D06EA11584 /* Pods-Green Recipes-Green RecipesUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

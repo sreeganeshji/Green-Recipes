@@ -163,6 +163,9 @@ class DataModels:ObservableObject{
     
     @Published var cache = Cache()
     
+    //photo storage
+    var photoStore = AmplifyStorage()
+    
     func fetchFavorites(){
         
         func updateFavoritesCache(recipes:[RecipeTemplate1]?, error:Error?){

@@ -15,20 +15,28 @@ struct AddRecipe: View {
     @State var description:String = ""
     @State var newEquipment:String = ""
     @State var origin:String = ""
+    @State var images:[UIImage] = []
+    @State var showSheetAddImages:Bool = false
     
     var body: some View {
 
         Form{
             Section{
             HStack{
-                Text("Name:").bold()
+                Text("Name:")
+                    .font(.title)
+                    .fontWeight(.light)
+                    .foregroundColor(.blue)
                 TextField("Add name", text: $recipeNew.name)
             }
             }
             Section{
                 HStack{
                     Spacer()
-                    Text("Description").bold()
+                    Text("Description")
+                        .font(.title)
+                        .fontWeight(.light)
+                        .foregroundColor(.blue)
                 Spacer()
             }
 
@@ -37,7 +45,11 @@ struct AddRecipe: View {
             Section{
             HStack {
                 Spacer()
-                Text("Ingredients").bold()
+                Text("Ingredients")
+                    .font(.title)
+                    .fontWeight(.light)
+                    .foregroundColor(.blue)
+                
                 Spacer()
             }
                 if(recipeNew.ingredients.count>0)
@@ -46,7 +58,10 @@ struct AddRecipe: View {
                         ForEach(Array(zip(recipeNew.ingredients,(1...recipeNew.ingredients.count))),id:\.1){
                     item in
                     HStack{
-                        Text("\(item.1).").bold()
+                        Text("\(item.1).")
+                            .font(.title)
+                            .fontWeight(.light)
+                            .foregroundColor(.blue)
                         Spacer()
                         Text(item.0)
                         Spacer()
@@ -63,7 +78,7 @@ struct AddRecipe: View {
                 HStack{
                     TextField("Add ingredient", text: $newIngredient)
                     Button(action:addIngredient){
-                        Text("Add")
+                        Image(systemName:"plus.circle.fill")
                     }
                 }
             }
@@ -71,7 +86,10 @@ struct AddRecipe: View {
             Section{
             HStack {
                 Spacer()
-                Text("Process").bold()
+                Text("Process")
+                    .font(.title)
+                    .fontWeight(.light)
+                    .foregroundColor(.blue)
                 Spacer()
             }
                 if(recipeNew.process.count>0)
@@ -80,7 +98,10 @@ struct AddRecipe: View {
                         ForEach(Array(zip((1...recipeNew.process.count),recipeNew.process)),id:\.0){
                     item in
                             HStack{
-                                Text("\(item.0).").bold()
+                                Text("\(item.0).")
+                                    .font(.title)
+                                    .fontWeight(.light)
+                                    .foregroundColor(.blue)
                                 Spacer()
                                 Text(item.1)
                                 Spacer()
@@ -97,7 +118,7 @@ struct AddRecipe: View {
                 HStack{
                     TextField("Add step", text: $newProcess)
                     Button(action:addProcess){
-                        Text("Add")
+                        Image(systemName:"plus.circle.fill")
                     }
                 }
             }
@@ -105,7 +126,10 @@ struct AddRecipe: View {
             Section{
             HStack {
                 Spacer()
-                Text("Equipment").bold()
+                Text("Equipment")
+                    .font(.title)
+                    .fontWeight(.light)
+                    .foregroundColor(.blue)
                 Spacer()
             }
                 //recipenew.equipment is initialized to []
@@ -115,7 +139,10 @@ struct AddRecipe: View {
                         ForEach(Array(zip((1...recipeNew.equipment!.count),recipeNew.equipment!)),id:\.0){
                     item in
                             HStack{
-                                Text("\(item.0).").bold()
+                                Text("\(item.0).")
+                                    .font(.title)
+                                    .fontWeight(.light)
+                                    .foregroundColor(.blue)
                                 Spacer()
                                 Text(item.1)
                                 Spacer()
@@ -132,18 +159,40 @@ struct AddRecipe: View {
                 HStack{
                     TextField("Add equipment", text: $newEquipment)
                     Button(action:addEquipment){
-                        Text("Add")
+                        Image(systemName:"plus.circle.fill")
                     }
                 }
             }
            
             Stepper(value: $recipeNew.servings, in: 0...100) {
                 HStack{
-                    Text("Servings:").bold()
+                    Text("Servings:")
+                        .font(.title)
+                        .fontWeight(.light)
+                        .foregroundColor(.blue)
                     Spacer()
                     Text("\(self.recipeNew.servings)")
                     Spacer()
                 }
+            }
+            
+            Section{
+                //images
+                HStack{
+                    Spacer()
+                Text("Images")
+                    .font(.title)
+                    .fontWeight(.light)
+                    .foregroundColor(.blue)
+                    Spacer()
+                    Button(action:{self.showSheetAddImages = true}){
+                        Image(systemName:"plus.circle.fill")
+                    }
+                }
+                ImageCarousel(images:self.$images)
+                    .frame(maxHeight:300)
+                
+                
             }
             
 //            HStack{
@@ -157,11 +206,17 @@ struct AddRecipe: View {
                     HStack{
                         Spacer()
                     Text("Submit")
+                        .font(.title)
+                        .fontWeight(.light)
+                        .foregroundColor(.blue)
                         Spacer()
                     }
                 }
             }
         }
+        .sheet(isPresented: self.$showSheetAddImages, content: {
+            PhotoPicker(showSheet: self.$showSheetAddImages, images: self.$images)
+        })
 
         .navigationTitle(Text("Add Recipe"))
               

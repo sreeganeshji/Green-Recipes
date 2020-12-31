@@ -6,9 +6,27 @@
 //
 
 import SwiftUI
+import Amplify
+import AmplifyPlugins
 
 @main
 struct Green_RecipesApp: App {
+    
+    init(){
+        
+        //initialize photo data stores
+        print("Configuring Amplify framework")
+        
+        do{
+            Amplify.Logging.logLevel = .verbose
+            try Amplify.add(plugin: AWSCognitoAuthPlugin())
+            try Amplify.add(plugin: AWSS3StoragePlugin())
+            try Amplify.configure()
+        }
+        catch{
+            print("could'nt configure due to error: \(error)")
+        }
+    }
     var data = DataModels()
     var body: some Scene {
         WindowGroup {
