@@ -153,6 +153,8 @@ struct RecipeDetail: View {
             
         
             }
+            }
+
 
                 if (self.recipe.images != nil && self.recipe.images!.count > 0){
                     Section{
