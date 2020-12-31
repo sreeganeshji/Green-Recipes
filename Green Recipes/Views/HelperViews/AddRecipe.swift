@@ -39,6 +39,7 @@ struct AddRecipe: View {
                         .font(.title)
                         .fontWeight(.light)
                         .foregroundColor(.blue)
+                    Text("Optional").foregroundColor(.secondary)
                 Spacer()
             }
 
@@ -132,6 +133,7 @@ struct AddRecipe: View {
                     .font(.title)
                     .fontWeight(.light)
                     .foregroundColor(.blue)
+                Text("Optional").foregroundColor(.secondary)
                 Spacer()
             }
                 //recipenew.equipment is initialized to []
@@ -186,6 +188,7 @@ struct AddRecipe: View {
                     .font(.title)
                     .fontWeight(.light)
                     .foregroundColor(.blue)
+                Text("Optional").foregroundColor(.secondary)
                     Spacer()
                     Button(action:{self.showSheetAddImages = true}){
                         Image(systemName:"plus.circle.fill")

@@ -125,6 +125,34 @@ struct Ratings:Hashable, Codable{
     }
 }
 
+struct Review:Codable, Hashable{
+    var reviewId:Int?
+    var rating:Int
+    var body:String?
+    var recipeId:Int
+    var userId:Int
+    var created:Date
+    var title:String
+    
+    enum CodingKeys:String, CodingKey{
+        case recipeId = "recipe_id"
+        case rating = "stars"
+        case body = "body"
+        case userId = "person_id"
+        case created = "created"
+        case reviewId = "review_id"
+        case title = "title"
+    }
+    
+    init(){
+        self.rating = 0
+        self.recipeId = 0
+        self.userId = 0
+        self.created = Date()
+        self.title = ""
+    }
+}
+
 struct Cache{
     //store common values.
     var timeUpdated:Date

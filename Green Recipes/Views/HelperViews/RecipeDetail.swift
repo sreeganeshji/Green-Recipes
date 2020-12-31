@@ -179,6 +179,7 @@ struct RecipeDetail: View {
                 }
 
         }
+            ReviewsSummary(user: self.$data.user, recipe: self.$recipe).environmentObject(self.data)
         }
 
 
