@@ -11,7 +11,7 @@ struct recipieThumb1: View {
     @Binding var recipe:Recipe
     var body: some View {
         VStack{
-        if((recipe.pictures?.count ?? 0)>0){
+        if((recipe.images?.count ?? 0)>0){
             //display image
         }
             Text(recipe.name).bold()

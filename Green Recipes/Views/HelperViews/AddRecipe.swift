@@ -17,6 +17,8 @@ struct AddRecipe: View {
     @State var origin:String = ""
     @State var images:[UIImage] = []
     @State var showSheetAddImages:Bool = false
+    @State var showAlert = false
+    @State var alertMessage = ""
     
     var body: some View {
 
@@ -126,7 +128,7 @@ struct AddRecipe: View {
             Section{
             HStack {
                 Spacer()
-                Text("Equipment")
+                Text("Equipments")
                     .font(.title)
                     .fontWeight(.light)
                     .foregroundColor(.blue)
@@ -189,6 +191,7 @@ struct AddRecipe: View {
                         Image(systemName:"plus.circle.fill")
                     }
                 }
+                
                 ImageCarousel(images:self.$images)
                     .frame(maxHeight:300)
                 
@@ -213,7 +216,11 @@ struct AddRecipe: View {
                     }
                 }
             }
+            .alert(isPresented: self.$showAlert, content: {
+                Alert(title: Text("Cannot Submit"), message: Text(self.alertMessage))
+            })
         }
+ 
         .sheet(isPresented: self.$showSheetAddImages, content: {
             PhotoPicker(showSheet: self.$showSheetAddImages, images: self.$images)
         })
@@ -238,18 +245,69 @@ struct AddRecipe: View {
         self.newProcess = ""
     }
     func addEquipment(){
+        self.showAlert = true
         if self.newEquipment != ""{
             self.recipeNew.equipment!.append(self.newEquipment)
         }
         self.newEquipment = ""
     }
     func submitRecipe(){
+        //ensure ingredients and process are entered
+        if (self.recipeNew.ingredients.count == 0 ) || (self.recipeNew.process.count == 0) || (self.recipeNew.name == ""){
+            //show alert
+            self.alertMessage = "Please add Name, Ingredients and Process."
+            self.showAlert = true
+            return
+        }
+        //blur and freeze the screen
+        
         //add the rest of the fields.
         self.recipeNew.origin = self.origin
         self.recipeNew.addedby = self.data.user.userId
         
+        //upload images
+        for i in 0...(self.images.count-1){
+            //generate a key
+            let key = self.getImageName()
+            
+            //upload to aws S3
+            self.data.photoStore.uploadData(key: key, data: images[i].pngData()!)
+            
+            //add to the new recipe
+            recipeNew.images?.append(key)
+            
+        }
+        
+        
         //validate the fields
         self.data.networkHandler.addRecipe(recipe: self.recipeNew)
+        //complete here
+        
+        //clear all values
+        recipeNew = Recipe()
+        newIngredient = ""
+        newProcess = ""
+        description = ""
+        newEquipment = ""
+        origin = ""
+        images = []
+        showSheetAddImages = false
+        showAlert = false
+        alertMessage = ""
+        
+    }
+    
+    //GenerateRandomString
+    func getImageName()->String{
+        let base = self.data.user.appleId
+        
+        //generate random string
+        let length = 8
+        let letters = "abcdefghijklmnopqrstuvwzyxABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        let randomString = String((0...length).map { _ in
+                                    letters.randomElement()!})
+        let name = base + randomString
+        return name
     }
 }
 

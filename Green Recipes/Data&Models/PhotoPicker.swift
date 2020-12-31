@@ -42,7 +42,7 @@ struct PhotoPicker:UIViewControllerRepresentable{
                             print("couldn't load images: \(error.localizedDescription)")
                         }
                         else{
-                            if(self.parent.images.count < 10){
+                            if(self.parent.images.count < 5){
                             let image = newImage as! UIImage
 //                          print(image.configuration.)
                             let compressedImage = image.jpegData(compressionQuality: 0.0000001)

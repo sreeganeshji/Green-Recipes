@@ -39,13 +39,11 @@ struct Recipe: Hashable, Equatable, Codable{
     var addedby:Int?
     var nutrition:[String]?
     var category:String?
-    var pictures:[String]?
 
     init() {
         self.name = ""
         self.process = []
         self.servings = 1
-        self.pictures = []
         self.ingredients = []
         self.equipment = []
         self.images = []
