@@ -12,11 +12,16 @@ struct ReviewStarSummary: View {
     @State var average:Double = 0
     
     var body: some View {
-        VStack{
-            Text("Ratings & Reviews").bold()
-            HStack{
-                Text(String(format: "%0.1f out of 5", self.average)).bold()
-            }
+        HStack{
+//            Text("Ratings & Reviews")
+//                .font(.title)
+//                .fontWeight(.light)
+//                .foregroundColor(.blue)
+//            HStack{
+//                Text(String(format: "%0.1f out of 5", self.average)).bold()
+                StarView(stars: average)
+//            }
+            Spacer()
             Text("\(self.reviews.count) ratings").foregroundColor(.secondary)
         }
             .onAppear(){

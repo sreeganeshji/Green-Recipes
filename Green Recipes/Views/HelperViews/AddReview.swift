@@ -11,7 +11,7 @@ struct AddReview: View {
     @Binding var user:User
     @Binding var recipe:Recipe
     @State var review:Review = .init()
-    @State var reviewBody:String = "Optional"
+    @State var reviewBody:String = ""
     @EnvironmentObject var data:DataModels
     
     var body: some View {
@@ -27,7 +27,7 @@ struct AddReview: View {
             }
         }
             Button(action:{updateStar(2)}){
-                if(review.rating > 0){
+                if(review.rating > 1){
                     Image(systemName: "star.fill")
                 }
                 else{
@@ -35,7 +35,7 @@ struct AddReview: View {
                 }
             }
             Button(action:{updateStar(3)}){
-                if(review.rating > 0){
+                if(review.rating > 2){
                     Image(systemName: "star.fill")
                 }
                 else{
@@ -43,7 +43,7 @@ struct AddReview: View {
                 }
             }
             Button(action:{updateStar(4)}){
-                if(review.rating > 0){
+                if(review.rating > 3){
                     Image(systemName: "star.fill")
                 }
                 else{
@@ -51,20 +51,40 @@ struct AddReview: View {
                 }
             }
             Button(action:{updateStar(5)}){
-                if(review.rating > 0){
+                if(review.rating > 4){
                     Image(systemName: "star.fill")
                 }
                 else{
                     Image(systemName: "star")
                 }
             }
-            Spacer()
-            Button(action:{}){
-                Text("Submit")
-            }
+
         }
-            TextEditor(text: self.$reviewBody).frame(minHeight: 100, maxHeight:300)
+//            HStack{
+//                Text("Title")
+//                    .font(.title)
+//                    .fontWeight(.light)
+//                    .foregroundColor(.blue)
+//            TextField("", text: self.$review.title)
+//                .border(Color(UIColor.separator), width: 3)
+//                .cornerRadius(5)
+//        }
+//            TextEditor(text: self.$reviewBody)
+//                .frame(maxHeight:300)
+//                .border(Color(UIColor.separator), width: 3)
+//                .cornerRadius(5)
+            Divider()
+            TextField("Title", text: self.$review.title)
+            Divider()
+            Text("Write review (Optional)")
+                .foregroundColor(.secondary)
+            TextEditor(text: self.$reviewBody)
+            
         }
+        .navigationBarItems(trailing:
+        Button(action:{}){
+            Text("Send")
+        })
         
     }
     

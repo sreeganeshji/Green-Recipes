@@ -10,29 +10,51 @@ import SwiftUI
 struct ReviewsSummary: View {
     @Binding var user:User
     @Binding var recipe:Recipe
-    @State var reviews:[Review] = []
+    @Binding var reviews:[Review]
     @EnvironmentObject var data:DataModels
+    @State var showSheetAddReview:Bool = false
     
     var body: some View {
-        VStack{
+//        ScrollView{
+        Form{
+//        VStack{
             ReviewStarSummary(reviews: self.$reviews)
-            AddReview(user: self.$user, recipe: self.$recipe).environmentObject(self.data)
-            Form{
+            
+            Button(action:{self.showSheetAddReview = true})
+            {
+                HStack{
+                    Text("Write Review")
+                    Spacer()
+                    Image(systemName: "square.and.pencil")
+                }
+            }
+            
                 ForEach(reviews, id:\.self){
                     review in
                     
                     Section{
+                    
+                    NavigationLink(destination:ReviewDetail()){
                         ReviewShort(review: .constant(review)).environmentObject(self.data)
+                            .padding()
+                    }
                     }
                     
                 }
-            }
+//            }
         }
+//        }
+        .navigationTitle("Ratings & Reviews")
+        .sheet(isPresented: self.$showSheetAddReview, content: {
+            NavigationView{
+            AddReview(user: self.$user, recipe: self.$recipe).environmentObject(self.data)
+                .padding()
+                .navigationTitle("Write Review")
+            }
+        })
     }
     
-    func fetchReviews(){
-        //use the recipe id to find the reviews.
-    }
+
 }
 
 //struct ReviewsSummary_Previews: PreviewProvider {

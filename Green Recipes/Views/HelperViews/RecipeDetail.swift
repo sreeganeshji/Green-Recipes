@@ -21,6 +21,7 @@ struct RecipeDetail: View {
     @State var recipe = Recipe()
     @State var images:[UIImage] = []
     @EnvironmentObject var data:DataModels
+    @State var reviews:[Review] = [.init()]
     var body: some View {
         if self.recipe.name == ""{
             Text("Loading...")
@@ -178,8 +179,19 @@ struct RecipeDetail: View {
                     }
                 }
 
-        }
-            ReviewsSummary(user: self.$data.user, recipe: self.$recipe).environmentObject(self.data)
+                NavigationLink(destination:
+                                ReviewsSummary(user: self.$data.user, recipe: self.$recipe, reviews:self.$reviews).environmentObject(self.data))
+                {
+                    VStack{
+                    Text("Ratings & Reviews")
+                        .font(.title)
+                        .fontWeight(.light)
+                        .foregroundColor(.blue)
+                    ReviewStarSummary(reviews: self.$reviews)
+                        .padding()
+                    }
+                }
+            }
         }
 
 
@@ -214,6 +226,10 @@ func UpdateRecipe(recipe:Recipe){
     
     self.recipe = recipe
     GetImages()
+}
+    
+func fetchReviews(){
+    //use the recipe id to find the reviews.
 }
 }
 
