@@ -51,7 +51,6 @@ class NetworkAdapter{
             print("Response",response ?? "")
             print("Error",error ?? "")
         }
-        print("Starting the task")
         task.resume()
         
     }
@@ -285,6 +284,122 @@ class NetworkAdapter{
                 completion(nil, error)
                 print("Couldn't decode due to error: \(error)")
             }
+        }
+        task.resume()
+    }
+    
+    func submitReview(review:Review){
+        var requestURL = baseURL
+        requestURL.appendPathComponent("addreview")
+        
+        //json encode the review and send it to the server
+        
+        let encoder = JSONEncoder()
+        do {
+        let jsonData = try encoder.encode(review)
+            
+        var requestObj = URLRequest(url: requestURL)
+        
+        requestObj.httpMethod = "POST"
+        requestObj.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        requestObj.httpBody = jsonData
+            
+        //create task
+            let task = URLSession.shared.dataTask(with: requestObj) { (data:Data?, response:URLResponse?, error:Error?) in
+                if error != nil{
+                    print("Session error: \(error)")
+                    
+                    return
+                }
+            }
+            task.resume()
+        }
+        catch{
+            print("Couldn't encode review due to errors: \(error)")
+        }
+    }
+    
+    func fetchReviews(review_id:Int, completion:@escaping ([Review],Error?)->()){
+        var requestURL = baseURL
+        requestURL.appendPathComponent("fetchreviews/\(review_id)")
+        
+        let task = URLSession.shared.dataTask(with: requestURL) { (data:Data?, response:URLResponse?, error:Error?) in
+            if error != nil{
+                print("error is: \(error)")
+                completion(.init(), error)
+                return
+            }
+            let decoder = JSONDecoder()
+            do{
+                var reviews_rec:[Review]
+                reviews_rec = try decoder.decode([Review].self, from: data!)
+                completion(reviews_rec, nil)
+            }
+            catch{
+                print("Couldn't decode recived reviews: \(error)")
+                completion(.init(), error)
+                return
+            }
+        }
+        task.resume()
+    }
+    
+    func fetchMyRecipes(userId:Int, completion:@escaping ([RecipeTemplate1],Error?)->()){
+        var fetchURL = baseURL
+        fetchURL.appendPathComponent("fetchmyrecipes/\(userId)")
+        
+        let task = URLSession.shared.dataTask(with: fetchURL) { (data:Data?, response:URLResponse?, error:Error?) in
+            if error != nil{
+                print("Couldn't get response error: \(error)")
+                completion(.init(), error)
+                return
+            }
+            let decoder = JSONDecoder()
+            do{
+                var recipes:[RecipeTemplate1]
+                recipes = try decoder.decode([RecipeTemplate1].self, from: data!)
+                completion(recipes, nil)
+            }
+            catch{
+                print("Couldn't decode error: \(error)")
+            }
+        }
+    }
+    
+    func updateRecipe(recipe: Recipe){
+        var addRecipeURL = baseURL
+        addRecipeURL.appendPathComponent("updaterecipe")
+        var addRecipeRequest = URLRequest(url: addRecipeURL)
+        
+        addRecipeRequest.httpMethod = "PUT"
+        addRecipeRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let encoder = JSONEncoder()
+        let data = try! encoder.encode(recipe)
+        print(String(data: data,encoding: .utf8)!)
+        addRecipeRequest.httpBody = data
+        let task = URLSession.shared.dataTask(with: addRecipeRequest) { (data:Data?, response:URLResponse?, error:Error?) in
+            print(String(data: data ?? Data(), encoding: .utf8)!)
+            print("Response",response ?? "")
+            print("Error",error ?? "")
+        }
+        task.resume()
+    }
+    
+    func updateUserProfile(user:User){
+        var addRecipeURL = baseURL
+        addRecipeURL.appendPathComponent("updateuserprofile")
+        var addRecipeRequest = URLRequest(url: addRecipeURL)
+        
+        addRecipeRequest.httpMethod = "PUT"
+        addRecipeRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let encoder = JSONEncoder()
+        let data = try! encoder.encode(user)
+        print(String(data: data,encoding: .utf8)!)
+        addRecipeRequest.httpBody = data
+        let task = URLSession.shared.dataTask(with: addRecipeRequest) { (data:Data?, response:URLResponse?, error:Error?) in
+            print(String(data: data ?? Data(), encoding: .utf8)!)
+            print("Response",response ?? "")
+            print("Error",error ?? "")
         }
         task.resume()
     }

@@ -17,23 +17,25 @@ struct MyRecipes: View {
     
     var body: some View {
         List{
-            NavigationLink(destination:AddRecipe().environmentObject(self.data)){
-            HStack{
-                Text("Add recipe").bold()
-                Spacer()
-                Image(systemName: "square.and.pencil")
-                    .foregroundColor(.blue)
-                }
-                ForEach(self.data.cache.myRecipes, id:\.self){
-                    recipe in 
-                }
-            }
+//            NavigationLink(destination:AddRecipe().environmentObject(self.data)){
+////            HStack{
+////                Text("Add recipe").bold()
+////                Spacer()
+////                Image(systemName: "square.and.pencil")
+////                    .foregroundColor(.blue)
+////                }
+//                ForEach(self.data.cache.myRecipes, id:\.self){
+//                    recipe in
+//                }
+//            }
         }
+        .navigationTitle("My Recipes")
+        .navigationBarItems(trailing: NavigationLink(destination:AddRecipe().environmentObject(self.data)){Image(systemName: "square.and.pencil").font(.headline)})
             .sheet(isPresented: self.$showSheet) {
                 AddRecipe().environmentObject(self.data)
             }
         .onAppear(){
-            self.navigationTitle.wrappedValue = "My Recipes"
+//            self.navigationTitle.wrappedValue = "My Recipes"
         }
     }
 }

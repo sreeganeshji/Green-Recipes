@@ -33,6 +33,8 @@ struct FavoritesView: View {
             }
 
             }
+            .navigationTitle("Favorites")
+            .navigationBarTitle("Whats this?")
             .onAppear(){
                 self.navigationTitle.wrappedValue = "Favorites"
             }

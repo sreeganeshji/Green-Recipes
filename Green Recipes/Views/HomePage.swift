@@ -30,35 +30,45 @@ struct HomePage: View {
     var body: some View {
 
         if(self.signedIn){
-            NavigationView{
+//            NavigationView{
         TabView(selection: $tabSelect) {
             Text("Explore").tabItem { HStack{
                 Image(systemName: "sparkles")
                 Text("Explore")
             } }.tag(tabViews.explore)
             
-            SearchView()
+            NavigationView{
+                SearchView().environmentObject(self.data)
+            }
                 .tabItem { HStack{
                 Image(systemName: "magnifyingglass")
                 Text("Search")} }.tag(tabViews.search)
             
+            NavigationView{
             FavoritesView(navigationTitle: self.$navigationTitle).environmentObject(self.data)
+            }
                 .tabItem { HStack{
                 Image(systemName: "star.fill")
                 Text("Favorites")} }.tag(tabViews.favorites)
             
+            NavigationView{
             MyRecipes(navigationTitle: self.$navigationTitle).environmentObject(data)
+        }
                 .tabItem {
                 HStack{
                 Image(systemName: "tray.fill")
                 Text("My Recipes")} }.tag(tabViews.addRecipe)
 
-            Text("Settings").tabItem { HStack{
+            NavigationView{
+            Settings().environmentObject(self.data)
+        }
+                .tabItem { HStack{
                 Image(systemName: "gear")
                 Text("Settings")} }.tag(tabViews.settings)
                 }
-        .navigationTitle(self.navigationTitle)
-            }
+//        .navigationTitle(self.navigationTitle)
+        .navigationBarHidden(true)
+//            }
         }
 
         else{

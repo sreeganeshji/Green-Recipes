@@ -8,13 +8,23 @@
 import SwiftUI
 
 struct Settings: View {
+    @EnvironmentObject var data:DataModels
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Form{
+            Section{
+                NavigationLink(destination:ProfileDetail().environmentObject(self.data))
+                {
+                    Text("\(self.data.user.username)")
+                        .font(.title2)
+                }
+            }
+        }
+            .navigationTitle("Settings")
     }
 }
 
 struct Settings_Previews: PreviewProvider {
     static var previews: some View {
-        Settings()
+        Settings().environmentObject(DataModels())
     }
 }

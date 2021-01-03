@@ -34,7 +34,7 @@ struct SearchView: View {
             
             
         
-            List{
+            Form{
                 ForEach(self.recipes, id:\.self){
                     recipe in
                     
