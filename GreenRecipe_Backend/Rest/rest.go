@@ -1,11 +1,11 @@
 package rest
 
-import(
+import (
 	"encoding/json"
 	"fmt"
+	"github.com/gorilla/mux"
 	models "greenrecipe/Models"
 	"greenrecipe/Service"
-	"github.com/gorilla/mux"
 	"log"
 	"net/http"
 	"strconv"
@@ -26,6 +26,13 @@ func Initalizer(service service.Service) (*mux.Router){
 	r.HandleFunc("/getuserfavorites/{person_id}", handler.GetUserFavorites).Methods(http.MethodGet)
 	r.HandleFunc("/addfavorite/{person_id}/{recipe_id}", handler.AddFavorite).Methods(http.MethodPost)
 	r.HandleFunc("/removefavorite/{person_id}/{recipe_id}", handler.RemoveFavorite).Methods(http.MethodDelete)
+	r.HandleFunc("/submitreview",handler.SubmitReview).Methods(http.MethodPost)
+	r.HandleFunc("/fetchreviews/{review_id}",handler.FetchReviews).Methods(http.MethodGet)
+	r.HandleFunc("/fetchmyrecipes/{person_id}",handler.FetchMyRecipes).Methods(http.MethodGet)
+	r.HandleFunc("/updaterecipe",handler.UpdateRecipe).Methods(http.MethodPut)
+	r.HandleFunc("/updateuserprofile",handler.UpdateUserProfile).Methods(http.MethodPut)
+	r.HandleFunc("/fetchmyreview/{review_id}/{person_id}", handler.FetchMyReview).Methods(http.MethodGet)
+	r.HandleFunc("/getusername/{person_id}",handler.GetUserName).Methods(http.MethodGet)
 	return r
 }
 
@@ -242,3 +249,31 @@ func (h *handler) GetUserFavorites(w http.ResponseWriter, r *http.Request){
 	w.WriteHeader(http.StatusOK)
 }
 
+
+func (h *handler) SubmitReview(w http.ResponseWriter, r *http.Request){
+
+}
+
+func (h *handler) FetchReviews(w http.ResponseWriter, r *http.Request){
+
+}
+
+func (h *handler) FetchMyRecipes(w http.ResponseWriter, r *http.Request){
+
+}
+
+func (h *handler) UpdateRecipe(w http.ResponseWriter, r *http.Request){
+
+}
+
+func (h *handler) UpdateUserProfile(w http.ResponseWriter, r *http.Request){
+
+}
+
+func (h *handler) FetchMyReview(w http.ResponseWriter, r* http.Request){
+
+}
+
+func (h *handler) GetUserName(w http.ResponseWriter, r *http.Request){
+
+}
