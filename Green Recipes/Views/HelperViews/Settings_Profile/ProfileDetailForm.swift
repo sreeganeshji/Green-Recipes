@@ -10,7 +10,26 @@ import SwiftUI
 struct ProfileDetailForm: View {
     @Binding var user:User
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Form{
+            Section(header:HStack{
+                Text("Username")
+                Text("(Visible to everyone)")
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
+            }){
+        Text(user.username)
+
+            }
+            
+            Section(header:Text("First Name")){
+                Text(user.firstName)
+            }
+            
+            Section(header:Text("Last Name"))
+            {
+                Text(user.lastName)
+            }
+        }
     }
 }
 

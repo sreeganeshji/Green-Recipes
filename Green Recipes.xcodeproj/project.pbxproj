@@ -247,20 +247,13 @@
 		1F84393D254DF6A4004A27A9 /* HelperViews */ = {
 			isa = PBXGroup;
 			children = (
-				1F843933254D3E57004A27A9 /* AddRecipe.swift */,
-				B1E81E1D259EA5720059EC28 /* StarView.swift */,
 				1F843949254DF70A004A27A9 /* recipeThumb1.swift */,
-				B1E81E18259E8F460059EC28 /* ReviewShort.swift */,
+				B1E81E3525A267170059EC28 /* Reviews */,
 				B1F0D60525906B6600BD36EF /* RecipeDetail.swift */,
-				B16A1246259112080027FC4F /* Reviews.swift */,
-				B1E81E06259E83190059EC28 /* AddReview.swift */,
 				B16A124E2591C69A0027FC4F /* SignUp.swift */,
 				B16A1253259271DB0027FC4F /* VerifyCredentials.swift */,
 				B1E81E13259E89D70059EC28 /* ReviewStarSummary.swift */,
-				B163D998259D741100225124 /* ImageCarousel.swift */,
-				B1E81DF7259E51F40059EC28 /* ImageCarouselPreview.swift */,
-				B1E81DFC259E55560059EC28 /* ReviewsSummary.swift */,
-				B1E81E01259E55660059EC28 /* ReviewDetail.swift */,
+				B1E81E3625A267370059EC28 /* MyRecipe */,
 				B1E81E2C25A266750059EC28 /* Settings_Profile */,
 			);
 			path = HelperViews;
@@ -308,6 +301,29 @@
 				B1E81E2D25A2669B0059EC28 /* ProfileDetailForm.swift */,
 			);
 			path = Settings_Profile;
+			sourceTree = "<group>";
+		};
+		B1E81E3525A267170059EC28 /* Reviews */ = {
+			isa = PBXGroup;
+			children = (
+				B1E81E1D259EA5720059EC28 /* StarView.swift */,
+				B1E81E18259E8F460059EC28 /* ReviewShort.swift */,
+				B16A1246259112080027FC4F /* Reviews.swift */,
+				B1E81DFC259E55560059EC28 /* ReviewsSummary.swift */,
+				B1E81E01259E55660059EC28 /* ReviewDetail.swift */,
+				B1E81E06259E83190059EC28 /* AddReview.swift */,
+			);
+			path = Reviews;
+			sourceTree = "<group>";
+		};
+		B1E81E3625A267370059EC28 /* MyRecipe */ = {
+			isa = PBXGroup;
+			children = (
+				B163D998259D741100225124 /* ImageCarousel.swift */,
+				1F843933254D3E57004A27A9 /* AddRecipe.swift */,
+				B1E81DF7259E51F40059EC28 /* ImageCarouselPreview.swift */,
+			);
+			path = MyRecipe;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

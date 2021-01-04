@@ -34,8 +34,8 @@ struct ReviewsSummary: View {
                     
                     Section{
                     
-                    NavigationLink(destination:ReviewDetail()){
-                        ReviewShort(review: .constant(review)).environmentObject(self.data)
+                    NavigationLink(destination:ReviewDetail(review: review)){
+                        ReviewDetail(review: review).environmentObject(self.data)
                             .padding()
                     }
                     }
@@ -47,7 +47,7 @@ struct ReviewsSummary: View {
         .navigationTitle("Ratings & Reviews")
         .sheet(isPresented: self.$showSheetAddReview, content: {
             NavigationView{
-            AddReview(user: self.$user, recipe: self.$recipe).environmentObject(self.data)
+                AddReview(showSheet:self.$showSheetAddReview, user: self.$user, recipe: self.$recipe).environmentObject(self.data)
                 .padding()
                 .navigationTitle("Write Review")
             }

@@ -187,8 +187,8 @@ struct RecipeDetail: View {
                         .font(.title)
                         .fontWeight(.light)
                         .foregroundColor(.blue)
-                    ReviewStarSummary(reviews: self.$reviews)
-                        .padding()
+//                    ReviewStarSummary(reviews: self.$reviews)
+//                        .padding()
                     }
                 }
             }

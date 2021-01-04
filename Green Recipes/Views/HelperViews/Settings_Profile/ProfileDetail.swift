@@ -16,9 +16,13 @@ struct ProfileDetail: View {
         if (editmode?.wrappedValue == EditMode.active)
         {
             ProfileEditView(user:$user)
+                .onDisappear(){
+                    print("Updating user credentials")
+                    self.data.networkHandler.updateUserProfile(user: user)
+                }
         }
         else{
-            Text("Not Editing")
+            ProfileDetailForm(user:$user)
         }
     }
         .navigationBarItems(trailing: EditButton().font(.headline))

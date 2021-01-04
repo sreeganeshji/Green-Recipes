@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AddReview: View {
+    @Binding var showSheet:Bool
     @Binding var user:User
     @Binding var recipe:Recipe
     @State var review:Review = .init()
@@ -76,16 +77,21 @@ struct AddReview: View {
             Divider()
             TextField("Title", text: self.$review.title)
             Divider()
-            Text("Write review (Optional)")
+            Text("Write review below (Optional)")
                 .foregroundColor(.secondary)
+            Divider()
             TextEditor(text: self.$reviewBody)
             
         }
         .navigationBarItems(trailing:
-        Button(action:{}){
+        Button(action:{submitReview()}){
             Text("Send")
+                .font(.headline)
         })
         
+        .onAppear(){
+            fetchMyReview()
+        }
     }
     
     func updateStar(_ rating:Int){
@@ -93,7 +99,20 @@ struct AddReview: View {
     }
     
     func submitReview(){
-        
+        self.showSheet = false
+        self.data.networkHandler.submitReview(review: review)
+    }
+    
+    func fetchMyReview(){
+//        self.data.networkHandler.
+    }
+    
+    func updateReview(review:Review, error:Error?){
+        if error != nil{
+            print("Couldn't submit review")
+            return
+        }
+        self.review = review
     }
 }
 

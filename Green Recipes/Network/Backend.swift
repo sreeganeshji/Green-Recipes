@@ -404,4 +404,44 @@ class NetworkAdapter{
         task.resume()
     }
     
+    func fetchMyReview(review_id:Int,userId:Int, completion:@escaping (Review,Error?)->()){
+        var requestURL = baseURL
+        requestURL.appendPathComponent("fetchmyreview/\(review_id)/\(userId)")
+        
+        let task = URLSession.shared.dataTask(with: requestURL) { (data:Data?, response:URLResponse?, error:Error?) in
+            if error != nil{
+                print("error is: \(error)")
+                completion(.init(), error)
+                return
+            }
+            let decoder = JSONDecoder()
+            do{
+                var reviews_rec:Review
+                reviews_rec = try decoder.decode(Review.self, from: data!)
+                completion(reviews_rec, nil)
+            }
+            catch{
+                print("Couldn't decode recived reviews: \(error)")
+                completion(.init(), error)
+                return
+            }
+        }
+        task.resume()
+    }
+    
+    func getUserName(userId:Int, completion:@escaping ((String, Error?)->())){
+        var requestURL = baseURL
+        requestURL.appendPathComponent("getusername\(userId)")
+        
+        let task = URLSession.shared.dataTask(with: requestURL) { (data:Data?, response:URLResponse?, error:Error?) in
+            if error != nil{
+                print("Couldn't get username")
+                return completion("", error)
+            }
+            let username = String(data: data!, encoding: .utf8)
+            completion(username!, nil)
+        }
+        
+        task.resume()
+    }
 }
