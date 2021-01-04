@@ -1,6 +1,6 @@
 package service
 
-import(
+import (
 	"greenrecipe/Database"
 	"greenrecipe/Models"
 )
@@ -39,4 +39,32 @@ func (s *Service) RemoveFavorite(user_id int, recipe_id int)(error){
 
 func (s *Service) GetUserFavorites(user_id int)([]models.Recipe, error){
 	return s.Postgres.GetUserFavorites(user_id)
+}
+
+func (s *Service) SubmitReview(review models.Review)(error){
+	return s.SubmitReview(review)
+}
+
+func (s *Service) FetchReviews(recipe_id int)([]models.Review, error){
+	return s.FetchReviews(recipe_id)
+}
+
+func (s *Service) FetchMyRecipes(person_id int)([]models.Recipe, error){
+	return s.FetchMyRecipes(person_id)
+}
+
+func (s *Service) UpdateRecipe(recipe models.Recipe)(error){
+	return s.UpdateRecipe(recipe)
+}
+
+func (s *Service) UpdateUserProfile(user models.Person)(error){
+	return s.UpdateUserProfile(user)
+}
+
+func (s *Service) FetchMyReview(person_id int, recipe_id int)(models.Review, error){
+	return s.FetchMyReview(person_id, recipe_id)
+}
+
+func (s *Service) GetUserName(person_id int)(string, error){
+	return s.GetUserName(person_id)
 }

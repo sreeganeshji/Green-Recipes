@@ -262,3 +262,37 @@ func (p *Postgres) GetUserRecipes(userid int)([]models.Recipe, error){
 	return recipes,nil
 }
 
+func (p *Postgres) SubmitReview(review models.Review)(error){
+
+	return nil
+}
+
+func (p *Postgres) FetchReviews(recipe_id int)([]models.Recipe, error){
+
+	return nil, nil
+}
+
+func (p *Postgres) FetchMyRecipes(person_id int)([]models.Recipe, error){
+
+	return nil, nil
+}
+
+func (p *Postgres) UpdateRecipe(recipe models.Recipe)(error){
+
+	return nil
+}
+
+func (p *Postgres) UpdateUserProfile(person models.Person)(error){
+
+	return nil
+}
+
+func (p *Postgres) FetchMyReview(person_id int, recipe_id int)(models.Review, error){
+
+	return models.Review{}, nil
+}
+
+func (p *Postgres) GetUserName(person_id int)(string, error){
+
+	return "", nil
+}
