@@ -252,7 +252,6 @@
 				B1F0D60525906B6600BD36EF /* RecipeDetail.swift */,
 				B16A124E2591C69A0027FC4F /* SignUp.swift */,
 				B16A1253259271DB0027FC4F /* VerifyCredentials.swift */,
-				B1E81E13259E89D70059EC28 /* ReviewStarSummary.swift */,
 				B1E81E3625A267370059EC28 /* MyRecipe */,
 				B1E81E2C25A266750059EC28 /* Settings_Profile */,
 			);
@@ -310,6 +309,7 @@
 				B1E81E18259E8F460059EC28 /* ReviewShort.swift */,
 				B16A1246259112080027FC4F /* Reviews.swift */,
 				B1E81DFC259E55560059EC28 /* ReviewsSummary.swift */,
+				B1E81E13259E89D70059EC28 /* ReviewStarSummary.swift */,
 				B1E81E01259E55660059EC28 /* ReviewDetail.swift */,
 				B1E81E06259E83190059EC28 /* AddReview.swift */,
 			);

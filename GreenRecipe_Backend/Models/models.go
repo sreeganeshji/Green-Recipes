@@ -23,7 +23,7 @@ type Review struct{
 	ID *int `json:"id,omitempty"`
 	Personfk *int `json:"personfk,omitempty"`
 	Recipefk *int `json:"recipefk,omitempty"`
-	Stars int `json:"stars,omitempty"`
+	Stars int `json:"stars"`
 	Body *string `json:"body,omitempty"`
 	Title *string `json:"title,omitempty"`
 	Likes int `json:"likes,omitempty"`

@@ -44,7 +44,7 @@ dislikes INT DEFAULT 0,
 body VARCHAR (1000),
 title VARCHAR (200),
 images TEXT[],
-created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+created DATE DEFAULT CURRENT_DATE
 );
 
 /*

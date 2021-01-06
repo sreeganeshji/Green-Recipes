@@ -20,6 +20,7 @@ struct ReviewStarSummary: View {
 //            HStack{
 //                Text(String(format: "%0.1f out of 5", self.average)).bold()
                 StarView(stars: average)
+                    .foregroundColor(.yellow)
 //            }
             Spacer()
             Text("\(self.reviews.count) ratings").foregroundColor(.secondary)

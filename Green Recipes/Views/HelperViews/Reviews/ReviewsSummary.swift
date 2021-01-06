@@ -13,6 +13,7 @@ struct ReviewsSummary: View {
     @Binding var reviews:[Review]
     @EnvironmentObject var data:DataModels
     @State var showSheetAddReview:Bool = false
+    var fetchReviews:()->()
     
     var body: some View {
 //        ScrollView{
@@ -34,14 +35,17 @@ struct ReviewsSummary: View {
                     
                     Section{
                     
-                    NavigationLink(destination:ReviewDetail(review: review)){
+//                    NavigationLink(destination:ReviewDetail(review: review)){
                         ReviewDetail(review: review).environmentObject(self.data)
                             .padding()
-                    }
+//                    }
                     }
                     
                 }
 //            }
+        }
+        .onAppear(){
+            fetchReviews()
         }
 //        }
         .navigationTitle("Ratings & Reviews")

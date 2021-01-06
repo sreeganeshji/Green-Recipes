@@ -22,8 +22,9 @@ struct RecipeDetail: View {
     @State var images:[UIImage] = []
     @EnvironmentObject var data:DataModels
     @State var reviews:[Review] = [.init()]
+    @State var loading = true
     var body: some View {
-        if self.recipe.name == ""{
+        if loading {
             Text("Loading...")
                 .foregroundColor(.blue)
                 .font(.title)
@@ -178,9 +179,11 @@ struct RecipeDetail: View {
                         
                     }
                 }
-
+//                VStack{
+//                    ReviewsSummary(user: self.$data.user, recipe: self.$recipe, reviews: self.$reviews).environmentObject(self.data)
+//                }
                 NavigationLink(destination:
-                                ReviewsSummary(user: self.$data.user, recipe: self.$recipe, reviews:self.$reviews).environmentObject(self.data))
+                                ReviewsSummary(user: self.$data.user, recipe: self.$recipe, reviews:self.$reviews, fetchReviews: fetchReviews).environmentObject(self.data))
                 {
                     VStack{
                     Text("Ratings & Reviews")
@@ -223,14 +226,24 @@ func GetImages(){
     }
 
 func UpdateRecipe(recipe:Recipe){
-    
+    loading = false
     self.recipe = recipe
+//    fetchReviews()
     GetImages()
 }
     
 func fetchReviews(){
     //use the recipe id to find the reviews.
+    self.data.networkHandler.fetchReviews(recipe_id: self.id, completion: updateReviews)
 }
+    
+    func updateReviews(reviews: [Review], err: Error?){
+        if err != nil{
+            print("Coudln't update reviews")
+            return
+        }
+        self.reviews = reviews
+    }
 }
 
 struct RecipeDetail_Previews: PreviewProvider {

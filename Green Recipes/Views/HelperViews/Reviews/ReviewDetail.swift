@@ -14,7 +14,7 @@ struct ReviewDetail: View {
     let LessLetterCount = 30
     var review:Review
     var body: some View {
-        ScrollView{
+//        ScrollView{
             VStack{
                 HStack{
                     Text(self.review.title).bold()
@@ -23,21 +23,32 @@ struct ReviewDetail: View {
                 }
                 HStack{
                 StarView(stars: Double(review.rating))
+                    .foregroundColor(.yellow)
                     Text(getUserName(userId: self.review.userId))
                 }
                 
                 
                 if review.body != nil{
-                    if (review.body!.count > 30)
+                    if (review.body!.count > 100)
                     {
-                        Text(review.body![review.body!.startIndex...review.body!.index(review.body!.startIndex, offsetBy: .init(30))])
+                        if showMore{
+                            Text(review.body!)
+                        }
+                        else{
+                        Text(review.body![review.body!.startIndex...review.body!.index(review.body!.startIndex, offsetBy: .init(100))])
                         Button(action:{self.showMore = true}){
-                            Text("more")}
+                            HStack{
+                                Spacer()
+                            Text("more")
+                            }
+                            
+                        }
+                        }
                     }
-                    Text(review.body!)
+                   
                 }
             }
-        }
+//        }
     }
     
     func getUserName(userId:Int)->String{

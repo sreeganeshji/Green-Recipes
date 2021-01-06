@@ -14,6 +14,8 @@ struct AddReview: View {
     @State var review:Review = .init()
     @State var reviewBody:String = ""
     @EnvironmentObject var data:DataModels
+    @State var showAlert = false
+    @State var alertMessage = ""
     
     var body: some View {
         VStack{
@@ -61,6 +63,7 @@ struct AddReview: View {
             }
 
         }
+        .foregroundColor(.yellow)
 //            HStack{
 //                Text("Title")
 //                    .font(.title)
@@ -77,12 +80,19 @@ struct AddReview: View {
             Divider()
             TextField("Title", text: self.$review.title)
             Divider()
+            HStack{
             Text("Write review below (Optional)")
+                Spacer()
+            Text("\(self.reviewBody.count)/1000")
+            }
                 .foregroundColor(.secondary)
             Divider()
             TextEditor(text: self.$reviewBody)
             
         }
+        .alert(isPresented: self.$showAlert, content: {
+            .init(title: Text("Could not submit"), message: Text(alertMessage))
+        })
         .navigationBarItems(trailing:
         Button(action:{submitReview()}){
             Text("Send")
@@ -99,6 +109,17 @@ struct AddReview: View {
     }
     
     func submitReview(){
+        if (self.reviewBody.count > 1000){
+            alertMessage = "The body exceeds 1000 caracters."
+            showAlert = true
+            return
+        }
+        if (self.review.title.count > 200){
+            alertMessage = "The title exceeds 200 characters"
+            showAlert = true
+            return
+        }
+        
         self.showSheet = false
         self.review.body = self.reviewBody
         self.review.recipeId = self.recipe.id!

@@ -27,7 +27,7 @@ func Initalizer(service service.Service) (*mux.Router){
 	r.HandleFunc("/addfavorite/{person_id}/{recipe_id}", handler.AddFavorite).Methods(http.MethodPost)
 	r.HandleFunc("/removefavorite/{person_id}/{recipe_id}", handler.RemoveFavorite).Methods(http.MethodDelete)
 	r.HandleFunc("/submitreview",handler.SubmitReview).Methods(http.MethodPost)
-	r.HandleFunc("/fetchreviews/{review_id}",handler.FetchReviews).Methods(http.MethodGet)
+	r.HandleFunc("/fetchreviews/{recipe_id}",handler.FetchReviews).Methods(http.MethodGet)
 	r.HandleFunc("/fetchmyrecipes/{person_id}",handler.FetchMyRecipes).Methods(http.MethodGet)
 	r.HandleFunc("/updaterecipe",handler.UpdateRecipe).Methods(http.MethodPut)
 	r.HandleFunc("/updateuserprofile",handler.UpdateUserProfile).Methods(http.MethodPut)
@@ -272,7 +272,7 @@ func (h *handler) SubmitReview(w http.ResponseWriter, r *http.Request){
 }
 
 func (h *handler) FetchReviews(w http.ResponseWriter, r *http.Request){
-	fmt.Println("Getting reviews")
+
 	vars := mux.Vars(r)
 	recipe_id, err := strconv.Atoi(vars["recipe_id"])
 	if err!=nil{

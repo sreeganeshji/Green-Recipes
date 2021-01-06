@@ -274,7 +274,7 @@ func (p *Postgres) SubmitReview(review models.Review)(int, error){
 	err := p.db.QueryRow(c,sql_statement, review.Title, review.Body, review.Created, review.Stars, review.Images, review.Likes, review.Dislikes, review.Recipefk, review.Personfk).Scan(&review_id)
 
 	if (err != nil) {
-		return -1, nil
+		return -1, err
 	}
 	return review_id, nil
 }
@@ -282,7 +282,7 @@ func (p *Postgres) SubmitReview(review models.Review)(int, error){
 func (p *Postgres) FetchReviews(recipe_id int)([]models.Review, error){
 	c, cancel := context.WithTimeout(context.Background(), time.Second*5)
 	defer cancel()
-
+	fmt.Println("Fetching reviews")
 	sql := `select review_id, recipe_id, person_id, title, body, stars, created from review where recipe_id=$1`
 
 	var reviews []models.Review

@@ -161,6 +161,8 @@ class NetworkAdapter{
         let task = URLSession.shared.dataTask(with: reqURL) { (data:Data?, response:URLResponse?, error:Error?) in
             if error != nil{
                 print("server error: \(error)")
+                
+                print("Url response: \(response)")
                 return
             }
             
@@ -290,7 +292,7 @@ class NetworkAdapter{
     
     func submitReview(review:Review){
         var requestURL = baseURL
-        requestURL.appendPathComponent("addreview")
+        requestURL.appendPathComponent("submitreview")
         
         //json encode the review and send it to the server
         
@@ -319,9 +321,9 @@ class NetworkAdapter{
         }
     }
     
-    func fetchReviews(review_id:Int, completion:@escaping ([Review],Error?)->()){
+    func fetchReviews(recipe_id:Int, completion:@escaping ([Review],Error?)->()){
         var requestURL = baseURL
-        requestURL.appendPathComponent("fetchreviews/\(review_id)")
+        requestURL.appendPathComponent("fetchreviews/\(recipe_id)")
         
         let task = URLSession.shared.dataTask(with: requestURL) { (data:Data?, response:URLResponse?, error:Error?) in
             if error != nil{
