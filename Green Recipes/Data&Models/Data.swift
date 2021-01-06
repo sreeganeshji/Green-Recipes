@@ -126,21 +126,21 @@ struct Ratings:Hashable, Codable{
 }
 
 struct Review:Codable, Hashable{
-    var reviewId:Int?
+    var Id:Int?
     var rating:Int
     var body:String?
     var recipeId:Int
     var userId:Int
-    var created:Date
+    var created:String?
     var title:String
     
     enum CodingKeys:String, CodingKey{
-        case recipeId = "recipe_id"
+        case recipeId = "recipefk"
         case rating = "stars"
         case body = "body"
-        case userId = "person_id"
+        case userId = "personfk"
         case created = "created"
-        case reviewId = "review_id"
+        case Id = "id"
         case title = "title"
     }
     
@@ -148,7 +148,6 @@ struct Review:Codable, Hashable{
         self.rating = 0
         self.recipeId = 0
         self.userId = 0
-        self.created = Date()
         self.title = ""
     }
 }
@@ -182,8 +181,8 @@ class DataModels:ObservableObject{
     
     var recipies = [Recipe]()
     
-//    var networkHandler = NetworkAdapter("http://localhost:5000")
-    var networkHandler = NetworkAdapter(nil)
+    var networkHandler = NetworkAdapter("http://localhost:5000")
+//    var networkHandler = NetworkAdapter(nil)
     
     var user = User()
     

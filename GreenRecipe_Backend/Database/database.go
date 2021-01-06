@@ -262,14 +262,49 @@ func (p *Postgres) GetUserRecipes(userid int)([]models.Recipe, error){
 	return recipes,nil
 }
 
-func (p *Postgres) SubmitReview(review models.Review)(error){
+func (p *Postgres) SubmitReview(review models.Review)(int, error){
+	c, cancel := context.WithTimeout(context.Background(), time.Second*5)
+	defer cancel()
+	fmt.Println("Submitting to database")
 
-	return nil
+	sql_statement := `INSERT INTO review (title, body, created, stars, images, likes, dislikes, recipe_id, person_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING review_id`
+
+	var review_id int
+
+	err := p.db.QueryRow(c,sql_statement, review.Title, review.Body, review.Created, review.Stars, review.Images, review.Likes, review.Dislikes, review.Recipefk, review.Personfk).Scan(&review_id)
+
+	if (err != nil) {
+		return -1, nil
+	}
+	return review_id, nil
 }
 
-func (p *Postgres) FetchReviews(recipe_id int)([]models.Recipe, error){
+func (p *Postgres) FetchReviews(recipe_id int)([]models.Review, error){
+	c, cancel := context.WithTimeout(context.Background(), time.Second*5)
+	defer cancel()
 
-	return nil, nil
+	sql := `select review_id, recipe_id, person_id, title, body, stars, created from review where recipe_id=$1`
+
+	var reviews []models.Review
+
+	row, err := p.db.Query(c, sql, recipe_id)
+
+	if err!=nil{
+		fmt.Println("Couldn't fetch reviews")
+		return nil, err
+	}
+
+	for row.Next(){
+		var review models.Review
+		err := row.Scan(&review.ID, &review.Recipefk, &review.Personfk, &review.Title, &review.Body, &review.Stars, &review.Created)
+		if err!=nil{
+			fmt.Println("cannot scan database rows")
+			return nil, err
+		}
+		reviews = append(reviews, review)
+	}
+
+	return reviews, nil
 }
 
 func (p *Postgres) FetchMyRecipes(person_id int)([]models.Recipe, error){

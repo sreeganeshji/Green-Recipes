@@ -100,6 +100,9 @@ struct AddReview: View {
     
     func submitReview(){
         self.showSheet = false
+        self.review.body = self.reviewBody
+        self.review.recipeId = self.recipe.id!
+        self.review.userId = self.user.userId
         self.data.networkHandler.submitReview(review: review)
     }
     

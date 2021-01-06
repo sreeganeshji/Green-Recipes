@@ -19,7 +19,7 @@ struct ReviewDetail: View {
                 HStack{
                     Text(self.review.title).bold()
                     Spacer()
-                    Text(self.review.created.description).foregroundColor(.secondary)
+                    Text(self.review.created ?? "").foregroundColor(.secondary)
                 }
                 HStack{
                 StarView(stars: Double(review.rating))

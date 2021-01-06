@@ -72,6 +72,8 @@ struct HomePage: View {
         }
 
         else{
+            
+            
 SignInWithAppleButton(.signIn, onRequest: { request in
     request.requestedScopes = [.fullName,.email]
 //    request.nonce = "noncestr"
@@ -134,6 +136,9 @@ SignInWithAppleButton(.signIn, onRequest: { request in
     ).padding()
                     .frame(height:100)
 .signInWithAppleButtonStyle(.whiteOutline)
+.onAppear(){
+    self.data.networkHandler.getUserWithAppleID(appleID: "001289c9ba712996a74ce8aa424e158d6b10d50653", completion: updateUser)
+}
 
     }
 //        .sheet(isPresented: self.$verifyCredentials, content: {

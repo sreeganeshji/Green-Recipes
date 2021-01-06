@@ -249,31 +249,171 @@ func (h *handler) GetUserFavorites(w http.ResponseWriter, r *http.Request){
 	w.WriteHeader(http.StatusOK)
 }
 
-
 func (h *handler) SubmitReview(w http.ResponseWriter, r *http.Request){
+	fmt.Println("Submitting review")
+	decoder := json.NewDecoder(r.Body)
+	var review models.Review
+	err := decoder.Decode(&review)
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Error unmarshalling JSON",err)))
+		return
+	}
 
+	review_id, err := h.Service.SubmitReview(review)
+	if err!=nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Error saving review to database:",err)))
+		return
+	}
+	data, err := json.Marshal(review_id)
+	w.Write(data)
+	w.WriteHeader(http.StatusCreated)
 }
 
 func (h *handler) FetchReviews(w http.ResponseWriter, r *http.Request){
+	fmt.Println("Getting reviews")
+	vars := mux.Vars(r)
+	recipe_id, err := strconv.Atoi(vars["recipe_id"])
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("unable to get the recipe_id: ", err)))
+		return
+	}
+	var reviews []models.Review
 
+	reviews, err = h.Service.FetchReviews(recipe_id)
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Error getting favorites: ",err)))
+		return
+	}
+	data,err := json.Marshal(reviews)
+
+	w.Write(data)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
 }
 
 func (h *handler) FetchMyRecipes(w http.ResponseWriter, r *http.Request){
+	fmt.Println("Getting my recipes")
+	vars := mux.Vars(r)
 
+	person_id, err := strconv.Atoi(vars["user_id"])
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("unable to get the user_id: ", err)))
+		return
+	}
+	var recipe []models.Recipe
+
+	recipe, err = h.Service.FetchMyRecipes(person_id)
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Error getting favorites: ",err)))
+		return
+	}
+	data,err := json.Marshal(recipe)
+
+	w.Write(data)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
 }
 
 func (h *handler) UpdateRecipe(w http.ResponseWriter, r *http.Request){
+	decoder := json.NewDecoder(r.Body)
+	var recipe models.Recipe
+	err := decoder.Decode(&recipe)
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Error unmarshalling JSON",err)))
+		return
+	}
 
+	err = h.Service.UpdateRecipe(recipe)
+	if err!=nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Error saving review to database:",err)))
+		return
+	}
+
+	w.WriteHeader(http.StatusAccepted)
 }
 
 func (h *handler) UpdateUserProfile(w http.ResponseWriter, r *http.Request){
+	decoder := json.NewDecoder(r.Body)
+	var person models.Person
+	err := decoder.Decode(&person)
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Error unmarshalling JSON",err)))
+		return
+	}
 
+	err = h.Service.UpdateUserProfile(person)
+	if err!=nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Error saving review to database:",err)))
+		return
+	}
+
+	w.WriteHeader(http.StatusAccepted)
 }
 
 func (h *handler) FetchMyReview(w http.ResponseWriter, r* http.Request){
+	fmt.Println("Getting my review")
+	vars := mux.Vars(r)
 
+	person_id, err := strconv.Atoi(vars["user_id"])
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("unable to get the user_id: ", err)))
+		return
+	}
+
+	recipe_id, err := strconv.Atoi(vars["recipe_id"])
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("unable to get the user_id: ", err)))
+		return
+	}
+	var review models.Review
+
+	review, err = h.Service.FetchMyReview(person_id, recipe_id)
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Error getting favorites: ",err)))
+		return
+	}
+	data,err := json.Marshal(review)
+
+	w.Write(data)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
 }
 
 func (h *handler) GetUserName(w http.ResponseWriter, r *http.Request){
+	fmt.Println("Getting my review")
+	vars := mux.Vars(r)
 
+	person_id, err := strconv.Atoi(vars["user_id"])
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("unable to get the user_id: ", err)))
+		return
+	}
+
+	var username string
+
+	username, err = h.Service.GetUserName(person_id)
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Error getting favorites: ",err)))
+		return
+	}
+	data,err := json.Marshal(username)
+
+	w.Write(data)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
 }

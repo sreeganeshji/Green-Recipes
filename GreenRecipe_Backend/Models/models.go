@@ -20,12 +20,16 @@ type Recipe struct {
 }
 
 type Review struct{
-	Recipefk int `json:"recipefk"`
-	Stars int `json:"stars"`
-	Body *string `json:"body"`
-	Likes int `json:"likes"`
-	Dislikes int `json:"dislikes"`
-	Images []*string `json:"images"`
+	ID *int `json:"id,omitempty"`
+	Personfk *int `json:"personfk,omitempty"`
+	Recipefk *int `json:"recipefk,omitempty"`
+	Stars int `json:"stars,omitempty"`
+	Body *string `json:"body,omitempty"`
+	Title *string `json:"title,omitempty"`
+	Likes int `json:"likes,omitempty"`
+	Dislikes int `json:"dislikes,omitempty"`
+	Images []*string `json:"images,omitempty"`
+	Created time.Time `json:"created,omitempty"`
 }
 
 type Reply struct{
