@@ -181,8 +181,8 @@ class DataModels:ObservableObject{
     
     var recipies = [Recipe]()
     
-    var networkHandler = NetworkAdapter("http://localhost:5000")
-//    var networkHandler = NetworkAdapter(nil)
+//    var networkHandler = NetworkAdapter("http://localhost:5000")
+    var networkHandler = NetworkAdapter(nil)
     
     var user = User()
     

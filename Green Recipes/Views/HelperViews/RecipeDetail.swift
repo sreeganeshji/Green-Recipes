@@ -23,6 +23,8 @@ struct RecipeDetail: View {
     @EnvironmentObject var data:DataModels
     @State var reviews:[Review] = []
     @State var loading = true
+    @State var average:Double = 0
+    let title:String
     var body: some View {
         if loading {
             Text("Loading...")
@@ -183,7 +185,7 @@ struct RecipeDetail: View {
 //                    ReviewsSummary(user: self.$data.user, recipe: self.$recipe, reviews: self.$reviews).environmentObject(self.data)
 //                }
                 NavigationLink(destination:
-                                ReviewsSummary(user: self.$data.user, recipe: self.$recipe, reviews:self.$reviews, fetchReviews: fetchReviews).environmentObject(self.data))
+                                ReviewsSummary(user: self.$data.user, recipe: self.$recipe, reviews:self.$reviews, average: self.$average, fetchReviews: fetchReviews).environmentObject(self.data))
                 {
                     VStack{
                     Text("Ratings & Reviews")
@@ -199,7 +201,7 @@ struct RecipeDetail: View {
 
 
 //        .navigationBarTitle(Text(self.recipe.name), displayMode: .inline)
-        .navigationTitle(self.recipe.name)
+        .navigationTitle(self.title)
             
         }
     }
@@ -243,11 +245,21 @@ func fetchReviews(){
             return
         }
         self.reviews = reviews
+        updateAverage()
     }
+    
+    func updateAverage(){
+        let total:Double = reviews.reduce(0.0) { (result:Double, review:Review) -> Double in
+            result + Double(review.rating)
+        }
+        let average = total/Double(reviews.count)
+        self.average = average
+    }
+
 }
 
-struct RecipeDetail_Previews: PreviewProvider {
-    static var previews: some View {
-        RecipeDetail(id:1).environmentObject(DataModels())
-    }
-}
+//struct RecipeDetail_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RecipeDetail(id:1).environmentObject(DataModels())
+//    }
+//}

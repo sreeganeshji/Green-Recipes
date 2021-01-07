@@ -311,24 +311,83 @@ func (p *Postgres) FetchReviews(recipe_id int)([]models.Review, error){
 }
 
 func (p *Postgres) FetchMyRecipes(person_id int)([]models.Recipe, error){
+	c, cancel := context.WithTimeout(context.Background(), time.Second * 5)
+	defer cancel()
+	sql := `select id, name, category from recipe where person_id=$1`
 
-	return nil, nil
+	var recipes []models.Recipe
+	row, err := p.db.Query(c, sql, person_id)
+
+	if err!=nil{
+		return nil, err
+	}
+
+	for row.Next(){
+		var recipe models.Recipe
+		err := row.Scan(&recipe)
+		if err!=nil{
+			return nil, err
+		}
+		recipes = append(recipes, recipe)
+	}
+
+	return recipes, nil
 }
 
-func (p *Postgres) UpdateRecipe(recipe models.Recipe)(error){
-
-	return nil
+func (p *Postgres) UpdateRecipe(recipe models.Recipe)(int, error){
+	/*
+	id SERIAL NOT NULL,
+	name VARCHAR(50) NOT NULL,
+	ingredients TEXT[] NOT NULL,
+	description VARCHAR(1000),
+	process TEXT[] NOT NULL,
+	contributor VARCHAR(50),
+	origin VARCHAR(50),
+	servings INT DEFAULT 1,
+	equipment TEXT[],
+	images TEXT[],
+	added_date DATE DEFAULT CURRENT_DATE,
+	added_by INT,
+	nutrition TEXT[],
+	category VARCHAR(50),
+	 */
+	c, cancel := context.WithTimeout(context.Background(), time.Second * 5)
+	defer cancel()
+	sql := `update recipe set name=$1, ingredients=$2, description=$3, origin=$4, equipment=$5, images=$6, category=$7, process=$8, contributor=$9 where id=$10`
+	var recipe_id int
+	err := p.db.QueryRow(c, sql, recipe.Name, recipe.Ingredients, recipe.Description, recipe.Origin, recipe.Equipment, recipe.Images, recipe.Category, recipe.Process, recipe.Contributor, recipe.ID).Scan(&recipe_id)
+	if err!=nil{
+		return 0, err
+	}
+	return recipe_id, nil
 }
 
-func (p *Postgres) UpdateUserProfile(person models.Person)(error){
+func (p *Postgres) UpdateUserProfile(person models.Person)(int, error){
+	c, cancel := context.WithTimeout(context.Background(), time.Second * 5)
+	defer cancel()
 
+	sql := `update person set firstname=$1, lastname=$2, username=$3 where person_id=$4 returning person_id`
 
-	return nil
+	var person_id int
+	err := p.db.QueryRow(c, sql, person.Firstname, person.Lastname, person.Username).Scan(&person_id)
+	if err!=nil{
+		return 0, err
+	}
+
+	return person_id, nil
 }
 
 func (p *Postgres) FetchMyReview(person_id int, recipe_id int)(models.Review, error){
+	c,cancel := context.WithTimeout(context.Background(), time.Second * 5)
+	defer cancel()
+	sql := `select review_id, recipe_id, person_id, title, body, stars, created from review where recipe_id=$1 and person_id=$2`
 
-	return models.Review{}, nil
+	var review models.Review
+	err := p.db.QueryRow(c, sql, recipe_id, person_id).Scan(&review)
+	if err!=nil{
+		return models.Review{}, err
+	}
+	return review, nil
 }
 
 func (p *Postgres) GetUserName(person_id int)(string, error){

@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct ReviewStarSummary: View {
-    @Binding var reviews:[Review]
-    @State var average:Double = 0
+    @Binding var average:Double
     
     var body: some View {
         HStack{
@@ -23,19 +22,11 @@ struct ReviewStarSummary: View {
                     .foregroundColor(.yellow)
 //            }
             Spacer()
-            Text("\(self.reviews.count) ratings").foregroundColor(.secondary)
+//            Text("\(self.reviews.count) ratings").foregroundColor(.secondary)
         }
-            .onAppear(){
-                updateAverage()
-    }
+
 }
-    func updateAverage(){
-        let total:Double = reviews.reduce(0.0) { (result:Double, review:Review) -> Double in
-            result + Double(review.rating)
-        }
-        let average = total/Double(reviews.count)
-        self.average = average
-    }
+
 }
 
 

@@ -55,6 +55,7 @@ struct ReviewDetail: View {
                     {
                         if showMore{
                             Text(review.body!)
+                                .padding(.bottom)
                         }
                         else{
                         Text(review.body![review.body!.startIndex...review.body!.index(review.body!.startIndex, offsetBy: .init(100))])
@@ -67,8 +68,9 @@ struct ReviewDetail: View {
                         }
                     }
                     else{
-                        Text(review.body!)
-                        if(!self.showMore && self.review.title.count > 10){
+                        
+                        if(!self.showMore && self.review.title.count > 20){
+                            Text(review.body!)
                             Button(action:{self.showMore = true}){
                                 HStack{
                                     Spacer()
@@ -76,6 +78,10 @@ struct ReviewDetail: View {
                             }
                         }
                     }
+                        else{
+                            Text(review.body!)
+                                .padding(.bottom)
+                        }
                 }
             }
             }

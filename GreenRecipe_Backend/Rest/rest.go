@@ -305,15 +305,14 @@ func (h *handler) FetchMyRecipes(w http.ResponseWriter, r *http.Request){
 		w.Write([]byte(fmt.Sprint("unable to get the user_id: ", err)))
 		return
 	}
-	var recipe []models.Recipe
 
-	recipe, err = h.Service.FetchMyRecipes(person_id)
+	recipes, err := h.Service.FetchMyRecipes(person_id)
 	if err!=nil{
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(fmt.Sprint("Error getting favorites: ",err)))
 		return
 	}
-	data,err := json.Marshal(recipe)
+	data,err := json.Marshal(recipes)
 
 	w.Write(data)
 	w.Header().Set("Content-Type", "application/json")
@@ -330,13 +329,13 @@ func (h *handler) UpdateRecipe(w http.ResponseWriter, r *http.Request){
 		return
 	}
 
-	err = h.Service.UpdateRecipe(recipe)
+	recipe_id, err := h.Service.UpdateRecipe(recipe)
 	if err!=nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(fmt.Sprint("Error saving review to database:",err)))
 		return
 	}
-
+	w.Write([]byte(fmt.Sprint(recipe_id)))
 	w.WriteHeader(http.StatusAccepted)
 }
 
@@ -350,13 +349,13 @@ func (h *handler) UpdateUserProfile(w http.ResponseWriter, r *http.Request){
 		return
 	}
 
-	err = h.Service.UpdateUserProfile(person)
+	person_id, err := h.Service.UpdateUserProfile(person)
 	if err!=nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(fmt.Sprint("Error saving review to database:",err)))
 		return
 	}
-
+	w.Write([]byte(fmt.Sprint(person_id)))
 	w.WriteHeader(http.StatusAccepted)
 }
 

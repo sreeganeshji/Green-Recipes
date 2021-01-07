@@ -19,7 +19,7 @@ struct FavoritesView: View {
             }), id:\.id){
                 recipe in
                 
-                NavigationLink(destination: RecipeDetail(id: recipe.id).environmentObject(self.data)){
+                NavigationLink(destination: RecipeDetail(id: recipe.id, title: recipe.name).environmentObject(self.data)){
                     HStack{
                 Text(recipe.name)
                         Spacer()

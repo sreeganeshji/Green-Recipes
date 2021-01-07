@@ -53,11 +53,11 @@ func (s *Service) FetchMyRecipes(person_id int)([]models.Recipe, error){
 	return s.Postgres.FetchMyRecipes(person_id)
 }
 
-func (s *Service) UpdateRecipe(recipe models.Recipe)(error){
+func (s *Service) UpdateRecipe(recipe models.Recipe)(int, error){
 	return s.Postgres.UpdateRecipe(recipe)
 }
 
-func (s *Service) UpdateUserProfile(user models.Person)(error){
+func (s *Service) UpdateUserProfile(user models.Person)(int, error){
 	return s.Postgres.UpdateUserProfile(user)
 }
 

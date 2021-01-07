@@ -43,7 +43,7 @@ struct SearchView: View {
 //                        self.sheetRecipeID = recipe.id
 //                        self.sheetPresented = true
 //                    })
-                    NavigationLink(destination:RecipeDetail(id: recipe.id).environmentObject(self.data))
+                    NavigationLink(destination:RecipeDetail(id: recipe.id, title: recipe.name).environmentObject(self.data))
                     {
                         HStack{
                         Text(recipe.name)

@@ -13,13 +13,26 @@ struct ReviewsSummary: View {
     @Binding var reviews:[Review]
     @EnvironmentObject var data:DataModels
     @State var showSheetAddReview:Bool = false
+    @Binding var average:Double
     var fetchReviews:()->()
     
     var body: some View {
 //        ScrollView{
         Form{
 //        VStack{
-            ReviewStarSummary(reviews: self.$reviews)
+            HStack{
+    //            Text("Ratings & Reviews")
+    //                .font(.title)
+    //                .fontWeight(.light)
+    //                .foregroundColor(.blue)
+    //            HStack{
+    //                Text(String(format: "%0.1f out of 5", self.average)).bold()
+                    StarView(stars: average)
+                        .foregroundColor(.yellow)
+    //            }
+                Spacer()
+                Text((self.reviews.count == 1) ? "\(self.reviews.count) rating" : "\(self.reviews.count) ratings").foregroundColor(.secondary)
+            }
             
             Button(action:{self.showSheetAddReview = true})
             {
@@ -58,7 +71,6 @@ struct ReviewsSummary: View {
         })
     }
     
-
 }
 
 //struct ReviewsSummary_Previews: PreviewProvider {
