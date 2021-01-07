@@ -235,7 +235,7 @@ struct RecipeDetail: View {
                 }
                 
                 if (self.uploadedByUsername != ""){
-                NavigationLink(destination:Text("More by this user")){
+                    NavigationLink(destination:MoreByUserView(username: self.uploadedByUsername, userid: self.recipe.addedby!).environmentObject(self.data)){
                 Section{
                     HStack{
                         Text("Added by:")
@@ -269,7 +269,6 @@ struct RecipeDetail: View {
             }
             }
         }
-
 
 //        .navigationBarTitle(Text(self.recipe.name), displayMode: .inline)
         .navigationTitle(self.title)
