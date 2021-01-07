@@ -367,6 +367,7 @@ class NetworkAdapter{
                 print("Couldn't decode error: \(error)")
             }
         }
+        task.resume()
     }
     
     func updateRecipe(recipe: Recipe){

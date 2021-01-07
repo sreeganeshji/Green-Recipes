@@ -181,8 +181,8 @@ class DataModels:ObservableObject{
     
     var recipies = [Recipe]()
     
-//    var networkHandler = NetworkAdapter("http://localhost:5000")
-    var networkHandler = NetworkAdapter(nil)
+    var networkHandler = NetworkAdapter("http://localhost:5000")
+//    var networkHandler = NetworkAdapter(nil)
     
     var user = User()
     
@@ -204,6 +204,18 @@ class DataModels:ObservableObject{
         self.networkHandler.getUserFavorites(userId: self.user.userId, completion: updateFavoritesCache)
     }
     
+    func fetchMyRecipes(userId:Int){
+        func updateMyRecipesCache(myRecipes:[RecipeTemplate1], err:Error?){
+            if err != nil{
+                print("Couldn't update my recipe")
+                return
+            }
+            self.cache.myRecipes = myRecipes
+        }
+        
+        self.networkHandler.fetchMyRecipes(userId: userId, completion: updateMyRecipesCache)
+    }
+    
     func createFavorites(userId:Int, recipe:RecipeTemplate1){
         self.networkHandler.addFavorite(userId: userId, recipeId: recipe.id)
         self.cache.favRecipes.insert(recipe)
@@ -216,6 +228,7 @@ class DataModels:ObservableObject{
     
     func updateCache(){
         fetchFavorites()
+        fetchMyRecipes(userId: self.user.userId)
         cache.timeUpdated = .init()
     }
 }

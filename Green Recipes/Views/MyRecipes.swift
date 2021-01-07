@@ -16,7 +16,7 @@ struct MyRecipes: View {
     @State var navigationTitle:Binding<String>
     
     var body: some View {
-        List{
+        Form{
 //            NavigationLink(destination:AddRecipe().environmentObject(self.data)){
 ////            HStack{
 ////                Text("Add recipe").bold()
@@ -24,11 +24,17 @@ struct MyRecipes: View {
 ////                Image(systemName: "square.and.pencil")
 ////                    .foregroundColor(.blue)
 ////                }
-//                ForEach(self.data.cache.myRecipes, id:\.self){
-//                    recipe in
-//                }
+                ForEach(self.data.cache.myRecipes, id:\.self){
+                    recipe in
+                    NavigationLink(destination:RecipeDetail(id: recipe.id, title: recipe.name).environmentObject(self.data))
+                    {
+                        Text(recipe.name)
+                           
+                        }
+                    }
+                }
 //            }
-        }
+        
         .navigationTitle("My Recipes")
         .navigationBarItems(trailing: NavigationLink(destination:AddRecipe().environmentObject(self.data)){Image(systemName: "square.and.pencil").font(.headline)})
             .sheet(isPresented: self.$showSheet) {

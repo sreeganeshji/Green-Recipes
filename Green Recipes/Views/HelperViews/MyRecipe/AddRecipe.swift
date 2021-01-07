@@ -248,7 +248,6 @@ struct AddRecipe: View {
         self.newProcess = ""
     }
     func addEquipment(){
-        self.showAlert = true
         if self.newEquipment != ""{
             self.recipeNew.equipment!.append(self.newEquipment)
         }
@@ -284,6 +283,9 @@ struct AddRecipe: View {
         
         //validate the fields
         self.data.networkHandler.addRecipe(recipe: self.recipeNew)
+        
+        //add to myrecipes
+        self.data.fetchMyRecipes(userId: self.data.user.userId)
         //complete here
         
         //clear all values

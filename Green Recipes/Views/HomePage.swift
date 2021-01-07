@@ -162,7 +162,7 @@ SignInWithAppleButton(.signIn, onRequest: { request in
         self.data.user = self.userDB
         self.signedIn = true
         
-        //fetch favorites
+        //fetch favorites and my recipes
         self.data.updateCache()
     }
     

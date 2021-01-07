@@ -66,13 +66,12 @@ func (p *Postgres)AddRecipe(recipe models.Recipe) (models.Recipe, error){
 	c, cancel := context.WithTimeout(context.Background(), time.Second*5)
 	defer cancel()
 
-	sql_statement := `INSERT INTO recipe (name, description, ingredients, process, contributor, origin, servings, equipment, images,
-added_date, added_by, nutrition, category) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING id,name, description, ingredients, process, contributor, origin, servings, equipment, images,
+	sql_statement := `INSERT INTO recipe (name, description, ingredients, process, contributor, origin, servings, equipment, images, added_by, nutrition, category) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING id,name, description, ingredients, process, contributor, origin, servings, equipment, images,
 added_date, added_by, nutrition, category`
 
 	var insertedrecipe models.Recipe
 
-	err := p.db.QueryRow(c,sql_statement,recipe.Name, recipe.Description, recipe.Ingredients, recipe.Process, recipe.Contributor, recipe.Origin, recipe.Servings, recipe.Equipment, recipe.Images, recipe.AddedDate, recipe.Addedby,recipe.Nutrition, recipe.Category).Scan(&insertedrecipe.ID, &insertedrecipe.Name, &insertedrecipe.Description, &insertedrecipe.Ingredients, &insertedrecipe.Process, &insertedrecipe.Contributor, &insertedrecipe.Origin, &insertedrecipe.Servings, &insertedrecipe.Equipment, &insertedrecipe.Images, &insertedrecipe.AddedDate, &insertedrecipe.Addedby, &insertedrecipe.Nutrition, &insertedrecipe.Category)
+	err := p.db.QueryRow(c,sql_statement,recipe.Name, recipe.Description, recipe.Ingredients, recipe.Process, recipe.Contributor, recipe.Origin, recipe.Servings, recipe.Equipment, recipe.Images, recipe.Addedby,recipe.Nutrition, recipe.Category).Scan(&insertedrecipe.ID, &insertedrecipe.Name, &insertedrecipe.Description, &insertedrecipe.Ingredients, &insertedrecipe.Process, &insertedrecipe.Contributor, &insertedrecipe.Origin, &insertedrecipe.Servings, &insertedrecipe.Equipment, &insertedrecipe.Images, &insertedrecipe.AddedDate, &insertedrecipe.Addedby, &insertedrecipe.Nutrition, &insertedrecipe.Category)
 
 	//fmt.Println("recipe ingridents",recipe.Ingredients)
 	//	sql_statement := `INSERT INTO recipe (name, description, ingredients, process, contributor) VALUES ($1, $2, $3, $4, $5) RETURNING id,name, description, ingredients, process, contributor, origin, servings, equipment, images,
@@ -313,7 +312,7 @@ func (p *Postgres) FetchReviews(recipe_id int)([]models.Review, error){
 func (p *Postgres) FetchMyRecipes(person_id int)([]models.Recipe, error){
 	c, cancel := context.WithTimeout(context.Background(), time.Second * 5)
 	defer cancel()
-	sql := `select id, name, category from recipe where person_id=$1`
+	sql := `select id, name, category from recipe where added_by=$1`
 
 	var recipes []models.Recipe
 	row, err := p.db.Query(c, sql, person_id)
@@ -324,7 +323,7 @@ func (p *Postgres) FetchMyRecipes(person_id int)([]models.Recipe, error){
 
 	for row.Next(){
 		var recipe models.Recipe
-		err := row.Scan(&recipe)
+		err := row.Scan(&recipe.ID, &recipe.Name, &recipe.Category)
 		if err!=nil{
 			return nil, err
 		}
@@ -335,22 +334,7 @@ func (p *Postgres) FetchMyRecipes(person_id int)([]models.Recipe, error){
 }
 
 func (p *Postgres) UpdateRecipe(recipe models.Recipe)(int, error){
-	/*
-	id SERIAL NOT NULL,
-	name VARCHAR(50) NOT NULL,
-	ingredients TEXT[] NOT NULL,
-	description VARCHAR(1000),
-	process TEXT[] NOT NULL,
-	contributor VARCHAR(50),
-	origin VARCHAR(50),
-	servings INT DEFAULT 1,
-	equipment TEXT[],
-	images TEXT[],
-	added_date DATE DEFAULT CURRENT_DATE,
-	added_by INT,
-	nutrition TEXT[],
-	category VARCHAR(50),
-	 */
+
 	c, cancel := context.WithTimeout(context.Background(), time.Second * 5)
 	defer cancel()
 	sql := `update recipe set name=$1, ingredients=$2, description=$3, origin=$4, equipment=$5, images=$6, category=$7, process=$8, contributor=$9 where id=$10`
