@@ -24,6 +24,7 @@ struct RecipeDetail: View {
     @State var reviews:[Review] = []
     @State var loading = true
     @State var average:Double = 0
+    @State var uploadedByUsername:String = ""
     let title:String
     var body: some View {
         if loading {
@@ -152,13 +153,9 @@ struct RecipeDetail: View {
                                 Spacer()
                             }.padding()
                         }
-        
                     }
-            
-        
+                }
             }
-            }
-
 
                 if (self.recipe.images != nil && self.recipe.images!.count > 0){
                     Section{
@@ -181,6 +178,79 @@ struct RecipeDetail: View {
                         
                     }
                 }
+                if(self.recipe.category != nil || self.recipe.contributor != nil){
+                Section{
+                    if (self.recipe.category != nil){
+                    HStack{
+                    Text("Category:")
+                        .font(.title)
+                        .fontWeight(.light)
+                        .foregroundColor(.blue)
+                        Spacer()
+                        Text(self.recipe.category!)
+                    }
+                    }
+                    if(self.recipe.contributor != nil)
+                    {
+                        HStack{
+                        Text("Contributor:")
+                            .font(.title)
+                            .fontWeight(.light)
+                            .foregroundColor(.blue)
+                            Spacer()
+                            Text(self.recipe.contributor!)
+                        }
+                    }
+                }
+                }
+                
+                //Nutrition
+                    if(self.recipe.nutrition != nil && self.recipe.nutrition!.count > 0 )
+                {
+                Section{
+                HStack {
+                    Spacer()
+                    Text("Nutrition")
+                        .font(.title)
+                        .fontWeight(.light)
+                        .foregroundColor(.blue)
+                    Spacer()
+                }
+
+                        List{
+                            ForEach(Array(zip((1...self.recipe.nutrition!.count),self.recipe.nutrition!)),id:\.0){
+                        item in
+                                HStack{
+                                    Text("\(item.0).")
+                                        .font(.title)
+                                        .fontWeight(.light)
+                                        .foregroundColor(.blue)
+                                    Spacer()
+                                    Text(item.1)
+                                    Spacer()
+                                }.padding()
+                            }
+                        }
+                    }
+                }
+                
+                if (self.uploadedByUsername != ""){
+                NavigationLink(destination:Text("More by this user")){
+                Section{
+                    HStack{
+                        Text("Added by:")
+                            .font(.title)
+                            .fontWeight(.light)
+                            .foregroundColor(.blue)
+                        Spacer()
+                        Text(self.uploadedByUsername)
+                            .lineLimit(1)
+                    }
+                }
+            }
+            }
+                
+                Section{
 //                VStack{
 //                    ReviewsSummary(user: self.$data.user, recipe: self.$recipe, reviews: self.$reviews).environmentObject(self.data)
 //                }
@@ -196,6 +266,7 @@ struct RecipeDetail: View {
 //                        .padding()
                     }
                 }
+            }
             }
         }
 
@@ -232,6 +303,11 @@ func UpdateRecipe(recipe:Recipe){
     self.recipe = recipe
 //    fetchReviews()
     GetImages()
+    
+//fetch username
+if (self.recipe.addedby != nil){
+self.data.networkHandler.getUserName(userId: self.recipe.addedby!, completion: updateUsername)
+}
 }
     
 func fetchReviews(){
@@ -246,6 +322,14 @@ func fetchReviews(){
         }
         self.reviews = reviews
         updateAverage()
+        
+    }
+    
+    func updateUsername(username:String, err:Error?){
+        if err != nil{
+            return
+        }
+        self.uploadedByUsername = username
     }
     
     func updateAverage(){

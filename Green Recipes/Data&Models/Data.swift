@@ -64,6 +64,9 @@ struct RecipeTemplate1:Codable, Hashable{
     var category:String?
 }
 
+//categories 
+let categories = ["Others","Desserts", "Snacks", "Lunch/Dinner", "Drinks", "Soups", "Salads"]
+
 struct Comment:Hashable, Codable{
     var creator:User
     var body:String
@@ -181,8 +184,8 @@ class DataModels:ObservableObject{
     
     var recipies = [Recipe]()
     
-    var networkHandler = NetworkAdapter("http://localhost:5000")
-//    var networkHandler = NetworkAdapter(nil)
+//    var networkHandler = NetworkAdapter("http://localhost:5000")
+    var networkHandler = NetworkAdapter(nil)
     
     var user = User()
     

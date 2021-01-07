@@ -1,28 +1,29 @@
 //
-//  AddRecipe.swift
+//  RecipeEditView.swift
 //  Green Recipes
 //
-//  Created by SreeGaneshji on 10/30/20.
+//  Created by SreeGaneshji Bangalore Chandrashekar on 1/6/21.
 //
 
 import SwiftUI
 
-struct AddRecipe: View {
+struct RecipeEditView: View {
     @EnvironmentObject var data:DataModels
-    @State var recipeNew = Recipe()
+    @State var recipeNew :Recipe
     @State var newIngredient:String = ""
     @State var newProcess:String = ""
     @State var description:String = ""
     @State var newEquipment:String = ""
     @State var newNutrition:String = ""
     @State var origin:String = ""
-    @State var images:[UIImage] = []
+    @State var images:[UIImage]
     @State var showSheetAddImages:Bool = false
     @State var showAlert = false
     @State var alertMessage = ""
     @State var recipeNewCategory = "Others"
     @State var recipeUserCategory = ""
     @State var recipeNewContributor = ""
+    
     
     var body: some View {
 
@@ -320,10 +321,18 @@ struct AddRecipe: View {
 
         .navigationTitle(Text("Add Recipe"))
               
+        .onAppear(){
+
+            description = recipeNew.description ?? ""
+            origin = recipeNew.origin ?? ""
+            recipeNewCategory = recipeNew.category ?? ""
+            recipeNewContributor = recipeNew.contributor ?? ""
+        }
         .onDisappear(){
       
         }
     }
+
     
     func addIngredient(){
         if self.newIngredient != ""{
@@ -416,8 +425,9 @@ struct AddRecipe: View {
     }
 }
 
-struct AddRecipe_Previews: PreviewProvider {
+
+struct RecipeEditView_Previews: PreviewProvider {
     static var previews: some View {
-        AddRecipe().environmentObject(DataModels())
+        RecipeEditView(recipeNew: .init(), images: []).environmentObject(DataModels())
     }
 }
