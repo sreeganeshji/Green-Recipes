@@ -270,11 +270,11 @@ func (p *Postgres) SubmitReview(review models.Review)(int, error){
 	defer cancel()
 	fmt.Println("Submitting to database")
 
-	sql_statement := `INSERT INTO review (title, body, created, stars, images, likes, dislikes, recipe_id, person_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING review_id`
+	sql_statement := `INSERT INTO review (title, body, stars, images, likes, dislikes, recipe_id, person_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING review_id`
 
 	var review_id int
 
-	err := p.db.QueryRow(c,sql_statement, review.Title, review.Body, review.Created, review.Stars, review.Images, review.Likes, review.Dislikes, review.Recipefk, review.Personfk).Scan(&review_id)
+	err := p.db.QueryRow(c,sql_statement, review.Title, review.Body, review.Stars, review.Images, review.Likes, review.Dislikes, review.Recipefk, review.Personfk).Scan(&review_id)
 
 	if (err != nil) {
 		return -1, err

@@ -42,7 +42,7 @@ stars INT NOT NULL DEFAULT 0,
 likes INT DEFAULT 0,
 dislikes INT DEFAULT 0,
 body VARCHAR (1000),
-title VARCHAR (200),
+title VARCHAR (200) NOT NULL,
 images TEXT[],
 created DATE DEFAULT CURRENT_DATE
 );

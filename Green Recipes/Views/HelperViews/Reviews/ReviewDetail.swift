@@ -12,7 +12,19 @@ struct ReviewDetail: View {
     @State var username:String = ""
     @State var showMore:Bool = false
     let LessLetterCount = 30
+    let year :String
+    let month:String
+    let day:String
     var review:Review
+    init(review:Review) {
+        self.review = review
+        let created = review.created!
+        let st = created.startIndex
+        year = String(created[created.index(st, offsetBy:2)...created.index(st, offsetBy: 3)])
+        month = String(created[created.index(st, offsetBy: 5)...created.index(st, offsetBy: 6)])
+        day = String(created[created.index(st, offsetBy: 8)...created.index(st, offsetBy: 9)])
+        
+    }
     var body: some View {
 //        ScrollView{
             VStack{
@@ -25,14 +37,17 @@ struct ReviewDetail: View {
                         .lineLimit(1)
                     }
                     Spacer()
-                    Text(self.review.created ?? "").foregroundColor(.secondary)
+                    Text("\(month)/\(day)/\(year)").foregroundColor(.secondary)
                 }
                 HStack{
                 StarView(stars: Double(review.rating))
                     .foregroundColor(.yellow)
                     Spacer()
                     Text(self.username)
+                        .lineLimit(1)
+                        .foregroundColor(.secondary)
                 }
+                .padding(.bottom)
                 
                 
                 if review.body != nil{

@@ -37,7 +37,7 @@ struct ReviewsSummary: View {
                     
 //                    NavigationLink(destination:ReviewDetail(review: review)){
                         ReviewDetail(review: review).environmentObject(self.data)
-                            .padding()
+//                            .padding()
 //                    }
                     }
                     

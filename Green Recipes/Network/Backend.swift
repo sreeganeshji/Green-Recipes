@@ -441,8 +441,10 @@ class NetworkAdapter{
                 print("Couldn't get username")
                 return completion("", error)
             }
-            let username = String(data: data!, encoding: .utf8)
-            completion(username!, nil)
+            let decoder = JSONDecoder()
+            let username = try! decoder.decode(String.self, from: data!)
+//            let username = String(data: data!, encoding: .utf8)
+            completion(username, nil)
         }
         
         task.resume()

@@ -21,7 +21,7 @@ struct RecipeDetail: View {
     @State var recipe = Recipe()
     @State var images:[UIImage] = []
     @EnvironmentObject var data:DataModels
-    @State var reviews:[Review] = [.init()]
+    @State var reviews:[Review] = []
     @State var loading = true
     var body: some View {
         if loading {
