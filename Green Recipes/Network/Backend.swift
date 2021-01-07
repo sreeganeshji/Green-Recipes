@@ -290,7 +290,7 @@ class NetworkAdapter{
         task.resume()
     }
     
-    func submitReview(review:Review){
+    func submitReview(review:Review, completion:@escaping (Error?)->()){
         var requestURL = baseURL
         requestURL.appendPathComponent("submitreview")
         
@@ -310,9 +310,10 @@ class NetworkAdapter{
             let task = URLSession.shared.dataTask(with: requestObj) { (data:Data?, response:URLResponse?, error:Error?) in
                 if error != nil{
                     print("Session error: \(error)")
-                    
+                    completion(error)
                     return
                 }
+                completion(nil)
             }
             task.resume()
         }
@@ -433,7 +434,7 @@ class NetworkAdapter{
     
     func getUserName(userId:Int, completion:@escaping ((String, Error?)->())){
         var requestURL = baseURL
-        requestURL.appendPathComponent("getusername\(userId)")
+        requestURL.appendPathComponent("getusername/\(userId)")
         
         let task = URLSession.shared.dataTask(with: requestURL) { (data:Data?, response:URLResponse?, error:Error?) in
             if error != nil{

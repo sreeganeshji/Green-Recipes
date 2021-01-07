@@ -16,6 +16,7 @@ struct AddReview: View {
     @EnvironmentObject var data:DataModels
     @State var showAlert = false
     @State var alertMessage = ""
+    var fetchReviews:()->()
     
     var body: some View {
         VStack{
@@ -124,7 +125,11 @@ struct AddReview: View {
         self.review.body = self.reviewBody
         self.review.recipeId = self.recipe.id!
         self.review.userId = self.user.userId
-        self.data.networkHandler.submitReview(review: review)
+        self.data.networkHandler.submitReview(review: review, completion: submitted)
+    }
+    
+    func submitted(err:Error?){
+        fetchReviews()
     }
     
     func fetchMyReview(){

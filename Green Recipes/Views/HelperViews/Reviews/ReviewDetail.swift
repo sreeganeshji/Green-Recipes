@@ -17,14 +17,21 @@ struct ReviewDetail: View {
 //        ScrollView{
             VStack{
                 HStack{
+                    if showMore{
                     Text(self.review.title).bold()
+                    }
+                    else{
+                        Text(self.review.title).bold()
+                        .lineLimit(1)
+                    }
                     Spacer()
                     Text(self.review.created ?? "").foregroundColor(.secondary)
                 }
                 HStack{
                 StarView(stars: Double(review.rating))
                     .foregroundColor(.yellow)
-                    Text(getUserName(userId: self.review.userId))
+                    Spacer()
+                    Text(self.username)
                 }
                 
                 
@@ -40,20 +47,31 @@ struct ReviewDetail: View {
                             HStack{
                                 Spacer()
                             Text("more")
+                                }
                             }
-                            
-                        }
                         }
                     }
-                   
+                    else{
+                        Text(review.body!)
+                        if(!self.showMore && self.review.title.count > 10){
+                            Button(action:{self.showMore = true}){
+                                HStack{
+                                    Spacer()
+                                Text("more")
+                            }
+                        }
+                    }
                 }
+            }
+            }
+            .onAppear(){
+                getUserName(userId: self.review.userId)
             }
 //        }
     }
     
-    func getUserName(userId:Int)->String{
+    func getUserName(userId:Int){
         self.data.networkHandler.getUserName(userId: userId, completion: updateUserName)
-        return "Username"
     }
     
     func updateUserName(username:String, error:Error?){

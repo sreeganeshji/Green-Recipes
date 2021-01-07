@@ -393,22 +393,19 @@ func (h *handler) FetchMyReview(w http.ResponseWriter, r* http.Request){
 }
 
 func (h *handler) GetUserName(w http.ResponseWriter, r *http.Request){
-	fmt.Println("Getting my review")
 	vars := mux.Vars(r)
 
-	person_id, err := strconv.Atoi(vars["user_id"])
+	person_id, err := strconv.Atoi(vars["person_id"])
 	if err!=nil{
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(fmt.Sprint("unable to get the user_id: ", err)))
+		w.Write([]byte(fmt.Sprint("unable to get the person_id: ", err)))
 		return
 	}
 
-	var username string
-
-	username, err = h.Service.GetUserName(person_id)
+	username, err := h.Service.GetUserName(person_id)
 	if err!=nil{
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(fmt.Sprint("Error getting favorites: ",err)))
+		w.Write([]byte(fmt.Sprint("Error getting username: ",err)))
 		return
 	}
 	data,err := json.Marshal(username)

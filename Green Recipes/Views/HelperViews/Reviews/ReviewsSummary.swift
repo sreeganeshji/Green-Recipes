@@ -30,7 +30,7 @@ struct ReviewsSummary: View {
                 }
             }
             
-                ForEach(reviews, id:\.self){
+            ForEach(reviews.reversed(), id:\.self){
                     review in
                     
                     Section{
@@ -51,7 +51,7 @@ struct ReviewsSummary: View {
         .navigationTitle("Ratings & Reviews")
         .sheet(isPresented: self.$showSheetAddReview, content: {
             NavigationView{
-                AddReview(showSheet:self.$showSheetAddReview, user: self.$user, recipe: self.$recipe).environmentObject(self.data)
+                AddReview(showSheet:self.$showSheetAddReview, user: self.$user, recipe: self.$recipe, fetchReviews: fetchReviews).environmentObject(self.data)
                 .padding()
                 .navigationTitle("Write Review")
             }

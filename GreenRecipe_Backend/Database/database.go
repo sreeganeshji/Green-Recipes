@@ -6,24 +6,27 @@ import (
 	"github.com/jackc/pgx/v4"
 	"greenrecipe/Models"
 	"time"
+	"github.com/jackc/pgx/v4/pgxpool"
 )
 
 type Postgres struct{
-	db *pgx.Conn
+	db *pgxpool.Pool
 	timeout int
 }
 
 func Connect(host string, dbname string, username string, password string, timeout int) (Postgres, error) {
 	connStr := fmt.Sprintf("user=%s dbname=%s password=%s  host=%s", username, dbname, password, host)
-	db, err := pgx.Connect(context.Background(),connStr)
+	//db, err := pgx.Connect(context.Background(),connStr)
+	pool, err := pgxpool.Connect(context.Background(), connStr)
+
 	if err != nil{
 		return Postgres{},err
 	}
-	return Postgres{db: db, timeout: timeout}, err
+	return Postgres{db: pool, timeout: timeout}, err
 }
 
 func (p *Postgres) Close() {
-	p.db.Close(context.Background())
+	p.db.Close()
 }
 
 /*
@@ -319,6 +322,7 @@ func (p *Postgres) UpdateRecipe(recipe models.Recipe)(error){
 
 func (p *Postgres) UpdateUserProfile(person models.Person)(error){
 
+
 	return nil
 }
 
@@ -328,6 +332,27 @@ func (p *Postgres) FetchMyReview(person_id int, recipe_id int)(models.Review, er
 }
 
 func (p *Postgres) GetUserName(person_id int)(string, error){
+	c, cancel := context.WithTimeout(context.Background(), time.Second * 5)
+	defer cancel()
 
-	return "", nil
+	sql := `select username from person where user_id=$1`
+
+	var username string
+
+	row, err := p.db.Query(c, sql, person_id)
+	if err!=nil{
+		fmt.Println("Couldn't fetch username: ",err)
+		return "", err
+	}
+
+	defer row.Close()
+
+	for row.Next(){
+		err = row.Scan(&username)
+		if err!=nil{
+			fmt.Println("Couldn't fetch username: ",err)
+			return "", err
+		}
+	}
+	return username, nil
 }
