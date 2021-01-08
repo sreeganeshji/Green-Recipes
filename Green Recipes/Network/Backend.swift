@@ -9,7 +9,6 @@ import Foundation
 
 class NetworkAdapter{
     
-    var baseURL = URL(string: "https://ganeshappbackend.com")!
     
     init(_ base:String?){
         if base != nil{
