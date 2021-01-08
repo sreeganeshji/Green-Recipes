@@ -33,6 +33,9 @@
 		B1A440C6259D2734002A0252 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A440C5259D2734002A0252 /* PhotoPicker.swift */; };
 		B1A440CB259D36F9002A0252 /* AmplifyStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A440CA259D36F9002A0252 /* AmplifyStorageManager.swift */; };
 		B1BF615C25A772600000D2A1 /* MoreByUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BF615B25A772600000D2A1 /* MoreByUserView.swift */; };
+		B1BF616425A77AE40000D2A1 /* ImageFetchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BF616325A77AE40000D2A1 /* ImageFetchView.swift */; };
+		B1BF616925A77C320000D2A1 /* ImageCarousalFetchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BF616825A77C320000D2A1 /* ImageCarousalFetchView.swift */; };
+		B1BF616E25A815F60000D2A1 /* SearchBarUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BF616D25A815F60000D2A1 /* SearchBarUI.swift */; };
 		B1E81DF8259E51F40059EC28 /* ImageCarouselPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E81DF7259E51F40059EC28 /* ImageCarouselPreview.swift */; };
 		B1E81DFD259E55560059EC28 /* ReviewsSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E81DFC259E55560059EC28 /* ReviewsSummary.swift */; };
 		B1E81E02259E55660059EC28 /* ReviewDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E81E01259E55660059EC28 /* ReviewDetail.swift */; };
@@ -104,6 +107,9 @@
 		B1A440C5259D2734002A0252 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
 		B1A440CA259D36F9002A0252 /* AmplifyStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmplifyStorageManager.swift; sourceTree = "<group>"; };
 		B1BF615B25A772600000D2A1 /* MoreByUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreByUserView.swift; sourceTree = "<group>"; };
+		B1BF616325A77AE40000D2A1 /* ImageFetchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetchView.swift; sourceTree = "<group>"; };
+		B1BF616825A77C320000D2A1 /* ImageCarousalFetchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCarousalFetchView.swift; sourceTree = "<group>"; };
+		B1BF616D25A815F60000D2A1 /* SearchBarUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarUI.swift; sourceTree = "<group>"; };
 		B1E81DF7259E51F40059EC28 /* ImageCarouselPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCarouselPreview.swift; sourceTree = "<group>"; };
 		B1E81DFC259E55560059EC28 /* ReviewsSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsSummary.swift; sourceTree = "<group>"; };
 		B1E81E01259E55660059EC28 /* ReviewDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetail.swift; sourceTree = "<group>"; };
@@ -244,6 +250,7 @@
 			children = (
 				1F8438EC254D2E8A004A27A9 /* Data.swift */,
 				B1A440C5259D2734002A0252 /* PhotoPicker.swift */,
+				B1BF616D25A815F60000D2A1 /* SearchBarUI.swift */,
 			);
 			path = "Data&Models";
 			sourceTree = "<group>";
@@ -324,6 +331,8 @@
 			isa = PBXGroup;
 			children = (
 				B163D998259D741100225124 /* ImageCarousel.swift */,
+				B1BF616825A77C320000D2A1 /* ImageCarousalFetchView.swift */,
+				B1BF616325A77AE40000D2A1 /* ImageFetchView.swift */,
 				1F843933254D3E57004A27A9 /* AddRecipe.swift */,
 				B1F0EDF525A6E79900397E94 /* RecipeEditView.swift */,
 				B1E81DF7259E51F40059EC28 /* ImageCarouselPreview.swift */,
@@ -594,6 +603,8 @@
 				1F8438E4254D2DBB004A27A9 /* HomePage.swift in Sources */,
 				B1A440C6259D2734002A0252 /* PhotoPicker.swift in Sources */,
 				B1E81DF8259E51F40059EC28 /* ImageCarouselPreview.swift in Sources */,
+				B1BF616E25A815F60000D2A1 /* SearchBarUI.swift in Sources */,
+				B1BF616425A77AE40000D2A1 /* ImageFetchView.swift in Sources */,
 				1F8438B5254D2D19004A27A9 /* Green_RecipesApp.swift in Sources */,
 				B1BF615C25A772600000D2A1 /* MoreByUserView.swift in Sources */,
 				B16A125925951A5D0027FC4F /* FavoritesView.swift in Sources */,
@@ -601,6 +612,7 @@
 				1F84394A254DF70A004A27A9 /* recipeThumb1.swift in Sources */,
 				1F8438ED254D2E8A004A27A9 /* Data.swift in Sources */,
 				B1A440CB259D36F9002A0252 /* AmplifyStorageManager.swift in Sources */,
+				B1BF616925A77C320000D2A1 /* ImageCarousalFetchView.swift in Sources */,
 				B1F0D60125904DC600BD36EF /* SearchView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

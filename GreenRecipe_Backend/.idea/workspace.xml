@@ -20,7 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0b39fbb6-cc4e-4b59-be15-8e3c7ca69ebc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Green Recipes/Network/Backend.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Network/Backend.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Green Recipes/Data&amp;Models/SearchBarUI.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/MyRecipe/ImageCarousalFetchView.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/MyRecipe/ImageFetchView.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Green Recipes.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes.xcodeproj/project.pbxproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

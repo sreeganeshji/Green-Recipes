@@ -17,24 +17,25 @@ struct SearchView: View {
     @State var sheetRecipeID = 0
     var body: some View {
         
-        VStack{
+        List{
           
-            HStack{
-                Button(action: searchQuery){
-                Image(systemName: "magnifyingglass")
-                }
-
-                TextField("Search recipes", text: $text)
-
-                Button(action:clearSearchField){
-                Image(systemName: "xmark.circle.fill")
-                }
-
-            }.padding()
+//            HStack{
+//                Button(action: searchQuery){
+//                Image(systemName: "magnifyingglass")
+//                }
+//
+//                TextField("Search recipes", text: $text)
+//
+//                Button(action:clearSearchField){
+//                Image(systemName: "xmark.circle.fill")
+//                }
+//
+//            }.padding()
             
-            
+            SearchBarUI(text:$text, completion: searchQuery)
+                
         
-            Form{
+//            Form{
                 ForEach(self.recipes, id:\.self){
                     recipe in
                     
@@ -68,10 +69,13 @@ struct SearchView: View {
                     }
 //                    .listRowInsets(EdgeInsets())
                 }
-            }
+//            }
             
         }
-        .navigationBarHidden(true)
+//        .navigationBarHidden(true)
+        
+        .navigationTitle("Search Recipes")
+        
         
 //        .sheet(isPresented: self.$sheetPresented, content: {
 //            RecipeDetail(id: self.sheetRecipeID)
