@@ -16,6 +16,7 @@ struct AddReview: View {
     @EnvironmentObject var data:DataModels
     @State var showAlert = false
     @State var alertMessage = ""
+    @State var reviewExists = false
     var fetchReviews:()->()
     
     var body: some View {
@@ -94,11 +95,37 @@ struct AddReview: View {
         .alert(isPresented: self.$showAlert, content: {
             .init(title: Text("Could not submit"), message: Text(alertMessage))
         })
-        .navigationBarItems(trailing:
+
+        .navigationBarItems(leading: VStack{
+            if(self.reviewExists)
+            {
+                Button(action:{
+                    validateFields()
+                    self.data.networkHandler.deleteMyReview(reviewId: self.review.Id!, completion: fetchReviews)
+                })
+                {
+                    Image(systemName: "trash")
+                        .font(.headline)
+                }
+            }
+        }, trailing:
+                                VStack{
+            if(self.reviewExists)
+        {
+                Button(action:{
+                        validateFields()
+                        self.data.networkHandler.updateMyReview(review: self.review, completion: fetchReviews)}){
+                Text("Update")
+                    .font(.headline)
+            }
+            }
+        else{
         Button(action:{submitReview()}){
             Text("Send")
                 .font(.headline)
-        })
+        }
+            }
+                                })
         
         .onAppear(){
             fetchMyReview()
@@ -109,7 +136,8 @@ struct AddReview: View {
         self.review.rating = rating
     }
     
-    func submitReview(){
+    
+    func validateFields(){
         if (self.reviewBody.count > 1000){
             alertMessage = "The body exceeds 1000 caracters."
             showAlert = true
@@ -121,10 +149,21 @@ struct AddReview: View {
             return
         }
         
+        if (self.review.title.isEmpty)
+        {
+            alertMessage = "Title is empty"
+            showAlert = true
+            return
+        }
+        
         self.showSheet = false
         self.review.body = self.reviewBody
         self.review.recipeId = self.recipe.id!
         self.review.userId = self.user.userId
+    }
+    
+    func submitReview(){
+        validateFields()
         self.data.networkHandler.submitReview(review: review, completion: submitted)
     }
     
@@ -133,15 +172,20 @@ struct AddReview: View {
     }
     
     func fetchMyReview(){
-//        self.data.networkHandler.
+        self.data.networkHandler.fetchMyReview(recipe_id: self.recipe.id!, userId: self.user.userId, completion: updateReview)
     }
     
     func updateReview(review:Review, error:Error?){
         if error != nil{
-            print("Couldn't submit review")
+            print("Couldn't receive review")
             return
         }
         self.review = review
+        self.reviewBody = review.body ?? ""
+        if self.review.Id != nil{
+            //review exists
+            self.reviewExists = true
+        }
     }
 }
 

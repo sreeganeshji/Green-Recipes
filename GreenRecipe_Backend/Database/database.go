@@ -367,11 +367,26 @@ func (p *Postgres) FetchMyReview(person_id int, recipe_id int)(models.Review, er
 	sql := `select review_id, recipe_id, person_id, title, body, stars, created from review where recipe_id=$1 and person_id=$2`
 
 	var review models.Review
-	err := p.db.QueryRow(c, sql, recipe_id, person_id).Scan(&review)
+	err := p.db.QueryRow(c, sql, recipe_id, person_id).Scan(&review.ID, &review.Recipefk, &review.Personfk, &review.Title, &review.Body, &review.Stars, &review.Created)
 	if err!=nil{
 		return models.Review{}, err
 	}
 	return review, nil
+}
+
+func (p *Postgres) UpdateMyReview(review models.Review)(int, error){
+	c, cancel := context.WithTimeout(context.Background(), time.Second * 5)
+	defer cancel()
+
+	sql := `update review set title=$1, body=$2, stars=$3 where review_id=$4 returning review_id`
+
+	var review_id int
+	err := p.db.QueryRow(c, sql, review.Title, review.Body, review.Stars, review.ID).Scan(&review_id)
+	if err!=nil{
+		return 0, err
+	}
+
+	return review_id, nil
 }
 
 func (p *Postgres) GetUserName(person_id int)(string, error){
@@ -398,4 +413,18 @@ func (p *Postgres) GetUserName(person_id int)(string, error){
 		}
 	}
 	return username, nil
+}
+
+func (p *Postgres) DeleteMyReview(review_id int)(error){
+	c, cancel := context.WithTimeout(context.Background(), time.Second * 5)
+	defer cancel()
+
+	sql := `delete from review where review_id=$1`
+
+	err := p.db.QueryRow(c, sql, review_id).Scan()
+	if err!=nil{
+		return err
+	}
+
+	return nil
 }

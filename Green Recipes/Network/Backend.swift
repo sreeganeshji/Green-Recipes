@@ -330,7 +330,7 @@ class NetworkAdapter{
         let task = URLSession.shared.dataTask(with: requestURL) { (data:Data?, response:URLResponse?, error:Error?) in
             if error != nil{
                 print("error is: \(error)")
-                completion(.init(), error)
+                completion([], error)
                 return
             }
             let decoder = JSONDecoder()
@@ -341,7 +341,7 @@ class NetworkAdapter{
             }
             catch{
                 print("Couldn't decode recived reviews: \(error)")
-                completion(.init(), error)
+                completion([], error)
                 return
             }
         }
@@ -409,9 +409,9 @@ class NetworkAdapter{
         task.resume()
     }
     
-    func fetchMyReview(review_id:Int,userId:Int, completion:@escaping (Review,Error?)->()){
+    func fetchMyReview(recipe_id:Int,userId:Int, completion:@escaping (Review,Error?)->()){
         var requestURL = baseURL
-        requestURL.appendPathComponent("fetchmyreview/\(review_id)/\(userId)")
+        requestURL.appendPathComponent("fetchmyreview/\(recipe_id)/\(userId)")
         
         let task = URLSession.shared.dataTask(with: requestURL) { (data:Data?, response:URLResponse?, error:Error?) in
             if error != nil{
@@ -449,6 +449,42 @@ class NetworkAdapter{
             completion(username, nil)
         }
         
+        task.resume()
+    }
+    
+    func updateMyReview(review:Review, completion:@escaping ()->()){
+        var addRecipeURL = baseURL
+        addRecipeURL.appendPathComponent("updatemyreview")
+        var addRecipeRequest = URLRequest(url: addRecipeURL)
+        
+        addRecipeRequest.httpMethod = "PUT"
+        addRecipeRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let encoder = JSONEncoder()
+        let data = try! encoder.encode(review)
+        print(String(data: data,encoding: .utf8)!)
+        addRecipeRequest.httpBody = data
+        let task = URLSession.shared.dataTask(with: addRecipeRequest) { (data:Data?, response:URLResponse?, error:Error?) in
+            print(String(data: data ?? Data(), encoding: .utf8)!)
+            print("Response",response ?? "")
+            print("Error",error ?? "")
+            completion()
+        }
+        task.resume()
+    }
+    
+    func deleteMyReview(reviewId:Int, completion: @escaping ()->()){
+        var requestURL = baseURL
+        requestURL.appendPathComponent("deletemyreview/\(reviewId)")
+        var deleteMyReviewRequest = URLRequest(url: requestURL)
+        deleteMyReviewRequest.httpMethod = "DELETE"
+        
+        let task = URLSession.shared.dataTask(with: deleteMyReviewRequest) {     (data:Data?, response:URLResponse?, error:Error?) in
+            if error != nil{
+                print("Couldn't delete my review")
+                
+            }
+            completion()
+        }
         task.resume()
     }
 }

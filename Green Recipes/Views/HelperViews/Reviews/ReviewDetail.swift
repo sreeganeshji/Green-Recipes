@@ -39,6 +39,7 @@ struct ReviewDetail: View {
                     Spacer()
                     Text("\(month)/\(day)/\(year)").foregroundColor(.secondary)
                 }
+                .padding(.top)
                 HStack{
                 StarView(stars: Double(review.rating))
                     .foregroundColor(.yellow)

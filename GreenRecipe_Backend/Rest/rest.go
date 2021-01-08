@@ -31,8 +31,10 @@ func Initalizer(service service.Service) (*mux.Router){
 	r.HandleFunc("/fetchmyrecipes/{person_id}",handler.FetchMyRecipes).Methods(http.MethodGet)
 	r.HandleFunc("/updaterecipe",handler.UpdateRecipe).Methods(http.MethodPut)
 	r.HandleFunc("/updateuserprofile",handler.UpdateUserProfile).Methods(http.MethodPut)
-	r.HandleFunc("/fetchmyreview/{review_id}/{person_id}", handler.FetchMyReview).Methods(http.MethodGet)
+	r.HandleFunc("/fetchmyreview/{recipe_id}/{person_id}", handler.FetchMyReview).Methods(http.MethodGet)
 	r.HandleFunc("/getusername/{person_id}",handler.GetUserName).Methods(http.MethodGet)
+	r.HandleFunc("/updatemyreview",handler.UpdateMyReview).Methods(http.MethodPut)
+	r.HandleFunc("/deletemyreview/{review_id}",handler.DeleteMyReview).Methods(http.MethodDelete)
 	return r
 }
 
@@ -363,7 +365,7 @@ func (h *handler) FetchMyReview(w http.ResponseWriter, r* http.Request){
 	fmt.Println("Getting my review")
 	vars := mux.Vars(r)
 
-	person_id, err := strconv.Atoi(vars["user_id"])
+	person_id, err := strconv.Atoi(vars["person_id"])
 	if err!=nil{
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(fmt.Sprint("unable to get the user_id: ", err)))
@@ -411,5 +413,45 @@ func (h *handler) GetUserName(w http.ResponseWriter, r *http.Request){
 
 	w.Write(data)
 	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+}
+
+func (h *handler) UpdateMyReview(w http.ResponseWriter, r *http.Request){
+	decoder := json.NewDecoder(r.Body)
+	var review models.Review
+	err := decoder.Decode(&review)
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Error unmarshalling JSON",err)))
+		return
+	}
+
+	review_id, err := h.Service.UpdateMyReview(review)
+	if err!=nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Error saving review to database:",err)))
+		return
+	}
+	w.Write([]byte(fmt.Sprint(review_id)))
+	w.WriteHeader(http.StatusAccepted)
+}
+
+func (h *handler) DeleteMyReview(w http.ResponseWriter, r *http.Request){
+	vars := mux.Vars(r)
+
+	review_id, err := strconv.Atoi(vars["review_id"])
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("unable to get the person_id: ", err)))
+		return
+	}
+
+	err = h.Service.DeleteMyReview(review_id)
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Error getting username: ",err)))
+		return
+	}
+
 	w.WriteHeader(http.StatusOK)
 }

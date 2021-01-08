@@ -20,10 +20,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0b39fbb6-cc4e-4b59-be15-8e3c7ca69ebc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Green Recipes/Data&amp;Models/SearchBarUI.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/MyRecipe/ImageCarousalFetchView.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/MyRecipe/ImageFetchView.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Green Recipes.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Green Recipes/Data&amp;Models/Data.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Data&amp;Models/Data.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Green Recipes/Network/Backend.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Network/Backend.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/Reviews/AddReview.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/Reviews/AddReview.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/Reviews/ReviewDetail.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/Reviews/ReviewDetail.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Green Recipes/Views/HomePage.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Views/HomePage.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Green Recipes/Views/MyRecipes.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Views/MyRecipes.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/database.go" beforeDir="false" afterPath="$PROJECT_DIR$/Database/database.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rest/rest.go" beforeDir="false" afterPath="$PROJECT_DIR$/Rest/rest.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Service/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/Service/service.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

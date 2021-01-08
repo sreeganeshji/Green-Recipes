@@ -32,10 +32,10 @@ struct HomePage: View {
         if(self.signedIn){
 //            NavigationView{
         TabView(selection: $tabSelect) {
-            Text("Explore").tabItem { HStack{
-                Image(systemName: "sparkles")
-                Text("Explore")
-            } }.tag(tabViews.explore)
+//            Text("Explore").tabItem { HStack{
+//                Image(systemName: "sparkles")
+//                Text("Explore")
+//            } }.tag(tabViews.explore)
             
             NavigationView{
                 SearchView().environmentObject(self.data)
@@ -51,9 +51,9 @@ struct HomePage: View {
                 Image(systemName: "star.fill")
                 Text("Favorites")} }.tag(tabViews.favorites)
             
-            NavigationView{
+
             MyRecipes(navigationTitle: self.$navigationTitle).environmentObject(data)
-        }
+        
                 .tabItem {
                 HStack{
                 Image(systemName: "tray.fill")

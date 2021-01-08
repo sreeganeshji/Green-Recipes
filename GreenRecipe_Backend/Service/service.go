@@ -68,3 +68,11 @@ func (s *Service) FetchMyReview(person_id int, recipe_id int)(models.Review, err
 func (s *Service) GetUserName(person_id int)(string, error){
 	return s.Postgres.GetUserName(person_id)
 }
+
+func (s *Service) UpdateMyReview(review models.Review)(int, error){
+	return s.Postgres.UpdateMyReview(review)
+}
+
+func (s *Service) DeleteMyReview(review_id int)(error){
+	return s.Postgres.DeleteMyReview(review_id)
+}

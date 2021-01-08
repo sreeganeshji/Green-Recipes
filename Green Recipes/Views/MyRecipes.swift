@@ -16,6 +16,7 @@ struct MyRecipes: View {
     @State var navigationTitle:Binding<String>
     
     var body: some View {
+        NavigationView{
         Form{
 //            NavigationLink(destination:AddRecipe().environmentObject(self.data)){
 ////            HStack{
@@ -28,18 +29,22 @@ struct MyRecipes: View {
                     recipe in
                     NavigationLink(destination:RecipeDetail(id: recipe.id, title: recipe.name).environmentObject(self.data))
                     {
+                        
                         Text(recipe.name)
-                           
+ 
                         }
                     }
                 }
 //            }
         
+//
         .navigationTitle("My Recipes")
         .navigationBarItems(trailing: NavigationLink(destination:AddRecipe().environmentObject(self.data)){Image(systemName: "square.and.pencil").font(.headline)})
             .sheet(isPresented: self.$showSheet) {
                 AddRecipe().environmentObject(self.data)
             }
+        }
+        
         .onAppear(){
 //            self.navigationTitle.wrappedValue = "My Recipes"
         }
