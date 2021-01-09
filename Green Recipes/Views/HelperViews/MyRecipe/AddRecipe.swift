@@ -16,7 +16,7 @@ struct AddRecipe: View {
     @State var newEquipment:String = ""
     @State var newNutrition:String = ""
     @State var origin:String = ""
-    @State var images:[UIImage] = []
+    @State var images:[ImageContainer] = []
     @State var showSheetAddImages:Bool = false
     @State var showAlert = false
     @State var alertMessage = ""
@@ -366,13 +366,13 @@ struct AddRecipe: View {
         //upload images
         for i in 0...(self.images.count-1){
             //generate a key
-            let key = self.getImageName()
+//            let key = self.getImageName()
             
             //upload to aws S3
-            self.data.photoStore.uploadData(key: key, data: images[i].pngData()!)
+            self.data.photoStore.uploadData(key: images[i].name, data: images[i].image.pngData()!)
             
             //add to the new recipe
-            recipeNew.images?.append(key)
+            recipeNew.images?.append(images[i].name)
             
         }
         
@@ -402,18 +402,7 @@ struct AddRecipe: View {
         
     }
     
-    //GenerateRandomString
-    func getImageName()->String{
-        let base = self.data.user.appleId
-        
-        //generate random string
-        let length = 8
-        let letters = "abcdefghijklmnopqrstuvwzyxABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        let randomString = String((0...length).map { _ in
-                                    letters.randomElement()!})
-        let name = base + randomString
-        return name
-    }
+
 }
 
 struct AddRecipe_Previews: PreviewProvider {

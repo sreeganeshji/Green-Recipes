@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 
 struct Recipe: Hashable, Equatable, Codable{
@@ -111,6 +112,11 @@ struct User:Hashable, Equatable, Codable{
         case email = "email"
         case profilePic = "profilepic"
     }
+}
+
+struct ImageContainer:Hashable{
+    var name:String
+    var image:UIImage
 }
 
 struct Ratings:Hashable, Codable{

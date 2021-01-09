@@ -19,7 +19,7 @@ struct RecipeDetail: View {
     var id :Int
 //    @StateObject var recipe = ObservedRecipe(recipe: Recipe())
     @State var recipe = Recipe()
-    @State var images:[UIImage] = []
+    @State var images:[ImageContainer] = []
     @EnvironmentObject var data:DataModels
     @State var reviews:[Review] = []
     @State var loading = true
@@ -292,8 +292,8 @@ func GetImages(){
     }
 }
     
-    func UpdateImages(image:Data){
-        self.images.append(UIImage(data: image)!)
+    func UpdateImages(name:String, image:Data){
+        self.images.append(.init(name:name, image:UIImage(data: image)!))
         GetImages()
     }
 

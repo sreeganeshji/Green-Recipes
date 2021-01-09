@@ -16,7 +16,7 @@ struct RecipeEditView: View {
     @State var newEquipment:String = ""
     @State var newNutrition:String = ""
     @State var origin:String = ""
-    @State var images:[UIImage]
+    @State var images:[ImageContainer]
     @State var showSheetAddImages:Bool = false
     @State var showAlert = false
     @State var alertMessage = ""
@@ -378,7 +378,7 @@ struct RecipeEditView: View {
             let key = self.getImageName()
             
             //upload to aws S3
-            self.data.photoStore.uploadData(key: key, data: images[i].pngData()!)
+            self.data.photoStore.uploadData(key: key, data: images[i].image.pngData()!)
             
             //add to the new recipe
             recipeNew.images?.append(key)

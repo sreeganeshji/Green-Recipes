@@ -12,7 +12,7 @@ import PhotosUI
 
 struct PhotoPicker:UIViewControllerRepresentable{
     @Binding var showSheet:Bool
-    @Binding var images:[UIImage]
+    @Binding var images:[ImageContainer]
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
         
     }
@@ -34,6 +34,22 @@ struct PhotoPicker:UIViewControllerRepresentable{
     
     class Coordinator:PHPickerViewControllerDelegate{
         func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+            
+            //GenerateRandomString
+            func getImageName()->String{
+        //        let base = self.data.user.appleId
+                
+                //generate random string
+                let length = 8
+                let letters = "abcdefghijklmnopqrstuvwzyxABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                let randomString = String((0...length).map { _ in
+                                            letters.randomElement()!})
+        //        let name = base + randomString
+                let name = randomString
+                return name
+            }
+            
+            
             parent.showSheet = false
             for image in results{
                 if image.itemProvider.canLoadObject(ofClass: UIImage.self){
@@ -52,7 +68,7 @@ struct PhotoPicker:UIViewControllerRepresentable{
                                 let thumbnail = UIImage(cgImage: imageFromCG)
                                 
                             
-                            self.parent.images.append(thumbnail)
+                                self.parent.images.append(.init(name: getImageName(), image: thumbnail))
                             }
                         }
                     }
@@ -72,5 +88,7 @@ struct PhotoPicker:UIViewControllerRepresentable{
        
         
     }
+    
+
 }
 

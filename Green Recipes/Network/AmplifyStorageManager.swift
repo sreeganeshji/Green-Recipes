@@ -32,7 +32,7 @@ class AmplifyStorage{
         })
     }
     
-    func downloadData(key:String, completion:@escaping (Data)->()) {
+    func downloadData(key:String, completion:@escaping (String,Data)->()) {
         let storageOperation = Amplify.Storage.downloadData(key: key)
         progressSink = storageOperation.progressPublisher.sink { (progress:Progress) in
             print("Progress is \(progress)")
@@ -43,8 +43,7 @@ class AmplifyStorage{
             }
         } receiveValue: {
             (data:Data) in
-            print("Data is \(data)")
-            completion(data)
+            completion(key,data)
         }
 
     }

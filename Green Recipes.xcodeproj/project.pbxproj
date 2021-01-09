@@ -36,6 +36,8 @@
 		B1BF616425A77AE40000D2A1 /* ImageFetchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BF616325A77AE40000D2A1 /* ImageFetchView.swift */; };
 		B1BF616925A77C320000D2A1 /* ImageCarousalFetchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BF616825A77C320000D2A1 /* ImageCarousalFetchView.swift */; };
 		B1BF616E25A815F60000D2A1 /* SearchBarUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BF616D25A815F60000D2A1 /* SearchBarUI.swift */; };
+		B1BF617625A8F5680000D2A1 /* MyRecipeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BF617525A8F5680000D2A1 /* MyRecipeDetail.swift */; };
+		B1BF617B25A9857F0000D2A1 /* RecipeObjectDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BF617A25A9857F0000D2A1 /* RecipeObjectDetail.swift */; };
 		B1E81DF8259E51F40059EC28 /* ImageCarouselPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E81DF7259E51F40059EC28 /* ImageCarouselPreview.swift */; };
 		B1E81DFD259E55560059EC28 /* ReviewsSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E81DFC259E55560059EC28 /* ReviewsSummary.swift */; };
 		B1E81E02259E55660059EC28 /* ReviewDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E81E01259E55660059EC28 /* ReviewDetail.swift */; };
@@ -110,6 +112,8 @@
 		B1BF616325A77AE40000D2A1 /* ImageFetchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetchView.swift; sourceTree = "<group>"; };
 		B1BF616825A77C320000D2A1 /* ImageCarousalFetchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCarousalFetchView.swift; sourceTree = "<group>"; };
 		B1BF616D25A815F60000D2A1 /* SearchBarUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarUI.swift; sourceTree = "<group>"; };
+		B1BF617525A8F5680000D2A1 /* MyRecipeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipeDetail.swift; sourceTree = "<group>"; };
+		B1BF617A25A9857F0000D2A1 /* RecipeObjectDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeObjectDetail.swift; sourceTree = "<group>"; };
 		B1E81DF7259E51F40059EC28 /* ImageCarouselPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCarouselPreview.swift; sourceTree = "<group>"; };
 		B1E81DFC259E55560059EC28 /* ReviewsSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsSummary.swift; sourceTree = "<group>"; };
 		B1E81E01259E55660059EC28 /* ReviewDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetail.swift; sourceTree = "<group>"; };
@@ -336,7 +340,9 @@
 				1F843933254D3E57004A27A9 /* AddRecipe.swift */,
 				B1F0EDF525A6E79900397E94 /* RecipeEditView.swift */,
 				B1E81DF7259E51F40059EC28 /* ImageCarouselPreview.swift */,
+				B1BF617A25A9857F0000D2A1 /* RecipeObjectDetail.swift */,
 				B1BF615B25A772600000D2A1 /* MoreByUserView.swift */,
+				B1BF617525A8F5680000D2A1 /* MyRecipeDetail.swift */,
 			);
 			path = MyRecipe;
 			sourceTree = "<group>";
@@ -599,6 +605,7 @@
 				B1E81E2E25A2669B0059EC28 /* ProfileDetailForm.swift in Sources */,
 				B1E81E14259E89D70059EC28 /* ReviewStarSummary.swift in Sources */,
 				B1E81E19259E8F460059EC28 /* ReviewShort.swift in Sources */,
+				B1BF617625A8F5680000D2A1 /* MyRecipeDetail.swift in Sources */,
 				B16A1254259271DB0027FC4F /* VerifyCredentials.swift in Sources */,
 				1F8438E4254D2DBB004A27A9 /* HomePage.swift in Sources */,
 				B1A440C6259D2734002A0252 /* PhotoPicker.swift in Sources */,
@@ -612,6 +619,7 @@
 				1F84394A254DF70A004A27A9 /* recipeThumb1.swift in Sources */,
 				1F8438ED254D2E8A004A27A9 /* Data.swift in Sources */,
 				B1A440CB259D36F9002A0252 /* AmplifyStorageManager.swift in Sources */,
+				B1BF617B25A9857F0000D2A1 /* RecipeObjectDetail.swift in Sources */,
 				B1BF616925A77C320000D2A1 /* ImageCarousalFetchView.swift in Sources */,
 				B1F0D60125904DC600BD36EF /* SearchView.swift in Sources */,
 			);

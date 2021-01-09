@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ImageCarouselPreview: View {
-    @Binding var images:[UIImage]
+    @Binding var images:[ImageContainer]
     var body: some View {
         ScrollView(.horizontal){
 
@@ -17,7 +17,7 @@ struct ImageCarouselPreview: View {
                 ForEach(self.images,id:\.self){
                     image in
                     
-                    Image(uiImage: image)
+                    Image(uiImage: image.image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(maxHeight:300)
@@ -32,9 +32,9 @@ struct ImageCarouselPreview: View {
     }
 }
 
-struct ImageCarouselPreview_Previews: PreviewProvider {
-    static var previews: some View {
-        ImageCarouselPreview(images:.constant([UIImage(systemName: "plus.circle")!, UIImage(systemName: "plus.minus")!,UIImage(systemName: "plus.circle")!, UIImage(systemName: "plus.minus")!,UIImage(systemName: "plus.circle")!, UIImage(systemName: "plus.minus")!]))
-//        ImageCarousel()
-    }
-}
+//struct ImageCarouselPreview_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ImageCarouselPreview(images:.constant([UIImage(systemName: "plus.circle")!, UIImage(systemName: "plus.minus")!,UIImage(systemName: "plus.circle")!, UIImage(systemName: "plus.minus")!,UIImage(systemName: "plus.circle")!, UIImage(systemName: "plus.minus")!]))
+////        ImageCarousel()
+//    }
+//}
