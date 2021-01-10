@@ -14,6 +14,7 @@ struct MyRecipes: View {
     @State var showSheet = false
     @EnvironmentObject var data: DataModels
     @State var navigationTitle:Binding<String>
+    @State var myRecipes:[RecipeTemplate1] = []
     
     var body: some View {
         NavigationView{
@@ -25,9 +26,9 @@ struct MyRecipes: View {
 ////                Image(systemName: "square.and.pencil")
 ////                    .foregroundColor(.blue)
 ////                }
-                ForEach(self.data.cache.myRecipes, id:\.self){
+                ForEach(myRecipes, id:\.self){
                     recipe in
-                    NavigationLink(destination:RecipeDetail(id: recipe.id, title: recipe.name).environmentObject(self.data))
+                    NavigationLink(destination:MyRecipeDetail(recipeSummary:recipe).environmentObject(self.data))
                     {
                         
                         Text(recipe.name)
@@ -39,7 +40,11 @@ struct MyRecipes: View {
         
 //
         .navigationTitle("My Recipes")
-        .navigationBarItems(trailing: NavigationLink(destination:AddRecipe().environmentObject(self.data)){Image(systemName: "square.and.pencil").font(.headline)})
+        .navigationBarItems(trailing: NavigationLink(destination:AddRecipe().environmentObject(self.data)
+            .onDisappear(){
+                fetchMyRecipes()
+            }
+        ){Image(systemName: "square.and.pencil").font(.headline)})
             .sheet(isPresented: self.$showSheet) {
                 AddRecipe().environmentObject(self.data)
             }
@@ -47,7 +52,20 @@ struct MyRecipes: View {
         
         .onAppear(){
 //            self.navigationTitle.wrappedValue = "My Recipes"
+                fetchMyRecipes()
         }
+    }
+    
+    func fetchMyRecipes(){
+        self.data.networkHandler.fetchMyRecipes(userId: self.data.user.userId, completion: updateMyRecipes)
+    }
+    
+    func updateMyRecipes(recipes:[RecipeTemplate1], err:Error?){
+        if err != nil{
+            print("Error fetching my recipes \(err!)")
+            return
+        }
+        self.myRecipes = recipes
     }
 }
 

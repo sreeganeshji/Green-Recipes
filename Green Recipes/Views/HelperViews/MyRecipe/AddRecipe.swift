@@ -20,6 +20,7 @@ struct AddRecipe: View {
     @State var showSheetAddImages:Bool = false
     @State var showAlert = false
     @State var alertMessage = ""
+    @State var alertTitle = "Cannot Submit"
     @State var recipeNewCategory = "Others"
     @State var recipeUserCategory = ""
     @State var recipeNewContributor = ""
@@ -309,16 +310,18 @@ struct AddRecipe: View {
                     }
                 }
             }
-            .alert(isPresented: self.$showAlert, content: {
-                Alert(title: Text("Cannot Submit"), message: Text(self.alertMessage))
-            })
+
         }
- 
+        .alert(isPresented: self.$showAlert, content: {
+            Alert(title: Text(self.alertTitle), message: Text(self.alertMessage))
+        })
+
         .sheet(isPresented: self.$showSheetAddImages, content: {
             PhotoPicker(showSheet: self.$showSheetAddImages, images: self.$images)
         })
 
         .navigationTitle(Text("Add Recipe"))
+        .navigationBarItems(trailing: EditButton())
               
         .onDisappear(){
       
@@ -350,9 +353,11 @@ struct AddRecipe: View {
         self.newNutrition = ""
     }
     func submitRecipe(){
+        
         //ensure ingredients and process are entered
         if (self.recipeNew.ingredients.count == 0 ) || (self.recipeNew.process.count == 0) || (self.recipeNew.name == ""){
             //show alert
+            self.alertTitle = "Cannot Submit"
             self.alertMessage = "Please add Name, Ingredients and Process."
             self.showAlert = true
             return
@@ -364,15 +369,15 @@ struct AddRecipe: View {
         self.recipeNew.addedby = self.data.user.userId
         
         //upload images
-        for i in 0...(self.images.count-1){
+        for image in self.images{
             //generate a key
 //            let key = self.getImageName()
             
             //upload to aws S3
-            self.data.photoStore.uploadData(key: images[i].name, data: images[i].image.pngData()!)
+            self.data.photoStore.uploadData(key: image.name, data: image.image.pngData()!)
             
             //add to the new recipe
-            recipeNew.images?.append(images[i].name)
+            recipeNew.images?.append(image.name)
             
         }
         
@@ -381,7 +386,7 @@ struct AddRecipe: View {
         self.data.networkHandler.addRecipe(recipe: self.recipeNew)
         
         //add to myrecipes
-        self.data.fetchMyRecipes(userId: self.data.user.userId)
+//        self.data.fetchMyRecipes(userId: self.data.user.userId)
         //complete here
         
         //clear all values
@@ -396,10 +401,9 @@ struct AddRecipe: View {
         recipeUserCategory = ""
         origin = ""
         images = []
-        showSheetAddImages = false
-        showAlert = false
-        alertMessage = ""
-        
+        self.alertTitle = "Success"
+        self.alertMessage = "Recipe Submitted"
+        self.showAlert = true
     }
     
 

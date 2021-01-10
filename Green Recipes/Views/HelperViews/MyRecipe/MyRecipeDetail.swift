@@ -10,7 +10,7 @@ import SwiftUI
 struct MyRecipeDetail: View {
     @Environment(\.editMode) var editMode
     @EnvironmentObject var data:DataModels
-    @State var recipe:Recipe
+    @State var recipe:Recipe = .init()
     @State var images:[ImageContainer] = []
     @State var loading:Bool = true
     @State var uploadedByUsername:String = ""
@@ -31,7 +31,7 @@ struct MyRecipeDetail: View {
             }
             else{
             if editMode?.wrappedValue == EditMode.active{
-                RecipeEditView(recipeNew: self.recipe, images: self.images).environmentObject(data)
+                RecipeEditView(recipeNew: self.$recipe, images: self.$images).environmentObject(data)
             }
             else{
                 RecipeObjectDetail(recipe: self.$recipe, images: self.$images, uploadedByUsername: self.$uploadedByUsername, title: self.recipe.name).environmentObject(data)

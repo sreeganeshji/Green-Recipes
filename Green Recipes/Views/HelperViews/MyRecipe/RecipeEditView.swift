@@ -9,20 +9,21 @@ import SwiftUI
 
 struct RecipeEditView: View {
     @EnvironmentObject var data:DataModels
-    @State var recipeNew :Recipe
+    @Binding var recipeNew :Recipe
     @State var newIngredient:String = ""
     @State var newProcess:String = ""
     @State var description:String = ""
     @State var newEquipment:String = ""
     @State var newNutrition:String = ""
     @State var origin:String = ""
-    @State var images:[ImageContainer]
+    @Binding var images:[ImageContainer]
     @State var showSheetAddImages:Bool = false
     @State var showAlert = false
     @State var alertMessage = ""
     @State var recipeNewCategory = "Others"
     @State var recipeUserCategory = ""
     @State var recipeNewContributor = ""
+    @Environment(\.editMode) var editMode
     
     
     var body: some View {
@@ -87,7 +88,9 @@ struct RecipeEditView: View {
                     TextField("Add ingredient", text: $newIngredient)
                     Button(action:addIngredient){
                         Image(systemName:"plus.circle.fill")
+                            .foregroundColor(.blue)
                     }
+                    .buttonStyle(PlainButtonStyle())
                 }
             }
             
@@ -127,7 +130,9 @@ struct RecipeEditView: View {
                     TextField("Add step", text: $newProcess)
                     Button(action:addProcess){
                         Image(systemName:"plus.circle.fill")
+                            .foregroundColor(.blue)
                     }
+                    .buttonStyle(PlainButtonStyle())
                 }
             }
             
@@ -169,7 +174,9 @@ struct RecipeEditView: View {
                     TextField("Add equipment", text: $newEquipment)
                     Button(action:addEquipment){
                         Image(systemName:"plus.circle.fill")
+                            .foregroundColor(.blue)
                     }
+                    .buttonStyle(PlainButtonStyle())
                 }
             }
            
@@ -197,12 +204,13 @@ struct RecipeEditView: View {
                     Spacer()
                     Button(action:{self.showSheetAddImages = true}){
                         Image(systemName:"plus.circle.fill")
+                            .foregroundColor(.blue)
                     }
+                    .buttonStyle(PlainButtonStyle())
                 }
                 
                 ImageCarousel(images:self.$images)
                     .frame(maxHeight:300)
-                
                 
             }
             
@@ -288,7 +296,9 @@ struct RecipeEditView: View {
                     TextField("Add equipment", text: $newNutrition)
                     Button(action:addNutrition){
                         Image(systemName:"plus.circle.fill")
+                            .foregroundColor(.blue)
                     }
+                    .buttonStyle(PlainButtonStyle())
                 }
             }
             
@@ -297,19 +307,23 @@ struct RecipeEditView: View {
 //                TextField("", text: self.$origin)
 //            }
 
-            Section{
-                Button(action:submitRecipe)
-                {
-                    HStack{
-                        Spacer()
-                    Text("Submit")
-                        .font(.title)
-                        .fontWeight(.light)
-                        .foregroundColor(.blue)
-                        Spacer()
-                    }
-                }
-            }
+           
+//            Section{
+//                Button(action:submitRecipe)
+//                {
+//
+//                    HStack{
+//                        Spacer()
+//                    Text("Update")
+//                        .font(.title)
+//                        .fontWeight(.light)
+//                        .foregroundColor(.blue)
+//                        Spacer()
+//                    }
+//                }
+//                .buttonStyle(PlainButtonStyle())
+//
+//            }
             .alert(isPresented: self.$showAlert, content: {
                 Alert(title: Text("Cannot Submit"), message: Text(self.alertMessage))
             })
@@ -319,9 +333,11 @@ struct RecipeEditView: View {
             PhotoPicker(showSheet: self.$showSheetAddImages, images: self.$images)
         })
 
-        .navigationTitle(Text("Add Recipe"))
+//        .navigationTitle(Text("Edit Recipe"))
               
         .onAppear(){
+            recipeNew.nutrition = recipeNew.nutrition ?? []
+            recipeNew.equipment = recipeNew.equipment ?? []
 
             description = recipeNew.description ?? ""
             origin = recipeNew.origin ?? ""
@@ -329,7 +345,7 @@ struct RecipeEditView: View {
             recipeNewContributor = recipeNew.contributor ?? ""
         }
         .onDisappear(){
-      
+      submitRecipe()
         }
     }
 
@@ -372,62 +388,69 @@ struct RecipeEditView: View {
         self.recipeNew.origin = self.origin
         self.recipeNew.addedby = self.data.user.userId
         
+        //current set
+        let oldImages = self.recipeNew.images ?? []
         //upload images
-        for i in 0...(self.images.count-1){
+        for image in images{
+            
+            //continue if already exists
+            if oldImages.contains(image.name){
+                continue
+            }
+            
             //generate a key
-            let key = self.getImageName()
+//            let key = self.getImageName()
             
             //upload to aws S3
-            self.data.photoStore.uploadData(key: key, data: images[i].image.pngData()!)
+            self.data.photoStore.uploadData(key: image.name, data: image.image.pngData()!)
             
             //add to the new recipe
-            recipeNew.images?.append(key)
-            
+            recipeNew.images?.append(image.name)
         }
+            
+            //delete the recipes which are not in the origianl set.
+        
+        let newImageNames = images.map({$0.name})
+        
+            for imageName in oldImages{
+                if !newImageNames.contains(imageName){
+                    //delete that image
+                    self.data.photoStore.deleteData(key: imageName)
+                    recipeNew.images?.removeAll(where: { (s:String) -> Bool in
+                        return (s == imageName)
+                    })
+                }
+            }
+            
         
         
-        //validate the fields
-        self.data.networkHandler.addRecipe(recipe: self.recipeNew)
+        
+
+        self.data.networkHandler.updateRecipe(recipe: self.recipeNew)
         
         //add to myrecipes
-        self.data.fetchMyRecipes(userId: self.data.user.userId)
+//        self.data.fetchMyRecipes(userId: self.data.user.userId)
         //complete here
-        
-        //clear all values
-        recipeNew = Recipe()
-        newIngredient = ""
-        newProcess = ""
-        description = ""
-        newEquipment = ""
-        newNutrition = ""
-        recipeNewContributor = ""
-        recipeNewCategory = ""
-        recipeUserCategory = ""
-        origin = ""
-        images = []
-        showSheetAddImages = false
-        showAlert = false
-        alertMessage = ""
-        
+
     }
     
     //GenerateRandomString
-    func getImageName()->String{
-        let base = self.data.user.appleId
-        
-        //generate random string
-        let length = 8
-        let letters = "abcdefghijklmnopqrstuvwzyxABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        let randomString = String((0...length).map { _ in
-                                    letters.randomElement()!})
-        let name = base + randomString
-        return name
-    }
+//    func getImageName()->String{
+//        let base = self.data.user.appleId
+//
+//        //generate random string
+//        let length = 8
+//        let letters = "abcdefghijklmnopqrstuvwzyxABCDEFGHIJKLMNOPQRSTUVWXYZ"
+//        let randomString = String((0...length).map { _ in
+//                                    letters.randomElement()!})
+//        let name = base + randomString
+//        return name
+//    }
 }
 
 
-struct RecipeEditView_Previews: PreviewProvider {
-    static var previews: some View {
-        RecipeEditView(recipeNew: .init(), images: []).environmentObject(DataModels())
-    }
-}
+//struct RecipeEditView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RecipeEditView(recipeNew: .init(), images: []).environmentObject(DataModels())
+//    }
+//}
