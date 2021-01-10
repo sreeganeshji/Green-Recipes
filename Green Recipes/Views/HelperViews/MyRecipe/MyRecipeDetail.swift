@@ -51,7 +51,7 @@ struct MyRecipeDetail: View {
             if self.images.count < self.recipe.images!.count{
                 let i = self.images.count
             //download images
-            self.data.photoStore.downloadData(key: self.recipe.images![i], completion: UpdateImages)
+            AmplifyStorage().downloadData(key: self.recipe.images![i], completion: UpdateImages)
             }
         }
     }

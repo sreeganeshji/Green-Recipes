@@ -9,25 +9,25 @@ import SwiftUI
 
 struct ImageCarousalFetchView: View {
     @EnvironmentObject var data:DataModels
-    @Binding var imageKeys:[String]
+    @Binding var images:[ImageContainer]
     var body: some View {
         ScrollView(.horizontal){
 
             HStack{
                
-                ForEach(self.imageKeys,id:\.self){
-                    imageKey in
+                ForEach(images.indices,id:\.self){
+                    i in
                     
-                    ImageFetchView(imageKey: imageKey).environmentObject(self.data)
+                    ImageFetchView(image: $images[i]).environmentObject(self.data)
 
                         .frame(maxHeight:300)
                         .clipShape(RoundedRectangle(cornerRadius: 10.0))
                 }
 
-                if self.imageKeys.count>0{
+                if self.images.count>0{
                     Button(action:{
-                        let N = self.imageKeys.count
-                        self.imageKeys.remove(at: N-1)
+                        let N = self.images.count
+                        self.images.remove(at: N-1)
                     })
                     {
                         HStack{

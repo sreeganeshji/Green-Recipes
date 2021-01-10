@@ -405,7 +405,7 @@ struct RecipeEditView: View {
 //            let key = self.getImageName()
             
             //upload to aws S3
-            self.data.photoStore.uploadData(key: image.name, data: image.image.pngData()!)
+            AmplifyStorage().uploadData(key: image.name, data: image.image.pngData()!)
             
             //add to the new recipe
             recipeNew.images?.append(image.name)
@@ -418,7 +418,7 @@ struct RecipeEditView: View {
             for imageName in oldImages{
                 if !newImageNames.contains(imageName){
                     //delete that image
-                    self.data.photoStore.deleteData(key: imageName)
+                    AmplifyStorage().deleteData(key: imageName)
                     recipeNew.images?.removeAll(where: { (s:String) -> Bool in
                         return (s == imageName)
                     })

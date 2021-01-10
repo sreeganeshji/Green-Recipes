@@ -374,7 +374,7 @@ struct AddRecipe: View {
 //            let key = self.getImageName()
             
             //upload to aws S3
-            self.data.photoStore.uploadData(key: image.name, data: image.image.pngData()!)
+            AmplifyStorage().uploadData(key: image.name, data: image.image.pngData()!)
             
             //add to the new recipe
             recipeNew.images?.append(image.name)

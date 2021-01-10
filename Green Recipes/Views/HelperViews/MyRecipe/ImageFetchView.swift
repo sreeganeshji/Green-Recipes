@@ -6,27 +6,40 @@
 //
 
 import SwiftUI
+import Dispatch
 
 struct ImageFetchView: View {
-    @State var image:ImageContainer = .init(name:"", image:.init())
-    @State var imageKey:String
+    let queue = DispatchQueue.init(label: "ImageFetch", qos: .background, attributes: .concurrent, autoreleaseFrequency: .inherit, target: .global())
+    @Binding var image:ImageContainer
     @EnvironmentObject var data:DataModels
+    @State var spin = false
+//    let queue = DispatchQueue(label: "ImageFetch1", qos: .default, attributes: .concurrent, autoreleaseFrequency: .inherit, target: .global())
     var body: some View {
         Image(uiImage: self.image.image)
             .resizable()
             .aspectRatio(contentMode: .fit)
             .onAppear(){
-                getImage()
+                    getImage()
             }
     }
     
     func getImage(){
         func updateImages(name:String, imageData:Data){
-            self.image = .init(name:name, image:UIImage(data: imageData)!)
+            self.image.image = UIImage(data: imageData)!
+            spin = false
         }
         
         //download images
-        self.data.photoStore.downloadData(key: self.imageKey, completion: updateImages)
+        let storage = AmplifyStorage()
+
+        queue.async{
+        storage.downloadData(key: self.image.name, completion: updateImages)
+        spin = true
+        while(spin)
+        {
+        
+        }
+        }
     }
 }
 

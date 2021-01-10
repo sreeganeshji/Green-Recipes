@@ -170,7 +170,7 @@ struct RecipeDetail: View {
 //
 //                        }
                         
-                        ImageCarouselPreview(images:self.$images)
+                        ImageCarousalFetchView(images:self.$images).environmentObject(self.data)
                             .frame(maxHeight:300)
                             .padding(.top)
                             .padding(.bottom)
@@ -270,8 +270,8 @@ struct RecipeDetail: View {
             }
         }
 
-//        .navigationBarTitle(Text(self.recipe.name), displayMode: .inline)
-        .navigationTitle(self.title)
+        .navigationBarTitle(Text(self.recipe.name), displayMode: .inline)
+//        .navigationTitle(self.title)
             
         }
     }
@@ -287,7 +287,7 @@ func GetImages(){
         if self.images.count < self.recipe.images!.count{
             let i = self.images.count
         //download images
-        self.data.photoStore.downloadData(key: self.recipe.images![i], completion: UpdateImages)
+        AmplifyStorage().downloadData(key: self.recipe.images![i], completion: UpdateImages)
         }
     }
 }
@@ -296,12 +296,22 @@ func GetImages(){
         self.images.append(.init(name:name, image:UIImage(data: image)!))
         GetImages()
     }
+    
+    func fillImages(){
+        if recipe.images == nil{
+            return
+        }
+        for imageName in recipe.images!{
+            self.images.append(.init(name: imageName, image: .init()))
+        }
+    }
 
 func UpdateRecipe(recipe:Recipe){
     loading = false
     self.recipe = recipe
 //    fetchReviews()
-    GetImages()
+//    GetImages()
+    fillImages()
     
 //fetch username
 if (self.recipe.addedby != nil){

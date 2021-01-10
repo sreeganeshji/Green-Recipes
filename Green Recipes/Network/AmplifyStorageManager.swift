@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import Amplify
+import Dispatch
 
 class AmplifyStorage{
     var resultSink : AnyCancellable?
@@ -33,6 +34,7 @@ class AmplifyStorage{
     }
     
     func downloadData(key:String, completion:@escaping (String,Data)->()) {
+        print("Download key",key)
         let storageOperation = Amplify.Storage.downloadData(key: key)
         progressSink = storageOperation.progressPublisher.sink { (progress:Progress) in
             print("Progress is \(progress)")
@@ -43,6 +45,7 @@ class AmplifyStorage{
             }
         } receiveValue: {
             (data:Data) in
+            print("KEY",key)
             completion(key,data)
         }
 
