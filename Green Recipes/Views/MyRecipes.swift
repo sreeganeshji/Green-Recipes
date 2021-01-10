@@ -35,15 +35,23 @@ struct MyRecipes: View {
  
                         }
                     }
+                .onDelete(perform: { indexSet in
+                    for index in indexSet{
+                        let recipe = myRecipes[index]
+//                        print("Will Delete \(recipe.name)")
+                        self.data.networkHandler.deleteMyRecipe(recipeId: recipe.id) {}
+                        myRecipes.remove(at: index)
+                    }
+                })
                 }
 //            }
         
 //
         .navigationTitle("My Recipes")
-        .navigationBarItems(trailing: NavigationLink(destination:AddRecipe().environmentObject(self.data)
-            .onDisappear(){
-                fetchMyRecipes()
-            }
+        .navigationBarItems(leading:EditButton(), trailing: NavigationLink(destination:AddRecipe().environmentObject(self.data)
+                                                                            .onDisappear(){
+                                                                                fetchMyRecipes()
+                                                                            }
         ){Image(systemName: "square.and.pencil").font(.headline)})
             .sheet(isPresented: self.$showSheet) {
                 AddRecipe().environmentObject(self.data)

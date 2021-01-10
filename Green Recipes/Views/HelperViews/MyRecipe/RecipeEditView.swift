@@ -324,6 +324,7 @@ struct RecipeEditView: View {
 //                .buttonStyle(PlainButtonStyle())
 //
 //            }
+            .navigationBarItems(leading: Image(systemName:"trash").font(.headline))
             .alert(isPresented: self.$showAlert, content: {
                 Alert(title: Text("Cannot Submit"), message: Text(self.alertMessage))
             })
@@ -387,6 +388,8 @@ struct RecipeEditView: View {
         //add the rest of the fields.
         self.recipeNew.origin = self.origin
         self.recipeNew.addedby = self.data.user.userId
+        self.recipeNew.contributor = self.recipeNewContributor
+        self.recipeNew.category = self.recipeNewCategory
         
         //current set
         let oldImages = self.recipeNew.images ?? []

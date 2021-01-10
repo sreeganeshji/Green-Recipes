@@ -76,3 +76,7 @@ func (s *Service) UpdateMyReview(review models.Review)(int, error){
 func (s *Service) DeleteMyReview(review_id int)(error){
 	return s.Postgres.DeleteMyReview(review_id)
 }
+
+func (s *Service) DeleteMyRecipe(recipe_id int)(error){
+	return s.Postgres.DeleteMyRecipe(recipe_id)
+}

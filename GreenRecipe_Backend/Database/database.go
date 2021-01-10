@@ -428,3 +428,17 @@ func (p *Postgres) DeleteMyReview(review_id int)(error){
 
 	return nil
 }
+
+func (p *Postgres) DeleteMyRecipe(recipe_id int)(error){
+	c, cancel := context.WithTimeout(context.Background(), time.Second * 5)
+	defer cancel()
+
+	sql := `delete from recipe where id=$1`
+
+	err := p.db.QueryRow(c, sql, recipe_id).Scan()
+	if err!=nil{
+		return err
+	}
+
+	return nil
+}

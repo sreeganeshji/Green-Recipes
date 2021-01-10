@@ -487,4 +487,20 @@ class NetworkAdapter{
         }
         task.resume()
     }
+    
+    func deleteMyRecipe(recipeId:Int, completion: @escaping ()->()){
+        var requestURL = baseURL
+        requestURL.appendPathComponent("deletemyrecipe/\(recipeId)")
+        var deleteMyReviewRequest = URLRequest(url: requestURL)
+        deleteMyReviewRequest.httpMethod = "DELETE"
+        
+        let task = URLSession.shared.dataTask(with: deleteMyReviewRequest) {     (data:Data?, response:URLResponse?, error:Error?) in
+            if error != nil{
+                print("Couldn't delete my recipe")
+                
+            }
+            completion()
+        }
+        task.resume()
+    }
 }

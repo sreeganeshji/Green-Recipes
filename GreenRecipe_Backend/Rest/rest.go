@@ -35,6 +35,7 @@ func Initalizer(service service.Service) (*mux.Router){
 	r.HandleFunc("/getusername/{person_id}",handler.GetUserName).Methods(http.MethodGet)
 	r.HandleFunc("/updatemyreview",handler.UpdateMyReview).Methods(http.MethodPut)
 	r.HandleFunc("/deletemyreview/{review_id}",handler.DeleteMyReview).Methods(http.MethodDelete)
+	r.HandleFunc("/deletemyrecipe/{recipe_id}",handler.DeleteMyRecipe).Methods(http.MethodDelete)
 	return r
 }
 
@@ -450,6 +451,26 @@ func (h *handler) DeleteMyReview(w http.ResponseWriter, r *http.Request){
 	if err!=nil{
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(fmt.Sprint("Error getting username: ",err)))
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+}
+
+func (h *handler) DeleteMyRecipe(w http.ResponseWriter, r *http.Request){
+	vars := mux.Vars(r)
+
+	recipe_id, err := strconv.Atoi(vars["recipe_id"])
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("couldn't get recipe_id", err)))
+		return
+	}
+
+	err = h.Service.DeleteMyRecipe(recipe_id)
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Couldn't delete recipe", err)))
 		return
 	}
 
