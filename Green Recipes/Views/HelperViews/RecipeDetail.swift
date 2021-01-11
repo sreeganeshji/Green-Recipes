@@ -38,9 +38,20 @@ struct RecipeDetail: View {
         }
         else{
 
-        VStack
-        {
             Form{
+            
+            if (self.recipe.images != nil && self.recipe.images!.count > 0){
+                    
+                    ImageCarousalFetchView(images:self.$images).environmentObject(self.data)
+                        .frame(maxHeight:300)
+                        .clipShape(RoundedRectangle(cornerRadius:10))
+                
+//                        .padding(.top)
+//                        .padding(.bottom)
+//                        .ignoresSafeArea()
+
+            }
+
             //description
             if(self.recipe.description != nil){
             Section{
@@ -157,27 +168,27 @@ struct RecipeDetail: View {
                 }
             }
 
-                if (self.recipe.images != nil && self.recipe.images!.count > 0){
-                    Section{
-                        //images
-//                        HStack{
-//                            Spacer()
-//                        Text("Images")
-//                            .font(.title)
-//                            .fontWeight(.light)
-//                            .foregroundColor(.blue)
-//                            Spacer()
+//                if (self.recipe.images != nil && self.recipe.images!.count > 0){
+//                    Section{
+//                        //images
+////                        HStack{
+////                            Spacer()
+////                        Text("Images")
+////                            .font(.title)
+////                            .fontWeight(.light)
+////                            .foregroundColor(.blue)
+////                            Spacer()
+////
+////                        }
 //
-//                        }
-                        
-                        ImageCarousalFetchView(images:self.$images).environmentObject(self.data)
-                            .frame(maxHeight:300)
-                            .padding(.top)
-                            .padding(.bottom)
-                        
-                        
-                    }
-                }
+//                        ImageCarousalFetchView(images:self.$images).environmentObject(self.data)
+//                            .frame(maxHeight:300)
+//                            .padding(.top)
+//                            .padding(.bottom)
+//
+//
+//                    }
+//                }
                 if(self.recipe.category != nil || self.recipe.contributor != nil){
                 Section{
                     if (self.recipe.category != nil){
@@ -268,12 +279,12 @@ struct RecipeDetail: View {
                 }
             }
             }
-        }
-
+            
+        
         .navigationBarTitle(Text(self.recipe.name), displayMode: .inline)
 //        .navigationTitle(self.title)
-            
         }
+        
     }
 
 
@@ -331,7 +342,6 @@ func fetchReviews(){
         }
         self.reviews = reviews
         updateAverage()
-        
     }
     
     func updateUsername(username:String, err:Error?){
@@ -351,8 +361,8 @@ func fetchReviews(){
 
 }
 
-//struct RecipeDetail_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RecipeDetail(id:1).environmentObject(DataModels())
-//    }
-//}
+struct RecipeDetail_Previews: PreviewProvider {
+    static var previews: some View {
+        RecipeDetail(id:1, title: "Detail stuff").environmentObject(DataModels())
+    }
+}

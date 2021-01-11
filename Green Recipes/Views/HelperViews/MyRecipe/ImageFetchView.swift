@@ -17,7 +17,7 @@ struct ImageFetchView: View {
     var body: some View {
         Image(uiImage: self.image.image)
             .resizable()
-            .aspectRatio(contentMode: .fit)
+            .aspectRatio(contentMode: .fill)
             .onAppear(){
                     getImage()
             }

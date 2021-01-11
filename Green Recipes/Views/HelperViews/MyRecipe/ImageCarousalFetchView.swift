@@ -21,21 +21,22 @@ struct ImageCarousalFetchView: View {
                     ImageFetchView(image: $images[i]).environmentObject(self.data)
 
                         .frame(maxHeight:300)
-                        .clipShape(RoundedRectangle(cornerRadius: 10.0))
+//                        .clipShape(RoundedRectangle(cornerRadius: 10.0))
+//                        .padding(-3)
                 }
 
-                if self.images.count>0{
-                    Button(action:{
-                        let N = self.images.count
-                        self.images.remove(at: N-1)
-                    })
-                    {
-                        HStack{
-                            Text("Remove")
-                        Image(systemName: "rectangle.stack.fill.badge.minus")
-                        }.foregroundColor(.red)
-                    }
-                }
+//                if self.images.count>0{
+//                    Button(action:{
+//                        let N = self.images.count
+//                        self.images.remove(at: N-1)
+//                    })
+//                    {
+//                        HStack{
+//                            Text("Remove")
+//                        Image(systemName: "rectangle.stack.fill.badge.minus")
+//                        }.foregroundColor(.red)
+//                    }
+//                }
                 
             }
         }

@@ -20,7 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0b39fbb6-cc4e-4b59-be15-8e3c7ca69ebc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Green Recipes/Network/Backend.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Network/Backend.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/MyRecipe/ImageCarousalFetchView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/MyRecipe/ImageCarousalFetchView.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/RecipeDetail.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/RecipeDetail.swift" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
