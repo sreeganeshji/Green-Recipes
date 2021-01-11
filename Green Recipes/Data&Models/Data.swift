@@ -161,6 +161,30 @@ struct Review:Codable, Hashable{
     }
 }
 
+struct Report:Codable, Hashable{
+    var Id:Int?
+    var body:String?
+    var recipeId:Int
+    var userId:Int
+    var created:String?
+    var title:String
+    
+    enum CodingKeys:String, CodingKey{
+        case recipeId = "recipefk"
+        case body = "body"
+        case userId = "personfk"
+        case created = "created"
+        case Id = "id"
+        case title = "title"
+    }
+    
+    init(){
+        self.recipeId = 0
+        self.userId = 0
+        self.title = ""
+    }
+}
+
 struct Cache{
     //store common values.
     var timeUpdated:Date

@@ -502,4 +502,36 @@ class NetworkAdapter{
         }
         task.resume()
     }
+    
+    func submitReport(report:Report, completion:@escaping (Error?)->()){
+        var requestURL = baseURL
+        requestURL.appendPathComponent("submitreport")
+        
+        //json encode the review and send it to the server
+        
+        let encoder = JSONEncoder()
+        do {
+        let jsonData = try encoder.encode(report)
+            
+        var requestObj = URLRequest(url: requestURL)
+        
+        requestObj.httpMethod = "POST"
+        requestObj.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        requestObj.httpBody = jsonData
+            
+        //create task
+            let task = URLSession.shared.dataTask(with: requestObj) { (data:Data?, response:URLResponse?, error:Error?) in
+                if error != nil{
+                    print("Session error: \(error)")
+                    completion(error)
+                    return
+                }
+                completion(nil)
+            }
+            task.resume()
+        }
+        catch{
+            print("Couldn't encode review due to errors: \(error)")
+        }
+    }
 }

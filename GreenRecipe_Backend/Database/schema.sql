@@ -27,6 +27,8 @@ added_date DATE DEFAULT CURRENT_DATE,
 added_by INT,
 nutrition TEXT[],
 category VARCHAR(50),
+rating REAL,
+ratingCount INT,
 PRIMARY KEY(ID),
 FOREIGN KEY(added_by) REFERENCES person(user_id)
 );
@@ -71,5 +73,14 @@ FOREIGN KEY(person_id) REFERENCES person(user_id) ON DELETE CASCADE ,
 FOREIGN KEY(recipe_id) REFERENCES recipe(id) ON DELETE CASCADE
 );
 
-
-
+CREATE TABLE report(
+report_id SERIAL NOT NULL,
+person_id INT NOT NULL,
+recipe_id INT NOT NULL,
+PRIMARY KEY (report_id),
+FOREIGN KEY(person_id) REFERENCES person(user_id) ON DELETE CASCADE,
+FOREIGN KEY(recipe_id) REFERENCES recipe(id) ON DELETE  CASCADE,
+title VARCHAR (200) NOT NULL,
+body VARCHAR(1000),
+created DATE DEFAULT CURRENT_DATE
+);

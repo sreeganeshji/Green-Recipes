@@ -80,3 +80,11 @@ func (s *Service) DeleteMyReview(review_id int)(error){
 func (s *Service) DeleteMyRecipe(recipe_id int)(error){
 	return s.Postgres.DeleteMyRecipe(recipe_id)
 }
+
+func (s *Service) SubmitReport(report models.Report)(int, error){
+	return s.Postgres.SubmitReport(report)
+}
+
+func (s *Service) UpdateRecipeRating(recipe_id int, rating_delta int){
+	return s.Postgres.UpdateRecipeRating(recipe_id, rating_delta)
+}

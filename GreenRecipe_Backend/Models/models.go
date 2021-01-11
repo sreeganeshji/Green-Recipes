@@ -55,4 +55,10 @@ type Favorite struct {
 	RecipeID *int `json:"recipeid"`
 }
 
-
+type Report struct{
+	Reportfk *int `json:"reportfk"`
+	Personfk *int `json:"personfk"`
+	Recipefk *int `json:"recipefk"`
+	Title *string `json:"title"`
+	Body *string `json:"body,omitempty"`
+}

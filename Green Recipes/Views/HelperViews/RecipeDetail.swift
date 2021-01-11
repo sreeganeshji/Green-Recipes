@@ -18,6 +18,7 @@ class ObservedRecipe:ObservableObject{
 struct RecipeDetail: View {
     var id :Int
 //    @StateObject var recipe = ObservedRecipe(recipe: Recipe())
+    @State var showReportSheet = false
     @State var recipe = Recipe()
     @State var images:[ImageContainer] = []
     @EnvironmentObject var data:DataModels
@@ -25,6 +26,7 @@ struct RecipeDetail: View {
     @State var loading = true
     @State var average:Double = 0
     @State var uploadedByUsername:String = ""
+    @State var report:Report = .init()
     let title:String
     var body: some View {
         if loading {
@@ -280,7 +282,10 @@ struct RecipeDetail: View {
             }
             }
             
-        
+            .sheet(isPresented: $showReportSheet, content: {
+                AddReport(showSheet: $showReportSheet, report: $report).environmentObject(self.data)
+            })
+            .navigationBarItems(trailing: Button(action:{showReportSheet = true}){Image(systemName:"flag").foregroundColor(.red)})
         .navigationBarTitle(Text(self.recipe.name), displayMode: .inline)
 //        .navigationTitle(self.title)
         }

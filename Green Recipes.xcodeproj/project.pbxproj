@@ -25,6 +25,7 @@
 		5C7284225351E8AB33B732DB /* Pods_Green_Recipes_Green_RecipesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70B825A8ABBFE20964DD063E /* Pods_Green_Recipes_Green_RecipesUITests.framework */; };
 		62708647B49747709C53CDBC /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = C34E391B81DD44CD8219A77A /* amplifyconfiguration.json */; };
 		B1199B640C7070095A0927BC /* Pods_Green_RecipesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E49E08B8110C81874B3EE94E /* Pods_Green_RecipesTests.framework */; };
+		B122465325AC18AB00320E27 /* AddReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = B122465225AC18AB00320E27 /* AddReport.swift */; };
 		B163D999259D741100225124 /* ImageCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B163D998259D741100225124 /* ImageCarousel.swift */; };
 		B16A1247259112080027FC4F /* Reviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16A1246259112080027FC4F /* Reviews.swift */; };
 		B16A124F2591C69A0027FC4F /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16A124E2591C69A0027FC4F /* SignUp.swift */; };
@@ -101,6 +102,7 @@
 		84C3F2A202E696D06EA11584 /* Pods-Green Recipes-Green RecipesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Green Recipes-Green RecipesUITests.release.xcconfig"; path = "Target Support Files/Pods-Green Recipes-Green RecipesUITests/Pods-Green Recipes-Green RecipesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		9A3B94E880CA402E8BE8FFC7 /* amplifytools.xcconfig */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.xcconfig; path = amplifytools.xcconfig; sourceTree = "<group>"; };
 		9C064A5FAC1E39E9D7297844 /* Pods-Green RecipesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Green RecipesTests.debug.xcconfig"; path = "Target Support Files/Pods-Green RecipesTests/Pods-Green RecipesTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B122465225AC18AB00320E27 /* AddReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReport.swift; sourceTree = "<group>"; };
 		B163D998259D741100225124 /* ImageCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCarousel.swift; sourceTree = "<group>"; };
 		B16A1246259112080027FC4F /* Reviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reviews.swift; sourceTree = "<group>"; };
 		B16A124E2591C69A0027FC4F /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
@@ -263,8 +265,9 @@
 			isa = PBXGroup;
 			children = (
 				1F843949254DF70A004A27A9 /* recipeThumb1.swift */,
-				B1E81E3525A267170059EC28 /* Reviews */,
 				B1F0D60525906B6600BD36EF /* RecipeDetail.swift */,
+				B122465225AC18AB00320E27 /* AddReport.swift */,
+				B1E81E3525A267170059EC28 /* Reviews */,
 				B16A124E2591C69A0027FC4F /* SignUp.swift */,
 				B16A1253259271DB0027FC4F /* VerifyCredentials.swift */,
 				B1E81E3625A267370059EC28 /* MyRecipe */,
@@ -602,6 +605,7 @@
 				1F46F55C2575E17A005414DE /* MyRecipes.swift in Sources */,
 				B1E81E07259E83190059EC28 /* AddReview.swift in Sources */,
 				B1E81E2325A25EB20059EC28 /* ProfileDetail.swift in Sources */,
+				B122465325AC18AB00320E27 /* AddReport.swift in Sources */,
 				B1E81E2E25A2669B0059EC28 /* ProfileDetailForm.swift in Sources */,
 				B1E81E14259E89D70059EC28 /* ReviewStarSummary.swift in Sources */,
 				B1E81E19259E8F460059EC28 /* ReviewShort.swift in Sources */,
