@@ -14,6 +14,8 @@ struct MyRecipeDetail: View {
     @State var images:[ImageContainer] = []
     @State var doneLoading:Bool = false
     @State var uploadedByUsername:String = ""
+    @State var progress:Double = .init(0)
+    @State var spin = false
 
     var recipeSummary :RecipeTemplate1
     
@@ -25,6 +27,8 @@ struct MyRecipeDetail: View {
                     .foregroundColor(.blue)
                     .font(.title)
                     .fontWeight(.light)
+                    
+                    activityIndicator()
                     .onAppear(){
                         GetRecipeByID()
                     }
@@ -45,13 +49,47 @@ struct MyRecipeDetail: View {
     func GetRecipeByID(){
         data.networkHandler.searchRecipeWithID(id: recipeSummary.id, completion: UpdateRecipe)
     }
+    
+    func progresscb(p:Double){
+        progress = p
+    }
+    
+    //simultaneous operation
+    func getImages2(){
+        if recipe.images == nil{
+            return
+        }
+            
+            func updateImages(name:String, imageData:Data){
+                self.images.append(.init(name: name, image: UIImage(data: imageData)!))
+                spin = false
+//                let prog = Double(images.count)/Double(recipe.images!.count)
+//                updateProgress(p: prog)
+                
+//                completion()
+            }
+            
+        for image in recipe.images!{
+            DispatchQueue.main.async{
+            //download images
+            let storage = AmplifyStorage()
+            
+                storage.downloadData(key: image, completion: updateImages, progresscb: progresscb)
+        spin = true
+        while(spin)
+        {
+        
+        }
+            }
+        }
+    }
         
     func GetImages(){
         if (self.recipe.images != nil && self.recipe.images!.count > 0){
             if self.images.count < self.recipe.images!.count{
                 let i = self.images.count
             //download images
-            AmplifyStorage().downloadData(key: self.recipe.images![i], completion: UpdateImages)
+                AmplifyStorage().downloadData(key: self.recipe.images![i], completion: UpdateImages, progresscb: progresscb)
             }
         }
     }
@@ -66,7 +104,8 @@ struct MyRecipeDetail: View {
         self.recipe = recipe
     //    fetchReviews()
 //        GetImages()
-        fillImages()
+//        fillImages()
+        getImages2()
     //fetch username
     self.uploadedByUsername = self.data.user.username
         

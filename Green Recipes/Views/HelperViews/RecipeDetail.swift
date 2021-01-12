@@ -28,20 +28,28 @@ struct RecipeDetail: View {
     @State var average:Double = 0
     @State var uploadedByUsername:String = ""
     @State var report:Report = .init()
-    @State var imageLoaded = false
+    @State var imageLoaded = true
+    @State var spin = false
+    @State var progress :Double = .init(0)
+    
     let title:String
     var body: some View {
         if !loadingDone {
+            VStack{
             Text("Loading...")
                 .foregroundColor(.blue)
                 .font(.title)
                 .fontWeight(.light)
+                
+                activityIndicator()
                 .onAppear(){
                     GetRecipeByID()
                 }
+               
+            }
         }
         else{
-
+        ZStack{
             Form{
             
             if (self.recipe.images != nil && self.recipe.images!.count > 0){
@@ -60,6 +68,7 @@ struct RecipeDetail: View {
                             .foregroundColor(.blue)
                             .fontWeight(.light)
                             .opacity(0.8)
+                            .frame(height:300)
                     }
                 }
 
@@ -293,6 +302,22 @@ struct RecipeDetail: View {
             }
             }
             
+            if !loadingDone {
+                VStack{
+                Text("Loading...")
+                    .foregroundColor(.blue)
+                    .font(.title)
+                    .fontWeight(.light)
+                    .onAppear(){
+                        GetRecipeByID()
+                    }
+                    ProgressView(value: progress)
+                }
+                .background(blur(radius: 3.0))
+            }
+        }
+    
+            
             .sheet(isPresented: $showReportSheet, content: {
                 AddReport(showSheet: $showReportSheet, report: $report).environmentObject(self.data)
             })
@@ -315,7 +340,7 @@ func GetImages(){
         if self.images.count < self.recipe.images!.count{
             let i = self.images.count
         //download images
-        AmplifyStorage().downloadData(key: self.recipe.images![i], completion: UpdateImages)
+            AmplifyStorage().downloadData(key: self.recipe.images![i], completion: UpdateImages, progresscb: progresscb)
         }
     }
 }
@@ -325,26 +350,42 @@ func GetImages(){
         GetImages()
     }
     
+    func progresscb(p:Double){
+    }
+    
+    func updateProgress(p:Double){
+        progress = p
+    }
+    
     //simultaneous operation
-//    func getImages2(){
-//        func updateImages(name:String, imageData:Data){
-//            self.images.append(.init(name: name, image: UIImage(data: imageData)!)) =
-//            spin = false
-//            completion()
-//        }
-//
-//        //download images
-//        let storage = AmplifyStorage()
-//
-//        queue.async{
-//        storage.downloadData(key: self.image.name, completion: updateImages)
-//        spin = true
-//        while(spin)
-//        {
-//
-//        }
-//        }
-//    }
+    func getImages2(){
+        if recipe.images == nil{
+            return
+        }
+            
+            func updateImages(name:String, imageData:Data){
+                self.images.append(.init(name: name, image: UIImage(data: imageData)!))
+                spin = false
+                let prog = Double(images.count)/Double(recipe.images!.count)
+                updateProgress(p: prog)
+                
+//                completion()
+            }
+            
+        for image in recipe.images!{
+            DispatchQueue.main.async{
+            //download images
+            let storage = AmplifyStorage()
+            
+                storage.downloadData(key: image, completion: updateImages, progresscb: progresscb)
+        spin = true
+        while(spin)
+        {
+        
+        }
+            }
+        }
+    }
     
     func fillImages(){
         if recipe.images == nil{
@@ -359,7 +400,8 @@ func UpdateRecipe(recipe:Recipe){
     self.recipe = recipe
 //    fetchReviews()
 //    GetImages()
-    fillImages()
+    getImages2()
+//    fillImages()
     fillReport()
     
 //fetch username

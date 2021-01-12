@@ -42,13 +42,7 @@ import SwiftUI
         //                        .padding(.top)
         //                        .padding(.bottom)
         //                        .ignoresSafeArea()
-                            if(!imageLoaded){
-                                Text("Loading Images...")
-                                    .font(.title)
-                                    .foregroundColor(.blue)
-                                    .fontWeight(.light)
-                                    .opacity(0.8)
-                            }
+
                         }
 
                     }
