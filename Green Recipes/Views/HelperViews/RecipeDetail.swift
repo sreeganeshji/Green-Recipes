@@ -18,18 +18,20 @@ class ObservedRecipe:ObservableObject{
 struct RecipeDetail: View {
     var id :Int
 //    @StateObject var recipe = ObservedRecipe(recipe: Recipe())
+    let queue = DispatchQueue.init(label: "ImageFetch", qos: .background, attributes: .concurrent, autoreleaseFrequency: .inherit, target: .global())
     @State var showReportSheet = false
     @State var recipe = Recipe()
     @State var images:[ImageContainer] = []
     @EnvironmentObject var data:DataModels
     @State var reviews:[Review] = []
-    @State var loading = true
+    @State var loadingDone = false
     @State var average:Double = 0
     @State var uploadedByUsername:String = ""
     @State var report:Report = .init()
+    @State var imageLoaded = false
     let title:String
     var body: some View {
-        if loading {
+        if !loadingDone {
             Text("Loading...")
                 .foregroundColor(.blue)
                 .font(.title)
@@ -43,14 +45,23 @@ struct RecipeDetail: View {
             Form{
             
             if (self.recipe.images != nil && self.recipe.images!.count > 0){
-                    
-                    ImageCarousalFetchView(images:self.$images).environmentObject(self.data)
+
+                ZStack{
+                ImageCarousalFetchView(images:self.$images, imagesLoaded: $imageLoaded).environmentObject(self.data)
                         .frame(maxHeight:300)
                         .clipShape(RoundedRectangle(cornerRadius:10))
                 
 //                        .padding(.top)
 //                        .padding(.bottom)
 //                        .ignoresSafeArea()
+                    if(!imageLoaded){
+                        Text("Loading Images...")
+                            .font(.title)
+                            .foregroundColor(.blue)
+                            .fontWeight(.light)
+                            .opacity(0.8)
+                    }
+                }
 
             }
 
@@ -314,6 +325,27 @@ func GetImages(){
         GetImages()
     }
     
+    //simultaneous operation
+//    func getImages2(){
+//        func updateImages(name:String, imageData:Data){
+//            self.images.append(.init(name: name, image: UIImage(data: imageData)!)) =
+//            spin = false
+//            completion()
+//        }
+//
+//        //download images
+//        let storage = AmplifyStorage()
+//
+//        queue.async{
+//        storage.downloadData(key: self.image.name, completion: updateImages)
+//        spin = true
+//        while(spin)
+//        {
+//
+//        }
+//        }
+//    }
+    
     func fillImages(){
         if recipe.images == nil{
             return
@@ -324,7 +356,6 @@ func GetImages(){
     }
 
 func UpdateRecipe(recipe:Recipe){
-    loading = false
     self.recipe = recipe
 //    fetchReviews()
 //    GetImages()
@@ -361,6 +392,8 @@ func fetchReviews(){
             return
         }
         self.uploadedByUsername = username
+        loadingDone = true
+
     }
     
     func updateAverage(){

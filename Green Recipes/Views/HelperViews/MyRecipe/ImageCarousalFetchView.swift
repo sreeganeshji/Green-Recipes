@@ -10,6 +10,9 @@ import SwiftUI
 struct ImageCarousalFetchView: View {
     @EnvironmentObject var data:DataModels
     @Binding var images:[ImageContainer]
+    @Binding var imagesLoaded:Bool
+    @State var doneCount = 0
+    
     var body: some View {
         ScrollView(.horizontal){
 
@@ -18,7 +21,7 @@ struct ImageCarousalFetchView: View {
                 ForEach(images.indices,id:\.self){
                     i in
                     
-                    ImageFetchView(image: $images[i]).environmentObject(self.data)
+                    ImageFetchView(image: $images[i], completion:completion).environmentObject(self.data)
 
                         .frame(maxHeight:300)
 //                        .clipShape(RoundedRectangle(cornerRadius: 10.0))
@@ -39,6 +42,13 @@ struct ImageCarousalFetchView: View {
 //                }
                 
             }
+        }
+    }
+    
+    func completion(){
+        doneCount += 1
+        if doneCount == images.count{
+            imagesLoaded = true
         }
     }
 }

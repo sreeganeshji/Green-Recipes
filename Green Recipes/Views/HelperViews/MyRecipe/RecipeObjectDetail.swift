@@ -24,12 +24,27 @@ import SwiftUI
         @State var reviews:[Review] = []
         @State var average:Double = 0
         @Binding var uploadedByUsername:String
+        @Binding var doneLoading :Bool
         let title:String
         var body: some View {
 
             VStack
             {
                 Form{
+                    //images
+                    if (self.recipe.images != nil && self.recipe.images!.count > 0){
+                            
+                        ImageCarousalFetchView(images:self.$images, imagesLoaded: $doneLoading).environmentObject(self.data)
+                                .frame(maxHeight:300)
+                                .clipShape(RoundedRectangle(cornerRadius:10))
+                        
+        //                        .padding(.top)
+        //                        .padding(.bottom)
+        //                        .ignoresSafeArea()
+
+                    }
+                    
+                    
                 //description
                 if(self.recipe.description != nil){
                 Section{
@@ -146,27 +161,27 @@ import SwiftUI
                     }
                 }
 
-                    if (self.recipe.images != nil && self.recipe.images!.count > 0){
-                        Section{
-                            //images
-    //                        HStack{
-    //                            Spacer()
-    //                        Text("Images")
-    //                            .font(.title)
-    //                            .fontWeight(.light)
-    //                            .foregroundColor(.blue)
-    //                            Spacer()
-    //
-    //                        }
-                            
-                            ImageCarouselPreview(images:self.$images)
-                                .frame(maxHeight:300)
-                                .padding(.top)
-                                .padding(.bottom)
-                            
-                            
-                        }
-                    }
+//                    if (self.recipe.images != nil && self.recipe.images!.count > 0){
+//                        Section{
+//                            //images
+//    //                        HStack{
+//    //                            Spacer()
+//    //                        Text("Images")
+//    //                            .font(.title)
+//    //                            .fontWeight(.light)
+//    //                            .foregroundColor(.blue)
+//    //                            Spacer()
+//    //
+//    //                        }
+//
+//                            ImageCarouselPreview(images:self.$images)
+//                                .frame(maxHeight:300)
+//                                .padding(.top)
+//                                .padding(.bottom)
+//
+//
+//                        }
+//                    }
                     if(self.recipe.category != nil || self.recipe.contributor != nil){
                     Section{
                         if (self.recipe.category != nil){

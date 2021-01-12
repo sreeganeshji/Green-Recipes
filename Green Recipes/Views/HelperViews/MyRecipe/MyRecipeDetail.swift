@@ -12,14 +12,14 @@ struct MyRecipeDetail: View {
     @EnvironmentObject var data:DataModels
     @State var recipe:Recipe = .init()
     @State var images:[ImageContainer] = []
-    @State var loading:Bool = true
+    @State var doneLoading:Bool = false
     @State var uploadedByUsername:String = ""
 
     var recipeSummary :RecipeTemplate1
     
     var body: some View {
         VStack{
-            if(loading)
+            if(!doneLoading)
             {
                 Text("Loading")
                     .foregroundColor(.blue)
@@ -34,7 +34,7 @@ struct MyRecipeDetail: View {
                 RecipeEditView(recipeNew: self.$recipe, images: self.$images).environmentObject(data)
             }
             else{
-                RecipeObjectDetail(recipe: self.$recipe, images: self.$images, uploadedByUsername: self.$uploadedByUsername, title: self.recipe.name).environmentObject(data)
+                RecipeObjectDetail(recipe: self.$recipe, images: self.$images, uploadedByUsername: self.$uploadedByUsername, doneLoading: $doneLoading, title: self.recipe.name).environmentObject(data)
             }
             }
         }
@@ -62,14 +62,23 @@ struct MyRecipeDetail: View {
         }
 
     func UpdateRecipe(recipe:Recipe){
-        loading = false
+//        loading = false
         self.recipe = recipe
     //    fetchReviews()
-        GetImages()
-        
+//        GetImages()
+        fillImages()
     //fetch username
     self.uploadedByUsername = self.data.user.username
 
+    }
+    
+    func fillImages(){
+        if recipe.images == nil{
+            return
+        }
+        for imageName in recipe.images!{
+            self.images.append(.init(name: imageName, image: .init()))
+        }
     }
         
 //    func fetchReviews(){

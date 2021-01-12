@@ -13,6 +13,8 @@ struct ImageFetchView: View {
     @Binding var image:ImageContainer
     @EnvironmentObject var data:DataModels
     @State var spin = false
+    var completion : ()->()
+    
 //    let queue = DispatchQueue(label: "ImageFetch1", qos: .default, attributes: .concurrent, autoreleaseFrequency: .inherit, target: .global())
     var body: some View {
         Image(uiImage: self.image.image)
@@ -27,6 +29,7 @@ struct ImageFetchView: View {
         func updateImages(name:String, imageData:Data){
             self.image.image = UIImage(data: imageData)!
             spin = false
+            completion()
         }
         
         //download images
