@@ -37,7 +37,7 @@ func Initalizer(service service.Service) (*mux.Router){
 	r.HandleFunc("/deletemyreview/{review_id}",handler.DeleteMyReview).Methods(http.MethodDelete)
 	r.HandleFunc("/deletemyrecipe/{recipe_id}",handler.DeleteMyRecipe).Methods(http.MethodDelete)
 	r.HandleFunc("/submitreport",handler.SubmitReport).Methods(http.MethodPost)
-	r.HandleFunc("/updatereciperating/{recipe_id}/{rating_delta}",handler.UpdateRecipeRating).Methods(http.MethodPut)
+	r.HandleFunc("/updatereciperating/{recipe_id}/{ratings}",handler.UpdateRecipeRating).Methods(http.MethodPut)
 	return r
 }
 
@@ -480,7 +480,6 @@ func (h *handler) DeleteMyRecipe(w http.ResponseWriter, r *http.Request){
 }
 
 func (h *handler) SubmitReport(w http.ResponseWriter, r *http.Request){
-	fmt.Println("Submitting report")
 	decoder := json.NewDecoder(r.Body)
 	var report models.Report
 	err := decoder.Decode(&report)
@@ -503,26 +502,26 @@ func (h *handler) SubmitReport(w http.ResponseWriter, r *http.Request){
 
 func (h *handler) UpdateRecipeRating(w http.ResponseWriter, r * http.Request){
 	vars := mux.Vars(r)
-	rating_delta, err := strconv.Atoi(vars["rating_delta"])
+	recipe_id, err := strconv.Atoi(vars["recipe_id"])
 	if err!=nil{
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(fmt.Sprint("Couldn't extract rating_delta",err)))
 		return
 	}
 
-	recipe_id, err := strconv.Atoi(vars["rating_delta"])
+	ratings, err := strconv.ParseFloat(vars["ratings"], 32)
 	if err!=nil{
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(fmt.Sprint("Couldn't extract recipe_id",err)))
 		return
 	}
 
-	new_rating, err := h.Service.UpdateRecipeRating(recipe_id, rating_delta)
+	recipe_id_rec, err := h.Service.UpdateRecipeRating(recipe_id, ratings)
 	if err!=nil{
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(fmt.Sprint("Couldn't update recipe delta:",err)))
 		return
 	}
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(fmt.Sprint(new_rating)))
+	w.Write([]byte(fmt.Sprint(recipe_id_rec)))
 }

@@ -57,9 +57,12 @@ struct ReviewDetail: View {
                         if showMore{
                             Text(review.body!)
                                 .padding(.bottom)
+                                .frame(alignment:.leading)
                         }
                         else{
                         Text(review.body![review.body!.startIndex...review.body!.index(review.body!.startIndex, offsetBy: .init(100))])
+                            .frame(alignment:.leading)
+
                         Button(action:{self.showMore = true}){
                             HStack{
                                 Spacer()
@@ -72,6 +75,8 @@ struct ReviewDetail: View {
                         
                         if(!self.showMore && self.review.title.count > 20){
                             Text(review.body!)
+                                .frame(alignment:.leading)
+
                             Button(action:{self.showMore = true}){
                                 HStack{
                                     Spacer()
@@ -80,8 +85,13 @@ struct ReviewDetail: View {
                         }
                     }
                         else{
+                            GeometryReader{ reader in
                             Text(review.body!)
-                                .padding(.bottom)
+                                .frame(width:reader.size.width,alignment:.leading)
+
+                                
+                            }
+                            .padding(.bottom)
                         }
                 }
             }

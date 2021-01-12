@@ -85,6 +85,6 @@ func (s *Service) SubmitReport(report models.Report)(int, error){
 	return s.Postgres.SubmitReport(report)
 }
 
-func (s *Service) UpdateRecipeRating(recipe_id int, rating_delta int){
-	return s.Postgres.UpdateRecipeRating(recipe_id, rating_delta)
+func (s *Service) UpdateRecipeRating(recipe_id int, rating float64)(int, error){
+	return s.Postgres.UpdateRecipeRating(recipe_id, rating)
 }

@@ -286,7 +286,8 @@ struct RecipeDetail: View {
                 AddReport(showSheet: $showReportSheet, report: $report).environmentObject(self.data)
             })
             .navigationBarItems(trailing: Button(action:{showReportSheet = true}){Image(systemName:"flag").foregroundColor(.red)})
-        .navigationBarTitle(Text(self.recipe.name), displayMode: .inline)
+//        .navigationBarTitle(Text(self.recipe.name), displayMode: .inline)
+            .navigationTitle(Text(self.recipe.name))
 //        .navigationTitle(self.title)
         }
         
@@ -328,12 +329,18 @@ func UpdateRecipe(recipe:Recipe){
 //    fetchReviews()
 //    GetImages()
     fillImages()
+    fillReport()
     
 //fetch username
 if (self.recipe.addedby != nil){
 self.data.networkHandler.getUserName(userId: self.recipe.addedby!, completion: updateUsername)
 }
 }
+    
+    func fillReport(){
+        report.userId = data.user.userId
+        report.recipeId = recipe.id!
+    }
     
 func fetchReviews(){
     //use the recipe id to find the reviews.

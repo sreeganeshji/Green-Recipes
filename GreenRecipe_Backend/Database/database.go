@@ -451,7 +451,6 @@ func (p *Postgres) SubmitReport(report models.Report)(int, error){
 	sql_statement := `INSERT INTO report (title, body, recipe_id, person_id) VALUES ($1, $2, $3, $4) RETURNING report_id`
 
 	var report_id int
-
 	err := p.db.QueryRow(c,sql_statement, report.Title, report.Body, report.Recipefk, report.Personfk).Scan(&report_id)
 
 	if (err != nil) {
@@ -460,9 +459,18 @@ func (p *Postgres) SubmitReport(report models.Report)(int, error){
 	return report_id, nil
 }
 
-func (p *Postgres) UpdateRecipeRating(recipe_id int, rating_delta int){
+func (p *Postgres) UpdateRecipeRating(recipe_id int, rating float64)(int, error){
 	c, cancel := context.WithTimeout(context.Background(), time.Second * 5)
 	defer cancel()
 	//Get current sum and total reviews
-	sql := `select `
+	sql := `update recipe set ratings=$1 where id=$2 returning ratings`
+	
+	var recipe_id_rec int
+
+	err := p.db.QueryRow(c, sql, rating, recipe_id).Scan(&recipe_id_rec)
+	if err!=nil{
+		return -1, err
+	}
+
+	return recipe_id_rec, nil
 }
