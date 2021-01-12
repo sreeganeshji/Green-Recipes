@@ -55,13 +55,18 @@ struct ReviewDetail: View {
                     if (review.body!.count > 100)
                     {
                         if showMore{
+                            GeometryReader{ reader in
                             Text(review.body!)
+                                .frame(width:reader.size.width,alignment:.leading)
+                            }
                                 .padding(.bottom)
-                                .frame(alignment:.leading)
+                                
                         }
                         else{
-                        Text(review.body![review.body!.startIndex...review.body!.index(review.body!.startIndex, offsetBy: .init(100))])
-                            .frame(alignment:.leading)
+                            GeometryReader{ reader in
+                            Text(review.body![review.body!.startIndex...review.body!.index(review.body!.startIndex, offsetBy: .init(100))])
+                                .frame(width:reader.size.width,alignment:.leading)
+                            }
 
                         Button(action:{self.showMore = true}){
                             HStack{
@@ -74,8 +79,10 @@ struct ReviewDetail: View {
                     else{
                         
                         if(!self.showMore && self.review.title.count > 20){
+                            GeometryReader{ reader in
                             Text(review.body!)
-                                .frame(alignment:.leading)
+                                .frame(width:reader.size.width,alignment:.leading)
+                            }
 
                             Button(action:{self.showMore = true}){
                                 HStack{
@@ -88,8 +95,6 @@ struct ReviewDetail: View {
                             GeometryReader{ reader in
                             Text(review.body!)
                                 .frame(width:reader.size.width,alignment:.leading)
-
-                                
                             }
                             .padding(.bottom)
                         }

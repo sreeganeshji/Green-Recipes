@@ -28,7 +28,7 @@ added_by INT,
 nutrition TEXT[],
 category VARCHAR(50),
 rating REAL,
-ratingCount INT,
+rating_count INT,
 PRIMARY KEY(ID),
 FOREIGN KEY(added_by) REFERENCES person(user_id)
 );

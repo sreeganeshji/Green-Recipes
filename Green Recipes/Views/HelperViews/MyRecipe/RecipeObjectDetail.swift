@@ -25,6 +25,7 @@ import SwiftUI
         @State var average:Double = 0
         @Binding var uploadedByUsername:String
         @Binding var doneLoading :Bool
+        @State var imageLoaded = false
         let title:String
         var body: some View {
 
@@ -33,14 +34,22 @@ import SwiftUI
                 Form{
                     //images
                     if (self.recipe.images != nil && self.recipe.images!.count > 0){
-                            
-                        ImageCarousalFetchView(images:self.$images, imagesLoaded: $doneLoading).environmentObject(self.data)
+                        ZStack{
+                        ImageCarousalFetchView(images:self.$images, imagesLoaded: $imageLoaded).environmentObject(self.data)
                                 .frame(maxHeight:300)
                                 .clipShape(RoundedRectangle(cornerRadius:10))
                         
         //                        .padding(.top)
         //                        .padding(.bottom)
         //                        .ignoresSafeArea()
+                            if(!imageLoaded){
+                                Text("Loading Images...")
+                                    .font(.title)
+                                    .foregroundColor(.blue)
+                                    .fontWeight(.light)
+                                    .opacity(0.8)
+                            }
+                        }
 
                     }
                     

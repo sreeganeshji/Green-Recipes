@@ -69,6 +69,8 @@ struct MyRecipeDetail: View {
         fillImages()
     //fetch username
     self.uploadedByUsername = self.data.user.username
+        
+        doneLoading = true
 
     }
     

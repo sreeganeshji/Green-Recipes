@@ -366,6 +366,7 @@ func UpdateRecipe(recipe:Recipe){
 if (self.recipe.addedby != nil){
 self.data.networkHandler.getUserName(userId: self.recipe.addedby!, completion: updateUsername)
 }
+    loadingDone = true
 }
     
     func fillReport(){
@@ -392,7 +393,6 @@ func fetchReviews(){
             return
         }
         self.uploadedByUsername = username
-        loadingDone = true
 
     }
     
