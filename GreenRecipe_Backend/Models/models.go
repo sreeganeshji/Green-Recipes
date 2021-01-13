@@ -17,6 +17,8 @@ type Recipe struct {
 	Addedby     *int    `json:"addedby,omitempty"`
 	Nutrition []*string `json:"nutrition,omitempty"`
 	Category *string `json:"category,omitempty"`
+	Rating *float64 `json:"rating,omitempty"`
+	RatingCount *int `json:"rating_count,omitempty"`
 }
 
 type Review struct{

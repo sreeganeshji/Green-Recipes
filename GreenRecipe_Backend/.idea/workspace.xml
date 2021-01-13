@@ -20,15 +20,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0b39fbb6-cc4e-4b59-be15-8e3c7ca69ebc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Green Recipes/Data&amp;Models/activityIndicator.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/Desserts.imageset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/Desserts.imageset/Dessert.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/Drinks.imageset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/Drinks.imageset/Drinks.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/Lunch.imageset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/Lunch.imageset/Lunch.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/Salads.imageset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/Salads.imageset/Salad.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/Snacks.imageset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/Snacks.imageset/Snacks.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/Soup.imageset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/Soup.imageset/Soup.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/Soup2.imageset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/Soup2.imageset/Soup2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Green Recipes/Views/Explore.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/CategoryThumb.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Green Recipes.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Green Recipes/Data&amp;Models/Data.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Data&amp;Models/Data.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Green Recipes/Network/AmplifyStorageManager.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Network/AmplifyStorageManager.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Green Recipes/Network/Backend.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Network/Backend.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/MyRecipe/ImageFetchView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/MyRecipe/ImageFetchView.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/MyRecipe/MyRecipeDetail.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/MyRecipe/MyRecipeDetail.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/RecipeDetail.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/RecipeDetail.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/MyRecipe/RecipeEditView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/MyRecipe/RecipeEditView.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/Reviews/ReviewDetail.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/Reviews/ReviewDetail.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Green Recipes/Views/HomePage.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Views/HomePage.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Green Recipes/Views/SearchView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Views/SearchView.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/database.go" beforeDir="false" afterPath="$PROJECT_DIR$/Database/database.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/models.go" beforeDir="false" afterPath="$PROJECT_DIR$/Models/models.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rest/rest.go" beforeDir="false" afterPath="$PROJECT_DIR$/Rest/rest.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Service/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/Service/service.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -49,7 +49,12 @@ struct SearchView: View {
                         HStack{
                         Text(recipe.name)
                             Spacer()
-                            
+                            Text("4").font(.footnote)
+                                .padding(-3)
+                            Image(systemName: "star.fill").foregroundColor(.yellow).font(.footnote)
+                                .padding(-3)
+                            Text("(23)").font(.footnote)
+                                .padding(EdgeInsets(top: -3, leading: -3, bottom: -3, trailing: 0))
                             if(checkFavorite(recipe: recipe)){
                                 Button(action: {self.data.removeFavorites(userId: self.data.user.userId, recipe: recipe)}){
                                 Image(systemName: "star.fill")

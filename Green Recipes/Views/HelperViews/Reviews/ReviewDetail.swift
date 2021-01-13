@@ -97,6 +97,7 @@ struct ReviewDetail: View {
                                 .frame(width:reader.size.width,alignment:.leading)
                             }
                             .padding(.bottom)
+                            .padding(.bottom)
                         }
                 }
             }

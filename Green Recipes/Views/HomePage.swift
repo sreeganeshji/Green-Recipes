@@ -32,10 +32,10 @@ struct HomePage: View {
         if(self.signedIn){
 //            NavigationView{
         TabView(selection: $tabSelect) {
-//            Text("Explore").tabItem { HStack{
-//                Image(systemName: "sparkles")
-//                Text("Explore")
-//            } }.tag(tabViews.explore)
+            Explore().tabItem { HStack{
+                Image(systemName: "sparkles")
+                Text("Explore")
+            } }.tag(tabViews.explore)
             
             NavigationView{
                 SearchView().environmentObject(self.data)

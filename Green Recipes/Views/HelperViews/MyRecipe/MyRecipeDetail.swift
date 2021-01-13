@@ -16,6 +16,7 @@ struct MyRecipeDetail: View {
     @State var uploadedByUsername:String = ""
     @State var progress:Double = .init(0)
     @State var spin = false
+    @State var showEditSheet = false
 
     var recipeSummary :RecipeTemplate1
     
@@ -34,15 +35,20 @@ struct MyRecipeDetail: View {
                     }
             }
             else{
-            if editMode?.wrappedValue == EditMode.active{
-                RecipeEditView(recipeNew: self.$recipe, images: self.$images).environmentObject(data)
-            }
-            else{
+//            if editMode?.wrappedValue == EditMode.active{
+//                RecipeEditView(recipeNew: self.$recipe, images: self.$images).environmentObject(data)
+//            }
+//            else{
                 RecipeObjectDetail(recipe: self.$recipe, images: self.$images, uploadedByUsername: self.$uploadedByUsername, doneLoading: $doneLoading, title: self.recipe.name).environmentObject(data)
-            }
+//            }
             }
         }
-        .navigationBarItems(trailing: EditButton().font(.headline))
+        
+        .sheet(isPresented: $showEditSheet, content: {
+            RecipeEditView(recipeNew: self.$recipe, images: self.$images, showSheet:$showEditSheet).environmentObject(data)
+        })
+//        .navigationBarItems(trailing: EditButton().font(.headline))
+        .navigationBarItems(trailing: Button(action:{showEditSheet = true}){Text("Edit").font(.headline)})
     }
     
 

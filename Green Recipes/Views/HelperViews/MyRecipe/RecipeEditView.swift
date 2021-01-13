@@ -23,11 +23,12 @@ struct RecipeEditView: View {
     @State var recipeNewCategory = "Others"
     @State var recipeUserCategory = ""
     @State var recipeNewContributor = ""
+    @Binding var showSheet :Bool
     @Environment(\.editMode) var editMode
     
     
     var body: some View {
-
+        NavigationView{
         Form{
             Section{
             HStack{
@@ -324,15 +325,19 @@ struct RecipeEditView: View {
 //                .buttonStyle(PlainButtonStyle())
 //
 //            }
-            .navigationBarItems(leading: Image(systemName:"trash").font(.headline))
-            .alert(isPresented: self.$showAlert, content: {
-                Alert(title: Text("Cannot Submit"), message: Text(self.alertMessage))
-            })
+
         }
- 
+        .navigationTitle("Editing \(recipeNew.name)")
+        .navigationBarItems(leading: Image(systemName:"trash").font(.headline), trailing:Button(action:{submitRecipe()}){Text("Submit").font(.headline)})
+        .alert(isPresented: self.$showAlert, content: {
+            Alert(title: Text("Cannot Submit"), message: Text(self.alertMessage))
+        })
         .sheet(isPresented: self.$showSheetAddImages, content: {
             PhotoPicker(showSheet: self.$showSheetAddImages, images: self.$images)
         })
+        }
+ 
+
 
 //        .navigationTitle(Text("Edit Recipe"))
               
@@ -344,9 +349,6 @@ struct RecipeEditView: View {
             origin = recipeNew.origin ?? ""
             recipeNewCategory = recipeNew.category ?? ""
             recipeNewContributor = recipeNew.contributor ?? ""
-        }
-        .onDisappear(){
-      submitRecipe()
         }
     }
 
@@ -377,6 +379,7 @@ struct RecipeEditView: View {
     }
     func submitRecipe(){
         //ensure ingredients and process are entered
+        showSheet = false
         if (self.recipeNew.ingredients.count == 0 ) || (self.recipeNew.process.count == 0) || (self.recipeNew.name == ""){
             //show alert
             self.alertMessage = "Please add Name, Ingredients and Process."
