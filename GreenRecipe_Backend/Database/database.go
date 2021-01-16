@@ -496,3 +496,36 @@ func (p *Postgres) FetchRecipesOfCategory(category string)([]models.Recipe, erro
 	}
 	return recipes, err
 }
+
+func (p *Postgres) FetchRecipesOfCategoryLike(category string, recipe string, count int)([]models.Recipe, error){
+	c, cancel  := context.WithTimeout(context.Background(), 1*time.Second)
+	defer cancel()
+
+	sql := `select id, name, category, rating, rating_count from recipe where category=$3 and name ilike '%' || $1 || '%' limit $2`
+
+	recipe_rec := make([]models.Recipe, count)
+
+	rows, err := p.db.Query(c, sql, recipe, count, category)
+
+	if err != nil{
+		return nil, err
+	}
+
+	i := 0
+	for rows.Next(){
+		var recipeRow models.Recipe
+		err := rows.Scan(&recipeRow.ID, &recipeRow.Name, &recipeRow.Category, &recipeRow.Rating, &recipeRow.RatingCount)
+		if err!=nil{
+			return []models.Recipe{}, err
+		}
+		fmt.Println(recipeRow.Name)
+		recipe_rec[i] = recipeRow
+		i += 1
+	}
+	//fmt.Println("Retrived ",i," rows of recipes")
+
+	//if (err != nil){
+	//	return recipe_rec, err
+	//}
+	return recipe_rec[:i], nil
+}

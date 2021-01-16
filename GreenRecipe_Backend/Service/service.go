@@ -92,3 +92,7 @@ func (s *Service) UpdateRecipeRating(recipe_id int, rating float64, rating_count
 func (s *Service) FetchRecipesOfCategory(category string)([]models.Recipe, error){
 	return s.Postgres.FetchRecipesOfCategory(category)
 }
+
+func (s *Service) FetchRecipesOfCategoryLike(category string, text string, count int) ([]models.Recipe, error){
+	return s.Postgres.FetchRecipesOfCategoryLike(category, text, count)
+}
