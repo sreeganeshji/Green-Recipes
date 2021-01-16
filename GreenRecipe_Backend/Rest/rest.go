@@ -257,7 +257,6 @@ func (h *handler) GetUserFavorites(w http.ResponseWriter, r *http.Request){
 }
 
 func (h *handler) SubmitReview(w http.ResponseWriter, r *http.Request){
-	fmt.Println("Submitting review")
 	decoder := json.NewDecoder(r.Body)
 	var review models.Review
 	err := decoder.Decode(&review)

@@ -25,7 +25,6 @@ struct RecipeDetail: View {
     @EnvironmentObject var data:DataModels
     @State var reviews:[Review] = []
     @State var loadingDone = false
-    @State var average:Double = 0
     @State var uploadedByUsername:String = ""
     @State var report:Report = .init()
     @State var imageLoaded = true
@@ -288,9 +287,17 @@ struct RecipeDetail: View {
 //                    ReviewsSummary(user: self.$data.user, recipe: self.$recipe, reviews: self.$reviews).environmentObject(self.data)
 //                }
                 NavigationLink(destination:
-                                ReviewsSummary(user: self.$data.user, recipe: self.$recipe, reviews:self.$reviews, average: self.$average, fetchReviews: fetchReviews).environmentObject(self.data))
+                                ReviewsSummary(user: self.$data.user, recipe: self.$recipe, reviews:self.$reviews, fetchReviews: fetchReviews).environmentObject(self.data))
                 {
                     VStack{
+                        HStack{
+
+                            StarView(stars: recipe.rating ?? 0)
+                                    .foregroundColor(.yellow)
+                            Spacer()
+                            Text((recipe.ratingCount != nil) ? "\(recipe.ratingCount!) ratings" : "0 ratings").foregroundColor(.secondary)
+                        }
+                        .padding()
                     Text("Ratings & Reviews")
                         .font(.title)
                         .fontWeight(.light)
@@ -416,18 +423,23 @@ self.data.networkHandler.getUserName(userId: self.recipe.addedby!, completion: u
         report.recipeId = recipe.id!
     }
     
-func fetchReviews(){
+    func fetchReviews(_ submitAvg:Bool){
     //use the recipe id to find the reviews.
-    self.data.networkHandler.fetchReviews(recipe_id: self.id, completion: updateReviews)
+    if submitAvg{
+        self.data.networkHandler.fetchReviews(recipe_id: self.id, completion: updateReviews, callback: updateAverage)
+    }
+    else{
+        self.data.networkHandler.fetchReviews(recipe_id: self.id, completion: updateReviews, callback: {})
+    }
 }
     
-    func updateReviews(reviews: [Review], err: Error?){
+    func updateReviews(reviews: [Review], err: Error?, callback: @escaping ()->()){
         if err != nil{
             print("Coudln't update reviews")
             return
         }
         self.reviews = reviews
-        updateAverage()
+        callback()
     }
     
     func updateUsername(username:String, err:Error?){
@@ -443,7 +455,7 @@ func fetchReviews(){
             result + Double(review.rating)
         }
         let average = total/Double(reviews.count)
-        self.average = average
+        data.networkHandler.updateRecipeRating(recipeID: recipe.id!, rating: average, ratingCount: reviews.count, completion: GetRecipeByID)
     }
 
 }

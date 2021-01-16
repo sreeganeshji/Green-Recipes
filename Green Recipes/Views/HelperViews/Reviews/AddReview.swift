@@ -17,7 +17,7 @@ struct AddReview: View {
     @State var showAlert = false
     @State var alertMessage = ""
     @State var reviewExists = false
-    var fetchReviews:()->()
+    var fetchReviews:(_ submitAvg:Bool)->()
     
     var body: some View {
         VStack{
@@ -101,7 +101,7 @@ struct AddReview: View {
             {
                 Button(action:{
                     validateFields()
-                    self.data.networkHandler.deleteMyReview(reviewId: self.review.Id!, completion: fetchReviews)
+                    self.data.networkHandler.deleteMyReview(reviewId: self.review.Id!, completion: fetchReviews, updateAvg:false)
                 })
                 {
                     Image(systemName: "trash")
@@ -114,7 +114,7 @@ struct AddReview: View {
         {
                 Button(action:{
                         validateFields()
-                        self.data.networkHandler.updateMyReview(review: self.review, completion: fetchReviews)}){
+                        self.data.networkHandler.updateMyReview(review: self.review, completion: fetchReviews, updateAvg:true)}){
                 Text("Update")
                     .font(.headline)
             }
@@ -157,7 +157,9 @@ struct AddReview: View {
         }
         
         self.showSheet = false
+        if self.reviewBody != ""{
         self.review.body = self.reviewBody
+        }
         self.review.recipeId = self.recipe.id!
         self.review.userId = self.user.userId
     }
@@ -168,7 +170,7 @@ struct AddReview: View {
     }
     
     func submitted(err:Error?){
-        fetchReviews()
+        fetchReviews(true)
     }
     
     func fetchMyReview(){

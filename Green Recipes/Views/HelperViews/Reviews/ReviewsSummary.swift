@@ -13,8 +13,7 @@ struct ReviewsSummary: View {
     @Binding var reviews:[Review]
     @EnvironmentObject var data:DataModels
     @State var showSheetAddReview:Bool = false
-    @Binding var average:Double
-    var fetchReviews:()->()
+    var fetchReviews:(_ submitAvg:Bool)->()
     
     var body: some View {
 //        ScrollView{
@@ -27,11 +26,11 @@ struct ReviewsSummary: View {
     //                .foregroundColor(.blue)
     //            HStack{
     //                Text(String(format: "%0.1f out of 5", self.average)).bold()
-                    StarView(stars: average)
+                StarView(stars: recipe.rating ?? 0)
                         .foregroundColor(.yellow)
     //            }
                 Spacer()
-                Text((self.reviews.count == 1) ? "\(self.reviews.count) rating" : "\(self.reviews.count) ratings").foregroundColor(.secondary)
+                Text((recipe.ratingCount != nil) ? "\(recipe.ratingCount!) ratings" : "0 ratings").foregroundColor(.secondary)
             }
             
             Button(action:{self.showSheetAddReview = true})
@@ -58,7 +57,7 @@ struct ReviewsSummary: View {
 //            }
         }
         .onAppear(){
-            fetchReviews()
+            fetchReviews(false)
         }
 //        }
         .navigationTitle("Ratings & Reviews")

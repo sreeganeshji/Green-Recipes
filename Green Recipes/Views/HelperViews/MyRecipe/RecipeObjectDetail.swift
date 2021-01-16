@@ -22,7 +22,6 @@ import SwiftUI
         @Binding var images:[ImageContainer]
         @EnvironmentObject var data:DataModels
         @State var reviews:[Review] = []
-        @State var average:Double = 0
         @Binding var uploadedByUsername:String
         @Binding var doneLoading :Bool
         @State var imageLoaded = false
@@ -262,7 +261,7 @@ import SwiftUI
     //                    ReviewsSummary(user: self.$data.user, recipe: self.$recipe, reviews: self.$reviews).environmentObject(self.data)
     //                }
                     NavigationLink(destination:
-                                    ReviewsSummary(user: self.$data.user, recipe: self.$recipe, reviews:self.$reviews, average: self.$average, fetchReviews: fetchReviews).environmentObject(self.data))
+                                    ReviewsSummary(user: self.$data.user, recipe: self.$recipe, reviews:self.$reviews, fetchReviews: fetchReviews).environmentObject(self.data))
                     {
                         VStack{
                         Text("Ratings & Reviews")
@@ -294,18 +293,23 @@ import SwiftUI
         }
     
         
-    func fetchReviews(){
+        func fetchReviews(_ submitAvg:Bool){
         //use the recipe id to find the reviews.
-        self.data.networkHandler.fetchReviews(recipe_id: self.recipe.id!, completion: updateReviews)
+            if submitAvg{
+        self.data.networkHandler.fetchReviews(recipe_id: self.recipe.id!, completion: updateReviews, callback: updateAverage)
+            }
+            else{
+                self.data.networkHandler.fetchReviews(recipe_id: self.recipe.id!, completion: updateReviews, callback: {})
+            }
     }
         
-        func updateReviews(reviews: [Review], err: Error?){
+        func updateReviews(reviews: [Review], err: Error?, callback:@escaping ()->()){
             if err != nil{
                 print("Coudln't update reviews")
                 return
             }
             self.reviews = reviews
-            updateAverage()
+            callback()
             
         }
         
@@ -321,7 +325,6 @@ import SwiftUI
                 result + Double(review.rating)
             }
             let average = total/Double(reviews.count)
-            self.average = average
         }
 
     }

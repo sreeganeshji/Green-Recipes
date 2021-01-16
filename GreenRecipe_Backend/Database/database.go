@@ -267,9 +267,7 @@ func (p *Postgres) GetUserRecipes(userid int)([]models.Recipe, error){
 func (p *Postgres) SubmitReview(review models.Review)(int, error){
 	c, cancel := context.WithTimeout(context.Background(), time.Second*1)
 	defer cancel()
-	fmt.Println("Submitting to database")
-
-	sql_statement := `INSERT INTO review (title, body, stars, images, likes, dislikes, recipe_id, person_id) VALUES ($1, $2, $3, $4, $1, $6, $7, $8) RETURNING review_id`
+	sql_statement := `INSERT INTO review (title, body, stars, images, likes, dislikes, recipe_id, person_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING review_id`
 
 	var review_id int
 

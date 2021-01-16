@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Explore: View {
-    let categories = ["Snacks", "Drinks", "Desserts", "Lunch", "Soup"]
+    let categories = ["Snacks", "Drinks", "Desserts", "Lunch", "Soup", "Others"]
     @EnvironmentObject var data:DataModels
     var body: some View {
         ScrollView(){

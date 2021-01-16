@@ -323,25 +323,25 @@ class NetworkAdapter{
         }
     }
     
-    func fetchReviews(recipe_id:Int, completion:@escaping ([Review],Error?)->()){
+    func fetchReviews(recipe_id:Int, completion:@escaping ([Review],Error?, _ callback:@escaping ()->())->(), callback:@escaping()->()){
         var requestURL = baseURL
         requestURL.appendPathComponent("fetchreviews/\(recipe_id)")
         
         let task = URLSession.shared.dataTask(with: requestURL) { (data:Data?, response:URLResponse?, error:Error?) in
             if error != nil{
                 print("error is: \(error)")
-                completion([], error)
+                completion([], error, callback)
                 return
             }
             let decoder = JSONDecoder()
             do{
                 var reviews_rec:[Review]
                 reviews_rec = try decoder.decode([Review].self, from: data!)
-                completion(reviews_rec, nil)
+                completion(reviews_rec, nil, callback)
             }
             catch{
                 print("Couldn't decode recived reviews: \(error)")
-                completion([], error)
+                completion([], error, callback)
                 return
             }
         }
@@ -452,7 +452,7 @@ class NetworkAdapter{
         task.resume()
     }
     
-    func updateMyReview(review:Review, completion:@escaping ()->()){
+    func updateMyReview(review:Review, completion:@escaping (Bool)->(), updateAvg:Bool){
         var addRecipeURL = baseURL
         addRecipeURL.appendPathComponent("updatemyreview")
         var addRecipeRequest = URLRequest(url: addRecipeURL)
@@ -467,12 +467,12 @@ class NetworkAdapter{
             print(String(data: data ?? Data(), encoding: .utf8)!)
             print("Response",response ?? "")
             print("Error",error ?? "")
-            completion()
+            completion(updateAvg)
         }
         task.resume()
     }
     
-    func deleteMyReview(reviewId:Int, completion: @escaping ()->()){
+    func deleteMyReview(reviewId:Int, completion: @escaping (Bool)->(), updateAvg:Bool){
         var requestURL = baseURL
         requestURL.appendPathComponent("deletemyreview/\(reviewId)")
         var deleteMyReviewRequest = URLRequest(url: requestURL)
@@ -483,7 +483,7 @@ class NetworkAdapter{
                 print("Couldn't delete my review")
                 
             }
-            completion()
+            completion(updateAvg)
         }
         task.resume()
     }
@@ -554,6 +554,18 @@ class NetworkAdapter{
                 completion([], error)
                 return
             }
+        }
+        task.resume()
+    }
+
+    func updateRecipeRating(recipeID:Int, rating:Double, ratingCount:Int, completion:@escaping ()->()){
+        var requestURL = baseURL
+        requestURL.appendPathComponent("updatereciperating/\(recipeID)/\(rating)/\(ratingCount)")
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = "PUT"
+        
+        let task = URLSession.shared.dataTask(with: request) { (data:Data?, response:URLResponse?, error:Error?) in
+            completion()
         }
         task.resume()
     }

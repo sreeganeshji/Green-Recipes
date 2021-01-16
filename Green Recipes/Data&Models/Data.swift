@@ -87,7 +87,7 @@ struct RecipeTemplate1:Codable, Hashable{
     var rating:Float64?
     var ratingCount:Int?
     
-    enum keys:String, CodingKey{
+    enum CodingKeys:String, CodingKey{
         case id = "id"
         case name = "name"
         case rating = "rating"
