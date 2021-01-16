@@ -9,7 +9,7 @@ import Foundation
 
 class NetworkAdapter{
     
-    var baseURL = URL(string: "https://ganeshappbackend.com")!
+ 
     
     init(_ base:String?){
         if base != nil{
@@ -534,5 +534,27 @@ class NetworkAdapter{
         catch{
             print("Couldn't encode review due to errors: \(error)")
         }
+    }
+    
+    func fetchRecipesOfCategory(category:String, completion: @escaping ([RecipeTemplate1], Error?)->()){
+        var requestURL = baseURL
+        requestURL.appendPathComponent("fetchrecipesofcategory/\(category)")
+        
+        let task = URLSession.shared.dataTask(with: requestURL) { (data:Data?, response:URLResponse?, error:Error?) in
+            if (error != nil){
+                completion([],error)
+                return
+            }
+            let jsonDecoder = JSONDecoder()
+            do{
+                let recipes = try jsonDecoder.decode([RecipeTemplate1].self, from: data!)
+                completion(recipes, nil)
+            }
+            catch{
+                completion([], error)
+                return
+            }
+        }
+        task.resume()
     }
 }

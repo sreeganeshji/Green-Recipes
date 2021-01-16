@@ -88,3 +88,7 @@ func (s *Service) SubmitReport(report models.Report)(int, error){
 func (s *Service) UpdateRecipeRating(recipe_id int, rating float64, rating_count int)(int, error){
 	return s.Postgres.UpdateRecipeRating(recipe_id, rating, rating_count)
 }
+
+func (s *Service) FetchRecipesOfCategory(category string)([]models.Recipe, error){
+	return s.Postgres.FetchRecipesOfCategory(category)
+}

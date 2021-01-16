@@ -1,49 +1,24 @@
 //
-//  SearchView.swift
+//  CategoryList.swift
 //  Green Recipes
 //
-//  Created by SreeGaneshji on 12/19/20.
+//  Created by SreeGaneshji Bangalore Chandrashekar on 1/12/21.
 //
 
 import SwiftUI
 
-struct SearchView: View {
-    @State var text : String = ""
-    @State var recipes : [RecipeTemplate1] = []
+struct CategoryList: View {
+    var categoryName:String
+    @State var recipes:[RecipeTemplate1] = []
     @EnvironmentObject var data:DataModels
-    
-    //modal sheet
-    @State var sheetPresented = false
-    @State var sheetRecipeID = 0
+    @State var text = ""
     var body: some View {
-        
         List{
-          
-//            HStack{
-//                Button(action: searchQuery){
-//                Image(systemName: "magnifyingglass")
-//                }
-//
-//                TextField("Search recipes", text: $text)
-//
-//                Button(action:clearSearchField){
-//                Image(systemName: "xmark.circle.fill")
-//                }
-//
-//            }.padding()
-            
             SearchBarUI(text:$text, completion: searchQuery)
                 
-        
-//            Form{
                 ForEach(self.recipes, id:\.self){
                     recipe in
                     
-//                    Button(action:{
-//                        print("Sending id \(recipe.id)")
-//                        self.sheetRecipeID = recipe.id
-//                        self.sheetPresented = true
-//                    })
                     NavigationLink(destination:RecipeDetail(id: recipe.id, title: recipe.name).environmentObject(self.data))
                     {
                         HStack{
@@ -72,43 +47,32 @@ struct SearchView: View {
                             }
                         }
                     }
-//                    .listRowInsets(EdgeInsets())
                 }
-//            }
-            
         }
-//        .navigationBarHidden(true)
-        
-        .navigationTitle("Search Recipes")
-        
-        
-//        .sheet(isPresented: self.$sheetPresented, content: {
-//            RecipeDetail(id: self.sheetRecipeID)
-//        })
-   
+        .navigationBarTitle(categoryName)
+            .onAppear(){
+                data.networkHandler.fetchRecipesOfCategory(category: categoryName, completion: updateRecipes)
+            }
     }
-    func clearSearchField(){
-        self.text = ""
+    func updateRecipes(recipes:[RecipeTemplate1], error:Error?){
+        if error != nil{
+            print("Error fetching recipes: \(error)")
+            return
+        }
+        self.recipes = recipes
     }
     
     func searchQuery(){
-        data.networkHandler.searchRecipeLike(text: self.text, completion: updateRecipes)
-        print("Recipes recived are ", self.recipes)
-    }
-    
-    func updateRecipes(recipes:[RecipeTemplate1]){
-        self.recipes = recipes
+        //search category
     }
     
     func checkFavorite(recipe:RecipeTemplate1)->Bool{
         return self.data.cache.favRecipes.contains(recipe)
     }
-    
-    
 }
 
-struct SearchView_Previews: PreviewProvider {
+struct CategoryList_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView().environmentObject(DataModels())
+        CategoryList(categoryName: "Lunch").environmentObject(DataModels())
     }
 }

@@ -38,6 +38,7 @@ func Initalizer(service service.Service) (*mux.Router){
 	r.HandleFunc("/deletemyrecipe/{recipe_id}",handler.DeleteMyRecipe).Methods(http.MethodDelete)
 	r.HandleFunc("/submitreport",handler.SubmitReport).Methods(http.MethodPost)
 	r.HandleFunc("/updatereciperating/{recipe_id}/{rating}/{rating_count}",handler.UpdateRecipeRating).Methods(http.MethodPut)
+	r.HandleFunc("/fetchrecipesofcategory/{category}",handler.FetchRecipesOfCategory).Methods(http.MethodGet)
 	return r
 }
 
@@ -531,4 +532,25 @@ func (h *handler) UpdateRecipeRating(w http.ResponseWriter, r * http.Request){
 	}
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte(fmt.Sprint(recipe_id_rec)))
+}
+
+func (h *handler) FetchRecipesOfCategory(w http.ResponseWriter, r * http.Request){
+	vars := mux.Vars(r)
+	category := vars["category"]
+
+	recipes, err := h.Service.FetchRecipesOfCategory(category)
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Couldn't fetch recipes of category:",err)))
+		return
+	}
+
+	data,err := json.Marshal(recipes)
+	if err!=nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("marshal json:",err)))
+		return
+	}
+	w.Write(data)
+	w.WriteHeader(http.StatusOK)
 }

@@ -29,6 +29,7 @@
 		B122465B25ADF7DD00320E27 /* activityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B122465A25ADF7DD00320E27 /* activityIndicator.swift */; };
 		B122466025AE506400320E27 /* CategoryThumb.swift in Sources */ = {isa = PBXBuildFile; fileRef = B122465F25AE506400320E27 /* CategoryThumb.swift */; };
 		B122466525AE50F100320E27 /* Explore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B122466425AE50F100320E27 /* Explore.swift */; };
+		B122466A25AE7C5000320E27 /* CategoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B122466925AE7C4F00320E27 /* CategoryList.swift */; };
 		B163D999259D741100225124 /* ImageCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B163D998259D741100225124 /* ImageCarousel.swift */; };
 		B16A1247259112080027FC4F /* Reviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16A1246259112080027FC4F /* Reviews.swift */; };
 		B16A124F2591C69A0027FC4F /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16A124E2591C69A0027FC4F /* SignUp.swift */; };
@@ -109,6 +110,7 @@
 		B122465A25ADF7DD00320E27 /* activityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = activityIndicator.swift; sourceTree = "<group>"; };
 		B122465F25AE506400320E27 /* CategoryThumb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryThumb.swift; sourceTree = "<group>"; };
 		B122466425AE50F100320E27 /* Explore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Explore.swift; sourceTree = "<group>"; };
+		B122466925AE7C4F00320E27 /* CategoryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryList.swift; sourceTree = "<group>"; };
 		B163D998259D741100225124 /* ImageCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCarousel.swift; sourceTree = "<group>"; };
 		B16A1246259112080027FC4F /* Reviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reviews.swift; sourceTree = "<group>"; };
 		B16A124E2591C69A0027FC4F /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 			children = (
 				1F843949254DF70A004A27A9 /* recipeThumb1.swift */,
 				B1F0D60525906B6600BD36EF /* RecipeDetail.swift */,
+				B122466925AE7C4F00320E27 /* CategoryList.swift */,
 				B122465225AC18AB00320E27 /* AddReport.swift */,
 				B1E81E3525A267170059EC28 /* Reviews */,
 				B16A124E2591C69A0027FC4F /* SignUp.swift */,
@@ -614,6 +617,7 @@
 				1F8438B7254D2D19004A27A9 /* ContentView.swift in Sources */,
 				B16A124F2591C69A0027FC4F /* SignUp.swift in Sources */,
 				1F46F55C2575E17A005414DE /* MyRecipes.swift in Sources */,
+				B122466A25AE7C5000320E27 /* CategoryList.swift in Sources */,
 				B1E81E07259E83190059EC28 /* AddReview.swift in Sources */,
 				B1E81E2325A25EB20059EC28 /* ProfileDetail.swift in Sources */,
 				B122465B25ADF7DD00320E27 /* activityIndicator.swift in Sources */,

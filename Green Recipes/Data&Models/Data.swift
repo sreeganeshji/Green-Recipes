@@ -40,6 +40,27 @@ struct Recipe: Hashable, Equatable, Codable{
     var addedby:Int?
     var nutrition:[String]?
     var category:String?
+    var rating:Float64?
+    var ratingCount:Int?
+    
+    enum CodingKeys:String, CodingKey{
+        case id = "id"
+        case name = "name"
+        case description = "description"
+        case ingredients = "ingredients"
+        case process = "process"
+        case contributor = "contributor"
+        case origin = "origin"
+        case servings = "servings"
+        case equipment = "equipment"
+        case images = "images"
+        case addeddate = "added_date"
+        case addedby = "addedby"
+        case nutrition = "nutrition"
+        case category = "category"
+        case rating = "rating"
+        case ratingCount = "rating_count"
+    }
 
     init() {
         self.name = ""
@@ -63,6 +84,16 @@ struct RecipeTemplate1:Codable, Hashable{
     var id:Int
     var name:String
     var category:String?
+    var rating:Float64?
+    var ratingCount:Int?
+    
+    enum keys:String, CodingKey{
+        case id = "id"
+        case name = "name"
+        case rating = "rating"
+        case ratingCount = "rating_count"
+        
+    }
 }
 
 //categories 
