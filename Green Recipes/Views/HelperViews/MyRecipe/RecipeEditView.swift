@@ -391,6 +391,7 @@ struct RecipeEditView: View {
         //add the rest of the fields.
         self.recipeNew.origin = self.origin
         self.recipeNew.addedby = self.data.user.userId
+        self.recipeNew.description = self.description
         self.recipeNew.contributor = self.recipeNewContributor
         self.recipeNew.category = self.recipeNewCategory
         

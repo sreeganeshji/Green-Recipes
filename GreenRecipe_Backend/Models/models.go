@@ -10,7 +10,7 @@ type Recipe struct {
 	Process     []*string  `json:"process,omitempty"`
 	Contributor *string    `json:"contributor,omitempty"`
 	Origin      *string    `json:"origin,omitempty"`
-	Servings    int   `json:"servings,omitempty"`
+	Servings    *int   `json:"servings,omitempty"`
 	Equipment   []*string  `json:"equipment,omitempty"`
 	Images      [] *string `json:"images,omitempty"`
 	AddedDate   time.Time    `json:"added_date,omitempty"`

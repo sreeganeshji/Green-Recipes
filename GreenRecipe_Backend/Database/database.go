@@ -66,7 +66,7 @@ func (p *Postgres)AddRecipe(recipe models.Recipe) (models.Recipe, error){
 	c, cancel := context.WithTimeout(context.Background(), time.Second*1)
 	defer cancel()
 
-	sql_statement := `INSERT INTO recipe (name, description, ingredients, process, contributor, origin, servings, equipment, images, added_by, nutrition, category) VALUES ($1, $2, $3, $4, $1, $6, $7, $8, $9, $10, $11, $12) RETURNING id,name, description, ingredients, process, contributor, origin, servings, equipment, images,
+	sql_statement := `INSERT INTO recipe (name, description, ingredients, process, contributor, origin, servings, equipment, images, added_by, nutrition, category) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING id,name, description, ingredients, process, contributor, origin, servings, equipment, images,
 added_date, added_by, nutrition, category`
 
 	var insertedrecipe models.Recipe
@@ -106,7 +106,7 @@ func (p *Postgres) AddUser(user models.Person) (models.Person, error){
 	// create a user based on the appleString and return its database id.
 	c, cancel := context.WithTimeout(context.Background(),time.Second*3)
 	defer cancel()
-	sql := `INSERT INTO person (apple_id, firstname, lastname, username, email) VALUES($1, $2, $3, $4, $1) RETURNING person_id, apple_id, firstname, lastname, username, email  `
+	sql := `INSERT INTO person (apple_id, firstname, lastname, username, email) VALUES($1, $2, $3, $4, $5) RETURNING person_id, apple_id, firstname, lastname, username, email  `
 
 	var user_rec models.Person
 
@@ -335,7 +335,7 @@ func (p *Postgres) UpdateRecipe(recipe models.Recipe)(int, error){
 
 	c, cancel := context.WithTimeout(context.Background(), time.Second * 1)
 	defer cancel()
-	sql := `update recipe set name=$1, ingredients=$2, description=$3, origin=$4, equipment=$1, images=$6, category=$7, process=$8, contributor=$9 where id=$10`
+	sql := `update recipe set name=$1, ingredients=$2, description=$3, origin=$4, equipment=$5, images=$6, category=$7, process=$8, contributor=$9 where id=$10 returning id`
 	var recipe_id int
 	err := p.db.QueryRow(c, sql, recipe.Name, recipe.Ingredients, recipe.Description, recipe.Origin, recipe.Equipment, recipe.Images, recipe.Category, recipe.Process, recipe.Contributor, recipe.ID).Scan(&recipe_id)
 	if err!=nil{

@@ -78,7 +78,10 @@ struct RecipeDetail: View {
             Section{
                 HStack{
                     Spacer()
-                    Text("Description").bold().italic()
+                    Text("Description")
+                        .font(.title)
+                        .foregroundColor(.blue)
+                        .fontWeight(.light)
                 Spacer()
             }
 
