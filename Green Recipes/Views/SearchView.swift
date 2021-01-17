@@ -77,10 +77,7 @@ struct SearchView: View {
 //            }
             
         }
-        .onAppear(){
-            data.networkHandler.fetchAllRecipes(count: 50, completion: updateRecipes)
 
-        }
 //        .navigationBarHidden(true)
         
         .navigationTitle("Search Recipes")

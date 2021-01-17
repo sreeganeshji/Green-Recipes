@@ -243,6 +243,17 @@ struct AddRecipe: View {
                     Spacer()
                 }
                     TextField("Add Contributor", text: self.$recipeNewContributor)
+                
+                HStack{
+                    Spacer()
+                    Text("Origin")
+                        .font(.title)
+                        .fontWeight(.light)
+                        .foregroundColor(.blue)
+                    Text("(Optional)").foregroundColor(.secondary)
+                    Spacer()
+                }
+                    TextField("Add Origin", text: self.$origin)
             }
             
             Section

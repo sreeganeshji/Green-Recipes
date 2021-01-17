@@ -50,9 +50,7 @@ struct CategoryList: View {
                 }
         }
         .navigationBarTitle(categoryName)
-            .onAppear(){
-                data.networkHandler.fetchRecipesOfCategory(category: categoryName, completion: updateRecipes)
-            }
+
     }
     func updateRecipes(recipes:[RecipeTemplate1], error:Error?){
         if error != nil{
@@ -64,6 +62,13 @@ struct CategoryList: View {
     
     func searchQuery(){
         //search category
+        if text == ""{
+        data.networkHandler.fetchRecipesOfCategory(category: categoryName, completion: updateRecipes)
+            return
+        }
+        
+        data.networkHandler.searchRecipeCategory(category: categoryName, text: text, completion: updateRecipes)
+
     }
     
     func checkFavorite(recipe:RecipeTemplate1)->Bool{
