@@ -264,6 +264,15 @@ import SwiftUI
                                     ReviewsSummary(user: self.$data.user, recipe: self.$recipe, reviews:self.$reviews, fetchReviews: fetchReviews).environmentObject(self.data))
                     {
                         VStack{
+                            HStack{
+
+                                StarView(stars: (recipe.rating != nil) ? .constant(recipe.rating!) : .constant(0))
+                                        .foregroundColor(.yellow)
+                                Spacer()
+                                Text((recipe.ratingCount != nil) ? "\(recipe.ratingCount!) ratings" : "0 ratings").foregroundColor(.secondary)
+                            }
+                            .padding()
+                            
                         Text("Ratings & Reviews")
                             .font(.title)
                             .fontWeight(.light)
@@ -320,12 +329,33 @@ import SwiftUI
             self.uploadedByUsername = username
         }
         
+        func UpdateRecipe(recipe:Recipe){
+    //        loading = false
+            self.recipe = recipe
+        //    fetchReviews()
+    //        GetImages()
+    //        fillImages()
+//            getImages2()
+        //fetch username
+        self.uploadedByUsername = self.data.user.username
+            
+            doneLoading = true
+
+        }
+        
+        func GetRecipeByID(){
+            data.networkHandler.searchRecipeWithID(id: recipe.id!, completion: UpdateRecipe)
+        }
+        
         func updateAverage(){
             let total:Double = reviews.reduce(0.0) { (result:Double, review:Review) -> Double in
                 result + Double(review.rating)
             }
             let average = total/Double(reviews.count)
+            data.networkHandler.updateRecipeRating(recipeID: recipe.id!, rating: average, ratingCount: reviews.count, completion: GetRecipeByID)
         }
+        
+        
 
     }
 
