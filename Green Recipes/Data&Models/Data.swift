@@ -40,7 +40,7 @@ struct Recipe: Hashable, Equatable, Codable{
     var addedby:Int?
     var nutrition:[String]?
     var category:String?
-    var rating:Float64?
+    var rating:Double?
     var ratingCount:Int?
     
     enum CodingKeys:String, CodingKey{
@@ -245,8 +245,8 @@ class DataModels:ObservableObject{
     
     var recipies = [Recipe]()
     
-    var networkHandler = NetworkAdapter("http://localhost:5000")
-//    var networkHandler = NetworkAdapter(nil)
+//    var networkHandler = NetworkAdapter("http://localhost:5000")
+    var networkHandler = NetworkAdapter(nil)
     
     var user = User()
     

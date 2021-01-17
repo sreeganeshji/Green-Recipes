@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StarView: View {
-    @State var stars:Double
+    @Binding var stars:Double
     var body: some View {
         HStack{
             if(stars >= 1){
@@ -82,6 +82,6 @@ struct StarView: View {
 
 struct StarView_Previews: PreviewProvider {
     static var previews: some View {
-        StarView(stars: 4.5)
+        StarView(stars: .constant(4.5))
     }
 }

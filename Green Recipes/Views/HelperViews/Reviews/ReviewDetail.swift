@@ -41,7 +41,7 @@ struct ReviewDetail: View {
                 }
                 .padding(.top)
                 HStack{
-                StarView(stars: Double(review.rating))
+                    StarView(stars: .constant(Double(review.rating)))
                     .foregroundColor(.yellow)
                     Spacer()
                     Text(self.username)

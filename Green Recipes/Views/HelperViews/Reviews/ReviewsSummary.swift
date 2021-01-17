@@ -26,7 +26,7 @@ struct ReviewsSummary: View {
     //                .foregroundColor(.blue)
     //            HStack{
     //                Text(String(format: "%0.1f out of 5", self.average)).bold()
-                StarView(stars: recipe.rating ?? 0)
+                StarView(stars: (recipe.rating != nil) ? .constant(recipe.rating!) : .constant(0))
                         .foregroundColor(.yellow)
     //            }
                 Spacer()

@@ -292,7 +292,7 @@ struct RecipeDetail: View {
                     VStack{
                         HStack{
 
-                            StarView(stars: recipe.rating ?? 0)
+                            StarView(stars: (recipe.rating != nil) ? .constant(recipe.rating!) : .constant(0))
                                     .foregroundColor(.yellow)
                             Spacer()
                             Text((recipe.ratingCount != nil) ? "\(recipe.ratingCount!) ratings" : "0 ratings").foregroundColor(.secondary)

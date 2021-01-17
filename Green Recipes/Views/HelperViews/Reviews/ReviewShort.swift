@@ -17,7 +17,7 @@ struct ReviewShort: View {
                 Text(self.review.created ?? "").foregroundColor(.secondary)
             }
             
-            StarView(stars: Double(review.rating))
+            StarView(stars: .constant(Double(review.rating)))
             
             if review.body != nil{
                 Text(review.body!).frame(maxHeight:200)
