@@ -19,12 +19,16 @@ struct ProfileDetail: View {
                 .onDisappear(){
                     print("Updating user credentials")
                     self.data.networkHandler.updateUserProfile(user: user)
+                    data.user = user
                 }
         }
         else{
             ProfileDetailForm(user:$user)
         }
     }
+        .onAppear(){
+            user = data.user
+        }
         .navigationBarItems(trailing: EditButton().font(.headline))
     }
 }

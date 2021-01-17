@@ -2,7 +2,7 @@
 /* create tables */
 
 CREATE TABLE person (
-user_id SERIAL,
+person_id SERIAL,
 apple_id VARCHAR (100) NOT NULL,
 firstname VARCHAR(50) NOT NULL,
 lastname VARCHAR(50) NOT NULL,

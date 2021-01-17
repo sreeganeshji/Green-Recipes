@@ -18,16 +18,18 @@ struct ProfileDetailForm: View {
                     .foregroundColor(.secondary)
             }){
         Text(user.username)
+            .foregroundColor(.blue)
 
             }
             
             Section(header:Text("First Name")){
-                Text(user.firstName)
+                Text(user.firstName).foregroundColor(.blue)
             }
             
             Section(header:Text("Last Name"))
             {
                 Text(user.lastName)
+                    .foregroundColor(.blue)
             }
         }
     }

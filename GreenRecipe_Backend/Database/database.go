@@ -106,7 +106,7 @@ func (p *Postgres) AddUser(user models.Person) (models.Person, error){
 	// create a user based on the appleString and return its database id.
 	c, cancel := context.WithTimeout(context.Background(),time.Second*3)
 	defer cancel()
-	sql := `INSERT INTO person (apple_id, firstname, lastname, username, email) VALUES($1, $2, $3, $4, $1) RETURNING user_id, apple_id, firstname, lastname, username, email  `
+	sql := `INSERT INTO person (apple_id, firstname, lastname, username, email) VALUES($1, $2, $3, $4, $1) RETURNING person_id, apple_id, firstname, lastname, username, email  `
 
 	var user_rec models.Person
 
@@ -123,7 +123,7 @@ func (p *Postgres) GetUserWithAppleID(apple_id string)(models.Person, error){
 	c, cancel := context.WithTimeout(context.Background(), 1 * time.Second)
 	defer cancel()
 
-	sql := `select user_id, apple_id, firstname, lastname, username, email from person where apple_id=$1`
+	sql := `select person_id, apple_id, firstname, lastname, username, email from person where apple_id=$1`
 
 	var user models.Person
 	err := p.db.QueryRow(c, sql, apple_id).Scan(&user.UserID, &user.Appleid, &user.Firstname, &user.Lastname, &user.Username, &user.Email)
@@ -351,7 +351,7 @@ func (p *Postgres) UpdateUserProfile(person models.Person)(int, error){
 	sql := `update person set firstname=$1, lastname=$2, username=$3 where person_id=$4 returning person_id`
 
 	var person_id int
-	err := p.db.QueryRow(c, sql, person.Firstname, person.Lastname, person.Username).Scan(&person_id)
+	err := p.db.QueryRow(c, sql, person.Firstname, person.Lastname, person.Username, person.UserID).Scan(&person_id)
 	if err!=nil{
 		return 0, err
 	}
@@ -391,7 +391,7 @@ func (p *Postgres) GetUserName(person_id int)(string, error){
 	c, cancel := context.WithTimeout(context.Background(), time.Second * 1)
 	defer cancel()
 
-	sql := `select username from person where user_id=$1`
+	sql := `select username from person where person_id=$1`
 
 	var username string
 
@@ -526,4 +526,25 @@ func (p *Postgres) FetchRecipesOfCategoryLike(category string, recipe string, co
 	//	return recipe_rec, err
 	//}
 	return recipe_rec[:i], nil
+}
+
+func (p *Postgres) FetchAllRecipes(count int)([]models.Recipe, error){
+	c, cancel := context.WithTimeout(context.Background(), time.Second*1)
+	defer cancel()
+
+	sql := `select id, name, category, rating, rating_count from recipe limit $1`
+
+	rows, err := p.db.Query(c, sql, count)
+
+	if err != nil{
+		return nil, err
+	}
+	var recipes []models.Recipe
+
+	for rows.Next(){
+		var recipe models.Recipe
+		rows.Scan(&recipe.ID, &recipe.Name, &recipe.Category, &recipe.Rating, &recipe.RatingCount)
+		recipes = append(recipes, recipe)
+	}
+	return recipes, nil
 }

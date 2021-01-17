@@ -77,6 +77,10 @@ struct SearchView: View {
 //            }
             
         }
+        .onAppear(){
+            data.networkHandler.fetchAllRecipes(count: 50, completion: updateRecipes)
+
+        }
 //        .navigationBarHidden(true)
         
         .navigationTitle("Search Recipes")
@@ -92,12 +96,18 @@ struct SearchView: View {
     }
     
     func searchQuery(){
+        if self.text == ""{
+            data.networkHandler.fetchAllRecipes(count: 50, completion: updateRecipes)
+            return
+        }
         data.networkHandler.searchRecipeLike(text: self.text, completion: updateRecipes)
-        print("Recipes recived are ", self.recipes)
+//        print("Recipes recived are ", self.recipes)
     }
     
-    func updateRecipes(recipes:[RecipeTemplate1]){
+    func updateRecipes(recipes:[RecipeTemplate1], error:Error?){
+        if error == nil{
         self.recipes = recipes
+        }
     }
     
     func checkFavorite(recipe:RecipeTemplate1)->Bool{

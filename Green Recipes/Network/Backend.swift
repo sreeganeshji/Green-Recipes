@@ -9,7 +9,7 @@ import Foundation
 
 class NetworkAdapter{
     
-    var baseURL = URL(string: "https://ganeshappbackend.com")!
+
     
     init(_ base:String?){
         if base != nil{
@@ -87,7 +87,7 @@ class NetworkAdapter{
         return receivedUser
     }
     
-    func searchRecipeLike(text:String, completion: @escaping ([RecipeTemplate1])->Void){
+    func searchRecipeLike(text:String, completion: @escaping ([RecipeTemplate1], Error?)->Void){
         /*
          Returns recipe with properties
          ID, name, and category.
@@ -100,19 +100,20 @@ class NetworkAdapter{
         
         let task = URLSession.shared.dataTask(with: fetchURL) { (data:Data?, response:URLResponse?, error:Error?) in
             if error != nil{
-                print("Couldn't recieve data. Error: \(String(describing: error))")
+//                print("Couldn't recieve data. Error: \(String(describing: error))")
+                completion([],error)
                 return
             }
             let decoder = JSONDecoder()
             do{
-                print("Data is: ",String(data:data!,encoding: .utf8))
+//                print("Data is: ",String(data:data!,encoding: .utf8))
             recipeList = try decoder.decode([RecipeTemplate1].self, from: data!)
-                print("Recipe is ",recipeList)
-                completion(recipeList)
+//                print("Recipe is ",recipeList)
+                completion(recipeList, nil)
             }
                 catch{
-                    
-                    print("Couldn't decode error: \(error)")
+                    completion([], error)
+//                    print("Couldn't decode error: \(error)")
                 }
             
             }
@@ -402,9 +403,9 @@ class NetworkAdapter{
         print(String(data: data,encoding: .utf8)!)
         addRecipeRequest.httpBody = data
         let task = URLSession.shared.dataTask(with: addRecipeRequest) { (data:Data?, response:URLResponse?, error:Error?) in
-            print(String(data: data ?? Data(), encoding: .utf8)!)
-            print("Response",response ?? "")
-            print("Error",error ?? "")
+//            print(String(data: data ?? Data(), encoding: .utf8)!)
+//            print("Response",response ?? "")
+//            print("Error",error ?? "")
         }
         task.resume()
     }
@@ -566,6 +567,27 @@ class NetworkAdapter{
         
         let task = URLSession.shared.dataTask(with: request) { (data:Data?, response:URLResponse?, error:Error?) in
             completion()
+        }
+        task.resume()
+    }
+    
+    func fetchAllRecipes(count:Int, completion:@escaping ([RecipeTemplate1], Error?)->()){
+        var requestURL = baseURL
+        requestURL.appendPathComponent("fetchallrecipes/\(count)")
+        
+        let task = URLSession.shared.dataTask(with: requestURL) { (data, response, error) in
+            if error != nil{
+                completion([], error)
+                return
+            }
+            let decoder = JSONDecoder()
+            do{
+            let recipes = try decoder.decode([RecipeTemplate1].self, from: data!)
+            completion(recipes, nil)
+            }
+            catch{
+                completion([], error)
+            }
         }
         task.resume()
     }
