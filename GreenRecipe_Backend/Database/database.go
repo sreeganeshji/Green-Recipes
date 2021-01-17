@@ -335,9 +335,9 @@ func (p *Postgres) UpdateRecipe(recipe models.Recipe)(int, error){
 
 	c, cancel := context.WithTimeout(context.Background(), time.Second * 1)
 	defer cancel()
-	sql := `update recipe set name=$1, ingredients=$2, description=$3, origin=$4, equipment=$5, images=$6, category=$7, process=$8, contributor=$9 where id=$10 returning id`
+	sql := `update recipe set name=$1, ingredients=$2, description=$3, origin=$4, equipment=$5, images=$6, category=$7, process=$8, contributor=$9, servings=$10 where id=$11 returning id`
 	var recipe_id int
-	err := p.db.QueryRow(c, sql, recipe.Name, recipe.Ingredients, recipe.Description, recipe.Origin, recipe.Equipment, recipe.Images, recipe.Category, recipe.Process, recipe.Contributor, recipe.ID).Scan(&recipe_id)
+	err := p.db.QueryRow(c, sql, recipe.Name, recipe.Ingredients, recipe.Description, recipe.Origin, recipe.Equipment, recipe.Images, recipe.Category, recipe.Process, recipe.Contributor, recipe.Servings, recipe.ID).Scan(&recipe_id)
 	if err!=nil{
 		return 0, err
 	}

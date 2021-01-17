@@ -384,9 +384,9 @@ class NetworkAdapter{
         print(String(data: data,encoding: .utf8)!)
         addRecipeRequest.httpBody = data
         let task = URLSession.shared.dataTask(with: addRecipeRequest) { (data:Data?, response:URLResponse?, error:Error?) in
-            print(String(data: data ?? Data(), encoding: .utf8)!)
-            print("Response",response ?? "")
-            print("Error",error ?? "")
+//            print(String(data: data ?? Data(), encoding: .utf8)!)
+//            print("Response",response ?? "")
+//            print("Error",error ?? "")
         }
         task.resume()
     }

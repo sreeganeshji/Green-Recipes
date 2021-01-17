@@ -52,7 +52,10 @@ import SwiftUI
                 Section{
                     HStack{
                         Spacer()
-                        Text("Description").bold().italic()
+                        Text("Description")
+                            .font(.title)
+                            .fontWeight(.light)
+                            .foregroundColor(.blue)
                     Spacer()
                 }
 
