@@ -20,11 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0b39fbb6-cc4e-4b59-be15-8e3c7ca69ebc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../Green Recipes/Data&amp;Models/LocalStorageManager.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Green Recipes.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes.xcodeproj/project.pbxproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Green Recipes/Network/Backend.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Network/Backend.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/RecipeDetail.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/RecipeDetail.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/Reviews/ReviewDetail.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/Reviews/ReviewDetail.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Green Recipes/Views/HomePage.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Views/HomePage.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.secret.txt.swp" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

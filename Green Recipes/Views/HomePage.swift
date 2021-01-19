@@ -19,12 +19,14 @@ enum tabViews {
 }
 
 struct HomePage: View {
+    var localStorageManager = LocalStorageManager(fileName: "appleID")
     @State var signedIn:Bool = false
     @EnvironmentObject var data:DataModels
     @State var tabSelect:tabViews = tabViews.explore
     @State var userDB = User()
     @State var verifyCredentials = false
     @State var navigationTitle:String = "Green Recipe"
+    @State var showLoading = true
     
     
     var body: some View {
@@ -74,7 +76,10 @@ struct HomePage: View {
         }
 
         else{
-            
+            VStack{
+                if showLoading{
+                    activityIndicator()
+                }
             
 SignInWithAppleButton(.signIn, onRequest: { request in
     request.requestedScopes = [.fullName,.email]
@@ -127,6 +132,7 @@ SignInWithAppleButton(.signIn, onRequest: { request in
                     
                     //Find if the user exists
                     print("Userid",userid.description)
+                    localStorageManager.save("appleID", data: appleID_clean)
                     self.data.networkHandler.getUserWithAppleID(appleID: appleID_clean, completion: updateUser)
                     
                 }
@@ -138,8 +144,18 @@ SignInWithAppleButton(.signIn, onRequest: { request in
     ).padding()
                     .frame(height:100)
 .signInWithAppleButtonStyle(.whiteOutline)
+        }
 .onAppear(){
-    self.data.networkHandler.getUserWithAppleID(appleID: "001289c9ba712996a74ce8aa424e158d6b10d50653", completion: updateUser)
+//    self.data.networkHandler.getUserWithAppleID(appleID: "001289c9ba712996a74ce8aa424e158d6b10d50653", completion: updateUser)
+    let appleID:String? = localStorageManager.load("appleID")
+    if appleID != nil{
+            self.data.networkHandler.getUserWithAppleID(appleID: appleID!, completion: updateUser)
+    }
+    else{
+        showLoading = false
+    }
+
+
 }
 
     }
