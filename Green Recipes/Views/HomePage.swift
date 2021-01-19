@@ -55,9 +55,9 @@ struct HomePage: View {
                 Image(systemName: "star.fill")
                 Text("Favorites")} }.tag(tabViews.favorites)
             
-
+            NavigationView{
             MyRecipes(navigationTitle: self.$navigationTitle).environmentObject(data)
-        
+            }
                 .tabItem {
                 HStack{
                 Image(systemName: "tray.fill")

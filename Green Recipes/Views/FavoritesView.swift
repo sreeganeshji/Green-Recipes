@@ -10,9 +10,20 @@ import SwiftUI
 struct FavoritesView: View {
     @EnvironmentObject var data:DataModels
     @State var navigationTitle:Binding<String>
-    
+    @State var loading = false
     var body: some View {
-     
+   
+            if loading{
+                Text("Loading...")
+                    .foregroundColor(.blue)
+                    .font(.title)
+                    .fontWeight(.light)
+                    
+                    activityIndicator()
+
+            }
+            else{
+                
             List{
             ForEach(self.data.cache.favRecipes.sorted(by: { (r1, r2) -> Bool in
                 return (r1.id<r2.id)
@@ -33,12 +44,13 @@ struct FavoritesView: View {
             }
 
             }
+            
+        
             .navigationTitle("Favorites")
-            .navigationBarTitle("Whats this?")
             .onAppear(){
                 self.navigationTitle.wrappedValue = "Favorites"
             }
-            
+            }
     }
 }
 

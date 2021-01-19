@@ -37,7 +37,7 @@ struct SearchBarUI:UIViewRepresentable{
         init(text: Binding<String>, completion :@escaping ()->()){
             _textCord = text
             self.completion = completion
-            completion()
+//            completion()
         }
         
         func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

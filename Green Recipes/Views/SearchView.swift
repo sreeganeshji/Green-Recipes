@@ -15,8 +15,23 @@ struct SearchView: View {
     //modal sheet
     @State var sheetPresented = false
     @State var sheetRecipeID = 0
+    
+    @State var loading = true
     var body: some View {
-        
+        if loading{
+            VStack{
+            Text("Loading")
+                .foregroundColor(.blue)
+                .font(.title)
+                .fontWeight(.light)
+                
+                activityIndicator()
+                    .onAppear(){
+                        searchQuery()
+                    }
+            }
+        }
+        else{
         List{
           
 //            HStack{
@@ -77,11 +92,12 @@ struct SearchView: View {
 //            }
             
         }
+        .navigationTitle("Search Recipes")
+        }
 
 //        .navigationBarHidden(true)
         
-        .navigationTitle("Search Recipes")
-        
+
         
 //        .sheet(isPresented: self.$sheetPresented, content: {
 //            RecipeDetail(id: self.sheetRecipeID)
@@ -102,8 +118,10 @@ struct SearchView: View {
     }
     
     func updateRecipes(recipes:[RecipeTemplate1], error:Error?){
+        loading = false
         if error == nil{
         self.recipes = recipes
+            
         }
     }
     

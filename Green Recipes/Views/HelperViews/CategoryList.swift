@@ -12,7 +12,22 @@ struct CategoryList: View {
     @State var recipes:[RecipeTemplate1] = []
     @EnvironmentObject var data:DataModels
     @State var text = ""
+    @State var loading = true
     var body: some View {
+        if loading{
+            VStack{
+            Text("Loading")
+                .foregroundColor(.blue)
+                .font(.title)
+                .fontWeight(.light)
+                
+                activityIndicator()
+                    .onAppear(){
+                        searchQuery()
+                    }
+            }
+        }
+        else{
         List{
             SearchBarUI(text:$text, completion: searchQuery)
                 
@@ -50,14 +65,16 @@ struct CategoryList: View {
                 }
         }
         .navigationBarTitle(categoryName)
-
+        }
     }
     func updateRecipes(recipes:[RecipeTemplate1], error:Error?){
+        loading = false
         if error != nil{
             print("Error fetching recipes: \(error)")
             return
         }
         self.recipes = recipes
+
     }
     
     func searchQuery(){

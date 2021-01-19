@@ -15,9 +15,25 @@ struct MyRecipes: View {
     @EnvironmentObject var data: DataModels
     @State var navigationTitle:Binding<String>
     @State var myRecipes:[RecipeTemplate1] = []
+    @State var loading = true
     
     var body: some View {
-        NavigationView{
+        if loading{
+            VStack{
+            Text("Loading")
+                .foregroundColor(.blue)
+                .font(.title)
+                .fontWeight(.light)
+                
+                activityIndicator()
+                    .onAppear(){
+            //            self.navigationTitle.wrappedValue = "My Recipes"
+                            fetchMyRecipes()
+                    }
+            }
+        }
+        else{
+
         Form{
 //            NavigationLink(destination:AddRecipe().environmentObject(self.data)){
 ////            HStack{
@@ -31,7 +47,17 @@ struct MyRecipes: View {
                     NavigationLink(destination:MyRecipeDetail(recipeSummary:recipe).environmentObject(self.data))
                     {
                         
+                        HStack{
                         Text(recipe.name)
+                            Spacer()
+                            Text(String(format: "%0.1f",recipe.rating ?? 0)).font(.footnote)
+                                .padding(-3)
+                            Image(systemName: "star.fill").foregroundColor(.yellow).font(.footnote)
+                                .padding(-3)
+                            Text(String("(\(recipe.ratingCount ?? 0))")).font(.footnote)
+                                .padding(EdgeInsets(top: -3, leading: -3, bottom: -3, trailing: 0))
+                
+                        }
  
                         }
                     }
@@ -58,10 +84,7 @@ struct MyRecipes: View {
             }
         }
         
-        .onAppear(){
-//            self.navigationTitle.wrappedValue = "My Recipes"
-                fetchMyRecipes()
-        }
+
     }
     
     func fetchMyRecipes(){
@@ -74,6 +97,7 @@ struct MyRecipes: View {
             return
         }
         self.myRecipes = recipes
+        loading = false
     }
 }
 

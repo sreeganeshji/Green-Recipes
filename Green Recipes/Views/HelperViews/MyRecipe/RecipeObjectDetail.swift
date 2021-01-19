@@ -48,7 +48,7 @@ import SwiftUI
                     
                     
                 //description
-                if(self.recipe.description != nil){
+                    if(self.recipe.description != nil && recipe.description != ""){
                 Section{
                     HStack{
                         Spacer()
