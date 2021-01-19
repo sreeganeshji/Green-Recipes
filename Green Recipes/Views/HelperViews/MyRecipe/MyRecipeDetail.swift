@@ -30,6 +30,9 @@ struct MyRecipeDetail: View {
                     .fontWeight(.light)
                     
                     activityIndicator()
+                ProgressView(value:progress)
+                    .padding()
+                    
                     .onAppear(){
                         GetRecipeByID()
                     }
@@ -60,6 +63,10 @@ struct MyRecipeDetail: View {
         progress = p
     }
     
+    func updateProgress(p:Double){
+        progress = p
+    }
+    
     //simultaneous operation
     func getImages2(){
         if recipe.images == nil{
@@ -69,14 +76,14 @@ struct MyRecipeDetail: View {
             func updateImages(name:String, imageData:Data){
                 self.images.append(.init(name: name, image: UIImage(data: imageData)!))
                 spin = false
-//                let prog = Double(images.count)/Double(recipe.images!.count)
-//                updateProgress(p: prog)
+                let prog = Double(images.count)/Double(recipe.images!.count)
+                updateProgress(p: prog)
                 
 //                completion()
             }
             
         for image in recipe.images!{
-            DispatchQueue.main.async{
+            DispatchQueue.main.sync{
             //download images
             let storage = AmplifyStorage()
             

@@ -29,7 +29,7 @@ struct RecipeDetail: View {
     @State var report:Report = .init()
     @State var imageLoaded = true
     @State var spin = false
-    @State var progress :Double = .init(0)
+    @State var progress :Double = .init(0.0)
     
     let title:String
     var body: some View {
@@ -41,6 +41,8 @@ struct RecipeDetail: View {
                 .fontWeight(.light)
                 
                 activityIndicator()
+                ProgressView(value: progress)
+                    .padding()
                 .onAppear(){
                     GetRecipeByID()
                 }
@@ -312,19 +314,20 @@ struct RecipeDetail: View {
             }
             }
             
-            if !loadingDone {
-                VStack{
-                Text("Loading...")
-                    .foregroundColor(.blue)
-                    .font(.title)
-                    .fontWeight(.light)
-                    .onAppear(){
-                        GetRecipeByID()
-                    }
-                    ProgressView(value: progress)
-                }
-                .background(blur(radius: 3.0))
-            }
+//            if !loadingDone {
+//                VStack{
+//                Text("Loading...")
+//                    .foregroundColor(.blue)
+//                    .font(.title)
+//                    .fontWeight(.light)
+//                    .onAppear(){
+//                        GetRecipeByID()
+//                    }
+////                    ProgressView(value: progress)
+//                    ProgressView(value: /*@START_MENU_TOKEN@*/0.5/*@END_MENU_TOKEN@*/)
+//                }
+//                .background(blur(radius: 3.0))
+//            }
         }
     
             
@@ -383,7 +386,7 @@ func GetImages(){
             }
             
         for image in recipe.images!{
-            DispatchQueue.main.async{
+            DispatchQueue.main.sync{
             //download images
             let storage = AmplifyStorage()
             
@@ -408,13 +411,14 @@ func GetImages(){
 
 func UpdateRecipe(recipe:Recipe){
     self.recipe = recipe
-    loadingDone = true
+    
 //    fetchReviews()
 //    GetImages()
     getImages2()
 //    fillImages()
     fillReport()
-    
+    loadingDone = true
+
 //fetch username
 if (self.recipe.addedby != nil){
 self.data.networkHandler.getUserName(userId: self.recipe.addedby!, completion: updateUsername)
