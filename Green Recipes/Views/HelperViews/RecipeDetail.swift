@@ -408,6 +408,7 @@ func GetImages(){
 
 func UpdateRecipe(recipe:Recipe){
     self.recipe = recipe
+    loadingDone = true
 //    fetchReviews()
 //    GetImages()
     getImages2()
@@ -418,7 +419,7 @@ func UpdateRecipe(recipe:Recipe){
 if (self.recipe.addedby != nil){
 self.data.networkHandler.getUserName(userId: self.recipe.addedby!, completion: updateUsername)
 }
-    loadingDone = true
+    
 }
     
     func fillReport(){

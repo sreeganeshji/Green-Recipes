@@ -55,18 +55,18 @@ struct ReviewDetail: View {
                     if (review.body!.count > 100)
                     {
                         if showMore{
-                            GeometryReader{ reader in
+//                            GeometryReader{ reader in
                             Text(review.body!)
-                                .frame(width:reader.size.width,alignment:.leading)
-                            }
+//                                .frame(width:reader.size.width,alignment:.leading)
+//                            }
                                 .padding(.bottom)
                                 
                         }
                         else{
-                            GeometryReader{ reader in
+//                            GeometryReader{ reader in
                             Text(review.body![review.body!.startIndex...review.body!.index(review.body!.startIndex, offsetBy: .init(100))])
-                                .frame(width:reader.size.width,alignment:.leading)
-                            }
+//                                .frame(width:reader.size.width,alignment:.leading)
+//                            }
 
                         Button(action:{self.showMore = true}){
                             HStack{
@@ -79,10 +79,10 @@ struct ReviewDetail: View {
                     else{
                         
                         if(!self.showMore && self.review.title.count > 20){
-                            GeometryReader{ reader in
+//                            GeometryReader{ reader in
                             Text(review.body!)
-                                .frame(width:reader.size.width,alignment:.leading)
-                            }
+//                                .frame(width:reader.size.width,alignment:.leading)
+//                            }
 
                             Button(action:{self.showMore = true}){
                                 HStack{
@@ -92,10 +92,10 @@ struct ReviewDetail: View {
                         }
                     }
                         else{
-                            GeometryReader{ reader in
+//                            GeometryReader{ reader in
                             Text(review.body!)
-                                .frame(width:reader.size.width,alignment:.leading)
-                            }
+//                                .frame(width:reader.size.width,alignment:.leading)
+//                            }
                             .padding(.bottom)
                             .padding(.bottom)
                         }

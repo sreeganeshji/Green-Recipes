@@ -9,14 +9,16 @@ import SwiftUI
 
 struct RecipeEditView: View {
     @EnvironmentObject var data:DataModels
-    @Binding var recipeNew :Recipe
+    @Binding var recipe:Recipe
+    @State var recipeNew :Recipe = .init()
     @State var newIngredient:String = ""
     @State var newProcess:String = ""
     @State var description:String = ""
     @State var newEquipment:String = ""
     @State var newNutrition:String = ""
     @State var origin:String = ""
-    @Binding var images:[ImageContainer]
+    @Binding var imagesOrg:[ImageContainer]
+    @State var images:[ImageContainer] = []
     @State var showSheetAddImages:Bool = false
     @State var showAlert = false
     @State var alertMessage = ""
@@ -24,6 +26,7 @@ struct RecipeEditView: View {
     @State var recipeUserCategory = ""
     @State var recipeNewContributor = ""
     @Binding var showSheet :Bool
+    @State var alertTitle = ""
     @Environment(\.editMode) var editMode
     
     
@@ -328,9 +331,10 @@ struct RecipeEditView: View {
 
         }
         .navigationTitle("Editing \(recipeNew.name)")
-        .navigationBarItems(leading: Image(systemName:"trash").font(.headline), trailing:Button(action:{submitRecipe()}){Text("Submit").font(.headline)})
+//        .navigationBarItems(leading: Button(action:{deleteMyRecipe()}){Image(systemName:"trash").font(.headline)}, trailing:Button(action:{submitRecipe()}){Text("Submit").font(.headline)})
+        .navigationBarItems(trailing:Button(action:{submitRecipe()}){Text("Submit").font(.headline)})
         .alert(isPresented: self.$showAlert, content: {
-            Alert(title: Text("Cannot Submit"), message: Text(self.alertMessage))
+            Alert(title: Text(self.alertTitle), message: Text(self.alertMessage))
         })
         .sheet(isPresented: self.$showSheetAddImages, content: {
             PhotoPicker(showSheet: self.$showSheetAddImages, images: self.$images)
@@ -342,6 +346,7 @@ struct RecipeEditView: View {
 //        .navigationTitle(Text("Edit Recipe"))
               
         .onAppear(){
+            recipeNew = recipe
             recipeNew.nutrition = recipeNew.nutrition ?? []
             recipeNew.equipment = recipeNew.equipment ?? []
 
@@ -349,6 +354,7 @@ struct RecipeEditView: View {
             origin = recipeNew.origin ?? ""
             recipeNewCategory = recipeNew.category ?? ""
             recipeNewContributor = recipeNew.contributor ?? ""
+            images = imagesOrg
         }
     }
 
@@ -378,10 +384,11 @@ struct RecipeEditView: View {
         self.newNutrition = ""
     }
     func submitRecipe(){
-        //ensure ingredients and process are entered
         showSheet = false
+        //ensure ingredients and process are entered
         if (self.recipeNew.ingredients.count == 0 ) || (self.recipeNew.process.count == 0) || (self.recipeNew.name == ""){
             //show alert
+            self.alertTitle = "Cannot Submit"
             self.alertMessage = "Please add Name, Ingredients and Process."
             self.showAlert = true
             return
@@ -397,6 +404,11 @@ struct RecipeEditView: View {
         
         //current set
         let oldImages = self.recipeNew.images ?? []
+        
+        //initialize images if previously nil
+        if (images.count > 0 && recipeNew.images == nil){
+            recipeNew.images = []
+        }
         //upload images
         for image in images{
             
@@ -412,33 +424,43 @@ struct RecipeEditView: View {
             AmplifyStorage().uploadData(key: image.name, data: image.image.pngData()!)
             
             //add to the new recipe
-            recipeNew.images?.append(image.name)
+            recipeNew.images!.append(image.name)
         }
             
             //delete the recipes which are not in the origianl set.
         
         let newImageNames = images.map({$0.name})
-        
+        var deleted = false
             for imageName in oldImages{
                 if !newImageNames.contains(imageName){
                     //delete that image
                     AmplifyStorage().deleteData(key: imageName)
+                    deleted = true
                     recipeNew.images?.removeAll(where: { (s:String) -> Bool in
                         return (s == imageName)
                     })
                 }
             }
-            
+        recipe = recipeNew
+        if !deleted{
         
-        
-        
+        imagesOrg = images
+        }
 
         self.data.networkHandler.updateRecipe(recipe: self.recipeNew)
         
         //add to myrecipes
 //        self.data.fetchMyRecipes(userId: self.data.user.userId)
         //complete here
+//        self.alertTitle = "Submitted"
+//        self.alertMessage = "Successfully updated the recipe."
+//        self.showAlert = true
 
+    }
+    
+    func deleteMyRecipe(){
+        showSheet = false
+        data.networkHandler.deleteMyRecipe(recipeId: recipeNew.id!, completion: {})
     }
     
     //GenerateRandomString

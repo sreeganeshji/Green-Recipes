@@ -45,7 +45,7 @@ struct MyRecipeDetail: View {
         }
         
         .sheet(isPresented: $showEditSheet, content: {
-            RecipeEditView(recipeNew: self.$recipe, images: self.$images, showSheet:$showEditSheet).environmentObject(data)
+            RecipeEditView(recipe: self.$recipe, imagesOrg: self.$images, showSheet:$showEditSheet).environmentObject(data)
         })
 //        .navigationBarItems(trailing: EditButton().font(.headline))
         .navigationBarItems(trailing: Button(action:{showEditSheet = true}){Text("Edit").font(.headline)})
