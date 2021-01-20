@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Explore: View {
-    let categories = ["Snacks", "Drinks", "Desserts", "Lunch", "Soup", "Others"]
+    let categories = ["Snacks", "Drinks", "Desserts", "Lunch", "Salads", "Soups"]
     @EnvironmentObject var data:DataModels
     var body: some View {
         ScrollView(){
@@ -17,6 +17,9 @@ struct Explore: View {
                 NavigationLink(destination:CategoryList(categoryName: category).environmentObject(data)){
                 CategoryThumb(image:.constant(Image(category)), title: .constant(category))
                 }
+            }
+            NavigationLink(destination:CategoryOthersList(categoryName: "Others").environmentObject(data)){
+            CategoryThumb(image:.constant(Image("Others")), title: .constant("Others"))
             }
             
 //            CategoryThumb(image:.constant(Image("Snacks")), title: .constant("Snacks"))

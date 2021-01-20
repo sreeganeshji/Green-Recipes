@@ -100,3 +100,10 @@ func (s *Service) FetchRecipesOfCategoryLike(category string, text string, count
 func (s *Service) FetchAllRecipes(count int)([]models.Recipe, error){
 	return s.Postgres.FetchAllRecipes(count)
 }
+
+func (s *Service) FetchRecipesOfOtherCategory(count int)([]models.Recipe, error){
+	return s.Postgres.FetchRecipesOfOtherCategory(count)
+}
+func (s *Service) FetchRecipesOfOtherCategoryLike(text string, count int) ([]models.Recipe, error){
+	return s.Postgres.FetchRecipesOfOtherCategoryLike(text, count)
+}

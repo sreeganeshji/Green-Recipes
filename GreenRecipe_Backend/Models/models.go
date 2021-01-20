@@ -19,6 +19,7 @@ type Recipe struct {
 	Category *string `json:"category,omitempty"`
 	Rating *float64 `json:"rating,omitempty"`
 	RatingCount *int `json:"rating_count,omitempty"`
+	EstimatedTime *string `json:"estimated_time,omitempty"`
 }
 
 type Review struct{

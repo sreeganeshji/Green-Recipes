@@ -66,12 +66,12 @@ func (p *Postgres)AddRecipe(recipe models.Recipe) (models.Recipe, error){
 	c, cancel := context.WithTimeout(context.Background(), time.Second*1)
 	defer cancel()
 
-	sql_statement := `INSERT INTO recipe (name, description, ingredients, process, contributor, origin, servings, equipment, images, added_by, nutrition, category) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING id,name, description, ingredients, process, contributor, origin, servings, equipment, images,
-added_date, added_by, nutrition, category`
+	sql_statement := `INSERT INTO recipe (name, description, ingredients, process, contributor, origin, servings, equipment, images, added_by, nutrition, category, estimated_time) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING id,name, description, ingredients, process, contributor, origin, servings, equipment, images,
+added_date, added_by, nutrition, category, estimated_time`
 
 	var insertedrecipe models.Recipe
 
-	err := p.db.QueryRow(c,sql_statement,recipe.Name, recipe.Description, recipe.Ingredients, recipe.Process, recipe.Contributor, recipe.Origin, recipe.Servings, recipe.Equipment, recipe.Images, recipe.Addedby,recipe.Nutrition, recipe.Category).Scan(&insertedrecipe.ID, &insertedrecipe.Name, &insertedrecipe.Description, &insertedrecipe.Ingredients, &insertedrecipe.Process, &insertedrecipe.Contributor, &insertedrecipe.Origin, &insertedrecipe.Servings, &insertedrecipe.Equipment, &insertedrecipe.Images, &insertedrecipe.AddedDate, &insertedrecipe.Addedby, &insertedrecipe.Nutrition, &insertedrecipe.Category)
+	err := p.db.QueryRow(c,sql_statement,recipe.Name, recipe.Description, recipe.Ingredients, recipe.Process, recipe.Contributor, recipe.Origin, recipe.Servings, recipe.Equipment, recipe.Images, recipe.Addedby,recipe.Nutrition, recipe.Category, recipe.EstimatedTime).Scan(&insertedrecipe.ID, &insertedrecipe.Name, &insertedrecipe.Description, &insertedrecipe.Ingredients, &insertedrecipe.Process, &insertedrecipe.Contributor, &insertedrecipe.Origin, &insertedrecipe.Servings, &insertedrecipe.Equipment, &insertedrecipe.Images, &insertedrecipe.AddedDate, &insertedrecipe.Addedby, &insertedrecipe.Nutrition, &insertedrecipe.Category, &insertedrecipe.EstimatedTime)
 
 	//fmt.Println("recipe ingridents",recipe.Ingredients)
 	//	sql_statement := `INSERT INTO recipe (name, description, ingredients, process, contributor) VALUES ($1, $2, $3, $4, $1) RETURNING id,name, description, ingredients, process, contributor, origin, servings, equipment, images,
@@ -143,7 +143,7 @@ func (p *Postgres) FindRecipesLike(recipe string, count int)([]models.Recipe, er
 	c, cancel  := context.WithTimeout(context.Background(), 1*time.Second)
 	defer cancel()
 
-	sql := `select id, name, category, rating, rating_count from recipe where name ilike '%' || $1 || '%' limit $2`
+	sql := `select id, name, category, rating, rating_count from recipe where name ilike '%' || $1 || '%' order by rating_count desc nulls last , rating desc limit $2`
 
 	recipe_rec := make([]models.Recipe, count)
 
@@ -177,10 +177,10 @@ func (p *Postgres) FindRecipeWithID(id int) (models.Recipe, error) {
 	defer cancel()
 
 	sql := `select id, name, description, ingredients, process, contributor, origin, servings, equipment, images,
-added_date, added_by, nutrition, category, rating, rating_count from recipe where id=$1`
+added_date, added_by, nutrition, category, rating, rating_count, estimated_time from recipe where id=$1`
 
 	var recipe models.Recipe
-	err := p.db.QueryRow(c, sql, id).Scan(&recipe.ID, &recipe.Name, &recipe.Description, &recipe.Ingredients, &recipe.Process, &recipe.Contributor, &recipe.Origin, &recipe.Servings, &recipe.Equipment, &recipe.Images, &recipe.AddedDate, &recipe.Addedby, &recipe.Nutrition, &recipe.Category, &recipe.Rating, &recipe.RatingCount)
+	err := p.db.QueryRow(c, sql, id).Scan(&recipe.ID, &recipe.Name, &recipe.Description, &recipe.Ingredients, &recipe.Process, &recipe.Contributor, &recipe.Origin, &recipe.Servings, &recipe.Equipment, &recipe.Images, &recipe.AddedDate, &recipe.Addedby, &recipe.Nutrition, &recipe.Category, &recipe.Rating, &recipe.RatingCount, &recipe.EstimatedTime)
 
 	if err!=nil{
 		return recipe, err
@@ -220,7 +220,7 @@ func (p *Postgres) GetUserFavorites(userid int)([]models.Recipe, error){
 	c, cancel := context.WithTimeout(context.Background(), 1 * time.Second)
 	defer cancel()
 
-	sql := `select id, name, category, rating, rating_count from recipe inner join favorites on id=recipe_id where person_id=$1`
+	sql := `select id, name, category, rating, rating_count from recipe inner join favorites on id=recipe_id where person_id=$1 order by rating_count desc nulls last , rating desc`
 
 	var recipes []models.Recipe
 	row, err := p.db.Query(c, sql, userid)
@@ -244,7 +244,7 @@ func (p *Postgres) GetUserRecipes(userid int)([]models.Recipe, error){
 	c, cancel := context.WithTimeout(context.Background(), 1 * time.Second)
 	defer cancel()
 
-	sql := `select id, name, category, rating, rating_count from recipe where added_by=$1`
+	sql := `select id, name, category, rating, rating_count from recipe where added_by=$1 order by rating_count desc nulls last , rating desc`
 
 	var recipes []models.Recipe
 
@@ -310,7 +310,7 @@ func (p *Postgres) FetchReviews(recipe_id int)([]models.Review, error){
 func (p *Postgres) FetchMyRecipes(person_id int)([]models.Recipe, error){
 	c, cancel := context.WithTimeout(context.Background(), time.Second * 1)
 	defer cancel()
-	sql := `select id, name, category, rating, rating_count from recipe where added_by=$1`
+	sql := `select id, name, category, rating, rating_count from recipe where added_by=$1 order by rating_count desc nulls last , rating desc`
 
 	var recipes []models.Recipe
 	row, err := p.db.Query(c, sql, person_id)
@@ -335,9 +335,9 @@ func (p *Postgres) UpdateRecipe(recipe models.Recipe)(int, error){
 
 	c, cancel := context.WithTimeout(context.Background(), time.Second * 1)
 	defer cancel()
-	sql := `update recipe set name=$1, ingredients=$2, description=$3, origin=$4, equipment=$5, images=$6, category=$7, process=$8, contributor=$9, servings=$10 where id=$11 returning id`
+	sql := `update recipe set name=$1, ingredients=$2, description=$3, origin=$4, equipment=$5, images=$6, category=$7, process=$8, contributor=$9, servings=$10, estimated_time=$11 where id=$12 returning id`
 	var recipe_id int
-	err := p.db.QueryRow(c, sql, recipe.Name, recipe.Ingredients, recipe.Description, recipe.Origin, recipe.Equipment, recipe.Images, recipe.Category, recipe.Process, recipe.Contributor, recipe.Servings, recipe.ID).Scan(&recipe_id)
+	err := p.db.QueryRow(c, sql, recipe.Name, recipe.Ingredients, recipe.Description, recipe.Origin, recipe.Equipment, recipe.Images, recipe.Category, recipe.Process, recipe.Contributor, recipe.Servings, recipe.EstimatedTime, recipe.ID).Scan(&recipe_id)
 	if err!=nil{
 		return 0, err
 	}
@@ -476,7 +476,7 @@ func (p *Postgres) FetchRecipesOfCategory(category string)([]models.Recipe, erro
 	c, cancel := context.WithTimeout(context.Background(), time.Second * 1)
 	defer cancel()
 
-	sql := `select id, name, category, rating, rating_count from recipe where category=$1`
+	sql := `select id, name, category, rating, rating_count from recipe where category=$1 order by rating_count desc nulls last , rating desc`
 
 	row, err := p.db.Query(c, sql, category)
 	if err!=nil{
@@ -499,7 +499,7 @@ func (p *Postgres) FetchRecipesOfCategoryLike(category string, recipe string, co
 	c, cancel  := context.WithTimeout(context.Background(), 1*time.Second)
 	defer cancel()
 
-	sql := `select id, name, category, rating, rating_count from recipe where category=$3 and name ilike '%' || $1 || '%' limit $2`
+	sql := `select id, name, category, rating, rating_count from recipe where category=$3 and name ilike '%' || $1 || '%' order by rating_count desc nulls last , rating desc limit $2`
 
 	recipe_rec := make([]models.Recipe, count)
 
@@ -532,7 +532,7 @@ func (p *Postgres) FetchAllRecipes(count int)([]models.Recipe, error){
 	c, cancel := context.WithTimeout(context.Background(), time.Second*1)
 	defer cancel()
 
-	sql := `select id, name, category, rating, rating_count from recipe limit $1`
+	sql := `select id, name, category, rating, rating_count from recipe order by rating_count desc nulls last , rating desc limit $1`
 
 	rows, err := p.db.Query(c, sql, count)
 
@@ -547,4 +547,69 @@ func (p *Postgres) FetchAllRecipes(count int)([]models.Recipe, error){
 		recipes = append(recipes, recipe)
 	}
 	return recipes, nil
+}
+
+func (p *Postgres) FetchRecipesOfOtherCategory(count int)([]models.Recipe, error){
+	c, cancel  := context.WithTimeout(context.Background(), 1*time.Second)
+	defer cancel()
+	sql := `select id, name, category, rating, rating_count from recipe where category not SIMILAR TO '(Lunch|Snacks|Soups|Desserts|Salads|Drinks)' order by rating_count desc nulls last , rating desc  limit $1`
+
+	recipe_rec := make([]models.Recipe, count)
+
+	rows, err := p.db.Query(c, sql, count)
+
+	if err != nil{
+		return nil, err
+	}
+
+	i := 0
+	for rows.Next(){
+		var recipeRow models.Recipe
+		err := rows.Scan(&recipeRow.ID, &recipeRow.Name, &recipeRow.Category, &recipeRow.Rating, &recipeRow.RatingCount)
+		if err!=nil{
+			return []models.Recipe{}, err
+		}
+		fmt.Println(recipeRow.Name)
+		recipe_rec[i] = recipeRow
+		i += 1
+	}
+	//fmt.Println("Retrived ",i," rows of recipes")
+
+	//if (err != nil){
+	//	return recipe_rec, err
+	//}
+	return recipe_rec[:i], nil
+}
+
+func (p *Postgres) FetchRecipesOfOtherCategoryLike(recipe string, count int)([]models.Recipe, error){
+	c, cancel  := context.WithTimeout(context.Background(), 1*time.Second)
+	defer cancel()
+
+	sql := `select id, name, category, rating, rating_count from recipe where category not SIMILAR TO '(Lunch|Snacks|Soups|Desserts|Salads|Drinks)' and name ilike '%' || $1 || '%' order by rating_count desc nulls last , rating desc limit $2`
+
+	recipe_rec := make([]models.Recipe, count)
+
+	rows, err := p.db.Query(c, sql, recipe, count)
+
+	if err != nil{
+		return nil, err
+	}
+
+	i := 0
+	for rows.Next(){
+		var recipeRow models.Recipe
+		err := rows.Scan(&recipeRow.ID, &recipeRow.Name, &recipeRow.Category, &recipeRow.Rating, &recipeRow.RatingCount)
+		if err!=nil{
+			return []models.Recipe{}, err
+		}
+		fmt.Println(recipeRow.Name)
+		recipe_rec[i] = recipeRow
+		i += 1
+	}
+	//fmt.Println("Retrived ",i," rows of recipes")
+
+	//if (err != nil){
+	//	return recipe_rec, err
+	//}
+	return recipe_rec[:i], nil
 }

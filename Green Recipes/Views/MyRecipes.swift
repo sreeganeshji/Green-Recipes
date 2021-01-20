@@ -77,7 +77,12 @@ struct MyRecipes: View {
                     for index in indexSet{
                         let recipe = myRecipes[index]
 //                        print("Will Delete \(recipe.name)")
-                        self.data.networkHandler.deleteMyRecipe(recipeId: recipe.id) {}
+                        //delete the images
+                        /*
+                         1. fetch recipe images
+                         2. delete images
+                         */
+                        data.networkHandler.searchRecipeWithID(id: recipe.id, completion: deleteHandler)
                         myRecipes.remove(at: index)
                     }
                 })
@@ -111,6 +116,17 @@ struct MyRecipes: View {
         }
         self.myRecipes = recipes
         
+    }
+    func deleteHandler(recipe:Recipe){
+       
+        if recipe.images != nil{
+            let amplify = AmplifyStorage()
+        for image in recipe.images!{
+            amplify.deleteData(key: image)
+        }
+        }
+        self.data.networkHandler.deleteMyRecipe(recipeId: recipe.id!) {}
+
     }
 }
 

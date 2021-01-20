@@ -1,13 +1,14 @@
 //
-//  CategoryList.swift
+//  CategoryOthersList.swift
 //  Green Recipes
 //
-//  Created by SreeGaneshji Bangalore Chandrashekar on 1/12/21.
+//  Created by SreeGaneshji Bangalore Chandrashekar on 1/20/21.
 //
 
 import SwiftUI
 
-struct CategoryList: View {
+struct CategoryOthersList: View {
+
     var categoryName:String
     @State var recipes:[RecipeTemplate1] = []
     @EnvironmentObject var data:DataModels
@@ -80,11 +81,11 @@ struct CategoryList: View {
     func searchQuery(){
         //search category
         if text == ""{
-        data.networkHandler.fetchRecipesOfCategory(category: categoryName, completion: updateRecipes)
+        data.networkHandler.fetchRecipesOfOtherCategory(count: 50, completion: updateRecipes)
             return
         }
         
-        data.networkHandler.searchRecipeCategory(category: categoryName, text: text, count: 50, completion: updateRecipes)
+        data.networkHandler.searchRecipeOtherCategory(text: text, count: 50, completion: updateRecipes)
 
     }
     
@@ -93,8 +94,3 @@ struct CategoryList: View {
     }
 }
 
-struct CategoryList_Previews: PreviewProvider {
-    static var previews: some View {
-        CategoryList(categoryName: "Lunch").environmentObject(DataModels())
-    }
-}

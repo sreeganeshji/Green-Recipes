@@ -42,6 +42,7 @@ struct Recipe: Hashable, Equatable, Codable{
     var category:String?
     var rating:Double?
     var ratingCount:Int?
+    var estimatedTime:String?
     
     enum CodingKeys:String, CodingKey{
         case id = "id"
@@ -60,6 +61,7 @@ struct Recipe: Hashable, Equatable, Codable{
         case category = "category"
         case rating = "rating"
         case ratingCount = "rating_count"
+        case estimatedTime = "estimated_time"
     }
 
     init() {
@@ -240,8 +242,8 @@ class DataModels:ObservableObject{
     
     var recipies = [Recipe]()
     
-//    var networkHandler = NetworkAdapter("http://localhost:5000")
-    var networkHandler = NetworkAdapter(nil)
+    var networkHandler = NetworkAdapter("http://localhost:5000")
+//    var networkHandler = NetworkAdapter(nil)
     
     var user = User()
     

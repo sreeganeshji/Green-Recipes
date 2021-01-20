@@ -35,6 +35,7 @@
 		B16A124F2591C69A0027FC4F /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16A124E2591C69A0027FC4F /* SignUp.swift */; };
 		B16A1254259271DB0027FC4F /* VerifyCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16A1253259271DB0027FC4F /* VerifyCredentials.swift */; };
 		B16A125925951A5D0027FC4F /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16A125825951A5C0027FC4F /* FavoritesView.swift */; };
+		B17CE7AE25B8BC4E001D84DE /* CategoryOthersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17CE7AD25B8BC4E001D84DE /* CategoryOthersList.swift */; };
 		B1A440C6259D2734002A0252 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A440C5259D2734002A0252 /* PhotoPicker.swift */; };
 		B1A440CB259D36F9002A0252 /* AmplifyStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A440CA259D36F9002A0252 /* AmplifyStorageManager.swift */; };
 		B1BF615C25A772600000D2A1 /* MoreByUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BF615B25A772600000D2A1 /* MoreByUserView.swift */; };
@@ -118,6 +119,7 @@
 		B16A124E2591C69A0027FC4F /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		B16A1253259271DB0027FC4F /* VerifyCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyCredentials.swift; sourceTree = "<group>"; };
 		B16A125825951A5C0027FC4F /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
+		B17CE7AD25B8BC4E001D84DE /* CategoryOthersList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryOthersList.swift; sourceTree = "<group>"; };
 		B1A440C5259D2734002A0252 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
 		B1A440CA259D36F9002A0252 /* AmplifyStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmplifyStorageManager.swift; sourceTree = "<group>"; };
 		B1BF615B25A772600000D2A1 /* MoreByUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreByUserView.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 				B1CF0D4D25B6835B008169BE /* Icons */,
 				B1F0D60525906B6600BD36EF /* RecipeDetail.swift */,
 				B122466925AE7C4F00320E27 /* CategoryList.swift */,
+				B17CE7AD25B8BC4E001D84DE /* CategoryOthersList.swift */,
 				B122465225AC18AB00320E27 /* AddReport.swift */,
 				B1E81E3525A267170059EC28 /* Reviews */,
 				B16A124E2591C69A0027FC4F /* SignUp.swift */,
@@ -629,6 +632,7 @@
 				1F84393F254DF6BB004A27A9 /* RecipesHome.swift in Sources */,
 				B1F0D60625906B6600BD36EF /* RecipeDetail.swift in Sources */,
 				1F8438B7254D2D19004A27A9 /* ContentView.swift in Sources */,
+				B17CE7AE25B8BC4E001D84DE /* CategoryOthersList.swift in Sources */,
 				B16A124F2591C69A0027FC4F /* SignUp.swift in Sources */,
 				1F46F55C2575E17A005414DE /* MyRecipes.swift in Sources */,
 				B122466A25AE7C5000320E27 /* CategoryList.swift in Sources */,

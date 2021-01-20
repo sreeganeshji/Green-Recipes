@@ -59,23 +59,23 @@ struct RecipeDetail: View {
             
             if (self.recipe.images != nil && self.recipe.images!.count > 0){
 
-                ZStack{
+//                ZStack{
                 ImageCarousalFetchView(images:self.$images, imagesLoaded: $imageLoaded).environmentObject(self.data)
                         .frame(maxHeight:300)
-                        .clipShape(RoundedRectangle(cornerRadius:10))
-                
-//                        .padding(.top)
-//                        .padding(.bottom)
-//                        .ignoresSafeArea()
-                    if(!imageLoaded){
-                        Text("Loading Images...")
-                            .font(.title)
-                            .foregroundColor(.blue)
-                            .fontWeight(.light)
-                            .opacity(0.8)
-                            .frame(height:300)
-                    }
-                }
+                        .clipShape(RoundedRectangle(cornerRadius:12))
+                    .ignoresSafeArea()
+                        .padding(.top)
+                        .padding(.bottom)
+                        
+//                    if(!imageLoaded){
+//                        Text("Loading Images...")
+//                            .font(.title)
+//                            .foregroundColor(.blue)
+//                            .fontWeight(.light)
+//                            .opacity(0.8)
+//                            .frame(height:300)
+//                    }
+//                }
 
             }
 

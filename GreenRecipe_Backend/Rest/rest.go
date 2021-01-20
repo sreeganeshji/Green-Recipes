@@ -39,8 +39,11 @@ func Initalizer(service service.Service) (*mux.Router){
 	r.HandleFunc("/submitreport",handler.SubmitReport).Methods(http.MethodPost)
 	r.HandleFunc("/updatereciperating/{recipe_id}/{rating}/{rating_count}",handler.UpdateRecipeRating).Methods(http.MethodPut)
 	r.HandleFunc("/fetchrecipesofcategory/{category}",handler.FetchRecipesOfCategory).Methods(http.MethodGet)
-	r.HandleFunc("/fetchrecipesofcategorylike/{category}/{text}",handler.FetchRecipesOfCategoryLike).Methods(http.MethodGet)
+	r.HandleFunc("/fetchrecipesofcategorylike/{category}/{text}/{count}",handler.FetchRecipesOfCategoryLike).Methods(http.MethodGet)
 	r.HandleFunc("/fetchallrecipes/{count}",handler.FetchAllRecipes).Methods(http.MethodGet)
+	r.HandleFunc("/fetchrecipesofothercategory/{count}",handler.FetchRecipesOfOtherCategory).Methods(http.MethodGet)
+	r.HandleFunc("/fetchrecipesofothercategorylike/{text}/{count}",handler.FetchRecipesOfOtherCategoryLike).Methods(http.MethodGet)
+
 	return r
 }
 
@@ -561,9 +564,16 @@ func (h *handler) FetchRecipesOfCategoryLike(w http.ResponseWriter, r *http.Requ
 	w.WriteHeader(http.StatusOK)
 	text := vars["text"]
 	category := vars["category"]
+	count, err := strconv.Atoi(vars["count"])
+	if err!=nil{
+		//server error
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Error converting to integer: ", err.Error())))
+		return
+	}
 
 	//call the service.
-	recipes,err := h.Service.FetchRecipesOfCategoryLike(category, text,10)
+	recipes,err := h.Service.FetchRecipesOfCategoryLike(category, text,count)
 
 	if err!=nil{
 		//server error
@@ -591,6 +601,61 @@ func (h *handler) FetchAllRecipes(w http.ResponseWriter, r * http.Request){
 	var recipes []models.Recipe
 
 	recipes, err = h.Service.FetchAllRecipes(count)
+	if err!=nil{
+		//server error
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Error querying the database: ", err.Error())))
+		return
+	}
+
+	data,err := json.Marshal(recipes)
+
+	w.Write(data)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+}
+
+func (h *handler) FetchRecipesOfOtherCategory(w http.ResponseWriter, r * http.Request){
+	vars := mux.Vars(r)
+	count, err := strconv.Atoi(vars["count"])
+	if err!=nil{
+		//server error
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Couldn't parse http", err.Error())))
+		return
+	}
+	var recipes []models.Recipe
+
+	recipes, err = h.Service.FetchRecipesOfOtherCategory(count)
+	if err!=nil{
+		//server error
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Error querying the database: ", err.Error())))
+		return
+	}
+
+	data,err := json.Marshal(recipes)
+
+	w.Write(data)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+}
+
+func (h *handler) FetchRecipesOfOtherCategoryLike(w http.ResponseWriter, r *http.Request){
+	vars := mux.Vars(r)
+	w.WriteHeader(http.StatusOK)
+	text := vars["text"]
+	count, err := strconv.Atoi(vars["count"])
+	if err!=nil{
+		//server error
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(fmt.Sprint("Error converting to integer: ", err.Error())))
+		return
+	}
+
+	//call the service.
+	recipes,err := h.Service.FetchRecipesOfOtherCategoryLike(text,count)
+
 	if err!=nil{
 		//server error
 		w.WriteHeader(http.StatusInternalServerError)

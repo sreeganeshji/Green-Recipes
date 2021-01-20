@@ -593,9 +593,51 @@ class NetworkAdapter{
         task.resume()
     }
     
-    func searchRecipeCategory(category:String, text:String, completion:@escaping ([RecipeTemplate1], Error?)->()){
+    func searchRecipeCategory(category:String, text:String, count:Int, completion:@escaping ([RecipeTemplate1], Error?)->()){
         var requestURL = baseURL
-        requestURL.appendPathComponent("fetchrecipesofcategorylike/\(category)/\(text)")
+        requestURL.appendPathComponent("fetchrecipesofcategorylike/\(category)/\(text)/\(count)")
+        
+        let task = URLSession.shared.dataTask(with: requestURL) { (data, response, error) in
+            if error != nil{
+                completion([], error)
+                return
+            }
+            let decoder = JSONDecoder()
+            do{
+            let recipes = try decoder.decode([RecipeTemplate1].self, from: data!)
+            completion(recipes, nil)
+            }
+            catch{
+                completion([], error)
+            }
+        }
+        task.resume()
+    }
+    
+    func fetchRecipesOfOtherCategory(count:Int, completion:@escaping ([RecipeTemplate1], Error?)->()){
+        var requestURL = baseURL
+        requestURL.appendPathComponent("fetchrecipesofothercategory/\(count)")
+        
+        let task = URLSession.shared.dataTask(with: requestURL) { (data, response, error) in
+            if error != nil{
+                completion([], error)
+                return
+            }
+            let decoder = JSONDecoder()
+            do{
+            let recipes = try decoder.decode([RecipeTemplate1].self, from: data!)
+            completion(recipes, nil)
+            }
+            catch{
+                completion([], error)
+            }
+        }
+        task.resume()
+    }
+    
+    func searchRecipeOtherCategory(text:String, count:Int, completion:@escaping ([RecipeTemplate1], Error?)->()){
+        var requestURL = baseURL
+        requestURL.appendPathComponent("fetchrecipesofothercategorylike/\(text)/\(count)")
         
         let task = URLSession.shared.dataTask(with: requestURL) { (data, response, error) in
             if error != nil{
