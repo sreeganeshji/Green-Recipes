@@ -67,11 +67,6 @@ struct Recipe: Hashable, Equatable, Codable{
         self.process = []
         self.servings = 1
         self.ingredients = []
-        self.equipment = []
-        self.images = []
-        self.addeddate = ""
-        self.nutrition = []
-        self.origin = ""
     }
     init(name:String, description:String){
         self.init()

@@ -22,6 +22,10 @@ struct FavoritesView: View {
                     activityIndicator()
 
             }
+            else if (data.cache.favRecipes.count == 0){
+                Text("No favorites yet.")
+                    .navigationTitle("Favorites")
+            }
             else{
                 
             List{

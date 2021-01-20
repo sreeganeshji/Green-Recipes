@@ -77,6 +77,13 @@ struct HomePage: View {
 
         else{
             VStack{
+                Text("Your Recipe")
+                    .fontWeight(.light)
+                    .font(.custom("Heading", size: 40))
+    
+                Image("iconimg")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
                 if showLoading{
                     activityIndicator()
                 }
@@ -177,8 +184,10 @@ SignInWithAppleButton(.signIn, onRequest: { request in
             self.data.networkHandler.createUser(user: self.data.user, completion: createUser)
            
         }
+        else{
         self.data.user = self.userDB
         self.signedIn = true
+        }
         
         //fetch favorites and my recipes
         self.data.updateCache()
@@ -190,8 +199,10 @@ SignInWithAppleButton(.signIn, onRequest: { request in
             return
         }
         if user != nil{
-            self.userDB.copyFrom(user: user!)
+//            self.userDB.copyFrom(user: user!)
+            self.userDB = user!
         }
+        signedIn = true
     }
 }
 

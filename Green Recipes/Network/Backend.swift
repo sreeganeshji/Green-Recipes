@@ -356,7 +356,7 @@ class NetworkAdapter{
         let task = URLSession.shared.dataTask(with: fetchURL) { (data:Data?, response:URLResponse?, error:Error?) in
             if error != nil{
                 print("Couldn't get response error: \(error)")
-                completion(.init(), error)
+                completion([], error)
                 return
             }
             let decoder = JSONDecoder()
@@ -367,6 +367,7 @@ class NetworkAdapter{
             }
             catch{
                 print("Couldn't decode error: \(error)")
+                completion([], error)
             }
         }
         task.resume()

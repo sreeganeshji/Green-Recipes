@@ -32,6 +32,18 @@ struct MyRecipes: View {
                     }
             }
         }
+        else if (myRecipes.count == 0){
+            Text("Add your recipes")
+                .navigationTitle("My Recipes")
+                .navigationBarItems(trailing: NavigationLink(destination:AddRecipe().environmentObject(self.data)
+                                                                                    .onDisappear(){
+                                                                                        fetchMyRecipes()
+                                                                                    }
+                ){Image(systemName: "square.and.pencil").font(.headline)})
+                    .sheet(isPresented: self.$showSheet) {
+                        AddRecipe().environmentObject(self.data)
+                    }
+        }
         else{
 
         Form{
@@ -74,7 +86,7 @@ struct MyRecipes: View {
         
 //
         .navigationTitle("My Recipes")
-        .navigationBarItems(leading:EditButton(), trailing: NavigationLink(destination:AddRecipe().environmentObject(self.data)
+        .navigationBarItems(leading:EditButton().font(.headline), trailing: NavigationLink(destination:AddRecipe().environmentObject(self.data)
                                                                             .onDisappear(){
                                                                                 fetchMyRecipes()
                                                                             }
@@ -92,12 +104,13 @@ struct MyRecipes: View {
     }
     
     func updateMyRecipes(recipes:[RecipeTemplate1], err:Error?){
+        loading = false
         if err != nil{
             print("Error fetching my recipes \(err!)")
             return
         }
         self.myRecipes = recipes
-        loading = false
+        
     }
 }
 

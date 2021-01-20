@@ -347,9 +347,7 @@ struct RecipeEditView: View {
               
         .onAppear(){
             recipeNew = recipe
-            recipeNew.nutrition = recipeNew.nutrition ?? []
-            recipeNew.equipment = recipeNew.equipment ?? []
-
+            
             description = recipeNew.description ?? ""
             origin = recipeNew.origin ?? ""
             recipeNewCategory = recipeNew.category ?? ""
@@ -373,12 +371,18 @@ struct RecipeEditView: View {
     }
     func addEquipment(){
         if self.newEquipment != ""{
+            if recipeNew.equipment == nil{
+                recipeNew.equipment = []
+            }
             self.recipeNew.equipment!.append(self.newEquipment)
         }
         self.newEquipment = ""
     }
     func addNutrition(){
         if self.newNutrition != ""{
+            if recipeNew.nutrition == nil{
+                recipeNew.nutrition = []
+            }
             self.recipeNew.nutrition!.append(self.newNutrition)
         }
         self.newNutrition = ""
@@ -424,6 +428,9 @@ struct RecipeEditView: View {
             AmplifyStorage().uploadData(key: image.name, data: image.image.pngData()!)
             
             //add to the new recipe
+            if recipeNew.images == nil{
+                recipeNew.images = []
+            }
             recipeNew.images!.append(image.name)
         }
             

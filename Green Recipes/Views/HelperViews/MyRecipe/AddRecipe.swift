@@ -353,12 +353,18 @@ struct AddRecipe: View {
     }
     func addEquipment(){
         if self.newEquipment != ""{
+            if recipeNew.equipment == nil{
+                recipeNew.equipment = []
+            }
             self.recipeNew.equipment!.append(self.newEquipment)
         }
         self.newEquipment = ""
     }
     func addNutrition(){
         if self.newNutrition != ""{
+            if recipeNew.nutrition == nil{
+                recipeNew.nutrition = []
+            }
             self.recipeNew.nutrition!.append(self.newNutrition)
         }
         self.newNutrition = ""
@@ -390,8 +396,11 @@ struct AddRecipe: View {
             //upload to aws S3
             AmplifyStorage().uploadData(key: image.name, data: image.image.pngData()!)
             
+            if recipeNew.images == nil{
+                recipeNew.images = []
+            }
             //add to the new recipe
-            recipeNew.images?.append(image.name)
+            recipeNew.images!.append(image.name)
             
         }
         

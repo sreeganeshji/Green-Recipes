@@ -30,6 +30,7 @@ struct RecipeDetail: View {
     @State var imageLoaded = true
     @State var spin = false
     @State var progress :Double = .init(0.0)
+    @State var showProgress = false
     
     let title:String
     var body: some View {
@@ -41,11 +42,14 @@ struct RecipeDetail: View {
                 .fontWeight(.light)
                 
                 activityIndicator()
+                    .onAppear(){
+                        GetRecipeByID()
+                    }
+                if (showProgress){
                 ProgressView(value: progress)
                     .padding()
-                .onAppear(){
-                    GetRecipeByID()
                 }
+
                
             }
         }
@@ -76,7 +80,7 @@ struct RecipeDetail: View {
             }
 
             //description
-            if(self.recipe.description != nil){
+                if(self.recipe.description != nil && recipe.description != ""){
             Section{
                 HStack{
                     Spacer()
@@ -384,6 +388,7 @@ func GetImages(){
                 
 //                completion()
             }
+        showProgress = true
             
         for image in recipe.images!{
             DispatchQueue.main.sync{

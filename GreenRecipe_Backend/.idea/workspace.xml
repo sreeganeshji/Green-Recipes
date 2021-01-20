@@ -20,21 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0b39fbb6-cc4e-4b59-be15-8e3c7ca69ebc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/AppIcon.appiconset/1024.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/AppIcon.appiconset/114.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/AppIcon.appiconset/120.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/AppIcon.appiconset/180.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/AppIcon.appiconset/29.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/AppIcon.appiconset/40.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/AppIcon.appiconset/57.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/AppIcon.appiconset/58.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/AppIcon.appiconset/60.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/AppIcon.appiconset/80.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/AppIcon.appiconset/87.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/AppIcon.appiconset/Contents.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Green Recipes/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Info.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/iconimg.imageset/Screen Shot 2021-01-19 at 6.32.49 PM.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/iconimg.imageset/Contents.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/iconimg.imageset/Contents.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Green Recipes/Assets.xcassets/iconimg.imageset/Screen Shot 2021-01-19 at 1.24.41 PM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Green Recipes/Network/Backend.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Network/Backend.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/MyRecipe/MyRecipeDetail.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/MyRecipe/MyRecipeDetail.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/RecipeDetail.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/RecipeDetail.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Green Recipes/Views/HomePage.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Views/HomePage.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.secret.txt.swp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.secret.txt.swp" beforeDir="false" afterPath="$PROJECT_DIR$/.secret.txt.swp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/schema.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

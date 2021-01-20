@@ -17,6 +17,7 @@ struct MyRecipeDetail: View {
     @State var progress:Double = .init(0)
     @State var spin = false
     @State var showEditSheet = false
+    @State var showProgress = false
 
     var recipeSummary :RecipeTemplate1
     
@@ -30,12 +31,14 @@ struct MyRecipeDetail: View {
                     .fontWeight(.light)
                     
                     activityIndicator()
+                        .onAppear(){
+                                              GetRecipeByID()
+                                          }
+                if showProgress{
                 ProgressView(value:progress)
                     .padding()
-                    
-                    .onAppear(){
-                        GetRecipeByID()
-                    }
+                }
+                  
             }
             else{
 //            if editMode?.wrappedValue == EditMode.active{
@@ -72,6 +75,7 @@ struct MyRecipeDetail: View {
         if recipe.images == nil{
             return
         }
+        showProgress = true
             
             func updateImages(name:String, imageData:Data){
                 self.images.append(.init(name: name, image: UIImage(data: imageData)!))
