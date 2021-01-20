@@ -51,7 +51,7 @@ struct MyRecipeDetail: View {
         }
         
         .sheet(isPresented: $showEditSheet, content: {
-            RecipeEditView(recipe: self.$recipe, imagesOrg: self.$images, showSheet:$showEditSheet).environmentObject(data)
+            RecipeEditView(recipe: self.$recipe, imagesOrg: self.$images, showSheet:$showEditSheet, updateRecipe: GetRecipeByID).environmentObject(data)
         })
 //        .navigationBarItems(trailing: EditButton().font(.headline))
         .navigationBarItems(trailing: Button(action:{showEditSheet = true}){Text("Edit").font(.headline)})
@@ -75,10 +75,13 @@ struct MyRecipeDetail: View {
         if recipe.images == nil{
             return
         }
+        images = []
         showProgress = true
             
-            func updateImages(name:String, imageData:Data){
-                self.images.append(.init(name: name, image: UIImage(data: imageData)!))
+            func updateImages(name:String, imageData:Data?){
+                if imageData != nil{
+                self.images.append(.init(name: name, image: UIImage(data: imageData!)!))
+                }
                 spin = false
                 let prog = Double(images.count)/Double(recipe.images!.count)
                 updateProgress(p: prog)
@@ -111,8 +114,10 @@ struct MyRecipeDetail: View {
         }
     }
         
-    func UpdateImages(name:String, image:Data){
-        self.images.append(.init(name:name, image:UIImage(data: image)!))
+    func UpdateImages(name:String, image:Data?){
+        if image != nil{
+        self.images.append(.init(name:name, image:UIImage(data: image!)!))
+        }
             GetImages()
         }
 

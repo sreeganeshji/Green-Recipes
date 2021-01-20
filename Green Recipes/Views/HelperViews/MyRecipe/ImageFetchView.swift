@@ -33,8 +33,10 @@ struct ImageFetchView: View {
 
         DispatchQueue.main.async{
             
-            func updateImages(name:String, imageData:Data){
-                self.image.image = UIImage(data: imageData)!
+            func updateImages(name:String, imageData:Data?){
+                if imageData != nil{
+                self.image.image = UIImage(data: imageData!)!
+                }
                 spin = false
                 completion()
             }

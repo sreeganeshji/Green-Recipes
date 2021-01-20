@@ -32,7 +32,7 @@ import SwiftUI
             {
                 Form{
                     //images
-                    if (self.recipe.images != nil && self.recipe.images!.count > 0){
+                    if (images.count > 0){
                         ZStack{
                         ImageCarousalFetchView(images:self.$images, imagesLoaded: $imageLoaded).environmentObject(self.data)
                                 .frame(maxHeight:300)

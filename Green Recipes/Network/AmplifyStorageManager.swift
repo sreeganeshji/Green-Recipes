@@ -33,7 +33,7 @@ class AmplifyStorage{
         })
     }
     
-    func downloadData(key:String, completion:@escaping (String,Data)->(), progresscb:@escaping (Double)->()) {
+    func downloadData(key:String, completion:@escaping (String,Data?)->(), progresscb:@escaping (Double)->()) {
         print("Download key",key)
         let storageOperation = Amplify.Storage.downloadData(key: key)
         progressSink = storageOperation.progressPublisher.sink { (progress:Progress) in
@@ -43,6 +43,7 @@ class AmplifyStorage{
         resultSink = storageOperation.resultPublisher.sink {
             if case let .failure(StorageError) = $0{
                 print("Failed: \(StorageError.debugDescription) and \(StorageError.recoverySuggestion)")
+                completion(key,nil)
             }
         } receiveValue: {
             (data:Data) in

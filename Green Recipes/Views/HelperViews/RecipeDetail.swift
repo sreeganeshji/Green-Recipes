@@ -57,7 +57,7 @@ struct RecipeDetail: View {
         ZStack{
             Form{
             
-            if (self.recipe.images != nil && self.recipe.images!.count > 0){
+            if (self.images.count > 0){
 
 //                ZStack{
                 ImageCarousalFetchView(images:self.$images, imagesLoaded: $imageLoaded).environmentObject(self.data)
@@ -384,8 +384,10 @@ func GetImages(){
     }
 }
     
-    func UpdateImages(name:String, image:Data){
-        self.images.append(.init(name:name, image:UIImage(data: image)!))
+    func UpdateImages(name:String, image:Data?){
+        if image != nil{
+        self.images.append(.init(name:name, image:UIImage(data: image!)!))
+        }
         GetImages()
     }
     
@@ -402,8 +404,10 @@ func GetImages(){
             return
         }
             
-            func updateImages(name:String, imageData:Data){
-                self.images.append(.init(name: name, image: UIImage(data: imageData)!))
+            func updateImages(name:String, imageData:Data?){
+                if imageData != nil{
+                    self.images.append(.init(name: name, image: UIImage(data: imageData!)!))
+                }
                 spin = false
                 let prog = Double(images.count)/Double(recipe.images!.count)
                 updateProgress(p: prog)

@@ -373,7 +373,7 @@ class NetworkAdapter{
         task.resume()
     }
     
-    func updateRecipe(recipe: Recipe){
+    func updateRecipe(recipe: Recipe, completion:@escaping ()->()){
         var addRecipeURL = baseURL
         addRecipeURL.appendPathComponent("updaterecipe")
         var addRecipeRequest = URLRequest(url: addRecipeURL)
@@ -385,6 +385,7 @@ class NetworkAdapter{
         print(String(data: data,encoding: .utf8)!)
         addRecipeRequest.httpBody = data
         let task = URLSession.shared.dataTask(with: addRecipeRequest) { (data:Data?, response:URLResponse?, error:Error?) in
+            completion()
 //            print(String(data: data ?? Data(), encoding: .utf8)!)
 //            print("Response",response ?? "")
 //            print("Error",error ?? "")

@@ -31,7 +31,7 @@ struct RecipeEditView: View {
     @Binding var showSheet :Bool
     @State var alertTitle = ""
     @Environment(\.editMode) var editMode
-    
+    var updateRecipe:()->()
     
     var body: some View {
         NavigationView{
@@ -218,7 +218,7 @@ struct RecipeEditView: View {
                 
                 ImageCarousel(images:self.$images)
                     .frame(maxHeight:300)
-                
+                Text("Needs reopening to reflect deletions.").font(.footnote).foregroundColor(.secondary)
             }
             
             Section{
@@ -484,7 +484,7 @@ struct RecipeEditView: View {
         imagesOrg = images
         }
 
-        self.data.networkHandler.updateRecipe(recipe: self.recipeNew)
+        self.data.networkHandler.updateRecipe(recipe: self.recipeNew, completion:{})
         
         //add to myrecipes
 //        self.data.fetchMyRecipes(userId: self.data.user.userId)
