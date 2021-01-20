@@ -459,6 +459,10 @@ self.data.networkHandler.getUserName(userId: self.recipe.addedby!, completion: u
     }
     
     func updateAverage(){
+        if reviews.count == 0{
+            data.networkHandler.updateRecipeRating(recipeID: recipe.id!, rating: 0, ratingCount: 0, completion: GetRecipeByID)
+            return
+        }
         let total:Double = reviews.reduce(0.0) { (result:Double, review:Review) -> Double in
             result + Double(review.rating)
         }

@@ -9,14 +9,15 @@ import SwiftUI
 
 struct Icon1: View {
     var body: some View {
-        GeometryReader{
-            reader in
+
         VStack{
-            RoundedRectangle(cornerRadius: 20)
-                .frame(height:reader.size.height*0.5)
+            Image("iconimg")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
         }
-        }
-        .frame(width:300, height:300)
+        .padding(50)
+        
+        
     }
 }
 

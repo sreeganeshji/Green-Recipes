@@ -101,7 +101,7 @@ struct AddReview: View {
             {
                 Button(action:{
                     validateFields()
-                    self.data.networkHandler.deleteMyReview(reviewId: self.review.Id!, completion: fetchReviews, updateAvg:false)
+                    self.data.networkHandler.deleteMyReview(reviewId: self.review.Id!, completion: fetchReviews, updateAvg:true)
                 })
                 {
                     Image(systemName: "trash")

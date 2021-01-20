@@ -354,7 +354,7 @@ import SwiftUI
             let total:Double = reviews.reduce(0.0) { (result:Double, review:Review) -> Double in
                 result + Double(review.rating)
             }
-            let average = total/Double(reviews.count)
+            let average = (reviews.count == 0) ? 0 : total/Double(reviews.count)
             data.networkHandler.updateRecipeRating(recipeID: recipe.id!, rating: average, ratingCount: reviews.count, completion: GetRecipeByID)
         }
         

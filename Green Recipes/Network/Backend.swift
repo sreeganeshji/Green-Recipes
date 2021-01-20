@@ -9,7 +9,7 @@ import Foundation
 
 class NetworkAdapter{
     
-    var baseURL = URL(string: "https://ganeshappbackend.com")!
+    var baseURL = URL(string: "https://.com")!
     
     init(_ base:String?){
         if base != nil{
@@ -342,7 +342,7 @@ class NetworkAdapter{
             }
             catch{
                 print("Couldn't decode recived reviews: \(error)")
-                completion([], error, callback)
+                completion([], nil, callback)
                 return
             }
         }
