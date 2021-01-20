@@ -153,7 +153,7 @@ SignInWithAppleButton(.signIn, onRequest: { request in
 .signInWithAppleButtonStyle(.whiteOutline)
         }
 .onAppear(){
-
+//    self.data.networkHandler.getUserWithAppleID(appleID: "001289c9ba712996a74ce8aa424e158d6b10d50653", completion: updateUser)
     let appleID:String? = localStorageManager.load("appleID")
     if appleID != nil{
             self.data.networkHandler.getUserWithAppleID(appleID: appleID!, completion: updateUser)

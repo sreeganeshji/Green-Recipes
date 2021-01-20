@@ -15,7 +15,9 @@ struct RecipeEditView: View {
     @State var newProcess:String = ""
     @State var description:String = ""
     @State var newEquipment:String = ""
+    @State var equipment:[String]?
     @State var newNutrition:String = ""
+    @State var nutrition:[String]?
     @State var origin:String = ""
     @State var estimatedTime:String = ""
     @Binding var imagesOrg:[ImageContainer]
@@ -152,10 +154,10 @@ struct RecipeEditView: View {
                 Spacer()
             }
                 //recipenew.equipment is initialized to []
-                if(recipeNew.equipment != nil && recipeNew.equipment!.count>0)
+                if(equipment != nil && equipment!.count>0)
                 {
                     List{
-                        ForEach(Array(zip((1...recipeNew.equipment!.count),recipeNew.equipment!)),id:\.0){
+                        ForEach(Array(zip((1...equipment!.count), equipment!)),id:\.0){
                     item in
                             HStack{
                                 Text("\(item.0).")
@@ -168,10 +170,10 @@ struct RecipeEditView: View {
                             }.padding()
                 }
                 .onDelete(perform: { ind in
-                    self.recipeNew.equipment!.remove(atOffsets: ind)
+                    self.equipment!.remove(atOffsets: ind)
                 })
                     .onMove { (IndSet, ind) in
-                        self.recipeNew.equipment!.move(fromOffsets: IndSet, toOffset: ind)
+                        self.equipment!.move(fromOffsets: IndSet, toOffset: ind)
             }
                     }
             }
@@ -295,10 +297,10 @@ struct RecipeEditView: View {
                 Spacer()
             }
 //                recipenew.equipment is initialized to []
-                if(recipeNew.nutrition != nil && recipeNew.nutrition!.count>0)
+                if(nutrition != nil && nutrition!.count>0)
                 {
                     List{
-                        ForEach(Array(zip((1...recipeNew.nutrition!.count),recipeNew.nutrition!)),id:\.0){
+                        ForEach(Array(zip((1...nutrition!.count), nutrition!)),id:\.0){
                     item in
                             HStack{
                                 Text("\(item.0).")
@@ -311,10 +313,10 @@ struct RecipeEditView: View {
                             }.padding()
                 }
                 .onDelete(perform: { ind in
-                    self.recipeNew.nutrition!.remove(atOffsets: ind)
+                    self.nutrition!.remove(atOffsets: ind)
                 })
                     .onMove { (IndSet, ind) in
-                        self.recipeNew.nutrition!.move(fromOffsets: IndSet, toOffset: ind)
+                        self.nutrition!.move(fromOffsets: IndSet, toOffset: ind)
             }
                     }
             }
@@ -376,6 +378,8 @@ struct RecipeEditView: View {
             recipeNewContributor = recipeNew.contributor ?? ""
             images = imagesOrg
             estimatedTime = recipeNew.estimatedTime ?? ""
+            equipment = recipeNew.equipment
+            nutrition = recipeNew.nutrition
         }
     }
 
@@ -394,19 +398,19 @@ struct RecipeEditView: View {
     }
     func addEquipment(){
         if self.newEquipment != ""{
-            if recipeNew.equipment == nil{
-                recipeNew.equipment = []
+            if equipment == nil{
+                equipment = []
             }
-            self.recipeNew.equipment!.append(self.newEquipment)
+            equipment!.append(self.newEquipment)
         }
         self.newEquipment = ""
     }
     func addNutrition(){
         if self.newNutrition != ""{
-            if recipeNew.nutrition == nil{
-                recipeNew.nutrition = []
+            if nutrition == nil{
+                nutrition = []
             }
-            self.recipeNew.nutrition!.append(self.newNutrition)
+            nutrition!.append(self.newNutrition)
         }
         self.newNutrition = ""
     }
@@ -429,6 +433,8 @@ struct RecipeEditView: View {
         self.recipeNew.contributor = (self.recipeNewContributor == "") ? nil : self.recipeNewContributor
         self.recipeNew.category = (self.recipeNewCategory == "") ? nil : self.recipeNewCategory
         self.recipeNew.estimatedTime = (self.estimatedTime == "") ? nil: self.estimatedTime
+        self.recipeNew.equipment = (equipment == nil || equipment == []) ? nil:equipment
+        self.recipeNew.nutrition = (nutrition == nil || nutrition == []) ? nil:nutrition
 
         //current set
         let oldImages = self.recipeNew.images ?? []
