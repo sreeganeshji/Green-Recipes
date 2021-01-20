@@ -17,6 +17,7 @@ struct RecipeEditView: View {
     @State var newEquipment:String = ""
     @State var newNutrition:String = ""
     @State var origin:String = ""
+    @State var estimatedTime:String = ""
     @Binding var imagesOrg:[ImageContainer]
     @State var images:[ImageContainer] = []
     @State var showSheetAddImages:Bool = false
@@ -255,6 +256,27 @@ struct RecipeEditView: View {
                     Spacer()
                 }
                     TextField("Add Contributor", text: self.$recipeNewContributor)
+                HStack{
+                    Spacer()
+                    Text("Origin")
+                        .font(.title)
+                        .fontWeight(.light)
+                        .foregroundColor(.blue)
+                    Text("(Optional)").foregroundColor(.secondary)
+                    Spacer()
+                }
+                    TextField("Add Origin", text: self.$origin)
+                
+                HStack{
+                    Spacer()
+                    Text("Estimated Time")
+                        .font(.title)
+                        .fontWeight(.light)
+                        .foregroundColor(.blue)
+                    Text("(Optional)").foregroundColor(.secondary)
+                    Spacer()
+                }
+                    TextField("Add estimated time", text: self.$estimatedTime)
             }
             
             Section
@@ -353,6 +375,7 @@ struct RecipeEditView: View {
             recipeNewCategory = recipeNew.category ?? ""
             recipeNewContributor = recipeNew.contributor ?? ""
             images = imagesOrg
+            estimatedTime = recipeNew.estimatedTime ?? ""
         }
     }
 
@@ -400,12 +423,13 @@ struct RecipeEditView: View {
         //blur and freeze the screen
         
         //add the rest of the fields.
-        self.recipeNew.origin = self.origin
+        self.recipeNew.origin = (self.origin == "") ? nil : self.origin
         self.recipeNew.addedby = self.data.user.userId
-        self.recipeNew.description = self.description
-        self.recipeNew.contributor = self.recipeNewContributor
-        self.recipeNew.category = self.recipeNewCategory
-        
+        self.recipeNew.description = (self.description == "") ? nil : self.description
+        self.recipeNew.contributor = (self.recipeNewContributor == "") ? nil : self.recipeNewContributor
+        self.recipeNew.category = (self.recipeNewCategory == "") ? nil : self.recipeNewCategory
+        self.recipeNew.estimatedTime = (self.estimatedTime == "") ? nil: self.estimatedTime
+
         //current set
         let oldImages = self.recipeNew.images ?? []
         

@@ -187,7 +187,7 @@ import SwiftUI
 //
 //                        }
 //                    }
-                    if(self.recipe.category != nil || self.recipe.contributor != nil){
+                    if(self.recipe.category != nil || self.recipe.contributor != nil || self.recipe.origin != nil || self.recipe.estimatedTime != nil){
                     Section{
                         if (self.recipe.category != nil){
                         HStack{
@@ -208,6 +208,28 @@ import SwiftUI
                                 .foregroundColor(.blue)
                                 Spacer()
                                 Text(self.recipe.contributor!)
+                            }
+                        }
+                        if(self.recipe.origin != nil)
+                        {
+                            HStack{
+                            Text("Origin:")
+                                .font(.title)
+                                .fontWeight(.light)
+                                .foregroundColor(.blue)
+                                Spacer()
+                                Text(self.recipe.origin!)
+                            }
+                        }
+                        if(self.recipe.estimatedTime != nil)
+                        {
+                            HStack{
+                            Text("Estimated Time:")
+                                .font(.title)
+                                .fontWeight(.light)
+                                .foregroundColor(.blue)
+                                Spacer()
+                                Text(self.recipe.estimatedTime!)
                             }
                         }
                     }
