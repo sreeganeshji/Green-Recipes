@@ -80,10 +80,13 @@ struct HomePage: View {
                 Text("Your Recipe")
                     .fontWeight(.light)
                     .font(.custom("Heading", size: 40))
+                    .shadow(radius: 10)
     
                 Image("iconimg")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
+                    .padding()
+                    .shadow(radius: 15)
                 if showLoading{
                     activityIndicator()
                 }
@@ -153,7 +156,7 @@ SignInWithAppleButton(.signIn, onRequest: { request in
 .signInWithAppleButtonStyle(.whiteOutline)
         }
 .onAppear(){
-//    self.data.networkHandler.getUserWithAppleID(appleID: "001289c9ba712996a74ce8aa424e158d6b10d50653", completion: updateUser)
+
     let appleID:String? = localStorageManager.load("appleID")
     if appleID != nil{
             self.data.networkHandler.getUserWithAppleID(appleID: appleID!, completion: updateUser)
@@ -201,6 +204,7 @@ SignInWithAppleButton(.signIn, onRequest: { request in
         if user != nil{
 //            self.userDB.copyFrom(user: user!)
             self.userDB = user!
+            self.data.user = self.userDB
         }
         signedIn = true
     }

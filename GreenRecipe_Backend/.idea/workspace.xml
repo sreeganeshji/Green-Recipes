@@ -20,11 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0b39fbb6-cc4e-4b59-be15-8e3c7ca69ebc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Green Recipes/Data&amp;Models/Data.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Data&amp;Models/Data.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/PrivacyPolicy.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Database/gotests/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Green Recipes.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes.xcodeproj/project.pbxproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Green Recipes/Network/Backend.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Network/Backend.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/MyRecipe/AddRecipe.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/MyRecipe/AddRecipe.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/MyRecipe/RecipeEditView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Views/HelperViews/MyRecipe/RecipeEditView.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Green Recipes/Views/HomePage.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Views/HomePage.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Green Recipes/Views/Settings.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Green Recipes/Views/Settings.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Database/database.go" beforeDir="false" afterPath="$PROJECT_DIR$/Database/database.go" afterDir="false" />
     </list>
@@ -38,6 +39,7 @@
       <list>
         <option value="Go Application" />
         <option value="Go File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -59,6 +61,7 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />

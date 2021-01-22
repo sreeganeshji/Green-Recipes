@@ -23,6 +23,12 @@ struct Settings: View {
                         .font(.title2)
                 }
             }
+            Section{
+                NavigationLink(destination:PrivacyPolicy()){
+                    Text("Privacy Policy")
+                }
+            }
+            
         }
         .onAppear(){
             username = data.user.username

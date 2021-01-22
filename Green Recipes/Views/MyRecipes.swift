@@ -33,7 +33,7 @@ struct MyRecipes: View {
             }
         }
         else if (myRecipes.count == 0){
-            Text("Add your recipes")
+            Text("Add your recipes.")
                 .navigationTitle("My Recipes")
                 .navigationBarItems(trailing: NavigationLink(destination:AddRecipe().environmentObject(self.data)
                                                                                     .onDisappear(){

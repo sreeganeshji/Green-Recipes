@@ -14,6 +14,8 @@ struct Icon1: View {
             Image("iconimg")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
+            Text("Stuff")
+                .font(.title3)
         }
         .padding(50)
         

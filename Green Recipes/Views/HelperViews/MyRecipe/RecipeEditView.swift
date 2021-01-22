@@ -39,7 +39,7 @@ struct RecipeEditView: View {
             Section{
             HStack{
                 Text("Name:")
-                    .font(.title)
+                    .font(.title2)
                     .fontWeight(.light)
                     .foregroundColor(.blue)
                 TextField("Add name", text: $recipeNew.name)
@@ -49,7 +49,7 @@ struct RecipeEditView: View {
                 HStack{
                     Spacer()
                     Text("Description")
-                        .font(.title)
+                        .font(.title2)
                         .fontWeight(.light)
                         .foregroundColor(.blue)
                     Text("(Optional)").foregroundColor(.secondary)
@@ -62,7 +62,7 @@ struct RecipeEditView: View {
             HStack {
                 Spacer()
                 Text("Ingredients")
-                    .font(.title)
+                    .font(.title2)
                     .fontWeight(.light)
                     .foregroundColor(.blue)
                 
@@ -75,13 +75,14 @@ struct RecipeEditView: View {
                     item in
                     HStack{
                         Text("\(item.1).")
-                            .font(.title)
+                            .font(.title3)
                             .fontWeight(.light)
                             .foregroundColor(.blue)
-                        Spacer()
+//                        Spacer()
                         Text(item.0)
                         Spacer()
-                    }.padding()
+                    }
+//                    .padding()
                 }
                 .onDelete(perform: { ind in
                     self.recipeNew.ingredients.remove(atOffsets: ind)
@@ -105,7 +106,7 @@ struct RecipeEditView: View {
             HStack {
                 Spacer()
                 Text("Process")
-                    .font(.title)
+                    .font(.title2)
                     .fontWeight(.light)
                     .foregroundColor(.blue)
                 Spacer()
@@ -117,13 +118,14 @@ struct RecipeEditView: View {
                     item in
                             HStack{
                                 Text("\(item.0).")
-                                    .font(.title)
+                                    .font(.title3)
                                     .fontWeight(.light)
                                     .foregroundColor(.blue)
-                                Spacer()
+//                                Spacer()
                                 Text(item.1)
                                 Spacer()
-                            }.padding()
+                            }
+//                            .padding()
                 }
                 .onDelete(perform: { ind in
                     self.recipeNew.process.remove(atOffsets: ind)
@@ -147,7 +149,7 @@ struct RecipeEditView: View {
             HStack {
                 Spacer()
                 Text("Equipments")
-                    .font(.title)
+                    .font(.title2)
                     .fontWeight(.light)
                     .foregroundColor(.blue)
                 Text("(Optional)").foregroundColor(.secondary)
@@ -161,13 +163,14 @@ struct RecipeEditView: View {
                     item in
                             HStack{
                                 Text("\(item.0).")
-                                    .font(.title)
+                                    .font(.title3)
                                     .fontWeight(.light)
                                     .foregroundColor(.blue)
-                                Spacer()
+//                                Spacer()
                                 Text(item.1)
                                 Spacer()
-                            }.padding()
+                            }
+//                            .padding()
                 }
                 .onDelete(perform: { ind in
                     self.equipment!.remove(atOffsets: ind)
@@ -190,7 +193,7 @@ struct RecipeEditView: View {
             Stepper(value: $recipeNew.servings, in: 0...100) {
                 HStack{
                     Text("Servings:")
-                        .font(.title)
+                        .font(.title2)
                         .fontWeight(.light)
                         .foregroundColor(.blue)
                     Spacer()
@@ -204,7 +207,7 @@ struct RecipeEditView: View {
                 HStack{
                     Spacer()
                 Text("Images")
-                    .font(.title)
+                    .font(.title2)
                     .fontWeight(.light)
                     .foregroundColor(.blue)
                 Text("(Optional)").foregroundColor(.secondary)
@@ -226,7 +229,7 @@ struct RecipeEditView: View {
                 HStack{
                     Spacer()
                     Text("Category")
-                        .font(.title)
+                        .font(.title2)
                         .fontWeight(.light)
                         .foregroundColor(.blue)
                     Text("(Optional)").foregroundColor(.secondary)
@@ -251,7 +254,7 @@ struct RecipeEditView: View {
                 HStack{
                     Spacer()
                     Text("Contributor")
-                        .font(.title)
+                        .font(.title2)
                         .fontWeight(.light)
                         .foregroundColor(.blue)
                     Text("(Optional)").foregroundColor(.secondary)
@@ -261,7 +264,7 @@ struct RecipeEditView: View {
                 HStack{
                     Spacer()
                     Text("Origin")
-                        .font(.title)
+                        .font(.title2)
                         .fontWeight(.light)
                         .foregroundColor(.blue)
                     Text("(Optional)").foregroundColor(.secondary)
@@ -272,7 +275,7 @@ struct RecipeEditView: View {
                 HStack{
                     Spacer()
                     Text("Estimated Time")
-                        .font(.title)
+                        .font(.title2)
                         .fontWeight(.light)
                         .foregroundColor(.blue)
                     Text("(Optional)").foregroundColor(.secondary)
@@ -290,7 +293,7 @@ struct RecipeEditView: View {
             HStack {
                 Spacer()
                 Text("Nutrition")
-                    .font(.title)
+                    .font(.title2)
                     .fontWeight(.light)
                     .foregroundColor(.blue)
                 Text("(Optional)").foregroundColor(.secondary)
@@ -304,13 +307,14 @@ struct RecipeEditView: View {
                     item in
                             HStack{
                                 Text("\(item.0).")
-                                    .font(.title)
+                                    .font(.title3)
                                     .fontWeight(.light)
                                     .foregroundColor(.blue)
-                                Spacer()
+//                                Spacer()
                                 Text(item.1)
                                 Spacer()
-                            }.padding()
+                            }
+//                            .padding()
                 }
                 .onDelete(perform: { ind in
                     self.nutrition!.remove(atOffsets: ind)

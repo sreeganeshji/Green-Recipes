@@ -64,8 +64,8 @@ struct RecipeDetail: View {
                         .frame(maxHeight:300)
                         .clipShape(RoundedRectangle(cornerRadius:12))
                     .ignoresSafeArea()
-                        .padding(.top)
-                        .padding(.bottom)
+//                        .padding(.top)
+//                        .padding(.bottom)
                         
 //                    if(!imageLoaded){
 //                        Text("Loading Images...")
@@ -85,7 +85,7 @@ struct RecipeDetail: View {
                 HStack{
                     Spacer()
                     Text("Description")
-                        .font(.title)
+                        .font(.title2)
                         .foregroundColor(.blue)
                         .fontWeight(.light)
                 Spacer()
@@ -102,7 +102,7 @@ struct RecipeDetail: View {
                 Spacer()
                 Text("Ingredients").foregroundColor(.blue)
                     .fontWeight(.light)
-                    .font(.title)
+                    .font(.title2)
                 
                 Spacer()
             }
@@ -114,13 +114,15 @@ struct RecipeDetail: View {
                         ForEach(Array(zip(self.recipe.ingredients,(1...self.recipe.ingredients.count))),id:\.1){
                     item in
                     HStack{
-                        Text("\(item.1).").font(.title)
+                        Text("\(item.1).")
+                            .font(.title3)
                             .fontWeight(.light)
                             .foregroundColor(.blue)
-                        Spacer()
+
                         Text(item.0)
                         Spacer()
-                    }.padding()
+                    }
+//                    .padding()
                 }
 
                     }
@@ -133,7 +135,7 @@ struct RecipeDetail: View {
             HStack {
                 Spacer()
                 Text("Process")
-                    .font(.title)
+                    .font(.title2)
                     .fontWeight(.light)
                     .foregroundColor(.blue)
                 Spacer()
@@ -145,13 +147,14 @@ struct RecipeDetail: View {
                     item in
                             HStack{
                                 Text("\(item.0).")
-                                    .font(.title)
+                                    .font(.title3)
                                     .fontWeight(.light)
                                     .foregroundColor(.blue)
-                                Spacer()
+//                                Spacer()
                                 Text(item.1)
                                 Spacer()
-                            }.padding()
+                            }
+//                            .padding()
                         }
         
                     }
@@ -160,7 +163,7 @@ struct RecipeDetail: View {
             }
            
             HStack{
-                Text("Servings:").font(.title)
+                Text("Servings:").font(.title2)
                     .fontWeight(.light)
                     .foregroundColor(.blue)
                 Spacer()
@@ -175,7 +178,7 @@ struct RecipeDetail: View {
             HStack {
                 Spacer()
                 Text("Equipments")
-                    .font(.title)
+                    .font(.title2)
                     .fontWeight(.light)
                     .foregroundColor(.blue)
                 Spacer()
@@ -186,13 +189,14 @@ struct RecipeDetail: View {
                     item in
                             HStack{
                                 Text("\(item.0).")
-                                    .font(.title)
+                                    .font(.title3)
                                     .fontWeight(.light)
                                     .foregroundColor(.blue)
-                                Spacer()
+//                                Spacer()
                                 Text(item.1)
                                 Spacer()
-                            }.padding()
+                            }
+//                            .padding()
                         }
                     }
                 }
@@ -224,7 +228,7 @@ struct RecipeDetail: View {
                     if (self.recipe.category != nil){
                     HStack{
                     Text("Category:")
-                        .font(.title)
+                        .font(.title2)
                         .fontWeight(.light)
                         .foregroundColor(.blue)
                         Spacer()
@@ -235,7 +239,7 @@ struct RecipeDetail: View {
                     {
                         HStack{
                         Text("Contributor:")
-                            .font(.title)
+                            .font(.title2)
                             .fontWeight(.light)
                             .foregroundColor(.blue)
                             Spacer()
@@ -246,7 +250,7 @@ struct RecipeDetail: View {
                     {
                         HStack{
                         Text("Origin:")
-                            .font(.title)
+                            .font(.title2)
                             .fontWeight(.light)
                             .foregroundColor(.blue)
                             Spacer()
@@ -257,7 +261,7 @@ struct RecipeDetail: View {
                     {
                         HStack{
                         Text("Estimated Time:")
-                            .font(.title)
+                            .font(.title2)
                             .fontWeight(.light)
                             .foregroundColor(.blue)
                             Spacer()
@@ -274,7 +278,7 @@ struct RecipeDetail: View {
                 HStack {
                     Spacer()
                     Text("Nutrition")
-                        .font(.title)
+                        .font(.title2)
                         .fontWeight(.light)
                         .foregroundColor(.blue)
                     Spacer()
@@ -285,13 +289,14 @@ struct RecipeDetail: View {
                         item in
                                 HStack{
                                     Text("\(item.0).")
-                                        .font(.title)
+                                        .font(.title3)
                                         .fontWeight(.light)
                                         .foregroundColor(.blue)
-                                    Spacer()
+//                                    Spacer()
                                     Text(item.1)
                                     Spacer()
-                                }.padding()
+                                }
+//                                .padding()
                             }
                         }
                     }
@@ -302,7 +307,7 @@ struct RecipeDetail: View {
                 Section{
                     HStack{
                         Text("Added by:")
-                            .font(.title)
+                            .font(.title2)
                             .fontWeight(.light)
                             .foregroundColor(.blue)
                         Spacer()
@@ -330,7 +335,7 @@ struct RecipeDetail: View {
                         }
                         .padding()
                     Text("Ratings & Reviews")
-                        .font(.title)
+                        .font(.title2)
                         .fontWeight(.light)
                         .foregroundColor(.blue)
 //                    ReviewStarSummary(reviews: self.$reviews)

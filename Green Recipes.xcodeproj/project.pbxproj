@@ -36,6 +36,7 @@
 		B16A1254259271DB0027FC4F /* VerifyCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16A1253259271DB0027FC4F /* VerifyCredentials.swift */; };
 		B16A125925951A5D0027FC4F /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16A125825951A5C0027FC4F /* FavoritesView.swift */; };
 		B17CE7AE25B8BC4E001D84DE /* CategoryOthersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17CE7AD25B8BC4E001D84DE /* CategoryOthersList.swift */; };
+		B17CE7B325B91564001D84DE /* PrivacyPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17CE7B225B91564001D84DE /* PrivacyPolicy.swift */; };
 		B1A440C6259D2734002A0252 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A440C5259D2734002A0252 /* PhotoPicker.swift */; };
 		B1A440CB259D36F9002A0252 /* AmplifyStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A440CA259D36F9002A0252 /* AmplifyStorageManager.swift */; };
 		B1BF615C25A772600000D2A1 /* MoreByUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BF615B25A772600000D2A1 /* MoreByUserView.swift */; };
@@ -120,6 +121,7 @@
 		B16A1253259271DB0027FC4F /* VerifyCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyCredentials.swift; sourceTree = "<group>"; };
 		B16A125825951A5C0027FC4F /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		B17CE7AD25B8BC4E001D84DE /* CategoryOthersList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryOthersList.swift; sourceTree = "<group>"; };
+		B17CE7B225B91564001D84DE /* PrivacyPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicy.swift; sourceTree = "<group>"; };
 		B1A440C5259D2734002A0252 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
 		B1A440CA259D36F9002A0252 /* AmplifyStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmplifyStorageManager.swift; sourceTree = "<group>"; };
 		B1BF615B25A772600000D2A1 /* MoreByUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreByUserView.swift; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 			isa = PBXGroup;
 			children = (
 				1F843949254DF70A004A27A9 /* recipeThumb1.swift */,
+				B17CE7B225B91564001D84DE /* PrivacyPolicy.swift */,
 				B1CF0D4D25B6835B008169BE /* Icons */,
 				B1F0D60525906B6600BD36EF /* RecipeDetail.swift */,
 				B122466925AE7C4F00320E27 /* CategoryList.swift */,
@@ -628,6 +631,7 @@
 				B122466525AE50F100320E27 /* Explore.swift in Sources */,
 				B1E81DFD259E55560059EC28 /* ReviewsSummary.swift in Sources */,
 				B122466025AE506400320E27 /* CategoryThumb.swift in Sources */,
+				B17CE7B325B91564001D84DE /* PrivacyPolicy.swift in Sources */,
 				1F821330256D653200D29FEE /* Backend.swift in Sources */,
 				1F84393F254DF6BB004A27A9 /* RecipesHome.swift in Sources */,
 				B1F0D60625906B6600BD36EF /* RecipeDetail.swift in Sources */,
@@ -821,6 +825,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Green Recipes/Green Recipes.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.01;
 				DEVELOPMENT_ASSET_PATHS = "\"Green Recipes/Preview Content\"";
 				DEVELOPMENT_TEAM = C5978J5948;
 				ENABLE_PREVIEWS = YES;
@@ -830,6 +835,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1;
 				PRODUCT_BUNDLE_IDENTIFIER = "ganeshComp.Green-Recipes";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -845,6 +851,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Green Recipes/Green Recipes.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.01;
 				DEVELOPMENT_ASSET_PATHS = "\"Green Recipes/Preview Content\"";
 				DEVELOPMENT_TEAM = C5978J5948;
 				ENABLE_PREVIEWS = YES;
@@ -854,6 +861,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1;
 				PRODUCT_BUNDLE_IDENTIFIER = "ganeshComp.Green-Recipes";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
