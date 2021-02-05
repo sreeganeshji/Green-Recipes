@@ -231,6 +231,9 @@ class NetworkAdapter{
     }
     
     func addFavorite(userId:Int, recipeId:Int){
+        if userId == 0{
+            return
+        }
         var requestURL = baseURL
         requestURL.appendPathComponent("addfavorite/\(userId)/\(recipeId)")
         
@@ -247,6 +250,9 @@ class NetworkAdapter{
     }
     
     func removeFavorite(userId:Int, recipeId:Int){
+        if userId == 0{
+            return
+        }
         var requestURL = baseURL
         requestURL.appendPathComponent("removefavorite/\(userId)/\(recipeId)")
         

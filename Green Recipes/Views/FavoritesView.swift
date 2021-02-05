@@ -11,6 +11,7 @@ struct FavoritesView: View {
     @EnvironmentObject var data:DataModels
     @State var navigationTitle:Binding<String>
     @State var loading = false
+    @Binding var signedin :Bool
     var body: some View {
    
             if loading{
@@ -20,7 +21,18 @@ struct FavoritesView: View {
                     .fontWeight(.light)
                     
                     activityIndicator()
+                    .navigationTitle("Favorites")
 
+            }
+            else if (data.user.appleId == ""){
+                Button(action:{signedin = false})
+                {
+                    Text("Sign In")
+                        .foregroundColor(.blue)
+                        .font(.title)
+                        .fontWeight(.light)
+                }
+                .navigationTitle("Favorites")
             }
             else if (data.cache.favRecipes.count == 0){
                 Text("No favorites yet.")
@@ -61,7 +73,7 @@ struct FavoritesView: View {
 struct FavoritesView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView{
-            FavoritesView(navigationTitle: .constant("Stuff")).environmentObject(DataModels())
+            FavoritesView(navigationTitle: .constant("Stuff"), signedin: .constant(true)).environmentObject(DataModels())
         }
     }
 }

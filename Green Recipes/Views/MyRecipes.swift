@@ -16,9 +16,20 @@ struct MyRecipes: View {
     @State var navigationTitle:Binding<String>
     @State var myRecipes:[RecipeTemplate1] = []
     @State var loading = true
+    @Binding var signedin:Bool
     
     var body: some View {
-        if loading{
+        if data.user.appleId == ""{
+            Button(action:{signedin = false})
+            {
+                Text("Sign In")
+                    .foregroundColor(.blue)
+                    .font(.title)
+                    .fontWeight(.light)
+            }
+            .navigationTitle("My Recipes")
+        }
+        else if loading{
             VStack{
             Text("Loading")
                 .foregroundColor(.blue)
@@ -31,6 +42,7 @@ struct MyRecipes: View {
                             fetchMyRecipes()
                     }
             }
+            .navigationTitle("My Recipes")
         }
         else if (myRecipes.count == 0){
             Text("Add your recipes.")
@@ -130,10 +142,10 @@ struct MyRecipes: View {
     }
 }
 
-struct myRecipe_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView{
-            MyRecipes(navigationTitle: .constant("My Recipes")).environmentObject(DataModels())
-        }
-    }
-}
+//struct myRecipe_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NavigationView{
+//            MyRecipes(navigationTitle: .constant("My Recipes")).environmentObject(DataModels())
+//        }
+//    }
+//}

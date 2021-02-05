@@ -10,9 +10,19 @@ import SwiftUI
 struct Settings: View {
     @EnvironmentObject var data:DataModels
     @State var username:String = ""
+    @Binding var signedin:Bool
     var body: some View {
         Form{
             Section{
+                if data.user.appleId == ""{
+                    Button(action:{signedin = false})
+                    {
+                        Text("Sign In")
+//                            .font(.title)
+//                            .fontWeight(.light)
+                    }
+                }
+                else{
                 NavigationLink(destination:ProfileDetail().environmentObject(self.data)
                                 .onDisappear(){
                                     username = data.user.username
@@ -21,6 +31,7 @@ struct Settings: View {
                 {
                     Text(username)
                         .font(.title2)
+                }
                 }
             }
             Section{
@@ -39,6 +50,6 @@ struct Settings: View {
 
 struct Settings_Previews: PreviewProvider {
     static var previews: some View {
-        Settings().environmentObject(DataModels())
+        Settings(signedin: .constant(true)).environmentObject(DataModels())
     }
 }

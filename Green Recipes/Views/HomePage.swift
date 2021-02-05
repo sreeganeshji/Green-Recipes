@@ -49,14 +49,14 @@ struct HomePage: View {
                 Text("Search")} }.tag(tabViews.search)
             
             NavigationView{
-            FavoritesView(navigationTitle: self.$navigationTitle).environmentObject(self.data)
+                FavoritesView(navigationTitle: self.$navigationTitle, signedin: $signedIn).environmentObject(self.data)
             }
                 .tabItem { HStack{
                 Image(systemName: "star.fill")
                 Text("Favorites")} }.tag(tabViews.favorites)
             
             NavigationView{
-            MyRecipes(navigationTitle: self.$navigationTitle).environmentObject(data)
+                MyRecipes(navigationTitle: self.$navigationTitle, signedin: $signedIn).environmentObject(data)
             }
                 .tabItem {
                 HStack{
@@ -64,7 +64,7 @@ struct HomePage: View {
                 Text("My Recipes")} }.tag(tabViews.addRecipe)
 
             NavigationView{
-            Settings().environmentObject(self.data)
+                Settings(signedin: $signedIn).environmentObject(self.data)
         }
                 .tabItem { HStack{
                 Image(systemName: "gear")
@@ -154,9 +154,17 @@ SignInWithAppleButton(.signIn, onRequest: { request in
     ).padding()
                     .frame(height:100)
 .signInWithAppleButtonStyle(.whiteOutline)
+                
+                Button(action:{self.signedIn = true})
+                {
+                    Text("Skip")
+                        .font(.title)
+                        .fontWeight(.light)
+                }
         }
 .onAppear(){
-
+//    self.data.networkHandler.getUserWithAppleID(appleID: "001667ef225cca7d6b459480d20a48ad29ffaf0313", completion: updateUser)
+    
     let appleID:String? = localStorageManager.load("appleID")
     if appleID != nil{
             self.data.networkHandler.getUserWithAppleID(appleID: appleID!, completion: updateUser)
