@@ -18,6 +18,7 @@ struct MyRecipeDetail: View {
     @State var spin = false
     @State var showEditSheet = false
     @State var showProgress = false
+    @State var title:String
 
     var recipeSummary :RecipeTemplate1
     
@@ -30,6 +31,7 @@ struct MyRecipeDetail: View {
                     .font(.title)
                     .fontWeight(.light)
                     
+                    .navigationTitle(title)
                     activityIndicator()
                         .onAppear(){
                                               GetRecipeByID()

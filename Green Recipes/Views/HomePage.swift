@@ -71,13 +71,13 @@ struct HomePage: View {
                 Text("Settings")} }.tag(tabViews.settings)
                 }
 //        .navigationTitle(self.navigationTitle)
-        .navigationBarHidden(true)
+//        .navigationBarHidden(true)
 //            }
         }
 
         else{
             VStack{
-                Text("Your Recipe")
+                Text("Our Recipe")
                     .fontWeight(.light)
                     .font(.custom("Heading", size: 40))
                     .shadow(radius: 10)
@@ -157,7 +157,7 @@ SignInWithAppleButton(.signIn, onRequest: { request in
                 
                 Button(action:{self.signedIn = true})
                 {
-                    Text("Skip")
+                    Text("Continue")
                         .font(.title)
                         .fontWeight(.light)
                 }

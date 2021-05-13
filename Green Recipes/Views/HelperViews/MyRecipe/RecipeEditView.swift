@@ -15,9 +15,9 @@ struct RecipeEditView: View {
     @State var newProcess:String = ""
     @State var description:String = ""
     @State var newEquipment:String = ""
-    @State var equipment:[String]?
+    @State var equipment:[String] = []
     @State var newNutrition:String = ""
-    @State var nutrition:[String]?
+    @State var nutrition:[String] = []
     @State var origin:String = ""
     @State var estimatedTime:String = ""
     @Binding var imagesOrg:[ImageContainer]
@@ -156,10 +156,10 @@ struct RecipeEditView: View {
                 Spacer()
             }
                 //recipenew.equipment is initialized to []
-                if(equipment != nil && equipment!.count>0)
+                if(equipment != nil && equipment.count>0)
                 {
                     List{
-                        ForEach(Array(zip((1...equipment!.count), equipment!)),id:\.0){
+                        ForEach(Array(zip((1...equipment.count), equipment)),id:\.0){
                     item in
                             HStack{
                                 Text("\(item.0).")
@@ -173,10 +173,10 @@ struct RecipeEditView: View {
 //                            .padding()
                 }
                 .onDelete(perform: { ind in
-                    self.equipment!.remove(atOffsets: ind)
+                    self.equipment.remove(atOffsets: ind)
                 })
                     .onMove { (IndSet, ind) in
-                        self.equipment!.move(fromOffsets: IndSet, toOffset: ind)
+                        self.equipment.move(fromOffsets: IndSet, toOffset: ind)
             }
                     }
             }
@@ -190,7 +190,7 @@ struct RecipeEditView: View {
                 }
             }
            
-            Stepper(value: $recipeNew.servings, in: 0...100) {
+            Stepper(value: $recipeNew.servings, in: 1...100) {
                 HStack{
                     Text("Servings:")
                         .font(.title2)
@@ -221,7 +221,7 @@ struct RecipeEditView: View {
                 
                 ImageCarousel(images:self.$images)
                     .frame(maxHeight:300)
-                Text("Needs reopening to reflect deletions.").font(.footnote).foregroundColor(.secondary)
+                Text("Needs reopening recipe to reflect deletions.").font(.footnote).foregroundColor(.secondary)
             }
             
             Section{
@@ -300,10 +300,10 @@ struct RecipeEditView: View {
                 Spacer()
             }
 //                recipenew.equipment is initialized to []
-                if(nutrition != nil && nutrition!.count>0)
+                if(nutrition != nil && nutrition.count>0)
                 {
                     List{
-                        ForEach(Array(zip((1...nutrition!.count), nutrition!)),id:\.0){
+                        ForEach(Array(zip((1...nutrition.count), nutrition)),id:\.0){
                     item in
                             HStack{
                                 Text("\(item.0).")
@@ -317,10 +317,10 @@ struct RecipeEditView: View {
 //                            .padding()
                 }
                 .onDelete(perform: { ind in
-                    self.nutrition!.remove(atOffsets: ind)
+                    self.nutrition.remove(atOffsets: ind)
                 })
                     .onMove { (IndSet, ind) in
-                        self.nutrition!.move(fromOffsets: IndSet, toOffset: ind)
+                        self.nutrition.move(fromOffsets: IndSet, toOffset: ind)
             }
                     }
             }
@@ -382,8 +382,8 @@ struct RecipeEditView: View {
             recipeNewContributor = recipeNew.contributor ?? ""
             images = imagesOrg
             estimatedTime = recipeNew.estimatedTime ?? ""
-            equipment = recipeNew.equipment
-            nutrition = recipeNew.nutrition
+            equipment = recipeNew.equipment ?? []
+            nutrition = recipeNew.nutrition ?? []
         }
     }
 
@@ -405,7 +405,7 @@ struct RecipeEditView: View {
             if equipment == nil{
                 equipment = []
             }
-            equipment!.append(self.newEquipment)
+            equipment.append(self.newEquipment)
         }
         self.newEquipment = ""
     }
@@ -414,7 +414,7 @@ struct RecipeEditView: View {
             if nutrition == nil{
                 nutrition = []
             }
-            nutrition!.append(self.newNutrition)
+            nutrition.append(self.newNutrition)
         }
         self.newNutrition = ""
     }
@@ -437,8 +437,8 @@ struct RecipeEditView: View {
         self.recipeNew.contributor = (self.recipeNewContributor == "") ? nil : self.recipeNewContributor
         self.recipeNew.category = (self.recipeNewCategory == "") ? nil : self.recipeNewCategory
         self.recipeNew.estimatedTime = (self.estimatedTime == "") ? nil: self.estimatedTime
-        self.recipeNew.equipment = (equipment == nil || equipment == []) ? nil:equipment
-        self.recipeNew.nutrition = (nutrition == nil || nutrition == []) ? nil:nutrition
+        self.recipeNew.equipment = (equipment == []) ? nil:equipment
+        self.recipeNew.nutrition = (nutrition == []) ? nil:nutrition
 
         //current set
         let oldImages = self.recipeNew.images ?? []

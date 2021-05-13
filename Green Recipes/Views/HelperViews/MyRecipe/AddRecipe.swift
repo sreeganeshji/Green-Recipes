@@ -179,7 +179,7 @@ struct AddRecipe: View {
                 }
             }
            
-            Stepper(value: $recipeNew.servings, in: 0...100) {
+            Stepper(value: $recipeNew.servings, in: 1...100) {
                 HStack{
                     Text("Servings:")
                         .font(.title2)

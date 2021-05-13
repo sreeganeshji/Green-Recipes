@@ -72,6 +72,7 @@ struct AddReport: View {
     
     func submitReport(){
         showSheet = false
+        report.body = reportBody
         self.data.networkHandler.submitReport(report:report, completion: submitted)
     }
     

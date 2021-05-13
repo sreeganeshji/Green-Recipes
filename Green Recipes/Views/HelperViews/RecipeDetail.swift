@@ -52,6 +52,7 @@ struct RecipeDetail: View {
 
                
             }
+            .navigationTitle(Text(title))
         }
         else{
         ZStack{
@@ -355,7 +356,7 @@ struct RecipeDetail: View {
 //                        GetRecipeByID()
 //                    }
 ////                    ProgressView(value: progress)
-//                    ProgressView(value: /*@START_MENU_TOKEN@*/0.5/*@END_MENU_TOKEN@*/)
+//                    ProgressView(value: 0.5)
 //                }
 //                .background(blur(radius: 3.0))
 //            }
@@ -463,7 +464,13 @@ self.data.networkHandler.getUserName(userId: self.recipe.addedby!, completion: u
 }
     
     func fillReport(){
+        if (data.user.appleId == "")
+        {
+            report.userId = 1
+        }
+        else{
         report.userId = data.user.userId
+        }
         report.recipeId = recipe.id!
     }
     
