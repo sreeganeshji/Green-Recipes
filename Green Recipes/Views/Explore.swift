@@ -10,15 +10,16 @@ import SwiftUI
 struct Explore: View {
     let categories = ["Snacks", "Drinks", "Desserts", "Lunch", "Salads", "Soups"]
     @EnvironmentObject var data:DataModels
+    @Binding var signedin:Bool
     var body: some View {
         ScrollView(){
             ForEach(categories, id:\.self){
                 category in
-                NavigationLink(destination:CategoryList(categoryName: category).environmentObject(data)){
+                NavigationLink(destination:CategoryList(categoryName: category, signedin: $signedin).environmentObject(data)){
                 CategoryThumb(image:.constant(Image(category)), title: .constant(category))
                 }
             }
-            NavigationLink(destination:CategoryOthersList(categoryName: "Others").environmentObject(data)){
+            NavigationLink(destination:CategoryOthersList(categoryName: "Others", signedin: $signedin).environmentObject(data)){
             CategoryThumb(image:.constant(Image("Others")), title: .constant("Others"))
             }
             

@@ -68,7 +68,7 @@ struct MyRecipes: View {
 ////                }
                 ForEach(myRecipes, id:\.self){
                     recipe in
-                    NavigationLink(destination:MyRecipeDetail(title: recipe.name, recipeSummary:recipe).environmentObject(self.data))
+                    NavigationLink(destination:MyRecipeDetail(title: recipe.name, signedin: $signedin, recipeSummary:recipe).environmentObject(self.data))
                     {
                         
                         HStack{

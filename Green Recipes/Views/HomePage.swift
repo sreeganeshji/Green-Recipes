@@ -35,14 +35,14 @@ struct HomePage: View {
 //            NavigationView{
         TabView(selection: $tabSelect) {
             NavigationView{
-            Explore().environmentObject(data)
+                Explore(signedin: $signedIn).environmentObject(data)
             }.tabItem { HStack{
                 Image(systemName: "sparkles")
                 Text("Explore")
             } }.tag(tabViews.explore)
             
             NavigationView{
-                SearchView().environmentObject(self.data)
+                SearchView(signedin: $signedIn).environmentObject(self.data)
             }
                 .tabItem { HStack{
                 Image(systemName: "magnifyingglass")

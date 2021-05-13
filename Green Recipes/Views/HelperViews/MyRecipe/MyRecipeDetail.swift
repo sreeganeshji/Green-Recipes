@@ -19,6 +19,7 @@ struct MyRecipeDetail: View {
     @State var showEditSheet = false
     @State var showProgress = false
     @State var title:String
+    @Binding var signedin:Bool
 
     var recipeSummary :RecipeTemplate1
     
@@ -47,7 +48,7 @@ struct MyRecipeDetail: View {
 //                RecipeEditView(recipeNew: self.$recipe, images: self.$images).environmentObject(data)
 //            }
 //            else{
-                RecipeObjectDetail(recipe: self.$recipe, images: self.$images, uploadedByUsername: self.$uploadedByUsername, doneLoading: $doneLoading, title: self.recipe.name).environmentObject(data)
+                RecipeObjectDetail(recipe: self.$recipe, images: self.$images, uploadedByUsername: self.$uploadedByUsername, doneLoading: $doneLoading, signedin: $signedin, title: self.recipe.name).environmentObject(data)
 //            }
             }
         }

@@ -11,6 +11,7 @@ struct SearchView: View {
     @State var text : String = ""
     @State var recipes : [RecipeTemplate1] = []
     @EnvironmentObject var data:DataModels
+    @Binding var signedin:Bool
     
     //modal sheet
     @State var sheetPresented = false
@@ -59,7 +60,7 @@ struct SearchView: View {
 //                        self.sheetRecipeID = recipe.id
 //                        self.sheetPresented = true
 //                    })
-                    NavigationLink(destination:RecipeDetail(id: recipe.id, title: recipe.name).environmentObject(self.data))
+                    NavigationLink(destination:RecipeDetail(id: recipe.id, signedin: $signedin, title: recipe.name).environmentObject(self.data))
                     {
                         HStack{
                         Text(recipe.name)
@@ -134,6 +135,6 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView().environmentObject(DataModels())
+        SearchView( signedin: .constant(true)).environmentObject(DataModels())
     }
 }

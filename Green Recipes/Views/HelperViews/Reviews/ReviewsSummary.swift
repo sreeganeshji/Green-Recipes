@@ -13,6 +13,7 @@ struct ReviewsSummary: View {
     @Binding var reviews:[Review]
     @EnvironmentObject var data:DataModels
     @State var showSheetAddReview:Bool = false
+    @Binding var signedin:Bool
     var fetchReviews:(_ submitAvg:Bool)->()
     
     var body: some View {
@@ -33,6 +34,13 @@ struct ReviewsSummary: View {
                 Text((recipe.ratingCount != nil) ? "\(recipe.ratingCount!) ratings" : "0 ratings").foregroundColor(.secondary)
             }
             
+            if data.user.appleId == ""{
+                Button(action:{signedin = false})
+                {
+                    Text("Sign In")
+                }
+            }
+                else{
             Button(action:{self.showSheetAddReview = true})
             {
                 HStack{
@@ -41,7 +49,7 @@ struct ReviewsSummary: View {
                     Image(systemName: "square.and.pencil")
                 }
             }
-            
+                }
             ForEach(reviews.reversed(), id:\.self){
                     review in
                     

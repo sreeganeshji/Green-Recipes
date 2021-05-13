@@ -10,6 +10,7 @@ import SwiftUI
 struct CategoryOthersList: View {
 
     var categoryName:String
+    @Binding var signedin:Bool
     @State var recipes:[RecipeTemplate1] = []
     @EnvironmentObject var data:DataModels
     @State var text = ""
@@ -35,7 +36,7 @@ struct CategoryOthersList: View {
                 ForEach(self.recipes, id:\.self){
                     recipe in
                     
-                    NavigationLink(destination:RecipeDetail(id: recipe.id, title: recipe.name).environmentObject(self.data))
+                    NavigationLink(destination:RecipeDetail(id: recipe.id, signedin: $signedin, title: recipe.name).environmentObject(self.data))
                     {
                         HStack{
                         Text(recipe.name)

@@ -31,6 +31,7 @@ struct RecipeDetail: View {
     @State var spin = false
     @State var progress :Double = .init(0.0)
     @State var showProgress = false
+    @Binding var signedin:Bool
     
     let title:String
     var body: some View {
@@ -304,7 +305,7 @@ struct RecipeDetail: View {
                 }
                 
                 if (self.uploadedByUsername != ""){
-                    NavigationLink(destination:MoreByUserView(username: self.uploadedByUsername, userid: self.recipe.addedby!).environmentObject(self.data)){
+                    NavigationLink(destination:MoreByUserView(signedin: $signedin, username: self.uploadedByUsername, userid: self.recipe.addedby!).environmentObject(self.data)){
                 Section{
                     HStack{
                         Text("Added by:")
@@ -324,7 +325,7 @@ struct RecipeDetail: View {
 //                    ReviewsSummary(user: self.$data.user, recipe: self.$recipe, reviews: self.$reviews).environmentObject(self.data)
 //                }
                 NavigationLink(destination:
-                                ReviewsSummary(user: self.$data.user, recipe: self.$recipe, reviews:self.$reviews, fetchReviews: fetchReviews).environmentObject(self.data))
+                                ReviewsSummary(user: self.$data.user, recipe: self.$recipe, reviews:self.$reviews, signedin: $signedin, fetchReviews: fetchReviews).environmentObject(self.data))
                 {
                     VStack{
                         HStack{
@@ -517,6 +518,6 @@ self.data.networkHandler.getUserName(userId: self.recipe.addedby!, completion: u
 
 struct RecipeDetail_Previews: PreviewProvider {
     static var previews: some View {
-        RecipeDetail(id:1, title: "Detail stuff").environmentObject(DataModels())
+        RecipeDetail(id:1, signedin: .constant(true), title: "Detail stuff").environmentObject(DataModels())
     }
 }

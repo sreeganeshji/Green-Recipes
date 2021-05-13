@@ -13,6 +13,7 @@ struct CategoryList: View {
     @EnvironmentObject var data:DataModels
     @State var text = ""
     @State var loading = true
+    @Binding var signedin:Bool
     var body: some View {
         if loading{
             VStack{
@@ -34,7 +35,7 @@ struct CategoryList: View {
                 ForEach(self.recipes, id:\.self){
                     recipe in
                     
-                    NavigationLink(destination:RecipeDetail(id: recipe.id, title: recipe.name).environmentObject(self.data))
+                    NavigationLink(destination:RecipeDetail(id: recipe.id, signedin: $signedin, title: recipe.name).environmentObject(self.data))
                     {
                         HStack{
                         Text(recipe.name)
@@ -95,6 +96,6 @@ struct CategoryList: View {
 
 struct CategoryList_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryList(categoryName: "Lunch").environmentObject(DataModels())
+        CategoryList(categoryName: "Lunch", signedin: .constant(true)).environmentObject(DataModels())
     }
 }

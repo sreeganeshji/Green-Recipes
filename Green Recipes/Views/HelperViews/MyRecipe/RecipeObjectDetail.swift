@@ -25,6 +25,7 @@ import SwiftUI
         @Binding var uploadedByUsername:String
         @Binding var doneLoading :Bool
         @State var imageLoaded = false
+        @Binding var signedin:Bool
         let title:String
         var body: some View {
 
@@ -290,7 +291,7 @@ import SwiftUI
     //                    ReviewsSummary(user: self.$data.user, recipe: self.$recipe, reviews: self.$reviews).environmentObject(self.data)
     //                }
                     NavigationLink(destination:
-                                    ReviewsSummary(user: self.$data.user, recipe: self.$recipe, reviews:self.$reviews, fetchReviews: fetchReviews).environmentObject(self.data))
+                                    ReviewsSummary(user: self.$data.user, recipe: self.$recipe, reviews:self.$reviews, signedin: $signedin, fetchReviews: fetchReviews).environmentObject(self.data))
                     {
                         VStack{
                             HStack{

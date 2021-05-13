@@ -12,6 +12,7 @@ struct MoreByUserView: View {
     @State var showSheet = false
     @EnvironmentObject var data: DataModels
     @State var userRecipes :[RecipeTemplate1] = []
+    @Binding var signedin:Bool
 
     var username :String
     var userid :Int
@@ -20,7 +21,7 @@ struct MoreByUserView: View {
         Form{
                 ForEach(self.userRecipes, id:\.self){
                     recipe in
-                    NavigationLink(destination:RecipeDetail(id: recipe.id, title: recipe.name).environmentObject(self.data))
+                    NavigationLink(destination:RecipeDetail(id: recipe.id, signedin: $signedin, title: recipe.name).environmentObject(self.data))
                     {
                         HStack{
                         Text(recipe.name)
